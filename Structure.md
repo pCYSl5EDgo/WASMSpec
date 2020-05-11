@@ -23,3 +23,10 @@
     <li>大きな積和は複数の定義に分割されることがあり、連続体<span class="math notranslate nohighlight">\(\mathit{sym} ::= \dots ~|~ A_2\)</span>を省略記号で開始し、<span class="math notranslate nohighlight">\(\mathit{sym} ::= A_1 ~|~ \dots\)</span>で明示的に終わらせることで示されます。</li>
     <li>いくつかの積和は括弧内に付記された条件“<span class="math notranslate nohighlight">\((\mathrel{\mbox{if}} \mathit{condition})\)</span>”で補強されていますが、これは積和を多くの別々のケースに組み合わせて拡張するための略記法です。</li>
 </ul>
+
+<footer>
+    <nav>
+        <a href="Introduction" rel="prev">Prev: Introduction</a>
+        <a href="../">Top: Index</a>
+    </nav>
+</footer>
