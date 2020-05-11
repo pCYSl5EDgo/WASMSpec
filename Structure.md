@@ -27,6 +27,6 @@
 <footer>
     <nav>
         <a href="Introduction" rel="prev">Prev: Introduction</a>
-        <a href="../">Top: Index</a>
+        <a href="./">Top: Index</a>
     </nav>
 </footer>

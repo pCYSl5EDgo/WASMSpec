@@ -147,7 +147,7 @@ WebAssemblyは、低レベルでアセンブリのようなプログラミング
 
 <footer>
     <nav>
-        <a href="../">Top: Index</a>
+        <a href="./">Top: Index</a>
         <a href="Structure" rel="next">Prev: Structure</a>
     </nav>
 </footer>
