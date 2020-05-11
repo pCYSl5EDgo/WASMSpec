@@ -1,4 +1,4 @@
 # もくじ
 
- - <a href="./Introduction.md">Introduction</a>
- - <a href="./Structure.md">Structure</a>
+ - <a href="./Introduction">はじめに</a>
+ - <a href="./Structure">構造</a>
