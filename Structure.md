@@ -574,7 +574,7 @@ local.tee命令はlocal.setと似ていますが、引数を返します。
 - ブロック命令、ループ命令、`if`命令は構造化された命令です。これらは、ブロックと呼ばれる命令の入れ子になったシーケンスを括弧で括り、`end`命令や`else`命令で終わるか、または擬似命令で区切られています。文法で規定されているように、これらの命令はうまく入れ子になっていなければなりません。
 
 <div>構造化命令はアノテーションされたブロック型に従ってオペランドスタック上で入力を消費し、出力を生成することができます。
-構造化命令は、適切な関数型を参照する型インデックスとして、または埋め込まれた値型として表記されます。(埋め込まれた値型は<span class="math notranslate nohighlight">\([] {\rightarrow} [{\mathit{valtype}}^?]\)</span>の短縮記法です。)</div>
+構造化命令は、適切な関数型を参照する型インデックスとして、または埋め込まれた値型として表記されます。(埋め込まれた値型は<span>\([] {\rightarrow} [{\mathit{valtype}}^?]\)</span>の短縮記法です。)</div>
 
 各構造化制御命令は暗黙のラベルを導入します。
 ラベルは、ラベルインデックスで識別され、ラベルを参照する分岐命令のターゲットとなります。
@@ -624,7 +624,33 @@ local.tee命令はlocal.setと似ていますが、引数を返します。
 
 # モジュール
 
+<div>
+\[\begin{split}\begin{array}{lllll}
+\def\mathdef1558#1{{}}\mathdef1558{module} &amp; {\mathit{module}} &amp;::=&amp; \{ &amp;
+  {\mathsf{types}}~{\mathit{vec}}({\mathit{functype}}), \\&amp;&amp;&amp;&amp;
+  {\mathsf{funcs}}~{\mathit{vec}}({\mathit{func}}), \\&amp;&amp;&amp;&amp;
+  {\mathsf{tables}}~{\mathit{vec}}({\mathit{table}}), \\&amp;&amp;&amp;&amp;
+  {\mathsf{mems}}~{\mathit{vec}}({\mathit{mem}}), \\&amp;&amp;&amp;&amp;
+  {\mathsf{globals}}~{\mathit{vec}}({\mathit{global}}), \\&amp;&amp;&amp;&amp;
+  {\mathsf{elem}}~{\mathit{vec}}({\mathit{elem}}), \\&amp;&amp;&amp;&amp;
+  {\mathsf{data}}~{\mathit{vec}}({\mathit{data}}), \\&amp;&amp;&amp;&amp;
+  {\mathsf{start}}~{\mathit{start}}^?, \\&amp;&amp;&amp;&amp;
+  {\mathsf{imports}}~{\mathit{vec}}({\mathit{import}}), \\&amp;&amp;&amp;&amp;
+  {\mathsf{exports}}~{\mathit{vec}}({\mathit{export}}) \quad\} \\
+\end{array}\end{split}\]</div>
+
 ## インデックス
+
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1558#1{{}}\mathdef1558{type index} &amp; {\mathit{typeidx}} &amp;::=&amp; {\mathit{u32}} \\
+\def\mathdef1558#1{{}}\mathdef1558{function index} &amp; {\mathit{funcidx}} &amp;::=&amp; {\mathit{u32}} \\
+\def\mathdef1558#1{{}}\mathdef1558{table index} &amp; {\mathit{tableidx}} &amp;::=&amp; {\mathit{u32}} \\
+\def\mathdef1558#1{{}}\mathdef1558{memory index} &amp; {\mathit{memidx}} &amp;::=&amp; {\mathit{u32}} \\
+\def\mathdef1558#1{{}}\mathdef1558{global index} &amp; {\mathit{globalidx}} &amp;::=&amp; {\mathit{u32}} \\
+\def\mathdef1558#1{{}}\mathdef1558{local index} &amp; {\mathit{localidx}} &amp;::=&amp; {\mathit{u32}} \\
+\def\mathdef1558#1{{}}\mathdef1558{label index} &amp; {\mathit{labelidx}} &amp;::=&amp; {\mathit{u32}} \\
+\end{array}\end{split}\]</div>
 
 ## 型
 
@@ -632,33 +658,104 @@ local.tee命令はlocal.setと似ていますが、引数を返します。
 
 ## 関数
 
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1558#1{{}}\mathdef1558{function} &amp; {\mathit{func}} &amp;::=&amp;
+  \{ {\mathsf{type}}~{\mathit{typeidx}}, {\mathsf{locals}}~{\mathit{vec}}({\mathit{valtype}}), {\mathsf{body}}~{\mathit{expr}} \} \\
+\end{array}\end{split}\]</div>
+
 ## テーブル
+
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1558#1{{}}\mathdef1558{table} &amp; {\mathit{table}} &amp;::=&amp;
+  \{ {\mathsf{type}}~{\mathit{tabletype}} \} \\
+\end{array}\end{split}\]</div>
 
 ### 付記
 
 ## メモリ
 
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1558#1{{}}\mathdef1558{memory} &amp; {\mathit{mem}} &amp;::=&amp;
+  \{ {\mathsf{type}}~{\mathit{memtype}} \} \\
+\end{array}\end{split}\]</div>
+
 ### 付記
 
 ## グローバル
 
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1558#1{{}}\mathdef1558{global} &amp; {\mathit{global}} &amp;::=&amp;
+  \{ {\mathsf{type}}~{\mathit{globaltype}}, {\mathsf{init}}~{\mathit{expr}} \} \\
+\end{array}\end{split}\]</div>
+
 ## Elementセグメント
+
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1558#1{{}}\mathdef1558{element segment} &amp; {\mathit{elem}} &amp;::=&amp;
+  \{ {\mathsf{table}}~{\mathit{tableidx}}, {\mathsf{offset}}~{\mathit{expr}}, {\mathsf{init}}~{\mathit{vec}}({\mathit{funcidx}}) \} \\
+\end{array}\end{split}\]</div>
 
 ### 付記
 
 ## Dataセグメント
 
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1558#1{{}}\mathdef1558{data segment} &amp; {\mathit{data}} &amp;::=&amp;
+  \{ {\mathsf{data}}~{\mathit{memidx}}, {\mathsf{offset}}~{\mathit{expr}}, {\mathsf{init}}~{\mathit{vec}}({\mathit{byte}}) \} \\
+\end{array}\end{split}\]</div>
+
 ### 付記
 
 ## 開始関数
+
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1558#1{{}}\mathdef1558{start function} &amp; {\mathit{start}} &amp;::=&amp;
+  \{ {\mathsf{func}}~{\mathit{funcidx}} \} \\
+\end{array}\end{split}\]</div>
 
 ### 付記
 
 ## Export
 
+<div>
+\[\begin{split}\begin{array}{llcl}
+\def\mathdef1558#1{{}}\mathdef1558{export} &amp; {\mathit{export}} &amp;::=&amp;
+  \{ {\mathsf{name}}~{\mathit{name}}, {\mathsf{desc}}~{\mathit{exportdesc}} \} \\
+\def\mathdef1558#1{{}}\mathdef1558{export description} &amp; {\mathit{exportdesc}} &amp;::=&amp;
+  {\mathsf{func}}~{\mathit{funcidx}} \\&amp;&amp;|&amp;
+  {\mathsf{table}}~{\mathit{tableidx}} \\&amp;&amp;|&amp;
+  {\mathsf{mem}}~{\mathit{memidx}} \\&amp;&amp;|&amp;
+  {\mathsf{global}}~{\mathit{globalidx}} \\
+\end{array}\end{split}\]</div>
+
 ### 表記上のお約束
 
+<ul>
+  <li><span>\({\mathrm{funcs}}({\mathit{export}}^\ast) = [{\mathit{funcidx}} ~|~ {\mathsf{func}}~{\mathit{funcidx}} \in ({\mathit{export}}.{\mathsf{desc}})^\ast]\)</span></li>
+  <li><span>\({\mathrm{tables}}({\mathit{export}}^\ast) = [{\mathit{tableidx}} ~|~ {\mathsf{table}}~{\mathit{tableidx}} \in ({\mathit{export}}.{\mathsf{desc}})^\ast]\)</span></li>
+  <li><span>\({\mathrm{mems}}({\mathit{export}}^\ast) = [{\mathit{memidx}} ~|~ {\mathsf{mem}}~{\mathit{memidx}} \in ({\mathit{export}}.{\mathsf{desc}})^\ast]\)</span></li>
+  <li><span>\({\mathrm{globals}}({\mathit{export}}^\ast) = [{\mathit{globalidx}} ~|~ {\mathsf{global}}~{\mathit{globalidx}} \in ({\mathit{export}}.{\mathsf{desc}})^\ast]\)</span></li>
+</ul>
+
 ## Import
+
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1558#1{{}}\mathdef1558{import} &amp; {\mathit{import}} &amp;::=&amp;
+  \{ {\mathsf{module}}~{\mathit{name}}, {\mathsf{name}}~{\mathit{name}}, {\mathsf{desc}}~{\mathit{importdesc}} \} \\
+\def\mathdef1558#1{{}}\mathdef1558{import description} &amp; {\mathit{importdesc}} &amp;::=&amp;
+  {\mathsf{func}}~{\mathit{typeidx}} \\&amp;&amp;|&amp;
+  {\mathsf{table}}~{\mathit{tabletype}} \\&amp;&amp;|&amp;
+  {\mathsf{mem}}~{\mathit{memtype}} \\&amp;&amp;|&amp;
+  {\mathsf{global}}~{\mathit{globaltype}} \\
+\end{array}\end{split}\]</div>
 
 ### 付記
 
