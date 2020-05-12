@@ -265,6 +265,18 @@ Binary Format仕様の制限により、名前の長さはUTF-8エンコーデ�
 リミットは、メモリの最小サイズと最大サイズを指定します。
 リミットの数値の単位は[ページサイズ](Execution#ページサイズ)です。
 
+<details><summary>訳者注:Thread</summary><div><div>\[\begin{split}\begin{array}{llll}
+\def\mathdef2404#1{{}}\mathdef2404{memory type} &amp; {\mathit{memtype}} &amp;::=&amp;
+  {\mathit{limits}}~{\mathit{share}} \\
+\def\mathdef2404#1{{}}\mathdef2404{share} &amp; {\mathit{share}} &amp;::=&amp;
+  {\mathsf{shared}} ~|~
+  {\mathsf{unshared}} \\
+\end{array}\end{split}\]</div>
+
+メモリが`shared`であるか否か(複数のスレッドからアクセス可能な共有メモリであるか否か)を決めています。
+
+</div></details>
+
 ## テーブル型
 
 テーブル型は、テーブルを要素の型とサイズで分類するものです。
@@ -705,27 +717,58 @@ DataとElementのセグメントまたは開始関数を援用して初期化ロ
 `body`は命令シーケンスです。
 実行終了時にスタック上に関数の戻り値型ベクトルに合致する値を残している必要があります。
 
-関数は、関数のインポートを参照しない最小のインデックスから始まる関数インデックスを通して参照されます。
+関数は、関数のImportを参照しない最小のインデックスから始まる関数インデックスを通して参照されます。
 
 ## テーブル
 
-<div>
-\[\begin{split}\begin{array}{llll}
+モジュールの`tables`コンポーネントは、テーブル型で記述されたテーブルのベクトルを定義します。
+
+<div>\[\begin{split}\begin{array}{llll}
 \def\mathdef1558#1{{}}\mathdef1558{table} &amp; {\mathit{table}} &amp;::=&amp;
   \{ {\mathsf{type}}~{\mathit{tabletype}} \} \\
 \end{array}\end{split}\]</div>
 
+テーブルは特定のテーブル要素型の不透明な値のベクトルです。
+テーブル型の[リミット](#リミット)の中の最小サイズはそのテーブルの初期サイズを指定します。
+[リミット](#リミット)に最大サイズが存在する場合には後から成長できる最大サイズに上限を設定します。
+
+テーブルはElementセグメントを通して初期化することができます。
+
+テーブルはテーブルのImportを参照しない最小のインデックスから始まるテーブルインデックスを通して参照されます。
+暗黙的にテーブルインデックス0を参照することが殆どです。
+
 ### 付記
+
+現在のバージョンの`WebAssembly`では、1つのモジュールで最大1つのテーブルを定義またはImportすることができます。
+モジュール初期化時にはこのテーブルの0番目を暗黙的に参照しています。
+
+この制限は将来のバージョンでは除かれる可能性[^3]があります。
 
 ## メモリ
 
-<div>
-\[\begin{split}\begin{array}{llll}
+モジュールの`mems`コンポーネントは、メモリ型で記述されたリニアメモリ（略してメモリ）のベクトルを定義します。
+
+<div>\[\begin{split}\begin{array}{llll}
 \def\mathdef1558#1{{}}\mathdef1558{memory} &amp; {\mathit{mem}} &amp;::=&amp;
   \{ {\mathsf{type}}~{\mathit{memtype}} \} \\
 \end{array}\end{split}\]</div>
 
+メモリは意味を問わない生のbyte列です。
+メモリ型の[リミット](#リミット)における最小サイズはそのメモリの初期サイズを指定します。
+[リミット](#リミット)に最大サイズが存在する場合には後から成長できる最大サイズに上限を設定します。
+どちらもページサイズを単位としています。
+
+メモリはDataセグメントを通して初期化することができます。
+
+メモリはメモリのImportを参照しない最小のインデックスから始まるメモリインデックスを通して参照されます。
+暗黙的にメモリインデックス0を参照することが殆どです。
+
 ### 付記
+
+現在のバージョンの`WebAssembly`では、1つのモジュールで最大1つのメモリを定義またはImportすることができます。
+モジュール初期化時にはこのメモリの0番目を暗黙的に参照しています。
+
+この制限は将来のバージョンでは除かれる可能性[^3]があります。
 
 ## グローバル
 
@@ -817,3 +860,4 @@ DataとElementのセグメントまたは開始関数を援用して初期化ロ
 
 [^1]: 訳注:SignalingNANは算術演算を行うと例外を発生させるNaNらしい。QuietNaNはNaNが伝播するらしい。
 [^2]: 訳注:デバッガがブレークポイントを差し込むのに利用したりします。
+[^3]: 訳注:[ほぼ確実にされる。](https://github.com/WebAssembly/design/blob/master/FutureFeatures.md#multiple-tables-and-memories)
