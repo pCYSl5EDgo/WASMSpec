@@ -145,9 +145,14 @@ WebAssemblyは、低レベルでアセンブリのようなプログラミング
 [^4]: 現在のバージョンのWebAssemblyでは、結果の値は最大でも1つかもしれません。
 
 
+# LINK
+
 <footer>
     <nav>
-        <a href="./">Top: Index</a>
-        <a href="Structure" rel="next">Next: Structure</a>
+        <ul>
+            <li><a href="./">Top: Index</a></li>
+            <li><a href="Structure" rel="next">Next: 構造</a></li>
+        </ul>
+        <a href="LICENSE" rel="license">LICENSE</a>
     </nav>
 </footer>
