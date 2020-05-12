@@ -265,7 +265,7 @@ Binary Format仕様の制限により、名前の長さはUTF-8エンコーデ�
 リミットは、メモリの最小サイズと最大サイズを指定します。
 リミットの数値の単位は[ページサイズ](Execution#ページサイズ)です。
 
-<details><summary>訳者注:Thread</summary><div><div>\[\begin{split}\begin{array}{llll}
+<details><summary>訳注:Thread</summary><div><div>\[\begin{split}\begin{array}{llll}
 \def\mathdef2404#1{{}}\mathdef2404{memory type} &amp; {\mathit{memtype}} &amp;::=&amp;
   {\mathit{limits}}~{\mathit{share}} \\
 \def\mathdef2404#1{{}}\mathdef2404{share} &amp; {\mathit{share}} &amp;::=&amp;
