@@ -100,12 +100,12 @@
 
 <div>
 \[\begin{split}\begin{array}{llll}
-\def\mathdef1632#1{{}}\mathdef1632{unsigned integer} &amp; \href{../syntax/values.html#syntax-int}{\mathit{u}N} &amp;::=&amp;
+\def\mathdef1632#1{{}}\mathdef1632{unsigned integer} &amp; {\mathit{u}N} &amp;::=&amp;
   0 ~|~ 1 ~|~ \dots ~|~ 2^N{-}1 \\
-\def\mathdef1632#1{{}}\mathdef1632{signed integer} &amp; \href{../syntax/values.html#syntax-int}{\mathit{s}N} &amp;::=&amp;
+\def\mathdef1632#1{{}}\mathdef1632{signed integer} &amp; {\mathit{s}N} &amp;::=&amp;
   -2^{N-1} ~|~ \dots ~|~ {-}1 ~|~ 0 ~|~ 1 ~|~ \dots ~|~ 2^{N-1}{-}1 \\
-\def\mathdef1632#1{{}}\mathdef1632{uninterpreted integer} &amp; \href{../syntax/values.html#syntax-int}{\mathit{i}N} &amp;::=&amp;
-  \href{../syntax/values.html#syntax-int}{\mathit{u}N} \\
+\def\mathdef1632#1{{}}\mathdef1632{uninterpreted integer} &amp; {\mathit{i}N} &amp;::=&amp;
+  {\mathit{u}N} \\
 \end{array}\end{split}\]</div>
 
 後者のクラスは解釈されない整数を定義し、その符号化の解釈はコンテキストに応じて変化します。
@@ -120,15 +120,75 @@
 ### 表記上のお約束
 
 <ul>
-    <li>メタ変数<span class="math notranslate nohighlight">\(m, n, i\)</span>は整数型を表します。</li>
-    <li>数値は上の文法のように単純な算術で表すことができます。整数型の演算<span class="math notranslate nohighlight">\(2^N\)</span>をシーケンス<span class="math notranslate nohighlight">\((1)^N\)</span>などから区別するため後者のシーケンス表現は括弧で括られることとします。</li>
+    <li>メタ変数<span>\(m, n, i\)</span>は整数型を表します。</li>
+    <li>数値は上の文法のように単純な算術で表すことができます。整数型の演算<span>\(2^N\)</span>をシーケンス<span>\((1)^N\)</span>などから区別するため後者のシーケンス表現は括弧で括られることとします。</li>
 </ul>
 
 ## 浮動小数点数
 
-浮動小数点データは、IEEE 754-2019規格（セクション3.3）のそれぞれのバイナリフォーマットに対応する32ビットまたは64ビットの値を表します。
+浮動小数点データは、[IEEE 754-2019規格（セクション3.3）](https://ieeexplore.ieee.org/document/8766229)のそれぞれのバイナリフォーマットに対応する32ビットまたは64ビットの値を表します。
+<div>
+各値は符号と大きさを持ちます。
+大きさは<span>\(m_0.m_1m_2\dots m_M \cdot2^e\)</span>の正規数（e は指数、m は最大符号ビット m0 が 1 の符号）、または指数を最小値に固定して m0 を 0 とした非正規化数で表すことができます。
+符号は2進数なので正規数は<span>\((1 + m\cdot 2^{-M}) \cdot 2^e\)</span>という形で表され、Mはmのビット幅で、非正規化数も同様です。
+</div>
+
+大きさは、無限大とNaNという特殊な値も考えられます。
+NaN値は基礎となる2値表現の中の仮数ビットを記述するペイロードを持ちます。
+Signaling NANとQuiet NaNの間には区別はありません。[^1]
+
+<div>
+\[\begin{split}\begin{array}{llcll}
+\def\mathdef1632#1{{}}\mathdef1632{floating-point value} &amp; {\mathit{f}N} &amp;::=&amp;
+  {+} {\mathit{f}\mathit{Nmag}} ~|~ {-} {\mathit{f}\mathit{Nmag}} \\
+\def\mathdef1632#1{{}}\mathdef1632{floating-point magnitude} &amp; {\mathit{f}\mathit{Nmag}} &amp;::=&amp;
+  (1 + {\mathit{u}M}\cdot 2^{-M}) \cdot 2^e &amp; (\mathrel{\mbox{if}} -2^{E-1}+2 \leq e \leq 2^{E-1}-1) \\ &amp;&amp;|&amp;
+  (0 + {\mathit{u}M}\cdot 2^{-M}) \cdot 2^e &amp; (\mathrel{\mbox{if}} e = -2^{E-1}+2) \\ &amp;&amp;|&amp;
+  \infty \\ &amp;&amp;|&amp;
+  {\mathsf{nan}}(n) &amp; (\mathrel{\mbox{if}} 1 \leq n &lt; 2^M) \\
+\end{array}\end{split}\]</div>
+
+<div><span>\(M = {\mathrm{signif}}(N)\)</span>と<span>\(E = {\mathrm{expon}}(N)\)</span>という仮定を置きます。なおsignifとexponenは以下の引数と戻り値の組み合わせを取ります。</div>
+
+<div id="aux-exponent">
+\[\begin{split}\begin{array}{lclllllcl}
+{\mathrm{signif}}(32) &amp;=&amp; 23 &amp;&amp;&amp;&amp;
+{\mathrm{expon}}(32) &amp;=&amp; 8 \\
+{\mathrm{signif}}(64) &amp;=&amp; 52 &amp;&amp;&amp;&amp;
+{\mathrm{expon}}(64) &amp;=&amp; 11 \\
+\end{array}\end{split}\]
+</div>
+
+<div>canonical NaNは浮動小数点値±nan(<span>\(\pm{\mathsf{nan}}({\mathrm{canon}}_N)\)</span>)であり、<span>\(\pm{\mathsf{nan}}({\mathrm{canon}}_N)\)</span>は最上位ビットが1であり、他のビットはすべて0であるペイロードです。
+<div class="math notranslate nohighlight">\[{\mathrm{canon}}_N = 2^{{\mathrm{signif}}(N)-1}\]</div>
+
+算術NaNとは、n≧<span>\(\pm{\mathsf{nan}}({\mathrm{canon}}_N)\)</span>の浮動小数点値±nan(n)で、最上位ビットが1で、他のビットは任意の値を取るものです。
+</div>
+
+### 付記
+
+抽象構文では、非正規化数は記号の先頭の0によって区別されます。
+非正規化数の指数は、正規数の最小の指数と同じ値を持ちます。
+2進表現でのみ、非正規化数の指数は、任意の正規数の指数とは異なる符号化が行われます。
+
+### 表記上のお約束
+
+<ul>
+    <li>メタ変数<span>\(z\)</span>は浮動小数点数型を表します。</li>
+</ul>
 
 ## 名前
+
+名前は、[Unicode](http://www.unicode.org/versions/latest/)（2.4節）で定義されているスカラー値の文字列です。
+
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{llclll}
+\def\mathdef1632#1{{}}\mathdef1632{name} &amp; {\mathit{name}} &amp;::=&amp;
+  {\mathit{char}}^\ast \qquad\qquad (\mathrel{\mbox{if}} |{\mathrm{utf8}}({\mathit{char}}^\ast)| &lt; 2^{32}) \\
+\def\mathdef1632#1{{}}\mathdef1632{character} &amp; {\mathit{char}} &amp;::=&amp;
+  \def\mathdef1671#1{\mathrm{U{+}#1}}\mathdef1671{00} ~|~ \dots ~|~ \def\mathdef1672#1{\mathrm{U{+}#1}}\mathdef1672{D7FF} ~|~
+  \def\mathdef1673#1{\mathrm{U{+}#1}}\mathdef1673{E000} ~|~ \dots ~|~ \def\mathdef1674#1{\mathrm{U{+}#1}}\mathdef1674{10FFFF} \\
+\end{array}\end{split}\]</div>
 
 # LINK
 
@@ -142,3 +202,5 @@
         <a href="LICENSE" rel="license">LICENSE</a>
     </nav>
 </footer>
+
+[^1]: 訳注:SignalingNANは算術演算を行うと例外を発生させるNaNらしい。QuietNaNはNaNが伝播するらしい。
