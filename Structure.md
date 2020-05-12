@@ -259,7 +259,7 @@ Binary Format仕様の制限により、名前の長さはUTF-8エンコーデ�
 
 <div>\[\begin{split}\begin{array}{llll}
 \def\mathdef1595#1{{}}\mathdef1595{memory type} &amp; {\mathit{memtype}} &amp;::=&amp;
-  \href{../syntax/types.html#syntax-limits}{\mathit{limits}} \\
+  {\mathit{limits}} \\
 \end{array}\end{split}\]</div>
 
 リミットは、メモリの最小サイズと最大サイズを指定します。
@@ -271,9 +271,9 @@ Binary Format仕様の制限により、名前の長さはUTF-8エンコーデ�
 
 <div>\[\begin{split}\begin{array}{llll}
 \def\mathdef1595#1{{}}\mathdef1595{table type} &amp; {\mathit{tabletype}} &amp;::=&amp;
-  \href{../syntax/types.html#syntax-limits}{\mathit{limits}}~\href{../syntax/types.html#syntax-elemtype}{\mathit{elemtype}} \\
-\def\mathdef1595#1{{}}\mathdef1595{element type} &amp; \href{../syntax/types.html#syntax-elemtype}{\mathit{elemtype}} &amp;::=&amp;
-  \href{../syntax/types.html#syntax-elemtype}{\mathsf{funcref}} \\
+  {\mathit{limits}}~{\mathit{elemtype}} \\
+\def\mathdef1595#1{{}}\mathdef1595{element type} &amp; {\mathit{elemtype}} &amp;::=&amp;
+  {\mathsf{funcref}} \\
 \end{array}\end{split}\]</div>
 
 [メモリ型](#メモリ型)と同様に、テーブル型は最小サイズと最大サイズを示す[リミット](#リミット)によって制約を施されています。
@@ -324,11 +324,343 @@ Binary Format仕様の制限により、名前の長さはUTF-8エンコーデ�
 
 # 命令
 
+`WebAssembly`のコードは命令のシーケンスで構成されています。
+その計算モデルは命令が暗黙のオペランド・スタック上の値を操作し、引数の値を消費（ポップ）し、結果の値を生成または返す（プッシュ）という点で、スタック・マシンに基づいています。
+
+スタックからの動的なオペランドに加えて、いくつかの命令は静的な即時引数、典型的にはインデックスや型のアノテーションを持ちます。
+即時引数は命令を構成する一部です。
+
+いくつかの命令は入れ子になった命令のシーケンスを括弧で囲むように構造化されています。
+
+以下のセクションでは、命令をいくつかの異なるカテゴリに分類しています。
+
+## 算術演算命令
+
+算術演算命令は特定の型の数値に対する基本的な操作を提供します。
+これらの操作はハードウェアで利用可能なそれぞれの操作と密接に一致しています。
+
+<div>
+\[\begin{split}\begin{array}{llcl}
+\def\mathdef1519#1{{}}\mathdef1519{width} &amp; \mathit{nn}, \mathit{mm} &amp;::=&amp;
+  \mathsf{32} ~|~ \mathsf{64} \\
+\def\mathdef1519#1{{}}\mathdef1519{signedness} &amp; {\mathit{sx}} &amp;::=&amp;
+  \mathsf{u} ~|~ \mathsf{s} \\
+\def\mathdef1519#1{{}}\mathdef1519{instruction} &amp; {\mathit{instr}} &amp;::=&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{const}}~{\def\mathdef1556#1{{\mathit{i#1}}}\mathdef1556{\mathit{nn}}} ~|~
+  \mathsf{f}\mathit{nn}\mathsf{.}{\mathsf{const}}~{\def\mathdef1557#1{{\mathit{f#1}}}\mathdef1557{\mathit{nn}}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathit{iunop}} ~|~
+  \mathsf{f}\mathit{nn}\mathsf{.}{\mathit{funop}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathit{ibinop}} ~|~
+  \mathsf{f}\mathit{nn}\mathsf{.}{\mathit{fbinop}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathit{itestop}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathit{irelop}} ~|~
+  \mathsf{f}\mathit{nn}\mathsf{.}{\mathit{frelop}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{extend}}\mathsf{8\_s} ~|~
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{extend}}\mathsf{16\_s} ~|~
+  \mathsf{i64.}{\mathsf{extend}}\mathsf{32\_s} \\&amp;&amp;|&amp;
+  \mathsf{i32.}{\mathsf{wrap}}\mathsf{\_i64} ~|~
+  \mathsf{i64.}{\mathsf{extend}}\mathsf{\_i32}\mathsf{\_}{\mathit{sx}} ~|~
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{trunc}}\mathsf{\_f}\mathit{mm}\mathsf{\_}{\mathit{sx}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{trunc}}\mathsf{\_sat\_f}\mathit{mm}\mathsf{\_}{\mathit{sx}} \\&amp;&amp;|&amp;
+  \mathsf{f32.}{\mathsf{demote}}\mathsf{\_f64} ~|~
+  \mathsf{f64.}{\mathsf{promote}}\mathsf{\_f32} ~|~
+  \mathsf{f}\mathit{nn}\mathsf{.}{\mathsf{convert}}\mathsf{\_i}\mathit{mm}\mathsf{\_}{\mathit{sx}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{reinterpret}}\mathsf{\_f}\mathit{nn} ~|~
+  \mathsf{f}\mathit{nn}\mathsf{.}{\mathsf{reinterpret}}\mathsf{\_i}\mathit{nn} \\&amp;&amp;|&amp;
+  \dots \\
+\def\mathdef1519#1{{}}\mathdef1519{integer unary operator} &amp; {\mathit{iunop}} &amp;::=&amp;
+  \mathsf{clz} ~|~
+  \mathsf{ctz} ~|~
+  \mathsf{popcnt} \\
+\def\mathdef1519#1{{}}\mathdef1519{integer binary operator} &amp; {\mathit{ibinop}} &amp;::=&amp;
+  \mathsf{add} ~|~
+  \mathsf{sub} ~|~
+  \mathsf{mul} ~|~
+  \mathsf{div\_}{\mathit{sx}} ~|~
+  \mathsf{rem\_}{\mathit{sx}} \\&amp;&amp;|&amp;
+  \mathsf{and} ~|~
+  \mathsf{or} ~|~
+  \mathsf{xor} ~|~
+  \mathsf{shl} ~|~
+  \mathsf{shr\_}{\mathit{sx}} ~|~
+  \mathsf{rotl} ~|~
+  \mathsf{rotr} \\
+\def\mathdef1519#1{{}}\mathdef1519{floating-point unary operator} &amp; {\mathit{funop}} &amp;::=&amp;
+  \mathsf{abs} ~|~
+  \mathsf{neg} ~|~
+  \mathsf{sqrt} ~|~
+  \mathsf{ceil} ~|~
+  \mathsf{floor} ~|~
+  \mathsf{trunc} ~|~
+  \mathsf{nearest} \\
+\def\mathdef1519#1{{}}\mathdef1519{floating-point binary operator} &amp; {\mathit{fbinop}} &amp;::=&amp;
+  \mathsf{add} ~|~
+  \mathsf{sub} ~|~
+  \mathsf{mul} ~|~
+  \mathsf{div} ~|~
+  \mathsf{min} ~|~
+  \mathsf{max} ~|~
+  \mathsf{copysign} \\
+\def\mathdef1519#1{{}}\mathdef1519{integer test operator} &amp; {\mathit{itestop}} &amp;::=&amp;
+  \mathsf{eqz} \\
+\def\mathdef1519#1{{}}\mathdef1519{integer relational operator} &amp; {\mathit{irelop}} &amp;::=&amp;
+  \mathsf{eq} ~|~
+  \mathsf{ne} ~|~
+  \mathsf{lt\_}{\mathit{sx}} ~|~
+  \mathsf{gt\_}{\mathit{sx}} ~|~
+  \mathsf{le\_}{\mathit{sx}} ~|~
+  \mathsf{ge\_}{\mathit{sx}} \\
+\def\mathdef1519#1{{}}\mathdef1519{floating-point relational operator} &amp; {\mathit{frelop}} &amp;::=&amp;
+  \mathsf{eq} ~|~
+  \mathsf{ne} ~|~
+  \mathsf{lt} ~|~
+  \mathsf{gt} ~|~
+  \mathsf{le} ~|~
+  \mathsf{ge} \\
+\end{array}\end{split}\]</div>
+
+算術演算命令は、引数の値の型ごとにいくつかに分けられます。
+
+- 定数
+  - 静的に定義された定数を返します。
+- 単項演算
+  - 1つのオペランドを消費し、それぞれの型の1つの結果を返します。
+- 二項演算
+  - 2つのオペランドを消費し、それぞれの型の1つの結果を返します。
+- テスト
+  - 1つのオペランドを消費し、真偽値の1つの結果を返します。
+- 比較
+  - 2つのオペランドを消費し、真偽値の1つの結果を返します。
+- 変換
+
+整数に関連する命令の中には、符号化アノテーションsxによって、オペランドが符号なし整数として解釈されるか、符号付き整数として解釈されるかが区別されるものがあります。
+その他の整数に関連する命令では、符号付き解釈に2の補数を使用することで、符号の有無に関係なく同じ動作をします。
+
+### 表記上のお約束
+
+以下の文法の短縮記法に従って演算子をグループ化しておくと便利です。
+
+<div>
+\[\begin{split}\begin{array}{llll}
+\def\mathdef1519#1{{}}\mathdef1519{unary operator} &amp; {\mathit{unop}} &amp;::=&amp;
+  {\mathit{iunop}} ~|~
+  {\mathit{funop}} ~|~
+  {\mathsf{extend}}{N}\mathsf{\_s} \\
+\def\mathdef1519#1{{}}\mathdef1519{binary operator} &amp; {\mathit{binop}} &amp;::=&amp; {\mathit{ibinop}} ~|~ {\mathit{fbinop}} \\
+\def\mathdef1519#1{{}}\mathdef1519{test operator} &amp; {\mathit{testop}} &amp;::=&amp; {\mathit{itestop}} \\
+\def\mathdef1519#1{{}}\mathdef1519{relational operator} &amp; {\mathit{relop}} &amp;::=&amp; {\mathit{irelop}} ~|~ {\mathit{frelop}} \\
+\def\mathdef1519#1{{}}\mathdef1519{conversion operator} &amp; {\mathit{cvtop}} &amp;::=&amp;
+  {\mathsf{wrap}} ~|~
+  {\mathsf{extend}} ~|~
+  {\mathsf{trunc}} ~|~
+  {\mathsf{trunc}}\mathsf{\_sat} ~|~
+  {\mathsf{convert}} ~|~
+  {\mathsf{demote}} ~|~
+  {\mathsf{promote}} ~|~
+  {\mathsf{reinterpret}} \\
+\end{array}\end{split}\]</div>
+
+## パラメトリック命令
+
+このグループの命令は、任意の値型のオペランドを操作することができます。
+
+<div>
+\[\begin{split}\begin{array}{llcl}
+\def\mathdef1519#1{{}}\mathdef1519{instruction} &amp; {\mathit{instr}} &amp;::=&amp;
+  \dots \\&amp;&amp;|&amp;
+  {\mathsf{drop}} \\&amp;&amp;|&amp;
+  {\mathsf{select}}
+\end{array}\end{split}\]</div>
+
+- `drop`
+  - スタック上に存在する値を1つ廃棄します。
+- `select`
+  - 3番目のオペランドがゼロかどうかで、最初の2つのオペランドのうちの1つを選択します。
+  - 詳細については[実行/命令/パラメトリック命令/select](Execute#select)を読んでください。
+
+## 変数命令
+
+変数命令は、ローカル変数やグローバル変数に関するものです。
+
+<div>
+\[\begin{split}\begin{array}{llcl}
+\def\mathdef1519#1{{}}\mathdef1519{instruction} &amp; {\mathit{instr}} &amp;::=&amp;
+  \dots \\&amp;&amp;|&amp;
+  {\mathsf{local.get}}~{\mathit{localidx}} \\&amp;&amp;|&amp;
+  {\mathsf{local.set}}~{\mathit{localidx}} \\&amp;&amp;|&amp;
+  {\mathsf{local.tee}}~{\mathit{localidx}} \\&amp;&amp;|&amp;
+  {\mathsf{global.get}}~{\mathit{globalidx}} \\&amp;&amp;|&amp;
+  {\mathsf{global.set}}~{\mathit{globalidx}} \\
+\end{array}\end{split}\]</div>
+
+これらの命令はそれぞれ変数の値を取得または設定します。
+
+local.tee命令はlocal.setと似ていますが、引数を返します。
+詳細については[実行/命令/変数命令/local.tee](Execute#local.tee)を読んでください。
+
+## メモリ命令
+
+メモリ命令はリニアメモリに関するものです。
+
+<div>
+\[\begin{split}\begin{array}{llcl}
+\def\mathdef1519#1{{}}\mathdef1519{memory immediate} &amp; {\mathit{memarg}} &amp;::=&amp;
+  \{ {\mathsf{offset}}~{\mathit{u32}}, {\mathsf{align}}~{\mathit{u32}} \} \\
+\def\mathdef1519#1{{}}\mathdef1519{instruction} &amp; {\mathit{instr}} &amp;::=&amp;
+  \dots \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{load}}~{\mathit{memarg}} ~|~
+  \mathsf{f}\mathit{nn}\mathsf{.}{\mathsf{load}}~{\mathit{memarg}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{store}}~{\mathit{memarg}} ~|~
+  \mathsf{f}\mathit{nn}\mathsf{.}{\mathsf{store}}~{\mathit{memarg}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{load}}\mathsf{8\_}{\mathit{sx}}~{\mathit{memarg}} ~|~
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{load}}\mathsf{16\_}{\mathit{sx}}~{\mathit{memarg}} ~|~
+  \mathsf{i64.}{\mathsf{load}}\mathsf{32\_}{\mathit{sx}}~{\mathit{memarg}} \\&amp;&amp;|&amp;
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{store}}\mathsf{8}~{\mathit{memarg}} ~|~
+  \mathsf{i}\mathit{nn}\mathsf{.}{\mathsf{store}}\mathsf{16}~{\mathit{memarg}} ~|~
+  \mathsf{i64.}{\mathsf{store}}\mathsf{32}~{\mathit{memarg}} \\&amp;&amp;|&amp;
+  {\mathsf{memory.size}} \\&amp;&amp;|&amp;
+  {\mathsf{memory.grow}} \\
+\end{array}\end{split}\]</div>
+
+メモリへのアクセスはロード命令とストア命令で行われます。
+値の型に応じて命令は用意されています。
+
+メモリ命令は即時に`memarg`で指定されたメモリを取ります。
+`memarg`は`u32`型のoffsetと2の累乗の指数で表されるalignで構成されます。
+
+整数のロードとストアでは、オプションでそれぞれの値型のビット幅よりも小さいストレージサイズを指定することができます。
+ロードの場合には、適切な動作を選択するために符号拡張モード sx が必要となります。
+
+静的なアドレスのoffsetが実行時に得られるオペランドアドレスに追加され、メモリがアクセスされるべき33ビットの有効アドレスが得られます。
+
+すべての値はリトルエンディアンのバイト順で読み書きされます。
+アクセスされたメモリ・バイトのいずれかが、メモリの現在のサイズによって暗示されるアドレス範囲外にある場合トラップ例外が発生します。
+
+- memory.size 命令はメモリの現在のサイズを返します。
+- memory.grow命令は、与えられたデルタ分だけメモリを成長させ、前のサイズを返します。どちらの命令もページサイズの単位で動作します。
+
+### 付記
+
+`WebAssembly`の将来のバージョンでは、64ビットのアドレス範囲を持つメモリ命令が提供されるかもしれません。
+
+現在のバージョンの`WebAssembly`では、すべてのメモリ命令は暗黙的にメモリインデックス0として動作します。
+この制約は将来のバージョンで除かれる可能性があります。
+
+## 制御命令
+
+制御命令は制御の流れに影響を与えるものです。
+
+<div>
+\[\begin{split}\begin{array}{llcl}
+\def\mathdef1519#1{{}}\mathdef1519{block type} &amp; {\mathit{blocktype}} &amp;::=&amp;
+  {\mathit{typeidx}} ~|~ {\mathit{valtype}}^? \\
+\def\mathdef1519#1{{}}\mathdef1519{instruction} &amp; {\mathit{instr}} &amp;::=&amp;
+  \dots \\&amp;&amp;|&amp;
+  {\mathsf{nop}} \\&amp;&amp;|&amp;
+  {\mathsf{unreachable}} \\&amp;&amp;|&amp;
+  {\mathsf{block}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}} \\&amp;&amp;|&amp;
+  {\mathsf{loop}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}} \\&amp;&amp;|&amp;
+  {\mathsf{if}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{else}}~{\mathit{instr}}^\ast~{\mathsf{end}} \\&amp;&amp;|&amp;
+  {\mathsf{br}}~{\mathit{labelidx}} \\&amp;&amp;|&amp;
+  {\mathsf{br\_if}}~{\mathit{labelidx}} \\&amp;&amp;|&amp;
+  {\mathsf{br\_table}}~{\mathit{vec}}({\mathit{labelidx}})~{\mathit{labelidx}} \\&amp;&amp;|&amp;
+  {\mathsf{return}} \\&amp;&amp;|&amp;
+  {\mathsf{call}}~{\mathit{funcidx}} \\&amp;&amp;|&amp;
+  {\mathsf{call\_indirect}}~{\mathit{typeidx}} \\
+\end{array}\end{split}\]</div>
+
+- `nop`は何もしません。[^2]
+- `unreachable`は無条件にトラップ例外を発生させます。
+- ブロック命令、ループ命令、`if`命令は構造化された命令です。これらは、ブロックと呼ばれる命令の入れ子になったシーケンスを括弧で括り、`end`命令や`else`命令で終わるか、または擬似命令で区切られています。文法で規定されているように、これらの命令はうまく入れ子になっていなければなりません。
+
+<div>構造化命令はアノテーションされたブロック型に従ってオペランドスタック上で入力を消費し、出力を生成することができます。
+構造化命令は、適切な関数型を参照する型インデックスとして、または埋め込まれた値型として表記されます。(埋め込まれた値型は<span class="math notranslate nohighlight">\([] {\rightarrow} [{\mathit{valtype}}^?]\)</span>の短縮記法です。)</div>
+
+各構造化制御命令は暗黙のラベルを導入します。
+ラベルは、ラベルインデックスで識別され、ラベルを参照する分岐命令のターゲットとなります。
+
+他のインデックス空間とは異なり、ラベルのインデックス付けは入れ子の深さによる相対的なものです。
+ラベル0は参照する分岐命令を囲んでいる最も内側の構造化制御命令を参照します。
+インデックスが増加するとより遠くにあるものを参照します。
+
+その結果、ラベルは関連する構造化制御命令内からしか参照できません。
+これはまた、分岐は対象となる制御構造のブロックから「break」して外側にのみ指示することができることを意味します。正確な挙動はその制御命令次第です。
+ブロックの場合、または前方へのジャンプであれば、マッチング終了後に実行を再開します。
+ループの場合は、ループの先頭への後方ジャンプです。
+
+分岐命令にはいくつかの種類があります。
+
+- `br`は無条件分岐
+- `br_if`は条件分岐
+- `br_table`はラベルベクトルを分岐先とします。オペランドがラベルベクトルの範囲外の時defaultラベルに分岐します。
+- `return`は最外層のブロック(暗黙的には関数)を無条件で脱するための短縮命令です。スタックを関数呼び出し前の状態に巻き戻します。関数定義に戻り値が定義されている場合戻り値を巻き戻し後にスタックにpushします。
+
+前方分岐は対象となるブロックの型の出力に応じたオペランドを要求します。
+後方分岐は対象ブロックの型の入力に応じたオペランドを要求し、再起動されたブロックによって消費された値を表します。
+
+`call`命令は別の関数を呼び出し、スタックから必要な引数を消費し、呼び出しの結果値を返します。
+
+`call_indirect`命令は、オペランドをindex扱いしてテーブルから間接的に関数を呼び出します。
+テーブルには`funcref`型の関数がありますが、呼び出したい関数のシグネチャと異なるシグネチャの関数が含まれている可能性があるため、呼び出し元は命令の`immediate`によってインデキシングされた関数型と実行時に照合され、一致しない場合はトラップ例外が発生して呼び出しが中止されます。
+
+### 付記
+
+ラベルインデックスのこの仕様により、構造化された制御フローが強制されます。
+直感的には、ブロックやifを対象とした分岐は、ほとんどのC言語ではbreak文のように動作し、ループを対象とした分岐はcontinue文のように動作します。
+
+現在のバージョンの`WebAssembly`では、`call_indirect`は暗黙的に0番目のテーブルを操作します。
+この制限は将来のバージョンでは解除されるかもしれません。
+
+## 式
+
+関数本体、グローバルの初期化値、要素または[Dataセグメント](#Dataセグメント)のoffsetは式として与えられます。
+
+<div>\[\begin{split}\begin{array}{llll}
+\def\mathdef1519#1{{}}\mathdef1519{expression} &amp; {\mathit{expr}} &amp;::=&amp;
+  {\mathit{instr}}^\ast~{\mathsf{end}} \\
+\end{array}\end{split}\]</div>
+
+バリデーションによって式が定数に制限される場所では、許容される命令の集合が制限されています。
+
 # モジュール
+
+## インデックス
+
+## 型
+
+### 付記
+
+## 関数
+
+## テーブル
+
+### 付記
+
+## メモリ
+
+### 付記
+
+## グローバル
+
+## Elementセグメント
+
+### 付記
+
+## Dataセグメント
+
+### 付記
+
+## 開始関数
+
+### 付記
+
+## Export
+
+### 表記上のお約束
 
 ## Import
 
-## Export
+### 付記
 
 # LINK
 
@@ -344,3 +676,4 @@ Binary Format仕様の制限により、名前の長さはUTF-8エンコーデ�
 </footer>
 
 [^1]: 訳注:SignalingNANは算術演算を行うと例外を発生させるNaNらしい。QuietNaNはNaNが伝播するらしい。
+[^2]: 訳注:デバッガがブレークポイントを差し込むのに利用したりします。
