@@ -126,7 +126,7 @@
 
 ## 浮動小数点数
 
-浮動小数点データは、[IEEE 754-2019規格（セクション3.3）](https://ieeexplore.ieee.org/document/8766229)のそれぞれのバイナリフォーマットに対応する32ビットまたは64ビットの値を表します。
+浮動小数点データは、[IEEE 754-2019](https://ieeexplore.ieee.org/document/8766229)のそれぞれのバイナリフォーマットに対応する32ビットまたは64ビットの値を表します。
 <div>
 各値は符号と大きさを持ちます。
 大きさは<span>\(m_0.m_1m_2\dots m_M \cdot2^e\)</span>の正規数（e は指数、m は最大符号ビット m0 が 1 の符号）、または指数を最小値に固定して m0 を 0 とした非正規化数で表すことができます。
@@ -160,7 +160,7 @@ Signaling NANとQuiet NaNの間には区別はありません。[^1]
 </div>
 
 <div>canonical NaNは浮動小数点値±nan(<span>\(\pm{\mathsf{nan}}({\mathrm{canon}}_N)\)</span>)であり、<span>\(\pm{\mathsf{nan}}({\mathrm{canon}}_N)\)</span>は最上位ビットが1であり、他のビットはすべて0であるペイロードです。
-<div class="math notranslate nohighlight">\[{\mathrm{canon}}_N = 2^{{\mathrm{signif}}(N)-1}\]</div>
+<div>\[{\mathrm{canon}}_N = 2^{{\mathrm{signif}}(N)-1}\]</div>
 
 算術NaNとは、n≧<span>\(\pm{\mathsf{nan}}({\mathrm{canon}}_N)\)</span>の浮動小数点値±nan(n)で、最上位ビットが1で、他のビットは任意の値を取るものです。
 </div>
@@ -181,7 +181,7 @@ Signaling NANとQuiet NaNの間には区別はありません。[^1]
 
 名前は、[Unicode](http://www.unicode.org/versions/latest/)（2.4節）で定義されているスカラー値の文字列です。
 
-<div class="math notranslate nohighlight">
+<div>
 \[\begin{split}\begin{array}{llclll}
 \def\mathdef1632#1{{}}\mathdef1632{name} &amp; {\mathit{name}} &amp;::=&amp;
   {\mathit{char}}^\ast \qquad\qquad (\mathrel{\mbox{if}} |{\mathrm{utf8}}({\mathit{char}}^\ast)| &lt; 2^{32}) \\
@@ -190,17 +190,157 @@ Signaling NANとQuiet NaNの間には区別はありません。[^1]
   \def\mathdef1673#1{\mathrm{U{+}#1}}\mathdef1673{E000} ~|~ \dots ~|~ \def\mathdef1674#1{\mathrm{U{+}#1}}\mathdef1674{10FFFF} \\
 \end{array}\end{split}\]</div>
 
+Binary Format仕様の制限により、名前の長さはUTF-8エンコーディングの長さに制限されます。
+
+### 表記上のお約束
+
+文字（Unicodeスカラ値）は、自然数`n`<1114112と暗黙的に同一であると見做し得ます。
+
+# 型
+
+`WebAssembly`の様々なエンティティは型によって分類されます。型は、検証、インスタンス化、および場合によっては実行時にチェックされます。
+
+## 値の取り得る型
+
+`WebAssembly`コードが計算できる個々の値と、変数が受け入れる値を分類します。
+
+<div>\[\begin{split}\begin{array}{llll}
+\def\mathdef1595#1{{}}\mathdef1595{value type} &amp; {\mathit{valtype}} &amp;::=&amp;
+  {\mathsf{i32}} ~|~ {\mathsf{i64}} ~|~ {\mathsf{f32}} ~|~ {\mathsf{f64}} \\
+\end{array}\end{split}\]</div>
+
+`i32`と`i64`は、それぞれ32ビットと64ビットの整数を分類します。
+整数表現は符号の有無とは無縁であり、その解釈は個々の演算によって決定されます。
+
+`f32`と`f64`はそれぞれ32ビットと64ビットの浮動小数点データを分類します。
+これらは、[IEEE 754-2019](https://ieeexplore.ieee.org/document/8766229)で定義されている単精度および倍精度としても知られる浮動小数点表現に対応しています。
+
+### 表記上のお約束
+
+メタ変数`t`は、文脈から明らかな値の型の範囲を表します。
+
+表記法｜t｜は値の型のビット幅を表します。つまり、｜i32｜=｜f32｜=32、｜i64｜=｜f64｜=64です。
+
+## 戻り値の取り得る型
+
+`戻り値型`は命令や関数を実行した結果の返り値の型です。
+角括弧\[\]で囲われた型の[ベクトル](#ベクトル)です。
+
+<div>\[\begin{split}\begin{array}{llll}
+\def\mathdef1595#1{{}}\mathdef1595{result type} &amp; {\mathit{resulttype}} &amp;::=&amp;
+  [{\mathit{vec}}({\mathit{valtype}})] \\
+\end{array}\end{split}\]</div>
+
+## 関数の取り得る型
+
+関数の型は関数のシグネチャです。
+引数の型の[ベクトル](#ベクトル)を戻り値の型の[ベクトル](#ベクトル)に射影します。
+また、命令の入力と出力を分類するためにも使用されます。
+
+<div>\[\begin{split}\begin{array}{llll}
+\def\mathdef1595#1{{}}\mathdef1595{function type} &amp; {\mathit{functype}} &amp;::=&amp;
+  {\mathit{resulttype}} {\rightarrow} {\mathit{resulttype}} \\
+\end{array}\end{split}\]</div>
+
+## リミット
+
+リミットは、[メモリ型](#メモリ型)と[テーブル型](#テーブル型)に関連付けられたサイズ変更可能なストレージのサイズ範囲です。
+
+<div>\[\begin{split}\begin{array}{llll}
+\def\mathdef1595#1{{}}\mathdef1595{limits} &amp; {\mathit{limits}} &amp;::=&amp;
+  \{ {\mathsf{min}}~{\mathit{u32}}, {\mathsf{max}}~{\mathit{u32}}^? \} \\
+\end{array}\end{split}\]</div>
+
+上限を指定しない場合、環境が許す範囲において任意の大きさを取り得ます。
+
+## メモリ型
+
+メモリ型は、リニアメモリとそのサイズ範囲です。
+
+<div>\[\begin{split}\begin{array}{llll}
+\def\mathdef1595#1{{}}\mathdef1595{memory type} &amp; {\mathit{memtype}} &amp;::=&amp;
+  \href{../syntax/types.html#syntax-limits}{\mathit{limits}} \\
+\end{array}\end{split}\]</div>
+
+リミットは、メモリの最小サイズと最大サイズを指定します。
+リミットの数値の単位は[ページサイズ](Execution#ページサイズ)です。
+
+## テーブル型
+
+テーブル型は、テーブルを要素の型とサイズで分類するものです。
+
+<div>\[\begin{split}\begin{array}{llll}
+\def\mathdef1595#1{{}}\mathdef1595{table type} &amp; {\mathit{tabletype}} &amp;::=&amp;
+  \href{../syntax/types.html#syntax-limits}{\mathit{limits}}~\href{../syntax/types.html#syntax-elemtype}{\mathit{elemtype}} \\
+\def\mathdef1595#1{{}}\mathdef1595{element type} &amp; \href{../syntax/types.html#syntax-elemtype}{\mathit{elemtype}} &amp;::=&amp;
+  \href{../syntax/types.html#syntax-elemtype}{\mathsf{funcref}} \\
+\end{array}\end{split}\]</div>
+
+[メモリ型](#メモリ型)と同様に、テーブル型は最小サイズと最大サイズを示す[リミット](#リミット)によって制約を施されています。
+リミットの数値の単位はテーブルの要素数です。
+
+要素型の`funcref`は，すべての関数型の無限和です。
+したがってこの`funcref`型のテーブルには関数への参照が含まれます。
+
+### 付記
+
+`WebAssembly`の将来のバージョンでは、他の要素型が導入されるかもしれません。
+
+## グローバル型
+
+グローバル型は、値を保持するグローバル変数の型です。
+
+<div>\[\begin{split}\begin{array}{llll}
+\def\mathdef1595#1{{}}\mathdef1595{global type} &amp; {\mathit{globaltype}} &amp;::=&amp;
+  {\mathit{mut}}~{\mathit{valtype}} \\
+\def\mathdef1595#1{{}}\mathdef1595{mutability} &amp; {\mathit{mut}} &amp;::=&amp;
+  {\mathsf{const}} ~|~
+  {\mathsf{var}} \\
+\end{array}\end{split}\]</div>
+
+## 外部型
+
+外部型は、[Import](#Import)と外部値を表す型です。
+
+<div>\[\begin{split}\begin{array}{llll}
+\def\mathdef1595#1{{}}\mathdef1595{external types} &amp; {\mathit{externtype}} &amp;::=&amp;
+  {\mathsf{func}}~{\mathit{functype}} ~|~
+  {\mathsf{table}}~{\mathit{tabletype}} ~|~
+  {\mathsf{mem}}~{\mathit{memtype}} ~|~
+  {\mathsf{global}}~{\mathit{globaltype}} \\
+\end{array}\end{split}\]</div>
+
+### お約束
+
+以下の補助的表記法は、外部型のシーケンスに対して定義されています。
+これは特定の種類のエントリを順序を保持してフィルタリングします。
+
+<ul>
+  <li><span>\({\mathrm{funcs}}({\mathit{externtype}}^\ast) = [{\mathit{functype}} ~|~ ({\mathsf{func}}~{\mathit{functype}}) \in {\mathit{externtype}}^\ast]\)</span></li>
+  <li><span>\({\mathrm{tables}}({\mathit{externtype}}^\ast) = [{\mathit{tabletype}} ~|~ ({\mathsf{table}}~{\mathit{tabletype}}) \in {\mathit{externtype}}^\ast]\)</span></li>
+  <li><span>\({\mathrm{mems}}({\mathit{externtype}}^\ast) = [{\mathit{memtype}} ~|~ ({\mathsf{mem}}~{\mathit{memtype}}) \in {\mathit{externtype}}^\ast]\)</span></li>
+  <li><span>\({\mathrm{globals}}({\mathit{externtype}}^\ast) = [{\mathit{globaltype}} ~|~ ({\mathsf{global}}~{\mathit{globaltype}}) \in {\mathit{externtype}}^\ast]\)</span></li>
+</ul>
+
+# 命令
+
+# モジュール
+
+## Import
+
+## Export
+
 # LINK
 
 <footer>
-    <nav>
-        <ul>
-            <li><a href="Introduction" rel="prev">Prev: はじめに</a></li>
-            <li><a href="./">Top: Index</a></li>
-            <li><a href="Validation" rel="next">Next: 検証</a></li>
-        </ul>
-        <a href="LICENSE" rel="license">LICENSE</a>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="Introduction" rel="prev">Prev: はじめに</a></li>
+      <li><a href="./">Top: Index</a></li>
+      <li><a href="Validation" rel="next">Next: 検証</a></li>
+    </ul>
+    <a href="LICENSE" rel="license">LICENSE</a>
+  </nav>
 </footer>
 
 [^1]: 訳注:SignalingNANは算術演算を行うと例外を発生させるNaNらしい。QuietNaNはNaNが伝播するらしい。
