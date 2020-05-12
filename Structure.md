@@ -49,7 +49,7 @@
 
 ### 積和
 
-<div>以下の形式の積和は、フィールド<span>\(\mathsf{field}_i\)</span>の固定セットをそれぞれ「値」<span>\(A_i\)</span>にマッピングするレコードとして解釈されます。</div>
+<div>以下の形式の積和は、「フィールド」<span>\(\mathsf{field}_i\)</span>の固定集合をそれぞれ「値」<span>\(A_i\)</span>にマッピングするレコードとして解釈されます。</div>
 <div>\[\mathit{r} ~::=~ \{ \mathsf{field}_1~A_1, \mathsf{field}_2~A_2, \dots \}\]</div>
 
 このようなレコードを操作する際には以下のような表記を採用しています:
@@ -772,13 +772,21 @@ DataとElementのセグメントまたは開始関数を援用して初期化ロ
 
 ## グローバル
 
-<div>
-\[\begin{split}\begin{array}{llll}
+モジュールの`globals`コンポーネントは、グローバル変数（略してグローバル）のベクトルを定義します。
+
+<div>\[\begin{split}\begin{array}{llll}
 \def\mathdef1558#1{{}}\mathdef1558{global} &amp; {\mathit{global}} &amp;::=&amp;
   \{ {\mathsf{type}}~{\mathit{globaltype}}, {\mathsf{init}}~{\mathit{expr}} \} \\
 \end{array}\end{split}\]</div>
 
+各グローバルは、指定されたグローバル型の単一の値を格納します。また、その型は、グローバルが不変型か突然変異型かを指定します。さらに、各グローバルは、定数のイニシャライザ式で与えられた init 値で初期化されます。
+
+グローバルはグローバルのImportを参照しない最小のインデックスから始まるグローバルインデックスを通して参照されます。
+
 ## Elementセグメント
+
+[テーブル](#テーブル)の内容はデフォルトでは初期化されません。
+モジュールの`elem`コンポーネントは、静的な要素のベクトルから与えられたテーブルの部分集合を初期化します。
 
 <div>
 \[\begin{split}\begin{array}{llll}
@@ -786,9 +794,17 @@ DataとElementのセグメントまたは開始関数を援用して初期化ロ
   \{ {\mathsf{table}}~{\mathit{tableidx}}, {\mathsf{offset}}~{\mathit{expr}}, {\mathsf{init}}~{\mathit{vec}}({\mathit{funcidx}}) \} \\
 \end{array}\end{split}\]</div>
 
+offsetは定数式です。
+
 ### 付記
 
+現在のバージョンの`WebAssembly`では、1つのモジュールで最大1つのテーブルを定義またはImportすることができます。
+故に現在唯一の有効な`tableidx`は0です。
+
 ## Dataセグメント
+
+[メモリ](#メモリ)の初期内容は全て0のバイト列です。
+モジュールの`data`コンポーネントは静的なバイト列から与えられたメモリの連続した部分を初期化します。
 
 <div>
 \[\begin{split}\begin{array}{llll}
@@ -796,22 +812,32 @@ DataとElementのセグメントまたは開始関数を援用して初期化ロ
   \{ {\mathsf{data}}~{\mathit{memidx}}, {\mathsf{offset}}~{\mathit{expr}}, {\mathsf{init}}~{\mathit{vec}}({\mathit{byte}}) \} \\
 \end{array}\end{split}\]</div>
 
+offsetは定数式です。
+
 ### 付記
+
+現在のバージョンの`WebAssembly`では、1つのモジュールで最大1つのメモリを定義またはImportすることができます。
+故に現在唯一の有効な`memidx`は0です。
 
 ## 開始関数
 
-<div>
-\[\begin{split}\begin{array}{llll}
+モジュールの`start`コンポーネントは、テーブルとメモリが初期化された後、モジュールがインスタンス化されたときに自動的に起動される開始関数の関数インデックスを宣言します。
+
+<div>\[\begin{split}\begin{array}{llll}
 \def\mathdef1558#1{{}}\mathdef1558{start function} &amp; {\mathit{start}} &amp;::=&amp;
   \{ {\mathsf{func}}~{\mathit{funcidx}} \} \\
 \end{array}\end{split}\]</div>
 
 ### 付記
 
+開始関数は、モジュールを初期化するためのものです。
+初期化が完了するまではモジュールと`Export`は利用不能です。
+
 ## Export
 
-<div>
-\[\begin{split}\begin{array}{llcl}
+モジュールの`exports`コンポーネントは、モジュールがインスタンス化されるとホスト環境からアクセス可能になるExportの集合を定義します。
+
+<div>\[\begin{split}\begin{array}{llcl}
 \def\mathdef1558#1{{}}\mathdef1558{export} &amp; {\mathit{export}} &amp;::=&amp;
   \{ {\mathsf{name}}~{\mathit{name}}, {\mathsf{desc}}~{\mathit{exportdesc}} \} \\
 \def\mathdef1558#1{{}}\mathdef1558{export description} &amp; {\mathit{exportdesc}} &amp;::=&amp;
@@ -821,7 +847,13 @@ DataとElementのセグメントまたは開始関数を援用して初期化ロ
   {\mathsf{global}}~{\mathit{globalidx}} \\
 \end{array}\end{split}\]</div>
 
+各Exportは、ユニークな名前でラベル付けされます。
+Export可能な定義は、関数、テーブル、メモリ、およびグローバルで、それぞれのインデックスを通して参照されます。
+
 ### 表記上のお約束
+
+以下の補助表記法はExportのシーケンスに対して定義されています。
+特定の種類のインデックスを順序を保持してフィルタリングします。
 
 <ul>
   <li><span>\({\mathrm{funcs}}({\mathit{export}}^\ast) = [{\mathit{funcidx}} ~|~ {\mathsf{func}}~{\mathit{funcidx}} \in ({\mathit{export}}.{\mathsf{desc}})^\ast]\)</span></li>
@@ -832,8 +864,9 @@ DataとElementのセグメントまたは開始関数を援用して初期化ロ
 
 ## Import
 
-<div>
-\[\begin{split}\begin{array}{llll}
+モジュールの`import`コンポーネントは、インスタンス化に必要なImportの集合を定義します。
+
+<div>\[\begin{split}\begin{array}{llll}
 \def\mathdef1558#1{{}}\mathdef1558{import} &amp; {\mathit{import}} &amp;::=&amp;
   \{ {\mathsf{module}}~{\mathit{name}}, {\mathsf{name}}~{\mathit{name}}, {\mathsf{desc}}~{\mathit{importdesc}} \} \\
 \def\mathdef1558#1{{}}\mathdef1558{import description} &amp; {\mathit{importdesc}} &amp;::=&amp;
@@ -843,7 +876,24 @@ DataとElementのセグメントまたは開始関数を援用して初期化ロ
   {\mathsf{global}}~{\mathit{globaltype}} \\
 \end{array}\end{split}\]</div>
 
+各Importは2層からなる名前空間に所属します。モジュール名とそのモジュール内のエンティティの名前です。
+
+Import可能な定義は、関数、テーブル、メモリ、およびグローバルです。
+
+各Importは、インスタンス化時に提供される定義が一致する必要がある、それぞれの型インデックスを通して指定されます。
+
+各Importは、それぞれのインデックス空間でインデックスを定義します。
+各インデックス空間では、Importのインデックスは、モジュール自体に含まれる定義の最初のインデックスよりも前になります。
+
 ### 付記
+
+Export名とは異なり、Import名は必ずしもユニークなものである必要はありません。
+
+同じモジュール/名前の組み合わせを複数回Importすることも可能です。
+そのようなImportは異なる種類のエンティティを含む異なる型の記述を持つこともありえるでしょう。
+
+エンベッダが同解釈するか次第ではありますが、このようなImportを持つモジュールをインスタンス化すること自体は可能です。
+しかし、エンベッダはそのようなオーバーロードをサポートする必要はなく、`WebAssembly`の仕様自体もオーバーロードをサポートしていません。
 
 # LINK
 
