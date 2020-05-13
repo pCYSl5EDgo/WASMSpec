@@ -3,7 +3,48 @@
 
 # 表記上のお約束
 
+検証(バリデーション)は、`WebAssembly`モジュールが適格で有効であるか否かを検証します。
+適格で有効なモジュールのみをインスタンス化することができます。
+
+有効性はモジュールの抽象構文とその内容に対する型システムによって定義されます。
+抽象構文の各部分には、それに適用される制約を指定する型付け規則があります。すべての規則は、2つの等価な形式で与えられます。
+
+<ol>
+    <li>散文的表記法では、人間にわかりやすい直感的な形で意味を記述します。</li>
+    <li>形式的表記法では、数学的な形式で規則を記述します。[^1]</li>
+</ol>
+
+### 付記
+
+散文的表記法と形式的表記法は等価です。
+この仕様書を読むためには形式表記法の理解は必要ありません。
+形式的表記法の方がプログラミング言語の意味論で広く使われている記法です。
+より簡潔な記述であり、数学的な証明を容易に行うことができます。
+
+---
+
+どちらの場合も、規則は宣言的な方法で定式化されます。
+つまり、制約を定式化するだけで、アルゴリズムを定義することはありません。
+この仕様に従った命令シーケンスの型チェックのための健全で完全なアルゴリズムの概要が[付録](Appendix)において提供されています。
+
 ## コンテキスト
+
+個々の定義の有効性は、周囲のモジュールとスコープ内の定義に関する関連情報を収集するコンテキストに対して相対的に指定されます:
+
+- 型：現在のモジュールで定義されている型のリスト。
+- 関数：現在のモジュールで宣言された関数のリスト。
+- テーブル: 現在のモジュールで宣言されたテーブルのリスト。
+- メモリ： 現在のモジュールで宣言されたメモリのリスト。
+- グローバル ： 現在のモジュールで宣言されているグローバルのリスト。
+- ローカル：現在の関数で宣言されたローカルのリスト（パラメータを含む）で、値の型で表されます。
+- ラベル：現在の位置からアクセス可能なラベルのスタック。
+- 戻り値: 現在の関数の戻り値の型で、オプションの結果型として表現されます。
+
+言い換えればコンテキストは各インデックス空間に適した型のシーケンスを含み、その空間で定義された各エントリを記述します。
+ローカル、ラベル、戻り値の型は、関数本体の命令を検証するためにのみ使用されそれ以外の場所では空のままにされます。
+ラベルスタックはコンテキストの内唯一mutableな部分です。これは命令シーケンスの検証の進行と共に変更されます。
+
+より具体的に言うならば、コンテキストは抽象構文を持つレコード`C`として定義されます。
 
 <div>\[\begin{split}\begin{array}{llll}
 \def\mathdef2623#1{{}}\mathdef2623{(context)} &amp; C &amp;::=&amp;
@@ -19,18 +60,45 @@
   \end{array}
 \end{array}\end{split}\]</div>
 
+コンテキストを操作する際には、`C.field`という形式のフィールドアクセスに加えて、以下のような表記を採用しています。
+
 <ul>
-    <li>When spelling out a context, empty fields are omitted.</li>
-    <li><span>\(C,\mathsf{field}\,A^\ast\)</span> denotes the same context as <span>\(C\)</span> but with the elements <span>\(A^\ast\)</span> prepended to its <span>\(\mathsf{field}\)</span> component sequence.</li>
+    <li>コンテキストを綴る際には、空のフィールドは省略します。</li>
+    <li><span>\(C,\mathsf{field}\,A^\ast\)</span>は、<span>\(C\)</span>と同じコンテキストを表しますが、フィールド構成要素のシーケンスの前に要素<span>\(A^\ast\)</span>が付加されています。</li>
 </ul>
 
 ### 付記
 
+<div><span>\(C.{\mathsf{labels}}[i]\)</span>のようなインデックス記法を使用して、コンテキスト内のそれぞれのインデックス空間のインデックスを検索します。
+コンテキスト拡張記法<span>\(C,\mathsf{field}\,A\)</span>は、主にラベルインデックスのような相対インデックス空間を局所的に拡張するために使用されます。</div>
+
+したがってこの記法は新しい相対インデックス0を導入し、既存のインデックスをシフトしながらそれぞれのシーケンスの先頭に追加するように定義されています。
+
 ## 散文的表記法
+
+有効性の検証は、抽象構文の各関連部分のスタイル化された規則によって指定されます。
+規則は、フレーズが有効なときに定義される制約を記述するだけでなく、型でそれを分類します。
+これらの規則を記述する際には、以下の規約が採用されています。
+
+- フレーズAは、それぞれの規則によって表現されているすべての制約が満たされている場合に限り、"型Tで有効"であると言われます。Tの形は、Aが何であるかに依存します。
+- 規則は暗黙のうちに、与えられたコンテキストCを前提としています。
+- いくつかの場所ではこのコンテキストは局所的にコンテキストC′に拡張され、追加の項目を持ちます。拡張されたコンテキストで具現化された仮定の下では、次の文が適用されなければならないことを表現するために、"Under context C′, ... statement .... "という定式化が採用されています。
 
 ### 付記
 
+例えば、Aが関数であれば、Tは関数型であり、グローバルなAであれば、Tはグローバル型である、などです。
+
 ## 形式的表記法
+
+この節では、規則を正式に指定するための表記法について簡単に説明します。
+興味のある読者のために、より詳細な紹介はそれぞれの教科書[^2]に掲載されています。
+
+フレーズAがそれぞれの型Tを持つという命題は、A:Tと書かれます。
+しかし、一般的には、型付けは文脈Cに依存しています。
+これを明示的に表現するために使用される完全な形式は、Cでエンコードされた仮定の下でA:Tが保持されるという判定C⊢A:Tです。
+
+形式的な型付け規則は、型システムを指定するための標準的なアプローチを使用し、それを演繹規則に変換します。
+すべての規則は以下の一般的な形式を持っています。
 
 <div>\[\frac{
   \mathit{premise}_1 \qquad \mathit{premise}_2 \qquad \dots \qquad \mathit{premise}_n
@@ -38,18 +106,34 @@
   \mathit{conclusion}
 }\]</div>
 
+このような規則は、すべての前提条件が成立すれば、結論が成立するという意味合いでおおまかに読まれます。
+いくつかの規則には前提条件がないものがあり、それらは結論が無条件に成立する公理です。
+結論は常に判断C⊢A:Tであり、抽象構文の関連する構成要素Aごとに1つのそれぞれの規則があります。
+
 ### 付記
+
+例えば、`i32.add`命令の型付け規則は公理として与えることができます。
 
 <div>\[\frac{
 }{
   C \vdash {\mathsf{i32}}.{\mathsf{add}} : [{\mathsf{i32}}~{\mathsf{i32}}] {\rightarrow} [{\mathsf{i32}}]
 }\]</div>
 
+<div>この命令は常に<span>\([{\mathsf{i32}}~{\mathsf{i32}}] {\rightarrow} [{\mathsf{i32}}]\)</span>型で有効です(2つのi32値を消費して1つの値を生成することを意味します)。</div>
+
+`local.get`のような命令は次のように型付けすることができます。
+
 <div>\[\frac{
   C.{\mathsf{locals}}[x] = t
 }{
   C \vdash {\mathsf{local.get}}~x : [] {\rightarrow} [t]
 }\]</div>
+
+<div>ここでは前提条件は即時ローカルインデックスxがコンテキスト内に存在することを強制します。
+命令はそれぞれの型tの値を生成します（値を消費しません）。
+<span>\(C.{\mathsf{locals}}[x]\)</span>が存在しない場合、前提条件は保持されず、命令は型が正しくありません。</div>
+
+最後に、構造化命令は再帰的な規則を必要とし、その前提はそれ自体が型付けの判断となります。
 
 <div>\[\frac{
   C \vdash {\mathit{blocktype}} : [t_1^\ast] {\rightarrow} [t_2^\ast]
@@ -59,11 +143,34 @@
   C \vdash {\mathsf{block}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}} : [t_1^\ast] {\rightarrow} [t_2^\ast]
 }\]</div>
 
+ブロック命令はそのボディ内の命令シーケンスが有効な場合にのみ有効となります。
+さらに、戻り値型はブロックの注釈で記述された`blocktype`と一致しなければなりません。
+そうであれば、ブロック命令はボディと同じ型を持ちます。
+ボディの中には、対応する戻り値型に対応する追加ラベルが取得可能です。
+これはコンテキスト`C`を前提とした追加ラベル情報で拡張することで表現されます。
+
 # 型
+
+ほとんどの型は普遍的に有効です。
+しかし、リミット型には検証時にチェックする必要のある条件があります。
+さらにその上、処理を容易にするために、ブロック型は素朴な関数型に変換されます。
 
 ## リミット
 
+リミットは、与えられた範囲内で意味のある境界を持っていなければなりません。
+
 <h3><span>\(\{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \}\)</span></h3>
+
+<ul class="simple">
+    <li><span>\(n\)</span>は<span>\(k\)</span>より大きい必要があります。</li>
+    <li><span>\(m^?\)</span>が空でないならば:
+        <ul>
+            <li><span>\(k\)</span>未満です。</li>
+            <li><span>\(n\)</span>以上です。</li>
+        </ul>
+    </li>
+    <li>以上の条件を満足する時、前提<span>\(k\)</span>の下でこのリミットは有効です。</li>
+</ul>
 
 <div>\[\frac{
   n \leq k
@@ -77,12 +184,13 @@
 
 ## ブロック型
 
+ブロック型は2つの形式の内いずれか一方で表現できます。
+いずれも次の規則に従うことでプレーンな関数型に変換されます。
+
 <h3><span>\({\mathit{typeidx}}\)</span></h3>
 
-<ul>
-    <li>The type <span>\(C.{\mathsf{types}}[{\mathit{typeidx}}]\)</span> must be defined in the context.</li>
-    <li>Then the block type is valid as <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\(C.{\mathsf{types}}[{\mathit{typeidx}}]\)</span>.</li>
-</ul>
+- <div><span>\(C.{\mathsf{types}}[{\mathit{typeidx}}]\)</span>はコンテキストに定義されている必要があります。</div>
+- <div>ブロック型は関数型<span>\(C.{\mathsf{types}}[{\mathit{typeidx}}]\)</span>として有効です。</div>
 
 <div>\[\frac{
   C.{\mathsf{types}}[{\mathit{typeidx}}] = {\mathit{functype}}
@@ -93,7 +201,7 @@
 <h3><span>\([{\mathit{valtype}}^?]\)</span></h3>
 
 <ul>
-    <li>The block type is valid as <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\([] {\rightarrow} [{\mathit{valtype}}^?]\)</span>.</li>
+    <li>ブロック型は関数型<span>\([] {\rightarrow} [{\mathit{valtype}}^?]\)</span>として有効です。</li>
 </ul>
 
 <div>\[\frac{
@@ -102,6 +210,8 @@
 }\]</div>
 
 ## 関数型
+
+関数型は常に有効です。
 
 <h3><span>\([t_1^n] {\rightarrow} [t_2^m]\)</span></h3>
 
@@ -115,8 +225,8 @@
 <h3><span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span></h3>
 
 <ul>
-    <li>The limits <span>\({\mathit{limits}}\)</span> must be <a class="reference internal" href="#valid-limits"><span class="std std-ref">valid</span></a> within range <span>\(2^{32}\)</span>.</li>
-    <li>Then the table type is valid.</li>
+    <li>リミット<span>\({\mathit{limits}}\)</span>は<span>\(2^{32}\)</span>を境界条件として与えられます。その上でリミットは有効でなくてはなりません。</li>
+    <li>以上の条件を満足する時、これは有効です。</li>
 </ul>
 
 <div>\[\frac{
@@ -130,8 +240,8 @@
 <h3><span>\({\mathit{limits}}\)</span></h3>
 
 <ul>
-    <li>The limits <span>\({\mathit{limits}}\)</span> must be <a class="reference internal" href="#valid-limits"><span class="std std-ref">valid</span></a> within range <span>\(2^{16}\)</span>.</li>
-    <li>Then the memory type is valid.</li>
+    <li>リミット<span>\({\mathit{limits}}\)</span>は<span>\(2^{16}\)</span>を境界条件として与えられます。その上でリミットは有効でなくてはなりません。</li>
+    <li>以上の条件を満足する時、これは有効です。</li>
 </ul>
 <div>\[\frac{
   {\vdash} {\mathit{limits}} : 2^{16}
@@ -139,7 +249,11 @@
   {\vdash} {\mathit{limits}} \mathrel{\mbox{ok}}
 }\]</div>
 
+<div>訳注:Threadでは<span>\({\mathit{share}}\)</span>が追加されています。</div>
+
 ## グローバル型
+
+グローバル型は常に有効です。
 
 <h3><span>\({\mathit{mut}}~{\mathit{valtype}}\)</span></h3>
 
@@ -154,8 +268,8 @@
 <h3><span>\({\mathsf{func}}~{\mathit{functype}}\)</span></h3>
 
 <ul>
-    <li>The <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\({\mathit{functype}}\)</span> must be <a class="reference internal" href="#valid-functype"><span class="std std-ref">valid</span></a>.</li>
-    <li>Then the external type is valid.</li>
+    <li>関数型<span>\({\mathit{functype}}\)</span>は有効でなくてはなりません。</li>
+    <li>以上の条件を満足する時、これは有効です。</li>
 </ul>
 <div>\[\frac{
   {\vdash} {\mathit{functype}} \mathrel{\mbox{ok}}
@@ -166,8 +280,8 @@
 <h3><span>\({\mathsf{table}}~{\mathit{tabletype}}\)</span></h3>
 
 <ul>
-    <li>The <a class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">table type</span></a> <span>\({\mathit{tabletype}}\)</span> must be <a class="reference internal" href="#valid-tabletype"><span class="std std-ref">valid</span></a>.</li>
-    <li>Then the external type is valid.</li>
+    <li>テーブル型<span>\({\mathit{tabletype}}\)</span>は有効でなくてはなりません。</li>
+    <li>以上の条件を満足する時、これは有効です。</li>
 </ul>
 
 <div>\[\frac{
@@ -180,8 +294,8 @@
 <h3><span>\({\mathsf{mem}}~{\mathit{memtype}}\)</span></h3>
 
 <ul>
-    <li>The <a class="reference internal" href="../syntax/types.html#syntax-memtype"><span class="std std-ref">memory type</span></a> <span>\({\mathit{memtype}}\)</span> must be <a class="reference internal" href="#valid-memtype"><span class="std std-ref">valid</span></a>.</li>
-    <li>Then the external type is valid.</li>
+    <li>メモリ型<span>\({\mathit{memtype}}\)</span>は有効でなくてはなりません。</li>
+    <li>以上の条件を満足する時、これは有効です。</li>
 </ul>
 
 <div>\[\frac{
@@ -193,8 +307,8 @@
 <h3><span>\({\mathsf{global}}~{\mathit{globaltype}}\)</span></h3>
 
 <ul>
-    <li>The <a class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global type</span></a> <span>\({\mathit{globaltype}}\)</span> must be <a class="reference internal" href="#valid-globaltype"><span class="std std-ref">valid</span></a>.</li>
-    <li>Then the external type is valid.</li>
+    <li>グローバル型<span>\({\mathit{globaltype}}\)</span>は有効でなくてはなりません。</li>
+    <li>以上の条件を満足する時、これは有効です。</li>
 </ul>
 <div>\[\frac{
   {\vdash} {\mathit{globaltype}} \mathrel{\mbox{ok}}
@@ -1182,3 +1296,6 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
         <a href="LICENSE" rel="license">LICENSE</a>
     </nav>
 </footer>
+
+[^1]: セマンティクスは以下の論文に由来しています。Andreas%20Haas、Andreas%20Rossberg、Derek%20Schuff、Ben%20Titzer、Dan%20Gohman、Luke%20Wagner、Alon%20Zakai、JF%20Bastien、Michael%20Holman。WebAssemblyでWebをスピードアップさせる.第38回ACM%20SIGPLAN%20Conference%20on%20Programming%20Language%20Design%20and%20Implementation%20(PLDI%202017).%20ACM%202017.
+[^2]: 例えば[ベンジャミン・ピアース%20型とプログラミング言語。MITプレス2002](https://www.cis.upenn.edu/~bcpierce/tapl/)
