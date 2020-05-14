@@ -986,8 +986,8 @@
 
 <h3><span>\(\{ {\mathsf{name}}~{\mathit{name}}, {\mathsf{desc}}~{\mathit{exportdesc}} \}\)</span></h3>
 <ul>
-    <li>The export description <span>\({\mathit{exportdesc}}\)</span> must be valid with 外部型 <span>\({\mathit{externtype}}\)</span>。</li>
-    <li>以上の条件を満足する時、the export is valid with 外部型 <span>\({\mathit{externtype}}\)</span>。</li>
+    <li>Exportの詳細<span>\({\mathit{exportdesc}}\)</span>は外部型<span>\({\mathit{externtype}}\)</span>として有効でなくてはなりません。。</li>
+    <li>以上の条件を満足する時、Exportは外部型<span>\({\mathit{externtype}}\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   C {\vdash} {\mathit{exportdesc}} : {\mathit{externtype}}
@@ -998,7 +998,7 @@
 <h3><span>\({\mathsf{func}}~x\)</span></h3>
 <ul>
     <li>関数<span>\(C.{\mathsf{funcs}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>以上の条件を満足する時、the export description is valid with 外部型 <span>\({\mathsf{func}}~C.{\mathsf{funcs}}[x]\)</span>。</li>
+    <li>以上の条件を満足する時、Exportは外部型<span>\({\mathsf{func}}~C.{\mathsf{funcs}}[x]\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{funcs}}[x] = {\mathit{functype}}
@@ -1009,7 +1009,7 @@
 <h3><span>\({\mathsf{table}}~x\)</span></h3>
 <ul>
     <li>テーブル<span>\(C.{\mathsf{tables}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>以上の条件を満足する時、the export description is valid with 外部型 <span>\({\mathsf{table}}~C.{\mathsf{tables}}[x]\)</span>。</li>
+    <li>以上の条件を満足する時、Exportは外部型<span>\({\mathsf{table}}~C.{\mathsf{tables}}[x]\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{tables}}[x] = {\mathit{tabletype}}
@@ -1020,7 +1020,7 @@
 <h3><span>\({\mathsf{mem}}~x\)</span></h3>
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>以上の条件を満足する時、the export description is valid with 外部型 <span>\({\mathsf{mem}}~C.{\mathsf{mems}}[x]\)</span>。</li>
+    <li>以上の条件を満足する時、Exportは外部型<span>\({\mathsf{mem}}~C.{\mathsf{mems}}[x]\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{mems}}[x] = {\mathit{memtype}}
@@ -1030,8 +1030,8 @@
 
 <h3><span>\({\mathsf{global}}~x\)</span></h3>
 <ul>
-    <li>The global <span>\(C.{\mathsf{globals}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>以上の条件を満足する時、the export description is valid with 外部型 <span>\({\mathsf{global}}~C.{\mathsf{globals}}[x]\)</span>。</li>
+    <li>グローバル変数<span>\(C.{\mathsf{globals}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
+    <li>以上の条件を満足する時、Exportは外部型<span>\({\mathsf{global}}~C.{\mathsf{globals}}[x]\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{globals}}[x] = {\mathit{globaltype}}
@@ -1043,8 +1043,8 @@
 
 <h3><span>\(\{ {\mathsf{module}}~{\mathit{name}}_1, {\mathsf{name}}~{\mathit{name}}_2, {\mathsf{desc}}~{\mathit{importdesc}} \}\)</span></h3>
 <ul>
-    <li>The import description <span>\({\mathit{importdesc}}\)</span> must be valid with type <span>\({\mathit{externtype}}\)</span>。</li>
-    <li>以上の条件を満足する時、Importは有効であり、型は<span>\({\mathit{externtype}}\)</span>となります。</li>
+    <li>Import詳細<span>\({\mathit{importdesc}}\)</span>は型<span>\({\mathit{externtype}}\)</span>として有効でなくてはなりません。</li>
+    <li>以上の条件を満足する時、Importは型<span>\({\mathit{externtype}}\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   C {\vdash} {\mathit{importdesc}} : {\mathit{externtype}}
@@ -1055,8 +1055,8 @@
 <h3><span>\({\mathsf{func}}~x\)</span></h3>
 <ul>
     <li>関数<span>\(C.{\mathsf{types}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> be the 関数型<span>\(C.{\mathsf{types}}[x]\)</span>。</li>
-    <li>以上の条件を満足する時、Import詳細は有効であり、型は<span>\({\mathsf{func}}~[t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>となります。</li>
+    <li><span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>が関数型<span>\(C.{\mathsf{types}}[x]\)</span>であるとします。</li>
+    <li>以上の条件を満足する時、Import詳細は型<span>\({\mathsf{func}}~[t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{types}}[x] = [t_1^\ast] {\rightarrow} [t_2^\ast]
@@ -1067,7 +1067,7 @@
 <h3><span>\({\mathsf{table}}~{\mathit{tabletype}}\)</span></h3>
 <ul>
     <li>テーブル型<span>\({\mathit{tabletype}}\)</span>は有効でなくてはなりません。</li>
-    <li>以上の条件を満足する時、Import詳細は有効であり、型は<span>\({\mathsf{table}}~{\mathit{tabletype}}\)</span>となります。</li>
+    <li>以上の条件を満足する時、Import詳細は型<span>\({\mathsf{table}}~{\mathit{tabletype}}\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   {\vdash} {\mathit{tabletype}} \mathrel{\mbox{ok}}
@@ -1078,7 +1078,7 @@
 <h3><span>\({\mathsf{mem}}~{\mathit{memtype}}\)</span></h3>
 <ul>
     <li>メモリ型<span>\({\mathit{memtype}}\)</span>は有効でなくてはなりません。</li>
-    <li>以上の条件を満足する時、Import詳細は有効であり、型は<span>\({\mathsf{mem}}~{\mathit{memtype}}\)</span>となります。</li>
+    <li>以上の条件を満足する時、Import詳細は型<span>\({\mathsf{mem}}~{\mathit{memtype}}\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   {\vdash} {\mathit{memtype}} \mathrel{\mbox{ok}}
@@ -1089,7 +1089,7 @@
 <h3><span>\({\mathsf{global}}~{\mathit{globaltype}}\)</span></h3>
 <ul>
     <li>グローバル型<span>\({\mathit{globaltype}}\)</span>は有効でなくてはなりません。</li>
-    <li>以上の条件を満足する時、Import詳細は有効であり、型は<span>\({\mathsf{global}}~{\mathit{globaltype}}\)</span>となります。</li>
+    <li>以上の条件を満足する時、Import詳細は型<span>\({\mathsf{global}}~{\mathit{globaltype}}\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   {\vdash} {\mathit{globaltype}} \mathrel{\mbox{ok}}
