@@ -1100,48 +1100,48 @@
 ## モジュール群
 
 <ul>
-    <li>Let <span>\({\mathit{module}}\)</span> be the module to validate。</li>
-    <li>Let <span>\(C\)</span> be a コンテキスト where:
+    <li>以下<span>\({\mathit{module}}\)</span>は検証対象のモジュールです。</li>
+    <li><span>\(C\)</span>はコンテキストであり、以下の仮定を満たします:
         <ul>
-            <li><span>\(C.{\mathsf{types}}\)</span> is <span>\({\mathit{module}}.{\mathsf{types}}\)</span>,</li>
-            <li><span>\(C.{\mathsf{funcs}}\)</span> is <span>\({\mathrm{funcs}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{ft}^\ast\)</span>, with the import’s 外部型 <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function types</span></a> <span>\(\mathit{ft}^\ast\)</span> as determined below,</li>
-            <li><span>\(C.{\mathsf{tables}}\)</span> is <span>\({\mathrm{tables}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{tt}^\ast\)</span>, with the import’s 外部型 <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">table types</span></a> <span>\(\mathit{tt}^\ast\)</span> as determined below,</li>
-            <li><span>\(C.{\mathsf{mems}}\)</span> is <span>\({\mathrm{mems}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{mt}^\ast\)</span>, with the import’s 外部型 <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-memtype"><span class="std std-ref">memory types</span></a> <span>\(\mathit{mt}^\ast\)</span> as determined below,</li>
-            <li><span>\(C.{\mathsf{globals}}\)</span> is <span>\({\mathrm{globals}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{gt}^\ast\)</span>, with the import’s 外部型 <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global types</span></a> <span>\(\mathit{gt}^\ast\)</span> as determined below,</li>
-            <li><span>\(C.{\mathsf{locals}}\)</span> is empty,</li>
-            <li><span>\(C.{\mathsf{labels}}\)</span> is empty,</li>
-            <li><span>\(C.{\mathsf{return}}\)</span> is empty。</li>
+            <li><span>\(C.{\mathsf{types}}\)</span>は<span>\({\mathit{module}}.{\mathsf{types}}\)</span></li>
+            <li><span>\(C.{\mathsf{funcs}}\)</span>は<span>\({\mathrm{funcs}}(\mathit{it}^\ast)\)</span>と<span>\(\mathit{ft}^\ast\)</span>を連続したものです。Importされた外部型<span>\(\mathit{it}^\ast\)</span>と内部の型<span>\(\mathit{ft}^\ast\)</span>は以下に従って決定されます。</li>
+            <li><span>\(C.{\mathsf{tables}}\)</span>は<span>\({\mathrm{tables}}(\mathit{it}^\ast)\)</span>と<span>\(\mathit{tt}^\ast\)</span>を連続したものです。Importされた外部型<span>\(\mathit{it}^\ast\)</span>と内部の型<span>\(\mathit{tt}^\ast\)</span>は以下に従って決定されます。</li>
+            <li><span>\(C.{\mathsf{mems}}\)</span>は<span>\({\mathrm{mems}}(\mathit{it}^\ast)\)</span>と<span>\(\mathit{mt}^\ast\)</span>を連続したものです。Importされた外部型<span>\(\mathit{it}^\ast\)</span>と内部の型<span>\(\mathit{mt}^\ast\)</span>は以下に従って決定されます。</li>
+            <li><span>\(C.{\mathsf{globals}}\)</span>は<span>\({\mathrm{globals}}(\mathit{it}^\ast)\)</span>と<span>\(\mathit{gt}^\ast\)</span>を連続したものです。Importされた外部型<span>\(\mathit{it}^\ast\)</span>と内部の型<span>\(\mathit{gt}^\ast\)</span>は以下に従って決定されます。</li>
+            <li><span>\(C.{\mathsf{locals}}\)</span>は空。</li>
+            <li><span>\(C.{\mathsf{labels}}\)</span>は空。</li>
+            <li><span>\(C.{\mathsf{return}}\)</span>は空。</li>
         </ul>
     </li>
-    <li>Let <span>\(C'\)</span> be the コンテキスト where <span>\(C'.{\mathsf{globals}}\)</span> is the sequence <span>\({\mathrm{globals}}(\mathit{it}^\ast)\)</span> and all other fields are empty。</li>
-    <li>Under コンテキスト<span>\(C\)</span>:
+    <li>コンテキスト<span>\(C'\)</span>がコンテキストであるとし、<span>\(C'.{\mathsf{globals}}\)</span>のシーケンス<span>\({\mathrm{globals}}(\mathit{it}^\ast)\)</span>と他のフィールド全てが空であるとします。</li>
+    <li>コンテキスト<span>\(C\)</span>の下において:
         <ul>
-            <li>For each <span>\({\mathit{functype}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{types}}\)</span>, the 関数型<span>\({\mathit{functype}}_i\)</span>は有効でなくてはなりません。</li>
-            <li>For each <span>\({\mathit{func}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{funcs}}\)</span>, the definition <span>\({\mathit{func}}_i\)</span> must be 有効 with a 関数型<span>\(\mathit{ft}_i\)</span>。</li>
-            <li>For each <span>\({\mathit{table}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{tables}}\)</span>, the definition <span>\({\mathit{table}}_i\)</span> must be 有効 with a テーブル型 <span>\(\mathit{tt}_i\)</span>。</li>
-            <li>For each <span>\({\mathit{mem}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{mems}}\)</span>, the definition <span>\({\mathit{mem}}_i\)</span> must be 有効 with a メモリ型 <span>\(\mathit{mt}_i\)</span>。</li>
-            <li>For each <span>\({\mathit{global}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{globals}}\)</span>:
+            <li><span>\({\mathit{module}}.{\mathsf{types}}\)</span>中の各<span>\({\mathit{functype}}_i\)</span>について、関数型<span>\({\mathit{functype}}_i\)</span>は有効でなくてはなりません。</li>
+            <li><span>\({\mathit{module}}.{\mathsf{funcs}}\)</span>中の各<span>\({\mathit{func}}_i\)</span>について、定義<span>\({\mathit{func}}_i\)</span>は関数型<span>\(\mathit{ft}_i\)</span>として有効でなくてはなりません。</li>
+            <li><span>\({\mathit{module}}.{\mathsf{tables}}\)</span>中の各<span>\({\mathit{table}}_i\)</span>について、定義<span>\({\mathit{table}}_i\)</span>はテーブル型 <span>\(\mathit{tt}_i\)</span>として有効でなくてはなりません。</li>
+            <li><span>\({\mathit{module}}.{\mathsf{mems}}\)</span>中の各<span>\({\mathit{mem}}_i\)</span>について、定義<span>\({\mathit{mem}}_i\)</span>はメモリ型 <span>\(\mathit{mt}_i\)</span>として有効でなくてはなりません。</li>
+            <li><span>\({\mathit{module}}.{\mathsf{globals}}\)</span>中の各<span>\({\mathit{global}}_i\)</span>について:
             <ul>
-                <li>Under コンテキスト<span>\(C'\)</span>, the definition <span>\({\mathit{global}}_i\)</span> must be 有効 with a グローバル型 <span>\(\mathit{gt}_i\)</span>。</li>
+                <li>コンテキスト<span>\(C'\)</span>の下において、定義<span>\({\mathit{global}}_i\)</span>はグローバル型 <span>\(\mathit{gt}_i\)</span>として有効でなくてはなりません。</li>
             </ul>
             </li>
-            <li>For each <span>\({\mathit{elem}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{elem}}\)</span>, the segment <span>\({\mathit{elem}}_i\)</span>は有効でなくてはなりません。</li>
-            <li>For each <span>\({\mathit{data}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{data}}\)</span>, the segment <span>\({\mathit{data}}_i\)</span>は有効でなくてはなりません。</li>
-            <li>If <span>\({\mathit{module}}.{\mathsf{start}}\)</span> is non-empty, then <span>\({\mathit{module}}.{\mathsf{start}}\)</span>は有効でなくてはなりません。</li>
-            <li>For each <span>\({\mathit{import}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{imports}}\)</span>, the segment <span>\({\mathit{import}}_i\)</span> must be 有効 with an 外部型 <span>\(\mathit{it}_i\)</span>。</li>
-            <li>For each <span>\({\mathit{export}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{exports}}\)</span>, the segment <span>\({\mathit{export}}_i\)</span> must be 有効 with 外部型 <span>\(\mathit{et}_i\)</span>。</li>
+            <li><span>\({\mathit{module}}.{\mathsf{elem}}\)</span>中の各<span>\({\mathit{elem}}_i\)</span>について、セグメント<span>\({\mathit{elem}}_i\)</span>は有効でなくてはなりません。</li>
+            <li><span>\({\mathit{module}}.{\mathsf{data}}\)</span>中の各<span>\({\mathit{data}}_i\)</span>について、セグメント<span>\({\mathit{data}}_i\)</span>は有効でなくてはなりません。</li>
+            <li>もし<span>\({\mathit{module}}.{\mathsf{start}}\)</span>が空ではないならば、<span>\({\mathit{module}}.{\mathsf{start}}\)</span>は有効でなくてはなりません。</li>
+            <li><span>\({\mathit{module}}.{\mathsf{imports}}\)</span>中の各<span>\({\mathit{import}}_i\)</span>について、セグメント<span>\({\mathit{import}}_i\)</span>は外部型<span>\(\mathit{it}_i\)</span>として有効でなくてはなりません。。</li>
+            <li><span>\({\mathit{module}}.{\mathsf{exports}}\)</span>中の各<span>\({\mathit{export}}_i\)</span>について、セグメント<span>\({\mathit{export}}_i\)</span>は外部型<span>\(\mathit{et}_i\)</span>として有効でなくてはなりません。。</li>
         </ul>
     </li>
-    <li>The length of <span>\(C.{\mathsf{tables}}\)</span> must not be larger than <span>\(1\)</span>。</li>
-    <li>The length of <span>\(C.{\mathsf{mems}}\)</span> must not be larger than <span>\(1\)</span>。</li>
-    <li>All export names <span>\({\mathit{export}}_i.{\mathsf{name}}\)</span> must be different。</li>
-    <li>Let <span>\(\mathit{ft}^\ast\)</span> be the concatenation of the internal 関数型 <span>\(\mathit{ft}_i\)</span>, in index order。</li>
-    <li>Let <span>\(\mathit{tt}^\ast\)</span> be the concatenation of the internal テーブル型 <span>\(\mathit{tt}_i\)</span>, in index order。</li>
-    <li>Let <span>\(\mathit{mt}^\ast\)</span> be the concatenation of the internal メモリ型 <span>\(\mathit{mt}_i\)</span>, in index order。</li>
-    <li>Let <span>\(\mathit{gt}^\ast\)</span> be the concatenation of the internal グローバル型 <span>\(\mathit{gt}_i\)</span>, in index order。</li>
-    <li>Let <span>\(\mathit{it}^\ast\)</span> be the concatenation of 外部型 <span>\(\mathit{it}_i\)</span> of the imports, in index order。</li>
-    <li>Let <span>\(\mathit{et}^\ast\)</span> be the concatenation of 外部型 <span>\(\mathit{et}_i\)</span> of the exports, in index order。</li>
-    <li>以上の条件を満足する時、the module is valid with 外部型 <span>\(\mathit{it}^\ast {\rightarrow} \mathit{et}^\ast\)</span>。</li>
+    <li><span>\(C.{\mathsf{tables}}\)</span>の長さは1以下でなくてはなりません。</li>
+    <li><span>\(C.{\mathsf{mems}}\)</span>の長さは1以下でなくてはなりません。</li>
+    <li>全てのExport名<span>\({\mathit{export}}_i.{\mathsf{name}}\)</span>は互いに異なっていなくてはなりません。</li>
+    <li><span>\(\mathit{ft}^\ast\)</span>と内部の関数型<span>\(\mathit{ft}_i\)</span>がインデックスに関して連続していなくてはなりません。</li>
+    <li><span>\(\mathit{tt}^\ast\)</span>と内部のテーブル型<span>\(\mathit{tt}_i\)</span>がインデックスに関して連続していなくてはなりません。</li>
+    <li><span>\(\mathit{mt}^\ast\)</span>と内部のメモリ型<span>\(\mathit{mt}_i\)</span>がインデックスに関して連続していなくてはなりません。</li>
+    <li><span>\(\mathit{gt}^\ast\)</span>と内部のグローバル型<span>\(\mathit{gt}_i\)</span>がインデックスに関して連続していなくてはなりません。</li>
+    <li><span>\(\mathit{it}^\ast\)</span>とImportの外部型<span>\(\mathit{it}_i\)</span>がインデックスに関して連続していなくてはなりません。</li>
+    <li><span>\(\mathit{et}^\ast\)</span>とExportの外部型<span>\(\mathit{et}_i\)</span>がインデックスに関して連続していなくてはなりません。</li>
+    <li>以上の条件を満足する時、モジュールは外部型<span>\(\mathit{it}^\ast {\rightarrow} \mathit{et}^\ast\)</span>として有効です。</li>
 </ul>
 <div>\[\begin{split}\frac{
   \begin{array}{&#64;{}c&#64;{}}
