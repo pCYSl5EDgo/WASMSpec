@@ -328,37 +328,47 @@
 
 ---
 
+<div>
 型付けは命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>にまで及びます。
-このような命令シーケンスは関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> if the accumulative effect of executing the instructions is consuming values of types <span>\(t_1^\ast\)</span> off the operand stack and pushing new values of types <span>\(t_2^\ast\)</span>.
-<p id="polymorphism">For some instructions, the typing rules do not fully constrain the type,
-and therefore allow for multiple types.
-Such instructions are called <em>polymorphic</em>.
-Two degrees of polymorphism can be distinguished:
+</div>
+
+<div>
+このような命令シーケンスを実行することでスタック上に元々あった<span>\(t_1^\ast\)</span>をpopし、実行後に<span>\(t_2^\ast\)</span>を新たにpushするならば関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として表記できます。
+</div>
+
+幾つかの命令は命令の種類に応じて型を決定するということが出来ません。
+このような命令は`ポリモーフィック`であると言えます。
+
+`ポリモーフィズム`にも2種類あります。
+
 <ul>
-    <li><em>value-polymorphic</em>:
-the 値型<span>\(t\)</span> of one or several individual operands is unconstrained.
-That is the case for all パラメトリック命令 like <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span>.</li>
-    <li><em>stack-polymorphic</em>:
-the entire (or most of the) 関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> of the instruction is unconstrained.
-That is the case for all 制御命令 that perform an <em>unconditional control transfer</em>, such as <span>\({\mathsf{unreachable}}\)</span>, <span>\({\mathsf{br}}\)</span>, <span>\({\mathsf{br\_table}}\)</span>, and <span>\({\mathsf{return}}\)</span>.</li>
+    <li><em>値のポリモーフィズム</em>:
+命令のオペランドである値型<span>\(t\)</span>の型が不定です。
+パラメトリック命令<span>\({\mathsf{drop}}\)</span>と<span>\({\mathsf{select}}\)</span>が当てはまります。</li>
+    <li><em>スタックのポリモーフィズム</em>:
+すべて（あるいは殆どの）関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>命令の型は不定です。
+すべての制御命令のうち<em>無条件にジャンプするもの</em>、<span>\({\mathsf{unreachable}}\)</span>, <span>\({\mathsf{br}}\)</span>, <span>\({\mathsf{br\_table}}\)</span>, <span>\({\mathsf{return}}\)</span>などが当てはまります。</li>
 </ul>
 
 
 ### 付記
 
-For example, the <span>\({\mathsf{select}}\)</span> instruction is valid with type <span>\([t~t~{\mathsf{i32}}] {\rightarrow} [t]\)</span>, for any possible 値型<span>\(t\)</span>.   Consequently, both instruction sequences
+<div>たとえば<span>\({\mathsf{select}}\)</span>命令はあらゆる値型<span>\(t\)</span>に対して<span>\([t~t~{\mathsf{i32}}] {\rightarrow} [t]\)</span>として有効な型です。</div>
+よって、次の2つの命令について、
 <div>\[({\mathsf{i32}}.{\mathsf{const}}~1)~~({\mathsf{i32}}.{\mathsf{const}}~2)~~({\mathsf{i32}}.{\mathsf{const}}~3)~~{\mathsf{select}}{}\]</div>
-and
 <div>\[({\mathsf{f64}}.{\mathsf{const}}~1.0)~~({\mathsf{f64}}.{\mathsf{const}}~2.0)~~({\mathsf{i32}}.{\mathsf{const}}~3)~~{\mathsf{select}}{}\]</div>
-are valid, with <span>\(t\)</span> in the typing of <span>\({\mathsf{select}}\)</span> being instantiated to <span>\({\mathsf{i32}}\)</span> or <span>\({\mathsf{f64}}\)</span>, respectively.
-The <span>\({\mathsf{unreachable}}\)</span> instruction is valid with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> for any possible sequences of value types <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.
-Consequently,
-<div>\[{\mathsf{unreachable}}~~{\mathsf{i32}}.{\mathsf{add}}\]</div>
-is valid by assuming type <span>\([] {\rightarrow} [{\mathsf{i32}}~{\mathsf{i32}}]\)</span> for the <span>\({\mathsf{unreachable}}\)</span> instruction.
-In contrast,
-<div>\[{\mathsf{unreachable}}~~({\mathsf{i64}}.{\mathsf{const}}~0)~~{\mathsf{i32}}.{\mathsf{add}}\]</div>
-is invalid, because there is no possible type to pick for the <span>\({\mathsf{unreachable}}\)</span> instruction that would make the sequence well-typed.
+<div>双方とも有効であり、<span>\({\mathsf{select}}\)</span>により型付けされた<span>\(t\)</span>は<span>\({\mathsf{i32}}\)</span>か<span>\({\mathsf{f64}}\)</span>の一方になります。</div>
 
+<span>\({\mathsf{unreachable}}\)</span>命令は<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>という型としてあらゆる<span>\(t_1^\ast\)</span>と<span>\(t_2^\ast\)</span>に対して有効です。
+
+<div>よって、<span>\([] {\rightarrow} [{\mathsf{i32}}~{\mathsf{i32}}]\)</span>であると型が推測される<span>\({\mathsf{unreachable}}\)</span>命令に対して</div>
+<div>\[{\mathsf{unreachable}}~~{\mathsf{i32}}.{\mathsf{add}}\]</div>
+は有効です。
+
+対象的に、同一のスタック上においては、
+<div>\[{\mathsf{unreachable}}~~({\mathsf{i64}}.{\mathsf{const}}~0)~~{\mathsf{i32}}.{\mathsf{add}}\]</div>
+は無効です。
+<div>何故ならば<span>\({\mathsf{unreachable}}\)</span>命令に対して適切な型付けが出来ないからです。</div>
 
 ## 算術演算命令
 
