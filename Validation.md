@@ -791,10 +791,10 @@
 <h3>空でない命令シーケンス: <span>\({\mathit{instr}}^\ast~{\mathit{instr}}_N\)</span></h3>
 
 <ul>
-    <li>The instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be valid with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>, for some sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>。</li>
-    <li>The instruction <span>\({\mathit{instr}}_N\)</span> must be valid with type <span>\([t^\ast] {\rightarrow} [t_3^\ast]\)</span>, for some sequences of 値型 <span>\(t^\ast\)</span> and <span>\(t_3^\ast\)</span>。</li>
-    <li>There must be a sequence of 値型 <span>\(t_0^\ast\)</span>, such that <span>\(t_2^\ast = t_0^\ast~t^\ast\)</span>。</li>
-    <li>以上の条件を満足する時、the combined instruction sequence is valid with type <span>\([t_1^\ast] {\rightarrow} [t_0^\ast~t_3^\ast]\)</span>。</li>
+    <li>命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>はある種の値型のシーケンス<span>\(t_1^\ast\)</span>と<span>\(t_2^\ast\)</span>に対して型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として有効です。</li>
+    <li>命令<span>\({\mathit{instr}}_N\)</span>はある種の値型のシーケンス<span>\(t^\ast\)</span>と<span>\(t_3^\ast\)</span>に対して型<span>\([t^\ast] {\rightarrow} [t_3^\ast]\)</span>として有効です。</li>
+    <li><span>\(t_2^\ast = t_0^\ast~t^\ast\)</span>のような値型のシーケンス<span>\(t_0^\ast\)</span>が存在せねばなりません。</li>
+    <li>以上の条件を満足する時、複合命令シーケンスは型<span>\([t_1^\ast] {\rightarrow} [t_0^\ast~t_3^\ast]\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   C {\vdash} {\mathit{instr}}^\ast : [t_1^\ast] {\rightarrow} [t_0^\ast~t^\ast]
@@ -806,13 +806,13 @@
 
 ## 式
 
-<div><span>\([t^\ast]\)</span></div>
+<div>式は戻り値型<span>\([t^\ast]\)</span>として有効です。</div>
 
 <h3><span>\({\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
 
 <ul>
-    <li>The instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be 有効 with type <span>\([] {\rightarrow} [t^\ast]\)</span>, for some 戻り値型 <span>\([t^\ast]\)</span>。</li>
-    <li>以上の条件を満足する時、the expression is valid with 戻り値型 <span>\([t^\ast]\)</span>。</li>
+    <li>命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>はいくつかの戻り値型<span>\([t^\ast]\)</span>に対して型<span>\([] {\rightarrow} [t^\ast]\)</span>として有効です。</li>
+    <li>以上の条件を満足する時、式は戻り値型<span>\([t^\ast]\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
   C {\vdash} {\mathit{instr}}^\ast : [] {\rightarrow} [t^\ast]
@@ -823,13 +823,13 @@
 ### 定数式
 
 <ul>
-    <li>In a <em>constant</em> expression <span>\({\mathit{instr}}^\ast~{\mathsf{end}}\)</span> all instructions in <span>\({\mathit{instr}}^\ast\)</span> must be constant。</li>
-    <li>A constant instruction <span>\({\mathit{instr}}\)</span> must be:
-<ul>
-    <li>either of the form <span>\(t.{\mathsf{const}}~c\)</span>,</li>
-    <li>or of the form <span>\({\mathsf{global.get}}~x\)</span>, in which case <span>\(C.{\mathsf{globals}}[x]\)</span> must be a グローバル型 of the form <span>\({\mathsf{const}}~t\)</span>。</li>
-</ul>
-</li>
+    <li>定数式<span>\({\mathit{instr}}^\ast~{\mathsf{end}}\)</span>中の全ての命令<span>\({\mathit{instr}}^\ast\)</span>は定数でなければなりません。</li>
+    <li>定数命令<span>\({\mathit{instr}}\)</span>は必ず:
+        <ul>
+            <li>いずれかの形式を取る命令<span>\(t.{\mathsf{const}}~c\)</span>であるか、</li>
+            <li>もしくは、形式<span>\({\mathsf{global.get}}~x\)</span>を取ります。この場合<span>\(C.{\mathsf{globals}}[x]\)</span>は必ずグローバル型<span>\({\mathsf{const}}~t\)</span>でなければなりません。</li>
+        </ul>
+    </li>
 </ul>
 <div>\[\frac{
   (C {\vdash} {\mathit{instr}} {\mathrel{\mbox{const}}})^\ast
