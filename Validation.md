@@ -722,7 +722,7 @@
     <li>ラベル<span>\(C.{\mathsf{labels}}[l_N]\)</span>はコンテキスト中に定義されていなければなりません。</li>
     <li><span>\([t^\ast]\)</span>は戻り値型 <span>\(C.{\mathsf{labels}}[l_N]\)</span>であるとします。</li>
     <li>全ての<span>\(l^\ast\)</span>中の<span>\(l_i\)</span>について、ラベル<span>\(C.{\mathsf{labels}}[l_i]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>全ての<span>\(l^\ast\)</span>中の<span>\(l_i\)</span>について、ラベル<span>\(C.{\mathsf{labels}}[l_i]\)</span>は<span>\([t^\ast]\)</span>でなければなりません。</li>
+    <li>全ての<span>\(l^\ast\)</span>中の<span>\(l_i\)</span>について、ラベル<span>\(C.{\mathsf{labels}}[l_i]\)</span>は<span>\([t^\ast]\)</span>でなくてはなりません。</li>
     <li>以上の条件を満足する時、この命令は有効です。あらゆる値型のシーケンス<span>\(t_1^\ast\)</span>と<span>\(t_2^\ast\)</span>に対して<span>\([t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -763,7 +763,7 @@
 <ul>
     <li>テーブル<span>\(C.{\mathsf{tables}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
     <li><span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span>がテーブル型<span>\(C.{\mathsf{tables}}[0]\)</span>であるとします。</li>
-    <li>要素型<span>\({\mathit{elemtype}}\)</span>は<span>\({\mathsf{funcref}}\)</span>でなければなりません。</li>
+    <li>要素型<span>\({\mathit{elemtype}}\)</span>は<span>\({\mathsf{funcref}}\)</span>でなくてはなりません。</li>
     <li>型<span>\(C.{\mathsf{types}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
     <li><span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>が関数型<span>\(C.{\mathsf{types}}[x]\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([t_1^\ast~{\mathsf{i32}}] {\rightarrow} [t_2^\ast]\)</span>。</li>
@@ -823,11 +823,11 @@
 ### 定数式
 
 <ul>
-    <li>定数式<span>\({\mathit{instr}}^\ast~{\mathsf{end}}\)</span>中の全ての命令<span>\({\mathit{instr}}^\ast\)</span>は定数でなければなりません。</li>
+    <li>定数式<span>\({\mathit{instr}}^\ast~{\mathsf{end}}\)</span>中の全ての命令<span>\({\mathit{instr}}^\ast\)</span>は定数でなくてはなりません。</li>
     <li>定数命令<span>\({\mathit{instr}}\)</span>は必ず:
         <ul>
             <li>いずれかの形式を取る命令<span>\(t.{\mathsf{const}}~c\)</span>であるか、</li>
-            <li>もしくは、形式<span>\({\mathsf{global.get}}~x\)</span>を取ります。この場合<span>\(C.{\mathsf{globals}}[x]\)</span>は必ずグローバル型<span>\({\mathsf{const}}~t\)</span>でなければなりません。</li>
+            <li>もしくは、形式<span>\({\mathsf{global.get}}~x\)</span>を取ります。この場合<span>\(C.{\mathsf{globals}}[x]\)</span>は必ずグローバル型<span>\({\mathsf{const}}~t\)</span>でなくてはなりません。</li>
         </ul>
     </li>
 </ul>
@@ -860,18 +860,16 @@
 
 <h3><span>\(\{ {\mathsf{type}}~x, {\mathsf{locals}}~t^\ast, {\mathsf{body}}~{\mathit{expr}} \}\)</span></h3>
 <ul>
-    <li>The type <span>\(C.{\mathsf{types}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> be the 関数型<span>\(C.{\mathsf{types}}[x]\)</span>。</li>
-    <li>Let <span>\(C'\)</span> be the same コンテキスト as <span>\(C\)</span>,
-but with:
-<ul>
-    <li><span>\({\mathsf{locals}}\)</span> set to the sequence of 値型 <span>\(t_1^\ast~t^\ast\)</span>, concatenating parameters and locals,</li>
-    <li><span>\({\mathsf{labels}}\)</span> set to the singular sequence containing only 戻り値型 <span>\([t_2^\ast]\)</span>。</li>
-    <li><span>\({\mathsf{return}}\)</span> set to the 戻り値型 <span>\([t_2^\ast]\)</span>。</li>
-</ul>
-</li>
-    <li>Under the context <span>\(C'\)</span>,
-the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\([t_2^\ast]\)</span>。</li>
+    <li>型<span>\(C.{\mathsf{types}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
+    <li><span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>が関数型<span>\(C.{\mathsf{types}}[x]\)</span>であるとします。</li>
+    <li><span>\(C'\)</span>がコンテキスト<span>\(C\)</span>と同一であるとしますが、追加で:
+        <ul>
+            <li><span>\({\mathsf{locals}}\)</span>が引数とローカル変数のシーケンスに続く値型<span>\(t_1^\ast~t^\ast\)</span>のシーケンスに設定され、</li>
+            <li><span>\({\mathsf{labels}}\)</span>が戻り値型<span>\([t_2^\ast]\)</span>を含む単一のシーケンスに設定され、</li>
+            <li><span>\({\mathsf{return}}\)</span>が戻り値型<span>\([t_2^\ast]\)</span>に設定されます。</li>
+        </ul>
+    </li>
+    <li>コンテキスト<span>\(C'\)</span>の下において、式<span>\({\mathit{expr}}\)</span>は型<span>\([t_2^\ast]\)</span>として有効でなくてはなりません。</li>
     <li>以上の条件を満足する時、関数定義は有効です。<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -886,7 +884,7 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 
 <h3><span>\(\{ {\mathsf{type}}~{\mathit{tabletype}} \}\)</span></h3>
 <ul>
-    <li>The テーブル型 <span>\({\mathit{tabletype}}\)</span>は有効でなくてはなりません。</li>
+    <li>テーブル型<span>\({\mathit{tabletype}}\)</span>は有効でなくてはなりません。</li>
     <li>以上の条件を満足する時、テーブル定義は有効です。<span>\({\mathit{tabletype}}\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -899,7 +897,7 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 
 <h3><span>\(\{ {\mathsf{type}}~{\mathit{memtype}} \}\)</span></h3>
 <ul>
-    <li>The メモリ型 <span>\({\mathit{memtype}}\)</span>は有効でなくてはなりません。</li>
+    <li>メモリ型<span>\({\mathit{memtype}}\)</span>は有効でなくてはなりません。</li>
     <li>以上の条件を満足する時、メモリ定義は有効です。<span>\({\mathit{memtype}}\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -912,9 +910,9 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 
 <h3><span>\(\{ {\mathsf{type}}~{\mathit{mut}}~t, {\mathsf{init}}~{\mathit{expr}} \}\)</span></h3>
 <ul>
-    <li>The グローバル型 <span>\({\mathit{mut}}~t\)</span>は有効でなくてはなりません。</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be 有効 with 戻り値型 <span>\([t]\)</span>。</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be 定数。</li>
+    <li>グローバル型<span>\({\mathit{mut}}~t\)</span>は有効でなくてはなりません。</li>
+    <li>式<span>\({\mathit{expr}}\)</span>は戻り値型<span>\([t]\)</span>として有効でなくてはなりません。</li>
+    <li>式<span>\({\mathit{expr}}\)</span>定数でなくてはなりません。</li>
     <li>以上の条件を満足する時、グローバル定義は有効です。<span>\({\mathit{mut}}~t\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -932,13 +930,12 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 <h3><span>\(\{ {\mathsf{table}}~x, {\mathsf{offset}}~{\mathit{expr}}, {\mathsf{init}}~y^\ast \}\)</span></h3>
 <ul>
     <li>テーブル<span>\(C.{\mathsf{tables}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span> be the テーブル型 <span>\(C.{\mathsf{tables}}[x]\)</span>。</li>
-    <li>要素型<span>\({\mathit{elemtype}}\)</span> must be <span>\({\mathsf{funcref}}\)</span>。</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be 有効 with 戻り値型 <span>\([{\mathsf{i32}}]\)</span>。</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be 定数。</li>
-    <li>For each <span>\(y_i\)</span> in <span>\(y^\ast\)</span>,
-関数<span>\(C.{\mathsf{funcs}}[y]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>以上の条件を満足する時、the element segment is valid。</li>
+    <li><span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span>がテーブル型 <span>\(C.{\mathsf{tables}}[x]\)</span>であるとします。</li>
+    <li>要素型<span>\({\mathit{elemtype}}\)</span>は<span>\({\mathsf{funcref}}\)</span>でなくてはなりません。</li>
+    <li>式<span>\({\mathit{expr}}\)</span>は戻り値型<span>\([{\mathsf{i32}}]\)</span>として有効でなくてはなりません。</li>
+    <li>式<span>\({\mathit{expr}}\)</span>は定数でなくてはなりません。</li>
+    <li><span>\(y^\ast\)</span>中の各<span>\(y_i\)</span>について、関数<span>\(C.{\mathsf{funcs}}[y]\)</span>はコンテキスト中に定義されていなければなりません。</li>
+    <li>以上の条件を満足する時、Elementセグメントは有効です。</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{tables}}[x] = {\mathit{limits}}~{\mathsf{funcref}}
@@ -957,9 +954,9 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 <h3><span>\(\{ {\mathsf{data}}~x, {\mathsf{offset}}~{\mathit{expr}}, {\mathsf{init}}~b^\ast \}\)</span></h3>
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be 有効 with 戻り値型 <span>\([{\mathsf{i32}}]\)</span>。</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be 定数。</li>
-    <li>以上の条件を満足する時、the data segment is valid。</li>
+    <li>式<span>\({\mathit{expr}}\)</span>は戻り値型<span>\([{\mathsf{i32}}]\)</span>として有効でなくてはなりません。</li>
+    <li>式<span>\({\mathit{expr}}\)</span>は定数でなくてはなりません。</li>
+    <li>以上の条件を満足する時、Dataセグメントは有効です。</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{mems}}[x] = {\mathit{limits}}
@@ -976,8 +973,8 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 <h3><span>\(\{ {\mathsf{func}}~x \}\)</span></h3>
 <ul>
     <li>関数<span>\(C.{\mathsf{funcs}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>The type of <span>\(C.{\mathsf{funcs}}[x]\)</span> must be <span>\([] {\rightarrow} []\)</span>。</li>
-    <li>以上の条件を満足する時、the start function is valid。</li>
+    <li><span>\(C.{\mathsf{funcs}}[x]\)</span>の型は<span>\([] {\rightarrow} []\)</span>でなくてはなりません。</li>
+    <li>以上の条件を満足する時、開始関数は有効です。</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{funcs}}[x] = [] {\rightarrow} []
@@ -1117,7 +1114,7 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
         </ul>
     </li>
     <li>Let <span>\(C'\)</span> be the コンテキスト where <span>\(C'.{\mathsf{globals}}\)</span> is the sequence <span>\({\mathrm{globals}}(\mathit{it}^\ast)\)</span> and all other fields are empty。</li>
-    <li>Under the context <span>\(C\)</span>:
+    <li>Under コンテキスト<span>\(C\)</span>:
         <ul>
             <li>For each <span>\({\mathit{functype}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{types}}\)</span>, the 関数型<span>\({\mathit{functype}}_i\)</span>は有効でなくてはなりません。</li>
             <li>For each <span>\({\mathit{func}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{funcs}}\)</span>, the definition <span>\({\mathit{func}}_i\)</span> must be 有効 with a 関数型<span>\(\mathit{ft}_i\)</span>。</li>
@@ -1125,7 +1122,7 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
             <li>For each <span>\({\mathit{mem}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{mems}}\)</span>, the definition <span>\({\mathit{mem}}_i\)</span> must be 有効 with a メモリ型 <span>\(\mathit{mt}_i\)</span>。</li>
             <li>For each <span>\({\mathit{global}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{globals}}\)</span>:
             <ul>
-                <li>Under the context <span>\(C'\)</span>, the definition <span>\({\mathit{global}}_i\)</span> must be 有効 with a グローバル型 <span>\(\mathit{gt}_i\)</span>。</li>
+                <li>Under コンテキスト<span>\(C'\)</span>, the definition <span>\({\mathit{global}}_i\)</span> must be 有効 with a グローバル型 <span>\(\mathit{gt}_i\)</span>。</li>
             </ul>
             </li>
             <li>For each <span>\({\mathit{elem}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{elem}}\)</span>, the segment <span>\({\mathit{elem}}_i\)</span>は有効でなくてはなりません。</li>
