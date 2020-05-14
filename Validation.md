@@ -540,7 +540,7 @@
   \qquad
   2^{{\mathit{memarg}}.{\mathsf{align}}} \leq |t|/8
 }{
-  C {\vdash} t\mathsf{.load}~{\mathit{memarg}} : [{\mathsf{i32}}] {\rightarrow} [t]
+  C {\vdash} t{\mathsf{.load}}~{\mathit{memarg}} : [{\mathsf{i32}}] {\rightarrow} [t]
 }\]</div>
 
 <h3><span>\(t\mathsf{.}{\mathsf{load}}{N}\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}}\)</span></h3>
@@ -556,7 +556,7 @@
   \qquad
   2^{{\mathit{memarg}}.{\mathsf{align}}} \leq N/8
 }{
-  C {\vdash} t\mathsf{.load}N\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}} : [{\mathsf{i32}}] {\rightarrow} [t]
+  C {\vdash} t{\mathsf{.load}}N{\mathsf{\_}}{\mathit{sx}}~{\mathit{memarg}} : [{\mathsf{i32}}] {\rightarrow} [t]
 }\]</div>
 
 <h3><span>\(t\mathsf{.}{\mathsf{store}}~{\mathit{memarg}}\)</span></h3>
@@ -572,7 +572,7 @@
   \qquad
   2^{{\mathit{memarg}}.{\mathsf{align}}} \leq |t|/8
 }{
-  C {\vdash} t\mathsf{.store}~{\mathit{memarg}} : [{\mathsf{i32}}~t] {\rightarrow} []
+  C {\vdash} t{\mathsf{.store}}~{\mathit{memarg}} : [{\mathsf{i32}}~t] {\rightarrow} []
 }\]</div>
 
 <h3><span>\(t\mathsf{.}{\mathsf{store}}{N}~{\mathit{memarg}}\)</span></h3>
@@ -588,7 +588,7 @@
   \qquad
   2^{{\mathit{memarg}}.{\mathsf{align}}} \leq N/8
 }{
-  C {\vdash} t\mathsf{.store}N~{\mathit{memarg}} : [{\mathsf{i32}}~t] {\rightarrow} []
+  C {\vdash} t{\mathsf{.store}}N~{\mathit{memarg}} : [{\mathsf{i32}}~t] {\rightarrow} []
 }\]</div>
 
 <h3><span>\({\mathsf{memory.size}}\)</span></h3>
