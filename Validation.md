@@ -623,7 +623,6 @@
 }{
   C {\vdash} {\mathsf{nop}} : [] {\rightarrow} []
 }\]</div>
-</div>
 
 <h3><span>\({\mathsf{unreachable}}\)</span></h3>
 
