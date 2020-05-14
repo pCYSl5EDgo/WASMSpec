@@ -694,7 +694,7 @@
 
 <ul>
     <li>ラベル<span>\(C.{\mathsf{labels}}[l]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\([t^\ast]\)</span> be the 戻り値型 <span>\(C.{\mathsf{labels}}[l]\)</span>。</li>
+    <li><span>\([t^\ast]\)</span>は戻り値型<span>\(C.{\mathsf{labels}}[l]\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -703,18 +703,11 @@
   C {\vdash} {\mathsf{br}}~l : [t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]
 }\]</div>
 
-### 付記
-
-The ラベルインデックス space in the コンテキスト <span>\(C\)</span> contains the most recent label first, so that <span>\(C.{\mathsf{labels}}[l]\)</span> performs a relative lookup as expected.
-The <span>\({\mathsf{br}}\)</span> instruction is <a class="reference internal" href="#polymorphism"><span class="std std-ref">stack-polymorphic</span></a>.
-
----
-
 <h3><span>\({\mathsf{br\_if}}~l\)</span></h3>
 
 <ul>
     <li>ラベル<span>\(C.{\mathsf{labels}}[l]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\([t^\ast]\)</span> be the 戻り値型 <span>\(C.{\mathsf{labels}}[l]\)</span>。</li>
+    <li><span>\([t^\ast]\)</span>は戻り値型<span>\(C.{\mathsf{labels}}[l]\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([t^\ast~{\mathsf{i32}}] {\rightarrow} [t^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -723,21 +716,14 @@ The <span>\({\mathsf{br}}\)</span> instruction is <a class="reference internal" 
   C {\vdash} {\mathsf{br\_if}}~l : [t^\ast~{\mathsf{i32}}] {\rightarrow} [t^\ast]
 }\]</div>
 
-### 付記
-
-The ラベルインデックス space in the コンテキスト <span>\(C\)</span> contains the most recent label first, so that <span>\(C.{\mathsf{labels}}[l]\)</span> performs a relative lookup as expected.
-
----
-
 <h3><span>\({\mathsf{br\_table}}~l^\ast~l_N\)</span></h3>
 
 <ul>
     <li>ラベル<span>\(C.{\mathsf{labels}}[l_N]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\([t^\ast]\)</span> be the 戻り値型 <span>\(C.{\mathsf{labels}}[l_N]\)</span>。</li>
-    <li>For all <span>\(l_i\)</span> in <span>\(l^\ast\)</span>, ラベル<span>\(C.{\mathsf{labels}}[l_i]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>For all <span>\(l_i\)</span> in <span>\(l^\ast\)</span>,
-<span>\(C.{\mathsf{labels}}[l_i]\)</span> must be <span>\([t^\ast]\)</span>。</li>
-    <li>以上の条件を満足する時、この命令は有効です。<span>\([t_1^\ast~t^\ast~{\mathsf{i32}}] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>。</li>
+    <li><span>\([t^\ast]\)</span>は戻り値型 <span>\(C.{\mathsf{labels}}[l_N]\)</span>であるとします。</li>
+    <li>全ての<span>\(l^\ast\)</span>中の<span>\(l_i\)</span>について、ラベル<span>\(C.{\mathsf{labels}}[l_i]\)</span>はコンテキスト中に定義されていなければなりません。</li>
+    <li>全ての<span>\(l^\ast\)</span>中の<span>\(l_i\)</span>について、ラベル<span>\(C.{\mathsf{labels}}[l_i]\)</span>は<span>\([t^\ast]\)</span>でなければなりません。</li>
+    <li>以上の条件を満足する時、この命令は有効です。あらゆる値型のシーケンス<span>\(t_1^\ast\)</span>と<span>\(t_2^\ast\)</span>に対して<span>\([t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
   (C.{\mathsf{labels}}[l] = [t^\ast])^\ast
@@ -747,34 +733,18 @@ The ラベルインデックス space in the コンテキスト <span>\(C\)</spa
   C {\vdash} {\mathsf{br\_table}}~l^\ast~l_N : [t_1^\ast~t^\ast~{\mathsf{i32}}] {\rightarrow} [t_2^\ast]
 }\]</div>
 
-### 付記
-
-The ラベルインデックス space in the コンテキスト <span>\(C\)</span> contains the most recent label first, so that <span>\(C.{\mathsf{labels}}[l_i]\)</span> performs a relative lookup as expected.
-The <span>\({\mathsf{br\_table}}\)</span> instruction is <a class="reference internal" href="#polymorphism"><span class="std std-ref">stack-polymorphic</span></a>.
-
----
-
 <h3><span>\({\mathsf{return}}\)</span></h3>
 
 <ul>
-    <li>戻り値型<span>\(C.{\mathsf{return}}\)</span> must not be absent in the context。</li>
-    <li>Let <span>\([t^\ast]\)</span> be the 戻り値型 of <span>\(C.{\mathsf{return}}\)</span>。</li>
-    <li>以上の条件を満足する時、この命令は有効です。<span>\([t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>。</li>
+    <li>戻り値型<span>\(C.{\mathsf{return}}\)</span>はコンテキスト中に定義されていなければなりません。</li>
+    <li><span>\([t^\ast]\)</span>が<span>\(C.{\mathsf{return}}\)</span>の戻り値型であるとします。</li>
+    <li>以上の条件を満足する時、この命令は有効です。あらゆる値型のシーケンス<span>\(t_1^\ast\)</span>と<span>\(t_2^\ast\)</span>に対して<span>\([t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{return}} = [t^\ast]
 }{
   C {\vdash} {\mathsf{return}} : [t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]
 }\]</div>
-
-### 付記
-
-The <span>\({\mathsf{return}}\)</span> instruction is <a class="reference internal" href="#polymorphism"><span class="std std-ref">stack-polymorphic</span></a>.
-<span>\(C.{\mathsf{return}}\)</span> is absent (set to <span>\(\epsilon\)</span>) when validating an 式 that is not a function body.
-This differs from it being set to the empty result type (<span>\([\epsilon]\)</span>),
-which is the case for functions not returning anything.
-
----
 
 <h3><span>\({\mathsf{call}}~x\)</span></h3>
 
@@ -791,11 +761,11 @@ which is the case for functions not returning anything.
 <h3><span>\({\mathsf{call\_indirect}}~x\)</span></h3>
 
 <ul>
-    <li>The table <span>\(C.{\mathsf{tables}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span> be the テーブル型 <span>\(C.{\mathsf{tables}}[0]\)</span>。</li>
-    <li>The 要素型 <span>\({\mathit{elemtype}}\)</span> must be <span>\({\mathsf{funcref}}\)</span>。</li>
-    <li>The type <span>\(C.{\mathsf{types}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> be the 関数型<span>\(C.{\mathsf{types}}[x]\)</span>。</li>
+    <li>テーブル<span>\(C.{\mathsf{tables}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
+    <li><span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span>がテーブル型<span>\(C.{\mathsf{tables}}[0]\)</span>であるとします。</li>
+    <li>要素型<span>\({\mathit{elemtype}}\)</span>は<span>\({\mathsf{funcref}}\)</span>でなければなりません。</li>
+    <li>型<span>\(C.{\mathsf{types}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
+    <li><span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>が関数型<span>\(C.{\mathsf{types}}[x]\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([t_1^\ast~{\mathsf{i32}}] {\rightarrow} [t_2^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -811,7 +781,7 @@ which is the case for functions not returning anything.
 <h3>空の命令シーケンス: <span>\(\epsilon\)</span></h3>
 
 <ul>
-    <li>The empty instruction sequence is valid with type <span>\([t^\ast] {\rightarrow} [t^\ast]\)</span>, for any sequence of 値型 <span>\(t^\ast\)</span>。</li>
+    <li>空の命令シーケンスはあらゆる値型のシーケンス<span>\(t^\ast\)</span>に対して型<span>\([t^\ast] {\rightarrow} [t^\ast]\)</span>として有効です。</li>
 </ul>
 <div>\[\frac{
 }{
@@ -956,9 +926,9 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 
 <h3><span>\(\{ {\mathsf{table}}~x, {\mathsf{offset}}~{\mathit{expr}}, {\mathsf{init}}~y^\ast \}\)</span></h3>
 <ul>
-    <li>The table <span>\(C.{\mathsf{tables}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
+    <li>テーブル<span>\(C.{\mathsf{tables}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
     <li>Let <span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span> be the テーブル型 <span>\(C.{\mathsf{tables}}[x]\)</span>。</li>
-    <li>The 要素型 <span>\({\mathit{elemtype}}\)</span> must be <span>\({\mathsf{funcref}}\)</span>。</li>
+    <li>要素型<span>\({\mathit{elemtype}}\)</span> must be <span>\({\mathsf{funcref}}\)</span>。</li>
     <li>The expression <span>\({\mathit{expr}}\)</span> must be 有効 with 戻り値型 <span>\([{\mathsf{i32}}]\)</span>。</li>
     <li>The expression <span>\({\mathit{expr}}\)</span> must be 定数。</li>
     <li>For each <span>\(y_i\)</span> in <span>\(y^\ast\)</span>,
@@ -1036,7 +1006,7 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 
 <h3><span>\({\mathsf{table}}~x\)</span></h3>
 <ul>
-    <li>The table <span>\(C.{\mathsf{tables}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
+    <li>テーブル<span>\(C.{\mathsf{tables}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
     <li>以上の条件を満足する時、the export description is valid with 外部型 <span>\({\mathsf{table}}~C.{\mathsf{tables}}[x]\)</span>。</li>
 </ul>
 <div>\[\frac{
