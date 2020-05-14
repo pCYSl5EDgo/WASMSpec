@@ -290,7 +290,6 @@
 }{
   {\vdash} {\mathsf{table}}~{\mathit{tabletype}} \mathrel{\mbox{ok}}
 }\]</div>
-</div>
 
 <h3><span>\({\mathsf{mem}}~{\mathit{memtype}}\)</span></h3>
 
@@ -365,7 +364,7 @@
 <div>\[{\mathsf{unreachable}}~~{\mathsf{i32}}.{\mathsf{add}}\]</div>
 は有効です。
 
-対象的に、同一のスタック上においては、
+対照的に、同一のスタック上においては、
 <div>\[{\mathsf{unreachable}}~~({\mathsf{i64}}.{\mathsf{const}}~0)~~{\mathsf{i32}}.{\mathsf{add}}\]</div>
 は無効です。
 <div>何故ならば<span>\({\mathsf{unreachable}}\)</span>命令に対して適切な型付けが出来ないからです。</div>
@@ -437,7 +436,7 @@
 <h3><span>\({\mathsf{drop}}\)</span></h3>
 
 <ul>
-    <li>この命令は有効です。値型<span>\(t\)</span>として、<span>\([t] {\rightarrow} []\)</span>。</li>
+    <li>この命令は有効です。<span>\(t\)</span>を値型として、<span>\([t] {\rightarrow} []\)</span>。</li>
 </ul>
 <div>\[\frac{
 }{
@@ -447,7 +446,7 @@
 <h3><span>\({\mathsf{select}}\)</span></h3>
 
 <ul>
-    <li>この命令は有効です。値型<span>\(t\)</span>として、<span>\([t~t~{\mathsf{i32}}] {\rightarrow} [t]\)</span>。</li>
+    <li>この命令は有効です。<span>\(t\)</span>を値型として、<span>\([t~t~{\mathsf{i32}}] {\rightarrow} [t]\)</span>。</li>
 </ul>
 <div>\[\frac{
 }{
@@ -517,7 +516,7 @@
 <ul>
     <li>グローバル変数<span>\(C.{\mathsf{globals}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
     <li><span>\({\mathit{mut}}~t\)</span>はグローバル型 <span>\(C.{\mathsf{globals}}[x]\)</span>であるとします。</li>
-    <li>mutableであるか否か<span>\({\mathit{mut}}\)</span>は<span>\({\mathsf{var}}\)</span>であるとします。</li>
+    <li><span>\({\mathit{mut}}\)</span>が<span>\({\mathsf{var}}\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([t] {\rightarrow} []\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -532,7 +531,7 @@
 
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span>は<span>\(t\)</span>のbit幅を<span>\(8\)</span>で除算したもの以下です。</li>
+    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}\)</span>は<span>\(t\)</span>のbit幅を<span>\(8\)</span>で除算したもの以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}] {\rightarrow} [t]\)</span>。</li>
 </ul>
 <div>\[\frac{
