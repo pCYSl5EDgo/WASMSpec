@@ -534,13 +534,9 @@
     <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}\)</span>は<span>\(t\)</span>のbit幅を<span>\(8\)</span>で除算したもの以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}] {\rightarrow} [t]\)</span>。</li>
 </ul>
-<div>\[\frac{
-  C.{\mathsf{mems}}[0] = {\mathit{memtype}}
-  \qquad
-  2^{{\mathit{memarg}}.{\mathsf{align}}} \leq |t|/8
-}{
-  C {\vdash} t\mathsf{.load}~{\mathit{memarg}} : [{\mathsf{i32}}] {\rightarrow} [t]
-}\]</div>
+
+訳注:何故かGoogle Chromeではmathjaxが適切に数式を解釈してくれないのでpngファイルを設置します。大きさが異なり申し訳ないです。
+![](Validation_0.png)
 
 <h3><span>\(t\mathsf{.}{\mathsf{load}}{N}\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}}\)</span></h3>
 
@@ -549,13 +545,8 @@
     <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}\)</span>は<span>\(N/8\)</span>以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}] {\rightarrow} [t]\)</span>。</li>
 </ul>
-<div>\[\frac{
-  C.{\mathsf{mems}}[0] = {\mathit{memtype}}
-  \qquad
-  2^{{\mathit{memarg}}.{\mathsf{align}}} \leq N/8
-}{
-  C {\vdash} t\mathsf{.load}N\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}} : [{\mathsf{i32}}] {\rightarrow} [t]
-}\]</div>
+
+![](Validation_1.png)
 
 <h3><span>\(t\mathsf{.}{\mathsf{store}}~{\mathit{memarg}}\)</span></h3>
 
@@ -564,13 +555,8 @@
     <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}\)</span>は<span>\(t\)</span>のbit幅を<span>\(8\)</span>で除算したもの以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}~t] {\rightarrow} []\)</span>。</li>
 </ul>
-<div>\[\frac{
-  C.{\mathsf{mems}}[0] = {\mathit{memtype}}
-  \qquad
-  2^{{\mathit{memarg}}.{\mathsf{align}}} \leq |t|/8
-}{
-  C {\vdash} t\mathsf{.store}~{\mathit{memarg}} : [{\mathsf{i32}}~t] {\rightarrow} []
-}\]</div>
+
+![](Validation_2.png)
 
 <h3><span>\(t\mathsf{.}{\mathsf{store}}{N}~{\mathit{memarg}}\)</span></h3>
 
@@ -579,13 +565,8 @@
     <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}\)</span>は<span>\(N/8\)</span>以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}~t] {\rightarrow} []\)</span>。</li>
 </ul>
-<div>\[\frac{
-  C.{\mathsf{mems}}[0] = {\mathit{memtype}}
-  \qquad
-  2^{{\mathit{memarg}}.{\mathsf{align}}} \leq N/8
-}{
-  C {\vdash} t\mathsf{.store}N~{\mathit{memarg}} : [{\mathsf{i32}}~t] {\rightarrow} []
-}\]</div>
+
+![](Validation_3.png)
 
 <h3><span>\({\mathsf{memory.size}}\)</span></h3>
 
