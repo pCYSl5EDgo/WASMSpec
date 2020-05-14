@@ -262,7 +262,6 @@
   {\vdash} {\mathit{mut}}~{\mathit{valtype}} \mathrel{\mbox{ok}}
 }\]</div>
 
-
 ## 外部型
 
 <h3><span>\({\mathsf{func}}~{\mathit{functype}}\)</span></h3>
@@ -350,7 +349,6 @@
 すべての制御命令のうち<em>無条件にジャンプするもの</em>、<span>\({\mathsf{unreachable}}\)</span>, <span>\({\mathsf{br}}\)</span>, <span>\({\mathsf{br\_table}}\)</span>, <span>\({\mathsf{return}}\)</span>などが当てはまります。</li>
 </ul>
 
-
 ### 付記
 
 <div>たとえば<span>\({\mathsf{select}}\)</span>命令はあらゆる値型<span>\(t\)</span>に対して<span>\([t~t~{\mathsf{i32}}] {\rightarrow} [t]\)</span>として有効な型です。</div>
@@ -432,9 +430,7 @@
   C {\vdash} t_2\mathsf{.}{\mathit{cvtop}}\mathsf{\_}t_1\mathsf{\_}{\mathit{sx}}^? : [t_1] {\rightarrow} [t_2]
 }\]</div>
 
-
 ## パラメトリック命令
-
 
 <h3><span>\({\mathsf{drop}}\)</span></h3>
 
@@ -466,7 +462,7 @@
 
 <ul>
     <li>ローカル変数<span>\(C.{\mathsf{locals}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\(t\)</span> be the 値型<span>\(C.{\mathsf{locals}}[x]\)</span>。</li>
+    <li><span>\(t\)</span>は値型<span>\(C.{\mathsf{locals}}[x]\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([] {\rightarrow} [t]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -475,12 +471,11 @@
   C {\vdash} {\mathsf{local.get}}~x : [] {\rightarrow} [t]
 }\]</div>
 
-
 <h3><span>\({\mathsf{local.set}}~x\)</span></h3>
 
 <ul>
     <li>ローカル変数<span>\(C.{\mathsf{locals}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\(t\)</span> be the 値型<span>\(C.{\mathsf{locals}}[x]\)</span>。</li>
+    <li><span>\(t\)</span>は値型<span>\(C.{\mathsf{locals}}[x]\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([t] {\rightarrow} []\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -489,13 +484,11 @@
   C {\vdash} {\mathsf{local.set}}~x : [t] {\rightarrow} []
 }\]</div>
 
-
-
 <h3><span>\({\mathsf{local.tee}}~x\)</span></h3>
 
 <ul>
     <li>ローカル変数<span>\(C.{\mathsf{locals}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\(t\)</span> be the 値型<span>\(C.{\mathsf{locals}}[x]\)</span>。</li>
+    <li><span>\(t\)</span>は値型<span>\(C.{\mathsf{locals}}[x]\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([t] {\rightarrow} [t]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -504,12 +497,11 @@
   C {\vdash} {\mathsf{local.tee}}~x : [t] {\rightarrow} [t]
 }\]</div>
 
-
 <h3><span>\({\mathsf{global.get}}~x\)</span></h3>
 
 <ul>
     <li>グローバル変数<span>\(C.{\mathsf{globals}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\({\mathit{mut}}~t\)</span> be the グローバル型 <span>\(C.{\mathsf{globals}}[x]\)</span>。</li>
+    <li><span>\({\mathit{mut}}~t\)</span>はグローバル型 <span>\(C.{\mathsf{globals}}[x]\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([] {\rightarrow} [t]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -518,13 +510,12 @@
   C {\vdash} {\mathsf{global.get}}~x : [] {\rightarrow} [t]
 }\]</div>
 
-
 <h3><span>\({\mathsf{global.set}}~x\)</span></h3>
 
 <ul>
     <li>グローバル変数<span>\(C.{\mathsf{globals}}[x]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>Let <span>\({\mathit{mut}}~t\)</span> be the グローバル型 <span>\(C.{\mathsf{globals}}[x]\)</span>。</li>
-    <li>The mutability <span>\({\mathit{mut}}\)</span> must be <span>\({\mathsf{var}}\)</span>。</li>
+    <li><span>\({\mathit{mut}}~t\)</span>はグローバル型 <span>\(C.{\mathsf{globals}}[x]\)</span>であるとします。</li>
+    <li>mutableであるか否か<span>\({\mathit{mut}}\)</span>は<span>\({\mathsf{var}}\)</span>であるとします。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([t] {\rightarrow} []\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -533,15 +524,13 @@
   C {\vdash} {\mathsf{global.set}}~x : [t] {\rightarrow} []
 }\]</div>
 
-
 ## メモリ命令
-
 
 <h3><span>\(t\mathsf{.}{\mathsf{load}}~{\mathit{memarg}}\)</span></h3>
 
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>The alignment <span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span> must not be larger than the bit幅 of <span>\(t\)</span> divided by <span>\(8\)</span>。</li>
+    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span>は<span>\(t\)</span>のbit幅を<span>\(8\)</span>で除算したもの以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}] {\rightarrow} [t]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -552,12 +541,11 @@
   C {\vdash} t\mathsf{.load}~{\mathit{memarg}} : [{\mathsf{i32}}] {\rightarrow} [t]
 }\]</div>
 
-
 <h3><span>\(t\mathsf{.}{\mathsf{load}}{N}\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}}\)</span></h3>
 
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>The alignment <span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span> must not be larger than <span>\(N/8\)</span>。</li>
+    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span>は<span>\(N/8\)</span>以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}] {\rightarrow} [t]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -568,12 +556,11 @@
   C {\vdash} t\mathsf{.load}N\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}} : [{\mathsf{i32}}] {\rightarrow} [t]
 }\]</div>
 
-
 <h3><span>\(t\mathsf{.}{\mathsf{store}}~{\mathit{memarg}}\)</span></h3>
 
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>The alignment <span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span> must not be larger than the bit幅 of <span>\(t\)</span> divided by <span>\(8\)</span>。</li>
+    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span>は<span>\(t\)</span>のbit幅を<span>\(8\)</span>で除算したもの以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}~t] {\rightarrow} []\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -584,13 +571,11 @@
   C {\vdash} t\mathsf{.store}~{\mathit{memarg}} : [{\mathsf{i32}}~t] {\rightarrow} []
 }\]</div>
 
-
-
 <h3><span>\(t\mathsf{.}{\mathsf{store}}{N}~{\mathit{memarg}}\)</span></h3>
 
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>The alignment <span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span> must not be larger than <span>\(N/8\)</span>。</li>
+    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span>は<span>\(N/8\)</span>以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}~t] {\rightarrow} []\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -613,7 +598,6 @@
   C {\vdash} {\mathsf{memory.size}} : [] {\rightarrow} [{\mathsf{i32}}]
 }\]</div>
 
-
 <h3><span>\({\mathsf{memory.grow}}\)</span></h3>
 
 <ul>
@@ -626,9 +610,7 @@
   C {\vdash} {\mathsf{memory.grow}} : [{\mathsf{i32}}] {\rightarrow} [{\mathsf{i32}}]
 }\]</div>
 
-
 ## 制御命令
-
 
 <h3><span>\({\mathsf{nop}}\)</span></h3>
 
@@ -640,7 +622,6 @@
   C {\vdash} {\mathsf{nop}} : [] {\rightarrow} []
 }\]</div>
 </div>
-
 
 <h3><span>\({\mathsf{unreachable}}\)</span></h3>
 
@@ -696,7 +677,6 @@ The <a class="reference internal" href="conventions.html#notation-extend"><span 
 }{
   C {\vdash} {\mathsf{loop}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}} : [t_1^\ast] {\rightarrow} [t_2^\ast]
 }\]</div>
-
 
 ### 付記
 
@@ -917,7 +897,6 @@ which is the case for functions not returning anything.
 }\]</div>
 
 ### 付記
-
 
 # モジュール
 
