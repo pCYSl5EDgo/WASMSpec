@@ -318,34 +318,35 @@
 
 # 命令
 
-<div><span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span></div>
+<div>命令は、オペランドスタックをどのように操作するかを表す関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>で分類されます。
+これらの型は、命令がポップアップオフする<span>\(t_1^\ast\)</span>型の引数値を持つ必要な入力スタックと、命令がプッシュバックする<span>\(t_2^\ast\)</span>型の結果値を持つ必要な出力スタックを記述しています。</div>
 
 ### 付記
 
-<div><span>\([{\mathsf{i32}}~{\mathsf{i32}}] {\rightarrow} [{\mathsf{i32}}]\)</span></div>
-
+<div>例えば<span>\(\mathsf{i32}.\mathsf{add}\)</span>は<span>\([{\mathsf{i32}}~{\mathsf{i32}}] {\rightarrow} [{\mathsf{i32}}]\)</span>型です。
+2つの<span>\(\mathsf{i32}\)</span>をpopして1つpushします。</div>
 
 ---
 
-Typing extends to <a class="reference internal" href="#valid-instr-seq"><span class="std std-ref">instruction sequences</span></a> <span>\({\mathit{instr}}^\ast\)</span>.
-Such a sequence has a <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> if the accumulative effect of executing the instructions is consuming values of types <span>\(t_1^\ast\)</span> off the operand stack and pushing new values of types <span>\(t_2^\ast\)</span>.
+型付けは命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>にまで及びます。
+このような命令シーケンスは関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> if the accumulative effect of executing the instructions is consuming values of types <span>\(t_1^\ast\)</span> off the operand stack and pushing new values of types <span>\(t_2^\ast\)</span>.
 <p id="polymorphism">For some instructions, the typing rules do not fully constrain the type,
 and therefore allow for multiple types.
 Such instructions are called <em>polymorphic</em>.
 Two degrees of polymorphism can be distinguished:
 <ul>
     <li><em>value-polymorphic</em>:
-the <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span>\(t\)</span> of one or several individual operands is unconstrained.
-That is the case for all <a class="reference internal" href="#valid-instr-parametric"><span class="std std-ref">parametric instructions</span></a> like <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span>.</li>
+the 値型<span>\(t\)</span> of one or several individual operands is unconstrained.
+That is the case for all パラメトリック命令 like <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span>.</li>
     <li><em>stack-polymorphic</em>:
-the entire (or most of the) <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> of the instruction is unconstrained.
-That is the case for all <a class="reference internal" href="#valid-instr-control"><span class="std std-ref">control instructions</span></a> that perform an <em>unconditional control transfer</em>, such as <span>\({\mathsf{unreachable}}\)</span>, <span>\({\mathsf{br}}\)</span>, <span>\({\mathsf{br\_table}}\)</span>, and <span>\({\mathsf{return}}\)</span>.</li>
+the entire (or most of the) 関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> of the instruction is unconstrained.
+That is the case for all 制御命令 that perform an <em>unconditional control transfer</em>, such as <span>\({\mathsf{unreachable}}\)</span>, <span>\({\mathsf{br}}\)</span>, <span>\({\mathsf{br\_table}}\)</span>, and <span>\({\mathsf{return}}\)</span>.</li>
 </ul>
 
 
 ### 付記
 
-For example, the <span>\({\mathsf{select}}\)</span> instruction is valid with type <span>\([t~t~{\mathsf{i32}}] {\rightarrow} [t]\)</span>, for any possible <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span>\(t\)</span>.   Consequently, both instruction sequences
+For example, the <span>\({\mathsf{select}}\)</span> instruction is valid with type <span>\([t~t~{\mathsf{i32}}] {\rightarrow} [t]\)</span>, for any possible 値型<span>\(t\)</span>.   Consequently, both instruction sequences
 <div>\[({\mathsf{i32}}.{\mathsf{const}}~1)~~({\mathsf{i32}}.{\mathsf{const}}~2)~~({\mathsf{i32}}.{\mathsf{const}}~3)~~{\mathsf{select}}{}\]</div>
 and
 <div>\[({\mathsf{f64}}.{\mathsf{const}}~1.0)~~({\mathsf{f64}}.{\mathsf{const}}~2.0)~~({\mathsf{i32}}.{\mathsf{const}}~3)~~{\mathsf{select}}{}\]</div>
@@ -435,7 +436,7 @@ is invalid, because there is no possible type to pick for the <span>\({\mathsf{u
 <h3><span>\({\mathsf{drop}}\)</span></h3>
 
 <ul>
-    <li>The instruction is valid with type <span>\([t] {\rightarrow} []\)</span>, for any <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span>\(t\)</span>.</li>
+    <li>The instruction is valid with type <span>\([t] {\rightarrow} []\)</span>, for any 値型<span>\(t\)</span>.</li>
 </ul>
 <div>\[\frac{
 }{
@@ -445,7 +446,7 @@ is invalid, because there is no possible type to pick for the <span>\({\mathsf{u
 <h3><span>\({\mathsf{select}}\)</span></h3>
 
 <ul>
-    <li>The instruction is valid with type <span>\([t~t~{\mathsf{i32}}] {\rightarrow} [t]\)</span>, for any <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span>\(t\)</span>.</li>
+    <li>The instruction is valid with type <span>\([t~t~{\mathsf{i32}}] {\rightarrow} [t]\)</span>, for any 値型<span>\(t\)</span>.</li>
 </ul>
 <div>\[\frac{
 }{
@@ -463,7 +464,7 @@ Both <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span> are
 
 <ul>
     <li>The local <span>\(C.{\mathsf{locals}}[x]\)</span> must be defined in the context.</li>
-    <li>Let <span>\(t\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span>\(C.{\mathsf{locals}}[x]\)</span>.</li>
+    <li>Let <span>\(t\)</span> be the 値型<span>\(C.{\mathsf{locals}}[x]\)</span>.</li>
     <li>Then the instruction is valid with type <span>\([] {\rightarrow} [t]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -477,7 +478,7 @@ Both <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span> are
 
 <ul>
     <li>The local <span>\(C.{\mathsf{locals}}[x]\)</span> must be defined in the context.</li>
-    <li>Let <span>\(t\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span>\(C.{\mathsf{locals}}[x]\)</span>.</li>
+    <li>Let <span>\(t\)</span> be the 値型<span>\(C.{\mathsf{locals}}[x]\)</span>.</li>
     <li>Then the instruction is valid with type <span>\([t] {\rightarrow} []\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -492,7 +493,7 @@ Both <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span> are
 
 <ul>
     <li>The local <span>\(C.{\mathsf{locals}}[x]\)</span> must be defined in the context.</li>
-    <li>Let <span>\(t\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value type</span></a> <span>\(C.{\mathsf{locals}}[x]\)</span>.</li>
+    <li>Let <span>\(t\)</span> be the 値型<span>\(C.{\mathsf{locals}}[x]\)</span>.</li>
     <li>Then the instruction is valid with type <span>\([t] {\rightarrow} [t]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -506,7 +507,7 @@ Both <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span> are
 
 <ul>
     <li>The global <span>\(C.{\mathsf{globals}}[x]\)</span> must be defined in the context.</li>
-    <li>Let <span>\({\mathit{mut}}~t\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global type</span></a> <span>\(C.{\mathsf{globals}}[x]\)</span>.</li>
+    <li>Let <span>\({\mathit{mut}}~t\)</span> be the グローバル型 <span>\(C.{\mathsf{globals}}[x]\)</span>.</li>
     <li>Then the instruction is valid with type <span>\([] {\rightarrow} [t]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -520,7 +521,7 @@ Both <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span> are
 
 <ul>
     <li>The global <span>\(C.{\mathsf{globals}}[x]\)</span> must be defined in the context.</li>
-    <li>Let <span>\({\mathit{mut}}~t\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global type</span></a> <span>\(C.{\mathsf{globals}}[x]\)</span>.</li>
+    <li>Let <span>\({\mathit{mut}}~t\)</span> be the グローバル型 <span>\(C.{\mathsf{globals}}[x]\)</span>.</li>
     <li>The mutability <span>\({\mathit{mut}}\)</span> must be <span>\({\mathsf{var}}\)</span>.</li>
     <li>Then the instruction is valid with type <span>\([t] {\rightarrow} []\)</span>.</li>
 </ul>
@@ -538,7 +539,7 @@ Both <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span> are
 
 <ul>
     <li>The memory <span>\(C.{\mathsf{mems}}[0]\)</span> must be defined in the context.</li>
-    <li>The alignment <span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span> must not be larger than the <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">bit width</span></a> of <span>\(t\)</span> divided by <span>\(8\)</span>.</li>
+    <li>The alignment <span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span> must not be larger than the bit幅 of <span>\(t\)</span> divided by <span>\(8\)</span>.</li>
     <li>Then the instruction is valid with type <span>\([{\mathsf{i32}}] {\rightarrow} [t]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -570,7 +571,7 @@ Both <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span> are
 
 <ul>
     <li>The memory <span>\(C.{\mathsf{mems}}[0]\)</span> must be defined in the context.</li>
-    <li>The alignment <span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span> must not be larger than the <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">bit width</span></a> of <span>\(t\)</span> divided by <span>\(8\)</span>.</li>
+    <li>The alignment <span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span> must not be larger than the bit幅 of <span>\(t\)</span> divided by <span>\(8\)</span>.</li>
     <li>Then the instruction is valid with type <span>\([{\mathsf{i32}}~t] {\rightarrow} []\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -642,7 +643,7 @@ Both <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span> are
 <h3><span>\({\mathsf{unreachable}}\)</span></h3>
 
 <ul>
-    <li>The instruction is valid with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value types</span></a> <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
+    <li>The instruction is valid with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
 </ul>
 <div>\[\frac{
 }{
@@ -658,10 +659,10 @@ Both <span>\({\mathsf{drop}}\)</span> and <span>\({\mathsf{select}}\)</span> are
 <h3><span>\({\mathsf{block}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
 
 <ul>
-    <li>The <a class="reference internal" href="../syntax/instructions.html#syntax-blocktype"><span class="std std-ref">block type</span></a> must be <a class="reference internal" href="types.html#valid-blocktype"><span class="std std-ref">valid</span></a> as some <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
-    <li>Let <span>\(C'\)</span> be the same <a class="reference internal" href="conventions.html#context"><span class="std std-ref">context</span></a> as <span>\(C\)</span>, but with the <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\([t_2^\ast]\)</span> prepended to the <span>\({\mathsf{labels}}\)</span> vector.</li>
+    <li>The ブロック型 must be 有効 as some 関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
+    <li>Let <span>\(C'\)</span> be the same コンテキスト as <span>\(C\)</span>, but with the 戻り値型 <span>\([t_2^\ast]\)</span> prepended to the <span>\({\mathsf{labels}}\)</span> vector.</li>
     <li>Under context <span>\(C'\)</span>,
-the instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be <a class="reference internal" href="#valid-instr-seq"><span class="std std-ref">valid</span></a> with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
+the instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be 有効 with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
     <li>Then the compound instruction is valid with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -681,10 +682,10 @@ The <a class="reference internal" href="conventions.html#notation-extend"><span 
 <h3><span>\({\mathsf{loop}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
 
 <ul>
-    <li>The <a class="reference internal" href="../syntax/instructions.html#syntax-blocktype"><span class="std std-ref">block type</span></a> must be <a class="reference internal" href="types.html#valid-blocktype"><span class="std std-ref">valid</span></a> as some <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
-    <li>Let <span>\(C'\)</span> be the same <a class="reference internal" href="conventions.html#context"><span class="std std-ref">context</span></a> as <span>\(C\)</span>, but with the <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\([t_1^\ast]\)</span> prepended to the <span>\({\mathsf{labels}}\)</span> vector.</li>
+    <li>The ブロック型 must be 有効 as some 関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
+    <li>Let <span>\(C'\)</span> be the same コンテキスト as <span>\(C\)</span>, but with the 戻り値型 <span>\([t_1^\ast]\)</span> prepended to the <span>\({\mathsf{labels}}\)</span> vector.</li>
     <li>Under context <span>\(C'\)</span>,
-the instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be <a class="reference internal" href="#valid-instr-seq"><span class="std std-ref">valid</span></a> with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
+the instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be 有効 with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
     <li>Then the compound instruction is valid with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -705,12 +706,12 @@ The <a class="reference internal" href="conventions.html#notation-extend"><span 
 <h3><span>\({\mathsf{if}}~{\mathit{blocktype}}~{\mathit{instr}}_1^\ast~{\mathsf{else}}~{\mathit{instr}}_2^\ast~{\mathsf{end}}\)</span></h3>
 
 <ul>
-    <li>The <a class="reference internal" href="../syntax/instructions.html#syntax-blocktype"><span class="std std-ref">block type</span></a> must be <a class="reference internal" href="types.html#valid-blocktype"><span class="std std-ref">valid</span></a> as some <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
-    <li>Let <span>\(C'\)</span> be the same <a class="reference internal" href="conventions.html#context"><span class="std std-ref">context</span></a> as <span>\(C\)</span>, but with the <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\([t_2^\ast]\)</span> prepended to the <span>\({\mathsf{labels}}\)</span> vector.</li>
+    <li>The ブロック型 must be 有効 as some 関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
+    <li>Let <span>\(C'\)</span> be the same コンテキスト as <span>\(C\)</span>, but with the 戻り値型 <span>\([t_2^\ast]\)</span> prepended to the <span>\({\mathsf{labels}}\)</span> vector.</li>
     <li>Under context <span>\(C'\)</span>,
-the instruction sequence <span>\({\mathit{instr}}_1^\ast\)</span> must be <a class="reference internal" href="#valid-instr-seq"><span class="std std-ref">valid</span></a> with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
+the instruction sequence <span>\({\mathit{instr}}_1^\ast\)</span> must be 有効 with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
     <li>Under context <span>\(C'\)</span>,
-the instruction sequence <span>\({\mathit{instr}}_2^\ast\)</span> must be <a class="reference internal" href="#valid-instr-seq"><span class="std std-ref">valid</span></a> with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
+the instruction sequence <span>\({\mathit{instr}}_2^\ast\)</span> must be 有効 with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
     <li>Then the compound instruction is valid with type <span>\([t_1^\ast~{\mathsf{i32}}] {\rightarrow} [t_2^\ast]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -733,8 +734,8 @@ The <a class="reference internal" href="conventions.html#notation-extend"><span 
 
 <ul>
     <li>The label <span>\(C.{\mathsf{labels}}[l]\)</span> must be defined in the context.</li>
-    <li>Let <span>\([t^\ast]\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\(C.{\mathsf{labels}}[l]\)</span>.</li>
-    <li>Then the instruction is valid with type <span>\([t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value types</span></a> <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
+    <li>Let <span>\([t^\ast]\)</span> be the 戻り値型 <span>\(C.{\mathsf{labels}}[l]\)</span>.</li>
+    <li>Then the instruction is valid with type <span>\([t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{labels}}[l] = [t^\ast]
@@ -744,7 +745,7 @@ The <a class="reference internal" href="conventions.html#notation-extend"><span 
 
 ### 付記
 
-The <a class="reference internal" href="../syntax/modules.html#syntax-labelidx"><span class="std std-ref">label index</span></a> space in the <a class="reference internal" href="conventions.html#context"><span class="std std-ref">context</span></a> <span>\(C\)</span> contains the most recent label first, so that <span>\(C.{\mathsf{labels}}[l]\)</span> performs a relative lookup as expected.
+The ラベルインデックス space in the コンテキスト <span>\(C\)</span> contains the most recent label first, so that <span>\(C.{\mathsf{labels}}[l]\)</span> performs a relative lookup as expected.
 The <span>\({\mathsf{br}}\)</span> instruction is <a class="reference internal" href="#polymorphism"><span class="std std-ref">stack-polymorphic</span></a>.
 
 ---
@@ -753,7 +754,7 @@ The <span>\({\mathsf{br}}\)</span> instruction is <a class="reference internal" 
 
 <ul>
     <li>The label <span>\(C.{\mathsf{labels}}[l]\)</span> must be defined in the context.</li>
-    <li>Let <span>\([t^\ast]\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\(C.{\mathsf{labels}}[l]\)</span>.</li>
+    <li>Let <span>\([t^\ast]\)</span> be the 戻り値型 <span>\(C.{\mathsf{labels}}[l]\)</span>.</li>
     <li>Then the instruction is valid with type <span>\([t^\ast~{\mathsf{i32}}] {\rightarrow} [t^\ast]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -764,7 +765,7 @@ The <span>\({\mathsf{br}}\)</span> instruction is <a class="reference internal" 
 
 ### 付記
 
-The <a class="reference internal" href="../syntax/modules.html#syntax-labelidx"><span class="std std-ref">label index</span></a> space in the <a class="reference internal" href="conventions.html#context"><span class="std std-ref">context</span></a> <span>\(C\)</span> contains the most recent label first, so that <span>\(C.{\mathsf{labels}}[l]\)</span> performs a relative lookup as expected.
+The ラベルインデックス space in the コンテキスト <span>\(C\)</span> contains the most recent label first, so that <span>\(C.{\mathsf{labels}}[l]\)</span> performs a relative lookup as expected.
 
 ---
 
@@ -772,12 +773,12 @@ The <a class="reference internal" href="../syntax/modules.html#syntax-labelidx">
 
 <ul>
     <li>The label <span>\(C.{\mathsf{labels}}[l_N]\)</span> must be defined in the context.</li>
-    <li>Let <span>\([t^\ast]\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\(C.{\mathsf{labels}}[l_N]\)</span>.</li>
+    <li>Let <span>\([t^\ast]\)</span> be the 戻り値型 <span>\(C.{\mathsf{labels}}[l_N]\)</span>.</li>
     <li>For all <span>\(l_i\)</span> in <span>\(l^\ast\)</span>,
 the label <span>\(C.{\mathsf{labels}}[l_i]\)</span> must be defined in the context.</li>
     <li>For all <span>\(l_i\)</span> in <span>\(l^\ast\)</span>,
 <span>\(C.{\mathsf{labels}}[l_i]\)</span> must be <span>\([t^\ast]\)</span>.</li>
-    <li>Then the instruction is valid with type <span>\([t_1^\ast~t^\ast~{\mathsf{i32}}] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value types</span></a> <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
+    <li>Then the instruction is valid with type <span>\([t_1^\ast~t^\ast~{\mathsf{i32}}] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
 </ul>
 <div>\[\frac{
   (C.{\mathsf{labels}}[l] = [t^\ast])^\ast
@@ -789,7 +790,7 @@ the label <span>\(C.{\mathsf{labels}}[l_i]\)</span> must be defined in the conte
 
 ### 付記
 
-The <a class="reference internal" href="../syntax/modules.html#syntax-labelidx"><span class="std std-ref">label index</span></a> space in the <a class="reference internal" href="conventions.html#context"><span class="std std-ref">context</span></a> <span>\(C\)</span> contains the most recent label first, so that <span>\(C.{\mathsf{labels}}[l_i]\)</span> performs a relative lookup as expected.
+The ラベルインデックス space in the コンテキスト <span>\(C\)</span> contains the most recent label first, so that <span>\(C.{\mathsf{labels}}[l_i]\)</span> performs a relative lookup as expected.
 The <span>\({\mathsf{br\_table}}\)</span> instruction is <a class="reference internal" href="#polymorphism"><span class="std std-ref">stack-polymorphic</span></a>.
 
 ---
@@ -798,8 +799,8 @@ The <span>\({\mathsf{br\_table}}\)</span> instruction is <a class="reference int
 
 <ul>
     <li>The return type <span>\(C.{\mathsf{return}}\)</span> must not be absent in the context.</li>
-    <li>Let <span>\([t^\ast]\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> of <span>\(C.{\mathsf{return}}\)</span>.</li>
-    <li>Then the instruction is valid with type <span>\([t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value types</span></a> <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
+    <li>Let <span>\([t^\ast]\)</span> be the 戻り値型 of <span>\(C.{\mathsf{return}}\)</span>.</li>
+    <li>Then the instruction is valid with type <span>\([t_1^\ast~t^\ast] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{return}} = [t^\ast]
@@ -810,7 +811,7 @@ The <span>\({\mathsf{br\_table}}\)</span> instruction is <a class="reference int
 ### 付記
 
 The <span>\({\mathsf{return}}\)</span> instruction is <a class="reference internal" href="#polymorphism"><span class="std std-ref">stack-polymorphic</span></a>.
-<span>\(C.{\mathsf{return}}\)</span> is absent (set to <span>\(\epsilon\)</span>) when validating an <a class="reference internal" href="#valid-expr"><span class="std std-ref">expression</span></a> that is not a function body.
+<span>\(C.{\mathsf{return}}\)</span> is absent (set to <span>\(\epsilon\)</span>) when validating an 式 that is not a function body.
 This differs from it being set to the empty result type (<span>\([\epsilon]\)</span>),
 which is the case for functions not returning anything.
 
@@ -832,10 +833,10 @@ which is the case for functions not returning anything.
 
 <ul>
     <li>The table <span>\(C.{\mathsf{tables}}[0]\)</span> must be defined in the context.</li>
-    <li>Let <span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">table type</span></a> <span>\(C.{\mathsf{tables}}[0]\)</span>.</li>
-    <li>The <a class="reference internal" href="../syntax/types.html#syntax-elemtype"><span class="std std-ref">element type</span></a> <span>\({\mathit{elemtype}}\)</span> must be <span>\({\mathsf{funcref}}\)</span>.</li>
+    <li>Let <span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span> be the テーブル型 <span>\(C.{\mathsf{tables}}[0]\)</span>.</li>
+    <li>The 要素型 <span>\({\mathit{elemtype}}\)</span> must be <span>\({\mathsf{funcref}}\)</span>.</li>
     <li>The type <span>\(C.{\mathsf{types}}[x]\)</span> must be defined in the context.</li>
-    <li>Let <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\(C.{\mathsf{types}}[x]\)</span>.</li>
+    <li>Let <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> be the 関数型<span>\(C.{\mathsf{types}}[x]\)</span>.</li>
     <li>Then the instruction is valid with type <span>\([t_1^\ast~{\mathsf{i32}}] {\rightarrow} [t_2^\ast]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -851,8 +852,7 @@ which is the case for functions not returning anything.
 <h3>空の命令シーケンス: <span>\(\epsilon\)</span></h3>
 
 <ul>
-    <li>The empty instruction sequence is valid with type <span>\([t^\ast] {\rightarrow} [t^\ast]\)</span>,
-for any sequence of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value types</span></a> <span>\(t^\ast\)</span>.</li>
+    <li>The empty instruction sequence is valid with type <span>\([t^\ast] {\rightarrow} [t^\ast]\)</span>, for any sequence of 値型 <span>\(t^\ast\)</span>.</li>
 </ul>
 <div>\[\frac{
 }{
@@ -862,12 +862,9 @@ for any sequence of <a class="reference internal" href="../syntax/types.html#syn
 <h3>空でない命令シーケンス: <span>\({\mathit{instr}}^\ast~{\mathit{instr}}_N\)</span></h3>
 
 <ul>
-    <li>The instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be valid with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>,
-for some sequences of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value types</span></a> <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
-    <li>The instruction <span>\({\mathit{instr}}_N\)</span> must be valid with type <span>\([t^\ast] {\rightarrow} [t_3^\ast]\)</span>,
-for some sequences of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value types</span></a> <span>\(t^\ast\)</span> and <span>\(t_3^\ast\)</span>.</li>
-    <li>There must be a sequence of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value types</span></a> <span>\(t_0^\ast\)</span>,
-such that <span>\(t_2^\ast = t_0^\ast~t^\ast\)</span>.</li>
+    <li>The instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be valid with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>, for some sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>.</li>
+    <li>The instruction <span>\({\mathit{instr}}_N\)</span> must be valid with type <span>\([t^\ast] {\rightarrow} [t_3^\ast]\)</span>, for some sequences of 値型 <span>\(t^\ast\)</span> and <span>\(t_3^\ast\)</span>.</li>
+    <li>There must be a sequence of 値型 <span>\(t_0^\ast\)</span>, such that <span>\(t_2^\ast = t_0^\ast~t^\ast\)</span>.</li>
     <li>Then the combined instruction sequence is valid with type <span>\([t_1^\ast] {\rightarrow} [t_0^\ast~t_3^\ast]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -885,9 +882,8 @@ such that <span>\(t_2^\ast = t_0^\ast~t^\ast\)</span>.</li>
 <h3><span>\({\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
 
 <ul>
-    <li>The instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be <a class="reference internal" href="#valid-instr-seq"><span class="std std-ref">valid</span></a> with type <span>\([] {\rightarrow} [t^\ast]\)</span>,
-for some <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\([t^\ast]\)</span>.</li>
-    <li>Then the expression is valid with <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\([t^\ast]\)</span>.</li>
+    <li>The instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be 有効 with type <span>\([] {\rightarrow} [t^\ast]\)</span>, for some 戻り値型 <span>\([t^\ast]\)</span>.</li>
+    <li>Then the expression is valid with 戻り値型 <span>\([t^\ast]\)</span>.</li>
 </ul>
 <div>\[\frac{
   C {\vdash} {\mathit{instr}}^\ast : [] {\rightarrow} [t^\ast]
@@ -902,7 +898,7 @@ for some <a class="reference internal" href="../syntax/types.html#syntax-resultt
     <li>A constant instruction <span>\({\mathit{instr}}\)</span> must be:
 <ul>
     <li>either of the form <span>\(t.{\mathsf{const}}~c\)</span>,</li>
-    <li>or of the form <span>\({\mathsf{global.get}}~x\)</span>, in which case <span>\(C.{\mathsf{globals}}[x]\)</span> must be a <a class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global type</span></a> of the form <span>\({\mathsf{const}}~t\)</span>.</li>
+    <li>or of the form <span>\({\mathsf{global.get}}~x\)</span>, in which case <span>\(C.{\mathsf{globals}}[x]\)</span> must be a グローバル型 of the form <span>\({\mathsf{const}}~t\)</span>.</li>
 </ul>
 </li>
 </ul>
@@ -932,13 +928,13 @@ for some <a class="reference internal" href="../syntax/types.html#syntax-resultt
 <h3><span>\(\{ {\mathsf{type}}~x, {\mathsf{locals}}~t^\ast, {\mathsf{body}}~{\mathit{expr}} \}\)</span></h3>
 <ul>
     <li>The type <span>\(C.{\mathsf{types}}[x]\)</span> must be defined in the context.</li>
-    <li>Let <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\(C.{\mathsf{types}}[x]\)</span>.</li>
-    <li>Let <span>\(C'\)</span> be the same <a class="reference internal" href="conventions.html#context"><span class="std std-ref">context</span></a> as <span>\(C\)</span>,
+    <li>Let <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> be the 関数型<span>\(C.{\mathsf{types}}[x]\)</span>.</li>
+    <li>Let <span>\(C'\)</span> be the same コンテキスト as <span>\(C\)</span>,
 but with:
 <ul>
-    <li><span>\({\mathsf{locals}}\)</span> set to the sequence of <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">value types</span></a> <span>\(t_1^\ast~t^\ast\)</span>, concatenating parameters and locals,</li>
-    <li><span>\({\mathsf{labels}}\)</span> set to the singular sequence containing only <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">result type</span></a> <span>\([t_2^\ast]\)</span>.</li>
-    <li><span>\({\mathsf{return}}\)</span> set to the <a class="reference internal" href="../syntax/types.html#syntax-valtype"><span class="std std-ref">result type</span></a> <span>\([t_2^\ast]\)</span>.</li>
+    <li><span>\({\mathsf{locals}}\)</span> set to the sequence of 値型 <span>\(t_1^\ast~t^\ast\)</span>, concatenating parameters and locals,</li>
+    <li><span>\({\mathsf{labels}}\)</span> set to the singular sequence containing only 戻り値型 <span>\([t_2^\ast]\)</span>.</li>
+    <li><span>\({\mathsf{return}}\)</span> set to the 戻り値型 <span>\([t_2^\ast]\)</span>.</li>
 </ul>
 </li>
     <li>Under the context <span>\(C'\)</span>,
@@ -957,7 +953,7 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 
 <h3><span>\(\{ {\mathsf{type}}~{\mathit{tabletype}} \}\)</span></h3>
 <ul>
-    <li>The <a class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">table type</span></a> <span>\({\mathit{tabletype}}\)</span> must be <a class="reference internal" href="types.html#valid-tabletype"><span class="std std-ref">valid</span></a>.</li>
+    <li>The テーブル型 <span>\({\mathit{tabletype}}\)</span> must be 有効.</li>
     <li>Then the table definition is valid with type <span>\({\mathit{tabletype}}\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -970,7 +966,7 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 
 <h3><span>\(\{ {\mathsf{type}}~{\mathit{memtype}} \}\)</span></h3>
 <ul>
-    <li>The <a class="reference internal" href="../syntax/types.html#syntax-memtype"><span class="std std-ref">memory type</span></a> <span>\({\mathit{memtype}}\)</span> must be <a class="reference internal" href="types.html#valid-memtype"><span class="std std-ref">valid</span></a>.</li>
+    <li>The メモリ型 <span>\({\mathit{memtype}}\)</span> must be 有効.</li>
     <li>Then the memory definition is valid with type <span>\({\mathit{memtype}}\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -983,9 +979,9 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 
 <h3><span>\(\{ {\mathsf{type}}~{\mathit{mut}}~t, {\mathsf{init}}~{\mathit{expr}} \}\)</span></h3>
 <ul>
-    <li>The <a class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global type</span></a> <span>\({\mathit{mut}}~t\)</span> must be <a class="reference internal" href="types.html#valid-globaltype"><span class="std std-ref">valid</span></a>.</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be <a class="reference internal" href="instructions.html#valid-expr"><span class="std std-ref">valid</span></a> with <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\([t]\)</span>.</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be <a class="reference internal" href="instructions.html#valid-constant"><span class="std std-ref">constant</span></a>.</li>
+    <li>The グローバル型 <span>\({\mathit{mut}}~t\)</span> must be 有効.</li>
+    <li>The expression <span>\({\mathit{expr}}\)</span> must be 有効 with 戻り値型 <span>\([t]\)</span>.</li>
+    <li>The expression <span>\({\mathit{expr}}\)</span> must be 定数.</li>
     <li>Then the global definition is valid with type <span>\({\mathit{mut}}~t\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -1003,10 +999,10 @@ the expression <span>\({\mathit{expr}}\)</span> must be valid with type <span>\(
 <h3><span>\(\{ {\mathsf{table}}~x, {\mathsf{offset}}~{\mathit{expr}}, {\mathsf{init}}~y^\ast \}\)</span></h3>
 <ul>
     <li>The table <span>\(C.{\mathsf{tables}}[x]\)</span> must be defined in the context.</li>
-    <li>Let <span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">table type</span></a> <span>\(C.{\mathsf{tables}}[x]\)</span>.</li>
-    <li>The <a class="reference internal" href="../syntax/types.html#syntax-elemtype"><span class="std std-ref">element type</span></a> <span>\({\mathit{elemtype}}\)</span> must be <span>\({\mathsf{funcref}}\)</span>.</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be <a class="reference internal" href="instructions.html#valid-expr"><span class="std std-ref">valid</span></a> with <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\([{\mathsf{i32}}]\)</span>.</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be <a class="reference internal" href="instructions.html#valid-constant"><span class="std std-ref">constant</span></a>.</li>
+    <li>Let <span>\({\mathit{limits}}~{\mathit{elemtype}}\)</span> be the テーブル型 <span>\(C.{\mathsf{tables}}[x]\)</span>.</li>
+    <li>The 要素型 <span>\({\mathit{elemtype}}\)</span> must be <span>\({\mathsf{funcref}}\)</span>.</li>
+    <li>The expression <span>\({\mathit{expr}}\)</span> must be 有効 with 戻り値型 <span>\([{\mathsf{i32}}]\)</span>.</li>
+    <li>The expression <span>\({\mathit{expr}}\)</span> must be 定数.</li>
     <li>For each <span>\(y_i\)</span> in <span>\(y^\ast\)</span>,
 the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the context.</li>
     <li>Then the element segment is valid.</li>
@@ -1028,8 +1024,8 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 <h3><span>\(\{ {\mathsf{data}}~x, {\mathsf{offset}}~{\mathit{expr}}, {\mathsf{init}}~b^\ast \}\)</span></h3>
 <ul>
     <li>The memory <span>\(C.{\mathsf{mems}}[x]\)</span> must be defined in the context.</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be <a class="reference internal" href="instructions.html#valid-expr"><span class="std std-ref">valid</span></a> with <a class="reference internal" href="../syntax/types.html#syntax-resulttype"><span class="std std-ref">result type</span></a> <span>\([{\mathsf{i32}}]\)</span>.</li>
-    <li>The expression <span>\({\mathit{expr}}\)</span> must be <a class="reference internal" href="instructions.html#valid-constant"><span class="std std-ref">constant</span></a>.</li>
+    <li>The expression <span>\({\mathit{expr}}\)</span> must be 有効 with 戻り値型 <span>\([{\mathsf{i32}}]\)</span>.</li>
+    <li>The expression <span>\({\mathit{expr}}\)</span> must be 定数.</li>
     <li>Then the data segment is valid.</li>
 </ul>
 <div>\[\frac{
@@ -1060,8 +1056,8 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 
 <h3><span>\(\{ {\mathsf{name}}~{\mathit{name}}, {\mathsf{desc}}~{\mathit{exportdesc}} \}\)</span></h3>
 <ul>
-    <li>The export description <span>\({\mathit{exportdesc}}\)</span> must be valid with <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external type</span></a> <span>\({\mathit{externtype}}\)</span>.</li>
-    <li>Then the export is valid with <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external type</span></a> <span>\({\mathit{externtype}}\)</span>.</li>
+    <li>The export description <span>\({\mathit{exportdesc}}\)</span> must be valid with 外部型 <span>\({\mathit{externtype}}\)</span>.</li>
+    <li>Then the export is valid with 外部型 <span>\({\mathit{externtype}}\)</span>.</li>
 </ul>
 <div>\[\frac{
   C {\vdash} {\mathit{exportdesc}} : {\mathit{externtype}}
@@ -1072,7 +1068,7 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 <h3><span>\({\mathsf{func}}~x\)</span></h3>
 <ul>
     <li>The function <span>\(C.{\mathsf{funcs}}[x]\)</span> must be defined in the context.</li>
-    <li>Then the export description is valid with <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external type</span></a> <span>\({\mathsf{func}}~C.{\mathsf{funcs}}[x]\)</span>.</li>
+    <li>Then the export description is valid with 外部型 <span>\({\mathsf{func}}~C.{\mathsf{funcs}}[x]\)</span>.</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{funcs}}[x] = {\mathit{functype}}
@@ -1083,7 +1079,7 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 <h3><span>\({\mathsf{table}}~x\)</span></h3>
 <ul>
     <li>The table <span>\(C.{\mathsf{tables}}[x]\)</span> must be defined in the context.</li>
-    <li>Then the export description is valid with <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external type</span></a> <span>\({\mathsf{table}}~C.{\mathsf{tables}}[x]\)</span>.</li>
+    <li>Then the export description is valid with 外部型 <span>\({\mathsf{table}}~C.{\mathsf{tables}}[x]\)</span>.</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{tables}}[x] = {\mathit{tabletype}}
@@ -1094,7 +1090,7 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 <h3><span>\({\mathsf{mem}}~x\)</span></h3>
 <ul>
     <li>The memory <span>\(C.{\mathsf{mems}}[x]\)</span> must be defined in the context.</li>
-    <li>Then the export description is valid with <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external type</span></a> <span>\({\mathsf{mem}}~C.{\mathsf{mems}}[x]\)</span>.</li>
+    <li>Then the export description is valid with 外部型 <span>\({\mathsf{mem}}~C.{\mathsf{mems}}[x]\)</span>.</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{mems}}[x] = {\mathit{memtype}}
@@ -1105,7 +1101,7 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 <h3><span>\({\mathsf{global}}~x\)</span></h3>
 <ul>
     <li>The global <span>\(C.{\mathsf{globals}}[x]\)</span> must be defined in the context.</li>
-    <li>Then the export description is valid with <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external type</span></a> <span>\({\mathsf{global}}~C.{\mathsf{globals}}[x]\)</span>.</li>
+    <li>Then the export description is valid with 外部型 <span>\({\mathsf{global}}~C.{\mathsf{globals}}[x]\)</span>.</li>
 </ul>
 <div>\[\frac{
   C.{\mathsf{globals}}[x] = {\mathit{globaltype}}
@@ -1129,7 +1125,7 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 <h3><span>\({\mathsf{func}}~x\)</span></h3>
 <ul>
     <li>The function <span>\(C.{\mathsf{types}}[x]\)</span> must be defined in the context.</li>
-    <li>Let <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> be the <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\(C.{\mathsf{types}}[x]\)</span>.</li>
+    <li>Let <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span> be the 関数型<span>\(C.{\mathsf{types}}[x]\)</span>.</li>
     <li>Then the import description is valid with type <span>\({\mathsf{func}}~[t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -1140,7 +1136,7 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 
 <h3><span>\({\mathsf{table}}~{\mathit{tabletype}}\)</span></h3>
 <ul>
-    <li>The table type <span>\({\mathit{tabletype}}\)</span> must be <a class="reference internal" href="types.html#valid-tabletype"><span class="std std-ref">valid</span></a>.</li>
+    <li>The table type <span>\({\mathit{tabletype}}\)</span> must be 有効.</li>
     <li>Then the import description is valid with type <span>\({\mathsf{table}}~{\mathit{tabletype}}\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -1151,7 +1147,7 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 
 <h3><span>\({\mathsf{mem}}~{\mathit{memtype}}\)</span></h3>
 <ul>
-    <li>The memory type <span>\({\mathit{memtype}}\)</span> must be <a class="reference internal" href="types.html#valid-memtype"><span class="std std-ref">valid</span></a>.</li>
+    <li>The memory type <span>\({\mathit{memtype}}\)</span> must be 有効.</li>
     <li>Then the import description is valid with type <span>\({\mathsf{mem}}~{\mathit{memtype}}\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -1162,7 +1158,7 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 
 <h3><span>\({\mathsf{global}}~{\mathit{globaltype}}\)</span></h3>
 <ul>
-    <li>The global type <span>\({\mathit{globaltype}}\)</span> must be <a class="reference internal" href="types.html#valid-globaltype"><span class="std std-ref">valid</span></a>.</li>
+    <li>The global type <span>\({\mathit{globaltype}}\)</span> must be 有効.</li>
     <li>Then the import description is valid with type <span>\({\mathsf{global}}~{\mathit{globaltype}}\)</span>.</li>
 </ul>
 <div>\[\frac{
@@ -1175,56 +1171,52 @@ the function <span>\(C.{\mathsf{funcs}}[y]\)</span> must be defined in the conte
 
 <ul>
     <li>Let <span>\({\mathit{module}}\)</span> be the module to validate.</li>
-    <li>Let <span>\(C\)</span> be a <a class="reference internal" href="conventions.html#context"><span class="std std-ref">context</span></a> where:
+    <li>Let <span>\(C\)</span> be a コンテキスト where:
         <ul>
             <li><span>\(C.{\mathsf{types}}\)</span> is <span>\({\mathit{module}}.{\mathsf{types}}\)</span>,</li>
-            <li><span>\(C.{\mathsf{funcs}}\)</span> is <span>\({\mathrm{funcs}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{ft}^\ast\)</span>,
-        with the import’s <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external types</span></a> <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function types</span></a> <span>\(\mathit{ft}^\ast\)</span> as determined below,</li>
-            <li><span>\(C.{\mathsf{tables}}\)</span> is <span>\({\mathrm{tables}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{tt}^\ast\)</span>,
-        with the import’s <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external types</span></a> <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">table types</span></a> <span>\(\mathit{tt}^\ast\)</span> as determined below,</li>
-            <li><span>\(C.{\mathsf{mems}}\)</span> is <span>\({\mathrm{mems}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{mt}^\ast\)</span>,
-        with the import’s <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external types</span></a> <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-memtype"><span class="std std-ref">memory types</span></a> <span>\(\mathit{mt}^\ast\)</span> as determined below,</li>
-            <li><span>\(C.{\mathsf{globals}}\)</span> is <span>\({\mathrm{globals}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{gt}^\ast\)</span>,
-        with the import’s <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external types</span></a> <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global types</span></a> <span>\(\mathit{gt}^\ast\)</span> as determined below,</li>
+            <li><span>\(C.{\mathsf{funcs}}\)</span> is <span>\({\mathrm{funcs}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{ft}^\ast\)</span>, with the import’s 外部型 <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function types</span></a> <span>\(\mathit{ft}^\ast\)</span> as determined below,</li>
+            <li><span>\(C.{\mathsf{tables}}\)</span> is <span>\({\mathrm{tables}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{tt}^\ast\)</span>, with the import’s 外部型 <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">table types</span></a> <span>\(\mathit{tt}^\ast\)</span> as determined below,</li>
+            <li><span>\(C.{\mathsf{mems}}\)</span> is <span>\({\mathrm{mems}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{mt}^\ast\)</span>, with the import’s 外部型 <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-memtype"><span class="std std-ref">memory types</span></a> <span>\(\mathit{mt}^\ast\)</span> as determined below,</li>
+            <li><span>\(C.{\mathsf{globals}}\)</span> is <span>\({\mathrm{globals}}(\mathit{it}^\ast)\)</span> concatenated with <span>\(\mathit{gt}^\ast\)</span>, with the import’s 外部型 <span>\(\mathit{it}^\ast\)</span> and the internal <a     class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global types</span></a> <span>\(\mathit{gt}^\ast\)</span> as determined below,</li>
             <li><span>\(C.{\mathsf{locals}}\)</span> is empty,</li>
             <li><span>\(C.{\mathsf{labels}}\)</span> is empty,</li>
             <li><span>\(C.{\mathsf{return}}\)</span> is empty.</li>
         </ul>
     </li>
-    <li>Let <span>\(C'\)</span> be the <a class="reference internal" href="conventions.html#context"><span class="std std-ref">context</span></a> where <span>\(C'.{\mathsf{globals}}\)</span> is the sequence <span>\({\mathrm{globals}}(\mathit{it}^\ast)\)</span> and all other fields are empty.</li>
+    <li>Let <span>\(C'\)</span> be the コンテキスト where <span>\(C'.{\mathsf{globals}}\)</span> is the sequence <span>\({\mathrm{globals}}(\mathit{it}^\ast)\)</span> and all other fields are empty.</li>
     <li>Under the context <span>\(C\)</span>:
         <ul>
             <li>For each <span>\({\mathit{functype}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{types}}\)</span>,
-        the <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\({\mathit{functype}}_i\)</span> must be <a class="reference internal" href="types.html#valid-functype"><span class="std std-ref">valid</span></a>.</li>
+        the 関数型<span>\({\mathit{functype}}_i\)</span> must be 有効.</li>
             <li>For each <span>\({\mathit{func}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{funcs}}\)</span>,
-        the definition <span>\({\mathit{func}}_i\)</span> must be <a class="reference internal" href="#valid-func"><span class="std std-ref">valid</span></a> with a <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function type</span></a> <span>\(\mathit{ft}_i\)</span>.</li>
+        the definition <span>\({\mathit{func}}_i\)</span> must be 有効 with a 関数型<span>\(\mathit{ft}_i\)</span>.</li>
             <li>For each <span>\({\mathit{table}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{tables}}\)</span>,
-        the definition <span>\({\mathit{table}}_i\)</span> must be <a class="reference internal" href="#valid-table"><span class="std std-ref">valid</span></a> with a <a class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">table type</span></a> <span>\(\mathit{tt}_i\)</span>.</li>
+        the definition <span>\({\mathit{table}}_i\)</span> must be 有効 with a テーブル型 <span>\(\mathit{tt}_i\)</span>.</li>
             <li>For each <span>\({\mathit{mem}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{mems}}\)</span>,
-        the definition <span>\({\mathit{mem}}_i\)</span> must be <a class="reference internal" href="#valid-mem"><span class="std std-ref">valid</span></a> with a <a class="reference internal" href="../syntax/types.html#syntax-memtype"><span class="std std-ref">memory type</span></a> <span>\(\mathit{mt}_i\)</span>.</li>
+        the definition <span>\({\mathit{mem}}_i\)</span> must be 有効 with a メモリ型 <span>\(\mathit{mt}_i\)</span>.</li>
             <li>For each <span>\({\mathit{global}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{globals}}\)</span>:
             <ul>
-                <li>Under the context <span>\(C'\)</span>, the definition <span>\({\mathit{global}}_i\)</span> must be <a class="reference internal" href="#valid-global"><span class="std std-ref">valid</span></a> with a <a class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global type</span></a> <span>\(\mathit{gt}_i\)</span>.</li>
+                <li>Under the context <span>\(C'\)</span>, the definition <span>\({\mathit{global}}_i\)</span> must be 有効 with a グローバル型 <span>\(\mathit{gt}_i\)</span>.</li>
             </ul>
             </li>
             <li>For each <span>\({\mathit{elem}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{elem}}\)</span>,
-        the segment <span>\({\mathit{elem}}_i\)</span> must be <a class="reference internal" href="#valid-elem"><span class="std std-ref">valid</span></a>.</li>
-            <li>For each <span>\({\mathit{data}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{data}}\)</span>, the segment <span>\({\mathit{data}}_i\)</span> must be <a class="reference internal" href="#valid-data"><span class="std std-ref">valid</span></a>.</li>
-            <li>If <span>\({\mathit{module}}.{\mathsf{start}}\)</span> is non-empty, then <span>\({\mathit{module}}.{\mathsf{start}}\)</span> must be <a class="reference internal" href="#valid-start"><span class="std std-ref">valid</span></a>.</li>
-            <li>For each <span>\({\mathit{import}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{imports}}\)</span>, the segment <span>\({\mathit{import}}_i\)</span> must be <a class="reference internal" href="#valid-import"><span class="std std-ref">valid</span></a> with an <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external type</span></a> <span>\(\mathit{it}_i\)</span>.</li>
-            <li>For each <span>\({\mathit{export}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{exports}}\)</span>, the segment <span>\({\mathit{export}}_i\)</span> must be <a class="reference internal" href="#valid-export"><span class="std std-ref">valid</span></a> with <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external type</span></a> <span>\(\mathit{et}_i\)</span>.</li>
+        the segment <span>\({\mathit{elem}}_i\)</span> must be 有効.</li>
+            <li>For each <span>\({\mathit{data}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{data}}\)</span>, the segment <span>\({\mathit{data}}_i\)</span> must be 有効.</li>
+            <li>If <span>\({\mathit{module}}.{\mathsf{start}}\)</span> is non-empty, then <span>\({\mathit{module}}.{\mathsf{start}}\)</span> must be 有効.</li>
+            <li>For each <span>\({\mathit{import}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{imports}}\)</span>, the segment <span>\({\mathit{import}}_i\)</span> must be 有効 with an 外部型 <span>\(\mathit{it}_i\)</span>.</li>
+            <li>For each <span>\({\mathit{export}}_i\)</span> in <span>\({\mathit{module}}.{\mathsf{exports}}\)</span>, the segment <span>\({\mathit{export}}_i\)</span> must be 有効 with 外部型 <span>\(\mathit{et}_i\)</span>.</li>
         </ul>
     </li>
     <li>The length of <span>\(C.{\mathsf{tables}}\)</span> must not be larger than <span>\(1\)</span>.</li>
     <li>The length of <span>\(C.{\mathsf{mems}}\)</span> must not be larger than <span>\(1\)</span>.</li>
     <li>All export names <span>\({\mathit{export}}_i.{\mathsf{name}}\)</span> must be different.</li>
-    <li>Let <span>\(\mathit{ft}^\ast\)</span> be the concatenation of the internal <a class="reference internal" href="../syntax/types.html#syntax-functype"><span class="std std-ref">function types</span></a> <span>\(\mathit{ft}_i\)</span>, in index order.</li>
-    <li>Let <span>\(\mathit{tt}^\ast\)</span> be the concatenation of the internal <a class="reference internal" href="../syntax/types.html#syntax-tabletype"><span class="std std-ref">table types</span></a> <span>\(\mathit{tt}_i\)</span>, in index order.</li>
-    <li>Let <span>\(\mathit{mt}^\ast\)</span> be the concatenation of the internal <a class="reference internal" href="../syntax/types.html#syntax-memtype"><span class="std std-ref">memory types</span></a> <span>\(\mathit{mt}_i\)</span>, in index order.</li>
-    <li>Let <span>\(\mathit{gt}^\ast\)</span> be the concatenation of the internal <a class="reference internal" href="../syntax/types.html#syntax-globaltype"><span class="std std-ref">global types</span></a> <span>\(\mathit{gt}_i\)</span>, in index order.</li>
-    <li>Let <span>\(\mathit{it}^\ast\)</span> be the concatenation of <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external types</span></a> <span>\(\mathit{it}_i\)</span> of the imports, in index order.</li>
-    <li>Let <span>\(\mathit{et}^\ast\)</span> be the concatenation of <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external types</span></a> <span>\(\mathit{et}_i\)</span> of the exports, in index order.</li>
-    <li>Then the module is valid with <a class="reference internal" href="../syntax/types.html#syntax-externtype"><span class="std std-ref">external types</span></a> <span>\(\mathit{it}^\ast {\rightarrow} \mathit{et}^\ast\)</span>.</li>
+    <li>Let <span>\(\mathit{ft}^\ast\)</span> be the concatenation of the internal 関数型 <span>\(\mathit{ft}_i\)</span>, in index order.</li>
+    <li>Let <span>\(\mathit{tt}^\ast\)</span> be the concatenation of the internal テーブル型 <span>\(\mathit{tt}_i\)</span>, in index order.</li>
+    <li>Let <span>\(\mathit{mt}^\ast\)</span> be the concatenation of the internal メモリ型 <span>\(\mathit{mt}_i\)</span>, in index order.</li>
+    <li>Let <span>\(\mathit{gt}^\ast\)</span> be the concatenation of the internal グローバル型 <span>\(\mathit{gt}_i\)</span>, in index order.</li>
+    <li>Let <span>\(\mathit{it}^\ast\)</span> be the concatenation of 外部型 <span>\(\mathit{it}_i\)</span> of the imports, in index order.</li>
+    <li>Let <span>\(\mathit{et}^\ast\)</span> be the concatenation of 外部型 <span>\(\mathit{et}_i\)</span> of the exports, in index order.</li>
+    <li>Then the module is valid with 外部型 <span>\(\mathit{it}^\ast {\rightarrow} \mathit{et}^\ast\)</span>.</li>
 </ul>
 <div>\[\begin{split}\frac{
   \begin{array}{&#64;{}c&#64;{}}
