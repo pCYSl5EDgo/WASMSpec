@@ -553,7 +553,6 @@
 <div class="math notranslate nohighlight">
 \[\frac{
   C.{\mathsf{mems}}[0] = {\mathit{memtype}}
-  \qquad
   2^{{\mathit{memarg}}.{\mathsf{align}}} \leq N/8
 }{
   C {\vdash} t\mathsf{.load}N\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}} : [{\mathsf{i32}}] {\rightarrow} [t]
@@ -569,7 +568,6 @@
 <div class="math notranslate nohighlight">
 \[\frac{
   C.{\mathsf{mems}}[0] = {\mathit{memtype}}
-  \qquad
   2^{{\mathit{memarg}}.{\mathsf{align}}} \leq |t|/8
 }{
   C {\vdash} t\mathsf{.store}~{\mathit{memarg}} : [{\mathsf{i32}}~t] {\rightarrow} []
@@ -585,7 +583,6 @@
 <div class="math notranslate nohighlight">
 \[\frac{
   C.{\mathsf{mems}}[0] = {\mathit{memtype}}
-  \qquad
   2^{{\mathit{memarg}}.{\mathsf{align}}} \leq N/8
 }{
   C {\vdash} t\mathsf{.store}N~{\mathit{memarg}} : [{\mathsf{i32}}~t] {\rightarrow} []
