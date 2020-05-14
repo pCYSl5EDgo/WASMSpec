@@ -546,7 +546,7 @@
 
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span>は<span>\(N/8\)</span>以下です。</li>
+    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}\)</span>は<span>\(N/8\)</span>以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}] {\rightarrow} [t]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -561,7 +561,7 @@
 
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span>は<span>\(t\)</span>のbit幅を<span>\(8\)</span>で除算したもの以下です。</li>
+    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}\)</span>は<span>\(t\)</span>のbit幅を<span>\(8\)</span>で除算したもの以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}~t] {\rightarrow} []\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -576,7 +576,7 @@
 
 <ul>
     <li>メモリ<span>\(C.{\mathsf{mems}}[0]\)</span>はコンテキスト中に定義されていなければなりません。</li>
-    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}}\)</span>は<span>\(N/8\)</span>以下です。</li>
+    <li>アラインメント<span>\(2^{{\mathit{memarg}}.{\mathsf{align}}\)</span>は<span>\(N/8\)</span>以下です。</li>
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}~t] {\rightarrow} []\)</span>。</li>
 </ul>
 <div>\[\frac{
