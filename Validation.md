@@ -536,6 +536,7 @@
 </ul>
 
 訳注:何故かGoogle Chromeではmathjaxが適切に数式を解釈してくれないのでpngファイルを設置します。大きさが異なり申し訳ないです。
+
 ![](Validation_0.png)
 
 <h3><span>\(t\mathsf{.}{\mathsf{load}}{N}\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}}\)</span></h3>
