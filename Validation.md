@@ -626,7 +626,7 @@
 <h3><span>\({\mathsf{unreachable}}\)</span></h3>
 
 <ul>
-    <li>この命令は有効です。<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>, for any sequences of 値型 <span>\(t_1^\ast\)</span> and <span>\(t_2^\ast\)</span>。</li>
+    <li>この命令は有効です。あらゆる値型のシーケンス<span>\(t_1^\ast\)</span>と<span>\(t_2^\ast\)</span>に対して<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
 }{
@@ -642,10 +642,9 @@
 <h3><span>\({\mathsf{block}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
 
 <ul>
-    <li>ブロック型 must be 有効 as some 関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
-    <li>Let <span>\(C'\)</span> be the same コンテキスト as <span>\(C\)</span>, but with the 戻り値型 <span>\([t_2^\ast]\)</span> prepended to the <span>\({\mathsf{labels}}\)</span> vector。</li>
-    <li>Under context <span>\(C'\)</span>,
-the instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be 有効 with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
+    <li>ブロック型は有効関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として有効でなくてはなりません。</li>
+    <li>コンテキスト<span>\(C'\)</span>をコンテキスト<span>\(C\)</span>と同一であるとしますが、しかし戻り値型<span>\([t_2^\ast]\)</span>がラベルベクトル<span>\({\mathsf{labels}}\)</span>の前に付加されているとします。</li>
+    <li>コンテキスト<span>\(C'\)</span>を前提として、命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>は型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として有効であるとします。</li>
     <li>以上の条件を満足する時、複合命令は有効です。<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -658,16 +657,16 @@ the instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be 有効 w
 
 ### 付記
 
-The <a class="reference internal" href="conventions.html#notation-extend"><span class="std std-ref">notation</span></a> <span>\(C,{\mathsf{labels}}\,[t^\ast]\)</span> inserts the new label type at index <span>\(0\)</span>, shifting all others.
+コンテキスト<span>\(C,{\mathsf{labels}}\,[t^\ast]\)</span>はラベル型をインデックス<span>\(0\)</span>に挿入し、他をずらします。
 
 ---
 
 <h3><span>\({\mathsf{loop}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
 
 <ul>
-    <li>ブロック型 must be 有効 as some 関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
-    <li>Let <span>\(C'\)</span> be the same コンテキスト as <span>\(C\)</span>, but with the 戻り値型 <span>\([t_1^\ast]\)</span> prepended to the <span>\({\mathsf{labels}}\)</span> vector。</li>
-    <li>Under context <span>\(C'\)</span>, the instruction sequence <span>\({\mathit{instr}}^\ast\)</span> must be 有効 with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
+    <li>ブロック型は有効関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として有効でなくてはなりません。</li>
+    <li>コンテキスト<span>\(C'\)</span>をコンテキスト<span>\(C\)</span>と同一であるとしますが、しかし戻り値型<span>\([t_2^\ast]\)</span>がラベルベクトル<span>\({\mathsf{labels}}\)</span>の前に付加されているとします。</li>
+    <li>コンテキスト<span>\(C'\)</span>を前提として、命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>は型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として有効であるとします。</li>
     <li>以上の条件を満足する時、複合命令は有効です。<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -680,17 +679,17 @@ The <a class="reference internal" href="conventions.html#notation-extend"><span 
 
 ### 付記
 
-The <a class="reference internal" href="conventions.html#notation-extend"><span class="std std-ref">notation</span></a> <span>\(C,{\mathsf{labels}}\,[t^\ast]\)</span> inserts the new label type at index <span>\(0\)</span>, shifting all others.
+コンテキスト<span>\(C,{\mathsf{labels}}\,[t^\ast]\)</span>はラベル型をインデックス<span>\(0\)</span>に挿入し、他をずらします。
 
 ---
 
 <h3><span>\({\mathsf{if}}~{\mathit{blocktype}}~{\mathit{instr}}_1^\ast~{\mathsf{else}}~{\mathit{instr}}_2^\ast~{\mathsf{end}}\)</span></h3>
 
 <ul>
-    <li>ブロック型 must be 有効 as some 関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
-    <li>Let <span>\(C'\)</span> be the same コンテキスト as <span>\(C\)</span>, but with the 戻り値型 <span>\([t_2^\ast]\)</span> prepended to the <span>\({\mathsf{labels}}\)</span> vector。</li>
-    <li>Under context <span>\(C'\)</span>, the instruction sequence <span>\({\mathit{instr}}_1^\ast\)</span> must be 有効 with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
-    <li>Under context <span>\(C'\)</span>, the instruction sequence <span>\({\mathit{instr}}_2^\ast\)</span> must be 有効 with type <span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>。</li>
+    <li>ブロック型は有効関数型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として有効でなくてはなりません。</li>
+    <li>コンテキスト<span>\(C'\)</span>をコンテキスト<span>\(C\)</span>と同一であるとしますが、しかし戻り値型<span>\([t_2^\ast]\)</span>がラベルベクトル<span>\({\mathsf{labels}}\)</span>の前に付加されているとします。</li>
+    <li>コンテキスト<span>\(C'\)</span>を前提として、命令シーケンス<span>\({\mathit{instr}}_1^\ast\)</span>は型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として有効であるとします。</li>
+    <li>コンテキスト<span>\(C'\)</span>を前提として、命令シーケンス<span>\({\mathit{instr}}_2^\ast\)</span>は型<span>\([t_1^\ast] {\rightarrow} [t_2^\ast]\)</span>として有効であるとします。</li>
     <li>以上の条件を満足する時、複合命令は有効です。<span>\([t_1^\ast~{\mathsf{i32}}] {\rightarrow} [t_2^\ast]\)</span>。</li>
 </ul>
 <div>\[\frac{
@@ -705,7 +704,7 @@ The <a class="reference internal" href="conventions.html#notation-extend"><span 
 
 ### 付記
 
-The <a class="reference internal" href="conventions.html#notation-extend"><span class="std std-ref">notation</span></a> <span>\(C,{\mathsf{labels}}\,[t^\ast]\)</span> inserts the new label type at index <span>\(0\)</span>, shifting all others.
+コンテキスト<span>\(C,{\mathsf{labels}}\,[t^\ast]\)</span>はラベル型をインデックス<span>\(0\)</span>に挿入し、他をずらします。
 
 ---
 
