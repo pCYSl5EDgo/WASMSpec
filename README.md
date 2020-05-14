@@ -30,6 +30,8 @@
    - [型](https://pcysl5edgo.github.io/WASMSpec/BinaryFormat#型)
    - [命令](https://pcysl5edgo.github.io/WASMSpec/BinaryFormat#命令)
    - [モジュール](https://pcysl5edgo.github.io/WASMSpec/BinaryFormat#モジュール)
+ - [Text Format(工事中)](https://pcysl5edgo.github.io/WASMSpec/TextFormat)
+ - [補遺](https://pcysl5edgo.github.io/WASMSpec/Appendix)
 
 # LICENSE
 

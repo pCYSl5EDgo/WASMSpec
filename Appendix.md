@@ -1,24 +1,13 @@
 <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"MAXBUFFER": 30720}})</script>
 
-# 表記上のお約束
-
-# 値
-
-# 型
-
-# 命令
-
-# モジュール
-
 # LINK
 
 <footer>
     <nav>
         <ul>
-            <li><a href="Execution" rel="prev">Prev: 実行</a></li>
+            <li><a href="TextFormat" rel="prev">Prev: Text Format</a></li>
             <li><a href="./">Top: Index</a></li>
-            <li><a href="TextFormat" rel="next">Next: TextFormat</a></li>
         </ul>
         <a href="LICENSE" rel="license">LICENSE</a>
     </nav>
