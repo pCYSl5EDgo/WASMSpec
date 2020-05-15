@@ -571,7 +571,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iadd}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で加算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で加算した結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iadd}}_N(i_1, i_2) &amp;=&amp; (i_1 + i_2) \mathbin{\mathrm{mod}} 2^N
@@ -579,7 +579,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{isub}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で減算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で減算した結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{isub}}_N(i_1, i_2) &amp;=&amp; (i_1 - i_2 + 2^N) \mathbin{\mathrm{mod}} 2^N
@@ -587,7 +587,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{imul}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で乗算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で乗算した結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{imul}}_N(i_1, i_2) &amp;=&amp; (i_1 \cdot i_2) \mathbin{\mathrm{mod}} 2^N
@@ -596,7 +596,7 @@ Exportの名前と関連する外部値を定義します。
 <h3><span>\({\mathrm{idiv\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
   <li><p><span>\(i_2\)</span>が0の時結果は未定義です。</p></li>
-  <li><p>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算し、0に向けて切り捨てた結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+  <li><p>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算し、0に向けて切り捨てた結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{idiv\_u}}_N(i_1, 0) &amp;=&amp; \{\} \\
