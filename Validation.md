@@ -538,7 +538,7 @@
 
 訳注:何故かGoogle Chromeではmathjaxが適切に数式を解釈してくれないのでpngファイルを設置します。大きさが異なり申し訳ないです。
 
-![](Validation_0.png)
+![](Pictures/Validation_0.png)
 
 <h3><span>\(t\mathsf{.}{\mathsf{load}}{N}\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}}\)</span></h3>
 
@@ -548,7 +548,7 @@
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}] {\rightarrow} [t]\)</span>。</li>
 </ul>
 
-![](Validation_1.png)
+![](Pictures/Validation_1.png)
 
 <h3><span>\(t\mathsf{.}{\mathsf{store}}~{\mathit{memarg}}\)</span></h3>
 
@@ -558,7 +558,7 @@
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}~t] {\rightarrow} []\)</span>。</li>
 </ul>
 
-![](Validation_2.png)
+![](Pictures/Validation_2.png)
 
 <h3><span>\(t\mathsf{.}{\mathsf{store}}{N}~{\mathit{memarg}}\)</span></h3>
 
@@ -568,7 +568,7 @@
     <li>以上の条件を満足する時、この命令は有効です。<span>\([{\mathsf{i32}}~t] {\rightarrow} []\)</span>。</li>
 </ul>
 
-![](Validation_3.png)
+![](Pictures/Validation_3.png)
 
 <h3><span>\({\mathsf{memory.size}}\)</span></h3>
 

@@ -211,11 +211,11 @@
 
 ### スタック上のラベル
 
-![](Execution_0.png)
+![](Pictures/Execution_0.png)
 
 ### アクティベーションフレーム
 
-![](Execution_1.png)
+![](Pictures/Execution_1.png)
 
 ### 表記上のお約束
 
@@ -230,11 +230,11 @@
 
 ## 管理命令
 
-![](Execution_2.png)
+![](Pictures/Execution_2.png)
 
 ### ブロックコンテキスト
 
-![](Execution_3.png)
+![](Pictures/Execution_3.png)
 
 ### 設定
 
@@ -245,7 +245,7 @@
 
 ### 評価コンテキスト
 
-![](Execution_4.png)
+![](Pictures/Execution_4.png)
 
 # 数値
 
