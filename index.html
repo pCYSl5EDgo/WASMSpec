@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>私家版 WebAssembly version 1.1 仕様書日本語訳 | WASMSpec</title>
+    <meta name="generator" content="Jekyll v3.8.5" />
+    <meta property="og:title" content="WebAssembly Specification version 1.1 Japanese" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://avatars0.githubusercontent.com/u/31692496?s=460&u=d963e8f15faaa099ea8fba90b49772c104eee95a" />
+    <meta name="twitter:card" content="私家版 WebAssembly version 1.1 仕様書日本語訳">
+    <meta name="twitter:site" content="@pCYSl5EDgo">
+    <meta name="description" content="The Japanese translation of WASM Spec" />
+    <meta property="og:description" content="The Japanese translation of WASM Spec" />
+    <link rel="canonical" href="https://pcysl5edgo.github.io/WASMSpec/" />
+    <meta property="og:url" content="https://pcysl5edgo.github.io/WASMSpec/" />
+    <meta property="og:site_name" content="WASMSpec" />
+    <script type="application/ld+json">{"headline":"私家版 WebAssembly version 1.1 仕様書日本語訳","@type":"WebSite","url":"https://pcysl5edgo.github.io/WASMSpec/","name":"WASMSpec","description":"WASM仕様書の日本語訳","@context":"https://schema.org"}</script>
+
+    <link rel="stylesheet" href="/WASMSpec/assets/css/style.css?v=3c8ba5e7f1884d5e005a0dfc572dde3411ef16a6">
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://pcysl5edgo.github.io/WASMSpec/">WASMSpec</a></h1>
+      
+
+      <h1 id="私家版-webassembly-version-11-仕様書日本語訳">私家版 WebAssembly version 1.1 仕様書日本語訳</h1>
+
+<p>この文書はW3CのWebAssembly Community Groupにより策定されたWebAssemblyのバージョン1.1の仕様書を私的に日本語訳したものです。</p>
+
+<h1 id="もくじ">もくじ</h1>
+
+<ul>
+  <li><a href="https://pcysl5edgo.github.io/WASMSpec/Introduction">はじめに</a>
+    <ul>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Introduction#はじめに">はじめに</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Introduction#概論">概論</a></li>
+    </ul>
+  </li>
+  <li><a href="https://pcysl5edgo.github.io/WASMSpec/Structure">構造</a>
+    <ul>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Structure#表記上のお約束">表記上のお約束</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Structure#値">値</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Structure#型">型</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Structure#命令">命令</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Structure#モジュール">モジュール</a></li>
+    </ul>
+  </li>
+  <li><a href="https://pcysl5edgo.github.io/WASMSpec/Validation">検証</a>
+    <ul>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Validation#表記上のお約束">表記上のお約束</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Validation#型">型</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Validation#命令">命令</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Validation#モジュール">モジュール</a></li>
+    </ul>
+  </li>
+  <li><a href="https://pcysl5edgo.github.io/WASMSpec/Execution">実行</a>
+    <ul>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Execution#表記上のお約束">表記上のお約束</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Execution#ランタイムの構造">ランタイムの構造</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Execution#数値">数値</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Execution#命令">命令</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/Execution#モジュール">モジュール</a></li>
+    </ul>
+  </li>
+  <li><a href="https://pcysl5edgo.github.io/WASMSpec/BinaryFormat">Binary Format</a>
+    <ul>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/BinaryFormat#表記上のお約束">表記上のお約束</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/BinaryFormat#値">値</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/BinaryFormat#型">型</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/BinaryFormat#命令">命令</a></li>
+      <li><a href="https://pcysl5edgo.github.io/WASMSpec/BinaryFormat#モジュール">モジュール</a></li>
+    </ul>
+  </li>
+  <li><a href="https://pcysl5edgo.github.io/WASMSpec/TextFormat">Text Format(工事中)</a></li>
+  <li><a href="https://pcysl5edgo.github.io/WASMSpec/Appendix">補遺</a></li>
+</ul>
+
+<h1 id="license">LICENSE</h1>
+
+<ul>
+  <li><a href="/WASMSpec/LICENSE">ライセンス本文</a></li>
+  <li><a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">原文ライセンス本文</a></li>
+</ul>
+
+<h1 id="英文原著リポジトリ">英文原著リポジトリ</h1>
+
+<p><a href="https://github.com/WebAssembly/spec">英文原著リポジトリ</a>のみが厳密に正確な仕様書です。
+この翻訳は不正確な可能性があります。</p>
+
+
+      
+      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+        This site is open source. <a href="https://github.com/pCYSl5EDgo/WASMSpec/edit/master/README.md">Improve this page</a>.
+      </div>
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    
+  </body>
+</html>
