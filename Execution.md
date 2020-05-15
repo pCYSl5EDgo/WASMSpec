@@ -49,8 +49,7 @@
 - 現在の関数の呼び出しフレーム`F`
 - 実行される命令のシーケンス
 
-<div>
-を構成要素とするタプル<span>\((S; F; {\mathit{instr}}^\ast)\)</span>です。
+<div>を構成要素とするタプル<span>\((S; F; {\mathit{instr}}^\ast)\)</span>です。
 </div>
 
 不要な複雑生を避けるために、ストア`S`とフレーム`F`は、それらと関係ない還元規則では表記を省略されています。
@@ -82,9 +81,9 @@
 \end{array}\end{split}\]</div>
 
 <ul>
-    <li><span>\(x_4 = -x_2\)</span></li>
-    <li><span>\(x_5 = -x_2 + x_3\)</span></li>
-    <li><span>\(x_6 = x_1 \cdot (-x_2 + x_3)\)</span></li>
+  <li><span>\(x_4 = -x_2\)</span></li>
+  <li><span>\(x_5 = -x_2 + x_3\)</span></li>
+  <li><span>\(x_6 = x_1 \cdot (-x_2 + x_3)\)</span></li>
 </ul>
 
 # ランタイムの構造
@@ -293,10 +292,10 @@ Exportの名前と関連する外部値を定義します。
 これは、特定の種類のエントリを順序を保持してフィルタリングします。
 
 <ul>
-    <li><span>\({\mathrm{funcs}}({\mathit{externval}}^\ast) = [{\mathit{funcaddr}} ~|~ ({\mathsf{func}}~{\mathit{funcaddr}}) \in {\mathit{externval}}^\ast]\)</span></li>
-    <li><span>\({\mathrm{tables}}({\mathit{externval}}^\ast) = [{\mathit{tableaddr}} ~|~ ({\mathsf{table}}~{\mathit{tableaddr}}) \in {\mathit{externval}}^\ast]\)</span></li>
-    <li><span>\({\mathrm{mems}}({\mathit{externval}}^\ast) = [{\mathit{memaddr}} ~|~ ({\mathsf{mem}}~{\mathit{memaddr}}) \in {\mathit{externval}}^\ast]\)</span></li>
-    <li><span>\({\mathrm{globals}}({\mathit{externval}}^\ast) = [{\mathit{globaladdr}} ~|~ ({\mathsf{global}}~{\mathit{globaladdr}}) \in {\mathit{externval}}^\ast]\)</span></li>
+  <li><span>\({\mathrm{funcs}}({\mathit{externval}}^\ast) = [{\mathit{funcaddr}} ~|~ ({\mathsf{func}}~{\mathit{funcaddr}}) \in {\mathit{externval}}^\ast]\)</span></li>
+  <li><span>\({\mathrm{tables}}({\mathit{externval}}^\ast) = [{\mathit{tableaddr}} ~|~ ({\mathsf{table}}~{\mathit{tableaddr}}) \in {\mathit{externval}}^\ast]\)</span></li>
+  <li><span>\({\mathrm{mems}}({\mathit{externval}}^\ast) = [{\mathit{memaddr}} ~|~ ({\mathsf{mem}}~{\mathit{memaddr}}) \in {\mathit{externval}}^\ast]\)</span></li>
+  <li><span>\({\mathrm{globals}}({\mathit{externval}}^\ast) = [{\mathit{globaladdr}} ~|~ ({\mathsf{global}}~{\mathit{globaladdr}}) \in {\mathit{externval}}^\ast]\)</span></li>
 </ul>
 
 ## スタック
@@ -327,8 +326,7 @@ Exportの名前と関連する外部値を定義します。
 
 ![](Pictures/Execution_0.png)
 
-<div>
-直感的には、<span>\({\mathit{instr}}^\ast\)</span>は、元の制御構造体の代わりに、ブランチを取ったときに実行する継続部分です。
+<div>直感的には、<span>\({\mathit{instr}}^\ast\)</span>は、元の制御構造体の代わりに、ブランチを取ったときに実行する継続部分です。
 </div>
 
 #### 付記
@@ -355,9 +353,9 @@ Exportの名前と関連する外部値を定義します。
 ### 表記上のお約束
 
 <ul>
-    <li>メタ変数<b>L</b>は、文脈から明らかなように、ラベルの範囲内にあります。</li>
-    <li>メタ変数<b>F</b>は、コンテキストから明らかなフレームの範囲内にあります。</li>
-    <li>以下の補助定義は、ブロック型を取り、現在のフレームでそれが示す関数型を検索します。
+  <li>メタ変数<b>L</b>は、文脈から明らかなように、ラベルの範囲内にあります。</li>
+  <li>メタ変数<b>F</b>は、コンテキストから明らかなフレームの範囲内にあります。</li>
+  <li>以下の補助定義は、ブロック型を取り、現在のフレームでそれが示す関数型を検索します。
         <div>\[\begin{split}\begin{array}{lll}
 {\mathrm{expand}}_F({\mathit{typeidx}}) &=& F.{\mathsf{module}}.{\mathsf{types}}[{\mathit{typeidx}}] \\
 {\mathrm{expand}}_F([{\mathit{valtype}}^?]) &=& [] {\rightarrow} [{\mathit{valtype}}^?] \\
@@ -447,21 +445,433 @@ Exportの名前と関連する外部値を定義します。
 
 # 数値
 
+数値プリミティブは一般的な方法で定義されており、ビット幅`N`のインデックスを持つ演算子によって定義されます。
+
+いくつかの演算子は、いくつかの可能な結果（異なるNaN値など）のうちの1つを返すことができるため、非決定論的なものもあります。
+技術的には、各演算子はこのようにして許容される値のセットを返します。
+便宜上、決定論的な結果は単純な値として表現され、それぞれのシングルトン集合で識別されると仮定されます。
+
+演算子の中には特定の入力に対して定義されていない部分的な演算子もあります。
+技術的にはこれらの入力に対しては空の結果セットが返されます。
+
+形式的な表記法では、各演算子は優先順位の低い順に適用される等式節によって定義されます。
+つまり、与えられた引数に適用される最初の節が結果を定義します。
+
+いくつかのケースでは、類似した節は±または∓という表記法を使用して1つに結合されます。
+これらのプレースホルダが一つの節に複数存在する場合それらは一貫して解決されなければなりません。
+つまりすべてのプレースホルダに対して上の符号が選択されるか、下の符号が選択されます。
+
+### 付記
+
+例えば、`fcopysign`演算子は次のように定義されています。
+
+<div>\[\begin{split}\begin{array}{@{}lcll}
+{\mathrm{fcopysign}}_N(\pm p_1, \pm p_2) &=& \pm p_1 \\
+{\mathrm{fcopysign}}_N(\pm p_1, \mp p_2) &=& \mp p_1 \\
+\end{array}\end{split}\]</div>
+
+この定義は、各節を次のように2つに展開したものを略記したものと読むことにします。
+
+<div>\[\begin{split}\begin{array}{@{}lcll}
+{\mathrm{fcopysign}}_N(+ p_1, + p_2) &=& + p_1 \\
+{\mathrm{fcopysign}}_N(- p_1, - p_2) &=& - p_1 \\
+{\mathrm{fcopysign}}_N(+ p_1, - p_2) &=& - p_1 \\
+{\mathrm{fcopysign}}_N(- p_1, + p_2) &=& + p_1 \\
+\end{array}\end{split}\]</div>
+
 ### 表記上のお約束
+
+<ul>
+  <li>メタ変数 d はシングルビットの範囲を指定するために使用されます。</li>
+  <li>メタ変数pは、浮動小数点値の倍数(nan および ∞を含む)の範囲を指定するために使用されます。</li>
+  <li>メタ変数qは、nanまたは∞を除く有理数の倍数の範囲を表すために使用されます。</li>
+  <li>表記法<span>\(f^{-1}\)</span>は、双射影関数fの逆数を表します。</li>
+  <li>
+    有理数の切り捨ては、通常の数学的定義を用いて、trunc(±q)と書きます。
+    <div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+{\mathrm{trunc}}(\pm q) &=& \pm i & (\mathrel{\mbox{if}} i \in \mathbb{N} \wedge +q - 1 < i \leq +q) \\
+\end{array}\end{split}\]</div>
+  </li>
+</ul>
 
 ## 表現
 
+数値は、基本的にはビットの列として二進表現を持っています。
+
+<div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+{\mathrm{bits}}_{\mathsf{i}N}(i) &=& {\mathrm{ibits}}_N(i) \\
+{\mathrm{bits}}_{\mathsf{f}N}(z) &=& {\mathrm{fbits}}_N(z) \\
+\end{array}\end{split}\]</div>
+
+これらの関数はそれぞれ二項対立であり、それゆえに反転可能です。
+
 ### 整数
+
+整数は2を基数とした符号なし数字として表現されます。
+
+<div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+{\mathrm{ibits}}_N(i) &=& d_{N-1}~\dots~d_0 & (i = 2^{N-1}\cdot d_{N-1} + \dots + 2^0\cdot d_0) \\
+\end{array}\end{split}\]</div>
+
+∧、∨、または⊻のようなブール演算子は、それらを点単位で適用することで、同じ長さのビットシーケンスにリフトされます。
 
 ### 浮動小数点数
 
+浮動小数点値は、[IEEE 754-2019](https://ieeexplore.ieee.org/document/8766229)で定義されたそれぞれのバイナリ形式で表現します。
+
+<div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+{\mathrm{fbits}}_N(\pm (1+m\cdot 2^{-M})\cdot 2^e) &=& {\mathrm{fsign}}({\pm})~{\mathrm{ibits}}_E(e+{\mathrm{fbias}}_N)~{\mathrm{ibits}}_M(m) \\
+{\mathrm{fbits}}_N(\pm (0+m\cdot 2^{-M})\cdot 2^e) &=& {\mathrm{fsign}}({\pm})~(0)^E~{\mathrm{ibits}}_M(m) \\
+{\mathrm{fbits}}_N(\pm \infty) &=& {\mathrm{fsign}}({\pm})~(1)^E~(0)^M \\
+{\mathrm{fbits}}_N(\pm {\mathsf{nan}}(n)) &=& {\mathrm{fsign}}({\pm})~(1)^E~{\mathrm{ibits}}_M(n) \\[1ex]
+{\mathrm{fbias}}_N &=& 2^{E-1}-1 \\
+{\mathrm{fsign}}({+}) &=& 0 \\
+{\mathrm{fsign}}({-}) &=& 1 \\
+\end{array}\end{split}\]</div>
+
+<div><span>\(M = {\mathrm{signif}}(N)\)</span>であり、<span>\(E = {\mathrm{expon}}(N)\)</span>です。</div>
+
 ### ストレージ
+
+数値はリトルエンディアンのバイト列としてメモリに格納されます。
+
+<div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+{\mathrm{bytes}}_t(i) &=& {\mathrm{littleendian}}({\mathrm{bits}}_t(i)) \\[1ex]
+{\mathrm{littleendian}}(\epsilon) &=& \epsilon \\
+{\mathrm{littleendian}}(d^8~{d'}^\ast~) &=& {\mathrm{littleendian}}({d'}^\ast)~{\mathrm{ibits}}_8^{-1}(d^8) \\
+\end{array}\end{split}\]</div>
+
+ここでも、これらの関数は反転可能な二項演算です。
 
 ## 整数演算
 
 ### 符号化
 
+整数演算子は iN 値に対して定義されています。
+
+符号付き解釈を使用する演算子は、値が値の範囲の上半分にある場合（すなわち、その最上位ビットが1である場合）に2の補数を取る以下の定義を使用して値を変換します。
+
+<div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+{\mathrm{signed}}_N(i) &=& i & (0 \leq i < 2^{N-1}) \\
+{\mathrm{signed}}_N(i) &=& i - 2^N & (2^{N-1} \leq i < 2^N) \\
+\end{array}\end{split}\]</div>
+
+ここでも、これらの関数は反転可能な二項演算です。
+
 ### 真偽値化
+
+述語、すなわちテストや関係演算子の整数結果は、条件に応じて値1または0を生成する以下の補助関数の助けを借りて定義されます。
+
+<div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+{\mathrm{bool}}(C) &=& 1 & (\mathrel{\mbox{if}} C) \\
+{\mathrm{bool}}(C) &=& 0 & (\mathrel{\mbox{otherwise}}) \\
+\end{array}\end{split}\]</div>
+
+---
+
+<h3><span>\({\mathrm{iadd}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で加算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{iadd}}_N(i_1, i_2) &amp;=&amp; (i_1 + i_2) \mathbin{\mathrm{mod}} 2^N
+\end{array}\]</div>
+</div>
+
+<h3><span>\({\mathrm{isub}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で減算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{isub}}_N(i_1, i_2) &amp;=&amp; (i_1 - i_2 + 2^N) \mathbin{\mathrm{mod}} 2^N
+\end{array}\]</div>
+</div>
+
+<h3><span>\({\mathrm{imul}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で乗算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{imul}}_N(i_1, i_2) &amp;=&amp; (i_1 \cdot i_2) \mathbin{\mathrm{mod}} 2^N
+\end{array}\]</div>
+</div>
+
+<h3><span>\({\mathrm{idiv\_u}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_2\)</span>が0の時結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算し、0に向けて切り捨てた結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{idiv\_u}}_N(i_1, 0) &amp;=&amp; \{\} \\
+{\mathrm{idiv\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{trunc}}(i_1 / i_2) \\
+\end{array}\end{split}\]</div>
+
+### 付記
+
+この関数はpartialです。
+
+---
+
+<h3><span>\({\mathrm{idiv\_s}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p>もし<span>\(j_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果が<span>\(2^{N-1}\)</span>ならば、結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果を0に向けて切り捨てたものが結果となります。</p></li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{idiv\_s}}_N(i_1, 0) &amp;=&amp; \{\} \\
+{\mathrm{idiv\_s}}_N(i_1, i_2) &amp;=&amp; \{\} \qquad\qquad (\mathrel{\mbox{if}} {\mathrm{signed}}_N(i_1) / {\mathrm{signed}}_N(i_2) = 2^{N-1}) \\
+{\mathrm{idiv\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{signed}}_N^{-1}({\mathrm{trunc}}({\mathrm{signed}}_N(i_1) / {\mathrm{signed}}_N(i_2))) \\
+\end{array}\end{split}\]</div>
+
+### 付記
+
+<div>\[(-2^{N-1})/(-1) = +2^{N-1}\]</div>
+
+符号付きNビット2進整数では上記式の結果は表現可能な整数範囲外です。
+
+この関数はpartialです。
+
+---
+
+<h3><span>\({\mathrm{irem\_u}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算した剰余を結果とします。</p></li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{irem\_u}}_N(i_1, 0) &amp;=&amp; \{\} \\
+{\mathrm{irem\_u}}_N(i_1, i_2) &amp;=&amp; i_1 - i_2 \cdot {\mathrm{trunc}}(i_1 / i_2) \\
+\end{array}\end{split}\]</div>
+
+### 付記
+
+この関数はpartialです。
+
+---
+
+<h3><span>\({\mathrm{irem\_s}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p>もし<span>\(j_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した剰余に<span>\(j_1\)</span>の符号を付加したものを結果とします。</p></li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{irem\_s}}_N(i_1, 0) &amp;=&amp; \{\} \\
+{\mathrm{irem\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{signed}}_N^{-1}(j_1 - j_2 \cdot {\mathrm{trunc}}(j_1 / j_2)) \\
+  &amp;&amp; (\mathrel{\mbox{where}} j_1 = {\mathrm{signed}}_N(i_1) \wedge j_2 = {\mathrm{signed}}_N(i_2)) \\
+\end{array}\end{split}\]</div>
+
+### 付記
+
+この関数はpartialです。
+
+---
+
+<h3><span>\({\mathrm{iand}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のand演算を行います。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{iand}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}({\mathrm{ibits}}_N(i_1) \wedge {\mathrm{ibits}}_N(i_2))
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ior}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のor演算を行います。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ior}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}({\mathrm{ibits}}_N(i_1) \vee {\mathrm{ibits}}_N(i_2))
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ixor}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のxor演算を行います。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ixor}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}({\mathrm{ibits}}_N(i_1) \veebar {\mathrm{ibits}}_N(i_2))
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ishl}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
+  <li><p><span>\(i_1\)</span>に対して<span>\(k\)</span>ビット左にシフトします。modulo <span>\(2^N\)</span></p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ishl}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_2^{N-k}~0^k)
+  &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i_1) = d_1^k~d_2^{N-k} \wedge k = i_2 \mathbin{\mathrm{mod}} N)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ishr\_u}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
+  <li><p><span>\(i_1\)</span>に対して右に<span>\(k\)</span>ビット論理シフトします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ishr\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(0^k~d_1^{N-k})
+  &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i_1) = d_1^{N-k}~d_2^k \wedge k = i_2 \mathbin{\mathrm{mod}} N)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ishr\_s}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
+  <li><p><span>\(i_1\)</span>に対して右に<span>\(k\)</span>ビット算術シフトします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ishr\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_0^{k+1}~d_1^{N-k-1})
+  &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i_1) = d_0~d_1^{N-k-1}~d_2^k \wedge k = i_2 \mathbin{\mathrm{mod}} N)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{irotl}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
+  <li><p><span>\(i_1\)</span>を左に<span>\(k\)</span>ビット回します。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{irotl}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_2^{N-k}~d_1^k)
+  &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i_1) = d_1^k~d_2^{N-k} \wedge k = i_2 \mathbin{\mathrm{mod}} N)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{irotr}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
+  <li><p><span>\(i_1\)</span>を右に<span>\(k\)</span>ビット回します。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{irotr}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_2^k~d_1^{N-k})
+  &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i_1) = d_1^{N-k}~d_2^k \wedge k = i_2 \mathbin{\mathrm{mod}} N)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{iclz}}_N(i)\)</span></h3>
+<ul>
+  <li><p><span>\(i\)</span>の先行する0bitを数えます。<span>\(i\)</span>が<span>\(0\)</span>ならばすべて0であると見なします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{iclz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = 0^k~(1~d^\ast)^?)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ictz}}_N(i)\)</span></h3>
+<ul>
+  <li><p><span>\(i\)</span>の後継する0bitを数えます; <span>\(i\)</span>が<span>\(0\)</span>ならばすべて0であると見なします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ictz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = (d^\ast~1)^?~0^k)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ipopcnt}}_N(i)\)</span></h3>
+<ul>
+  <li><p><span>\(i\)</span>の0でないbitを数えます。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ipopcnt}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = (0^\ast~1)^k~0^\ast)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ieqz}}_N(i)\)</span></h3>
+
+- iが0なら1を、そうでないならば0を戻り値とします。
+
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ieqz}}_N(i) &amp;=&amp; {\mathrm{bool}}(i = 0)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ieq}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば1を、そうでないならば0を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ieq}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 = i_2)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ine}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば0を、そうでないならば1を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ine}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 \neq i_2)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ilt\_u}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ilt\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 &lt; i_2)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ilt\_s}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ilt\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) &lt; {\mathrm{signed}}_N(i_2))
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{igt\_u}}_N(i_1, i_2)\)</span></h3>
+<ul>
+    <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{igt\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 &gt; i_2)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{igt\_s}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{igt\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) &gt; {\mathrm{signed}}_N(i_2))
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ile\_u}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ile\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 \leq i_2)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ile\_s}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ile\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) \leq {\mathrm{signed}}_N(i_2))
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ige\_u}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ige\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 \geq i_2)
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{ige\_s}}_N(i_1, i_2)\)</span></h3>
+<ul>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</p></li>
+</ul>
+<div>\[\begin{array}{&#64;{}lcll}
+{\mathrm{ige\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) \geq {\mathrm{signed}}_N(i_2))
+\end{array}\]</div>
+
+<h3><span>\({\mathrm{iextend}M\mathrm{\_s}}_N(i)\)</span></h3>
+<ul>
+  <li><p><a href="#extend_m_n">\({\mathrm{extend}^{\mathsf{s}}}_{M,N}(i)\)</a>を計算します</p></li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{iextend}M\mathrm{\_s}}_{N}(i) &amp;=&amp; {\mathrm{extend}^{\mathsf{s}}}_{M,N}(i) \\
+\end{array}\end{split}\]</div>
 
 ## 浮動小数点数演算
 
@@ -506,9 +916,9 @@ Exportの名前と関連する外部値を定義します。
 <footer>
     <nav>
         <ul>
-            <li><a href="Validation" rel="prev">Prev: 検証</a></li>
-            <li><a href="./">Top: Index</a></li>
-            <li><a href="BinaryFormat" rel="next">Next: Binary Format</a></li>
+          <li><a href="Validation" rel="prev">Prev: 検証</a></li>
+          <li><a href="./">Top: Index</a></li>
+          <li><a href="BinaryFormat" rel="next">Next: Binary Format</a></li>
         </ul>
         <a href="LICENSE" rel="license">LICENSE</a>
     </nav>
