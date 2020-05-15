@@ -212,19 +212,19 @@
 
 ### スタック上のラベル
 
-<div>\[\begin{split}\begin{array}{llll}
+<div>\begin{split}\begin{array}{llll}
 {\mathit{label}} &::=&
   {\mathsf{label}}_n\{{\mathit{instr}}^\ast\} \\
-\end{array}\end{split}\]</div>
+\end{array}\end{split}</div>
 
 ### アクティベーションフレーム
 
-<div>\[\begin{split}\begin{array}{llll}
+<div>\begin{split}\begin{array}{llll}
 \mathit{activation} &::=&
   {\mathsf{frame}}_n\{{\mathit{frame}}\} \\
 {\mathit{frame}} &::=&
   \{ {\mathsf{locals}}~{\mathit{val}}^\ast, {\mathsf{module}}~{\mathit{moduleinst}} \} \\
-\end{array}\end{split}\]</div>
+\end{array}\end{split}</div>
 
 ### 表記上のお約束
 
@@ -239,7 +239,7 @@
 
 ## 管理命令
 
-<div>\[\begin{split}\begin{array}{llcl}
+<div>\begin{split}\begin{array}{llcl}
 {\mathit{instr}} &::=&
   \dots \\ &&|&
   {\mathsf{trap}} \\ &&|&
@@ -248,7 +248,7 @@
   {\mathsf{init\_data}}~{\mathit{memaddr}}~{\mathit{u32}}~{\mathit{byte}}^\ast \\ &&|&
   {\mathsf{label}}_n\{{\mathit{instr}}^\ast\}~{\mathit{instr}}^\ast~{\mathsf{end}} \\ &&|&
   {\mathsf{frame}}_n\{{\mathit{frame}}\}~{\mathit{instr}}^\ast~{\mathsf{end}} \\
-\end{array}\end{split}\]</div>
+\end{array}\end{split}</div>
 
 ### ブロックコンテキスト
 
@@ -270,7 +270,7 @@
 
 ### 評価コンテキスト
 
-<div>\[\begin{split}\begin{array}{rcl}
+<div>\begin{split}\begin{array}{rcl}
 S; F; E[{\mathit{instr}}^\ast] &{\hookrightarrow}& S'; F'; E[{{\mathit{instr}}'}^\ast] \\
   && (\mathrel{\mbox{if}} S; F; {\mathit{instr}}^\ast {\hookrightarrow} S'; F'; {{\mathit{instr}}'}^\ast) \\
 S; F; {\mathsf{frame}}_n\{F'\}~{\mathit{instr}}^\ast~{\mathsf{end}} &{\hookrightarrow}& S'; F; {\mathsf{frame}}_n\{F''\}~{\mathit{instr}}'^\ast~{\mathsf{end}} \\
@@ -278,7 +278,7 @@ S; F; {\mathsf{frame}}_n\{F'\}~{\mathit{instr}}^\ast~{\mathsf{end}} &{\hookright
 S; F; E[{\mathsf{trap}}] &{\hookrightarrow}& S; F; {\mathsf{trap}}
   \qquad (\mathrel{\mbox{if}} E \neq [\_]) \\
 S; F; {\mathsf{frame}}_n\{F'\}~{\mathsf{trap}}~{\mathsf{end}} &{\hookrightarrow}& S; F; {\mathsf{trap}} \\
-\end{array}\end{split}\]</div>
+\end{array}\end{split}</div>
 
 # 数値
 
