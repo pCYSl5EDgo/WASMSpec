@@ -234,10 +234,7 @@
 
 ### ブロックコンテキスト
 
-<div>\[\begin{split}\begin{array}{llll}
-{B}^0 &::=& {\mathit{val}}^\ast~[\_]~{\mathit{instr}}^\ast \\
-{B}^{k+1} &::=& {\mathit{val}}^\ast~{\mathsf{label}}_n\{{\mathit{instr}}^\ast\}~{B}^k~{\mathsf{end}}~{\mathit{instr}}^\ast \\
-\end{array}\end{split}\]</div>
+![](Execution_3.png)
 
 ### 設定
 
@@ -248,7 +245,7 @@
 
 ### 評価コンテキスト
 
-![](Execution_3.png)
+![](Execution_4.png)
 
 # 数値
 
