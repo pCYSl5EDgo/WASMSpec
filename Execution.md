@@ -92,7 +92,7 @@
 ## 値
 
 <div>\[\begin{split}\begin{array}{llcl}
-\def\mathdef1260#1{{}}\mathdef1260{(value)} & {\mathit{val}} &::=&
+{\mathit{val}} &::=&
   {\mathsf{i32}}.{\mathsf{const}}~{\mathit{i32}} \\&&|&
   {\mathsf{i64}}.{\mathsf{const}}~{\mathit{i64}} \\&&|&
   {\mathsf{f32}}.{\mathsf{const}}~{\mathit{f32}} \\&&|&
@@ -102,7 +102,7 @@
 ## 戻り値
 
 <div>\[\begin{split}\begin{array}{llcl}
-\def\mathdef1260#1{{}}\mathdef1260{(result)} & {\mathit{result}} &::=&
+{\mathit{result}} &::=&
   {\mathit{val}}^\ast \\&&|&
   {\mathsf{trap}}
 \end{array}\end{split}\]</div>
@@ -110,7 +110,7 @@
 ## ストア
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(store)} & {\mathit{store}} &::=& \{~
+{\mathit{store}} &::=& \{~
   \begin{array}[t]{l@{~}ll}
   {\mathsf{funcs}} & {\mathit{funcinst}}^\ast, \\
   {\mathsf{tables}} & {\mathit{tableinst}}^\ast, \\
@@ -122,22 +122,22 @@
 ## アドレス
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(address)} & {\mathit{addr}} &::=&
+{\mathit{addr}} &::=&
   0 ~|~ 1 ~|~ 2 ~|~ \dots \\
-\def\mathdef1260#1{{}}\mathdef1260{(function address)} & {\mathit{funcaddr}} &::=&
+{\mathit{funcaddr}} &::=&
   {\mathit{addr}} \\
-\def\mathdef1260#1{{}}\mathdef1260{(table address)} & {\mathit{tableaddr}} &::=&
+{\mathit{tableaddr}} &::=&
   {\mathit{addr}} \\
-\def\mathdef1260#1{{}}\mathdef1260{(memory address)} & {\mathit{memaddr}} &::=&
+{\mathit{memaddr}} &::=&
   {\mathit{addr}} \\
-\def\mathdef1260#1{{}}\mathdef1260{(global address)} & {\mathit{globaladdr}} &::=&
+{\mathit{globaladdr}} &::=&
   {\mathit{addr}} \\
 \end{array}\end{split}\]</div>
 
 ## モジュールインスタンス
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(module instance)} & {\mathit{moduleinst}} &::=& \{
+{\mathit{moduleinst}} &::=& \{
   \begin{array}[t]{l@{~}ll}
   {\mathsf{types}} & {\mathit{functype}}^\ast, \\
   {\mathsf{funcaddrs}} & {\mathit{funcaddr}}^\ast, \\
@@ -151,46 +151,46 @@
 ## 関数インスタンス
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(function instance)} & {\mathit{funcinst}} &::=&
+{\mathit{funcinst}} &::=&
   \{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{code}}~{\mathit{func}} \} \\ &&|&
   \{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{hostcode}}~{\mathit{hostfunc}} \} \\
-\def\mathdef1260#1{{}}\mathdef1260{(host function)} & {\mathit{hostfunc}} &::=& \dots \\
+{\mathit{hostfunc}} &::=& \dots \\
 \end{array}\end{split}\]</div>
 
 ## テーブルインスタンス
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(table instance)} & {\mathit{tableinst}} &::=&
+{\mathit{tableinst}} &::=&
   \{ {\mathsf{elem}}~{\mathit{vec}}({\mathit{funcelem}}), {\mathsf{max}}~{\mathit{u32}}^? \} \\
-\def\mathdef1260#1{{}}\mathdef1260{(function element)} & {\mathit{funcelem}} &::=&
+{\mathit{funcelem}} &::=&
   {\mathit{funcaddr}}^? \\
 \end{array}\end{split}\]</div>
 
 ## メモリインスタンス
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(memory instance)} & {\mathit{meminst}} &::=&
+{\mathit{meminst}} &::=&
   \{ {\mathsf{data}}~{\mathit{vec}}({\mathit{byte}}), {\mathsf{max}}~{\mathit{u32}}^? \} \\
 \end{array}\end{split}\]</div>
 
 ## グローバルインスタンス
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(global instance)} & {\mathit{globalinst}} &::=&
+{\mathit{globalinst}} &::=&
   \{ {\mathsf{value}}~{\mathit{val}}, {\mathsf{mut}}~{\mathit{mut}} \} \\
 \end{array}\end{split}\]</div>
 
 ## Exportインスタンス
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(export instance)} & {\mathit{exportinst}} &::=&
+{\mathit{exportinst}} &::=&
   \{ {\mathsf{name}}~{\mathit{name}}, {\mathsf{value}}~{\mathit{externval}} \} \\
 \end{array}\end{split}\]</div>
 
 ## 外部値
 
 <div>\[\begin{split}\begin{array}{llcl}
-\def\mathdef1260#1{{}}\mathdef1260{(external value)} & {\mathit{externval}} &::=&
+{\mathit{externval}} &::=&
   {\mathsf{func}}~{\mathit{funcaddr}} \\&&|&
   {\mathsf{table}}~{\mathit{tableaddr}} \\&&|&
   {\mathsf{mem}}~{\mathit{memaddr}} \\&&|&
@@ -213,16 +213,16 @@
 ### スタック上のラベル
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(label)} & {\mathit{label}} &::=&
+{\mathit{label}} &::=&
   {\mathsf{label}}_n\{{\mathit{instr}}^\ast\} \\
 \end{array}\end{split}\]</div>
 
 ### アクティベーションフレーム
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(activation)} & \mathit{activation} &::=&
+\mathit{activation} &::=&
   {\mathsf{frame}}_n\{{\mathit{frame}}\} \\
-\def\mathdef1260#1{{}}\mathdef1260{(frame)} & {\mathit{frame}} &::=&
+{\mathit{frame}} &::=&
   \{ {\mathsf{locals}}~{\mathit{val}}^\ast, {\mathsf{module}}~{\mathit{moduleinst}} \} \\
 \end{array}\end{split}\]</div>
 
@@ -240,7 +240,7 @@
 ## 管理命令
 
 <div>\[\begin{split}\begin{array}{llcl}
-\def\mathdef1260#1{{}}\mathdef1260{(administrative instruction)} & {\mathit{instr}} &::=&
+{\mathit{instr}} &::=&
   \dots \\ &&|&
   {\mathsf{trap}} \\ &&|&
   {\mathsf{invoke}}~{\mathit{funcaddr}} \\ &&|&
@@ -253,18 +253,18 @@
 ### ブロックコンテキスト
 
 <div>\[\begin{split}\begin{array}{llll}
-\def\mathdef1260#1{{}}\mathdef1260{(block contexts)} & {B}^0 &::=&
+{B}^0 &::=&
   {\mathit{val}}^\ast~[\_]~{\mathit{instr}}^\ast \\
-\def\mathdef1260#1{{}}\mathdef1260{(block contexts)} & {B}^{k+1} &::=&
+{B}^{k+1} &::=&
   {\mathit{val}}^\ast~{\mathsf{label}}_n\{{\mathit{instr}}^\ast\}~{B}^k~{\mathsf{end}}~{\mathit{instr}}^\ast \\
 \end{array}\end{split}\]</div>
 
 ### 設定
 
 <div>\[\begin{split}\begin{array}{llcl}
-\def\mathdef1260#1{{}}\mathdef1260{(configuration)} & {\mathit{config}} &::=&
+{\mathit{config}} &::=&
   {\mathit{store}}; {\mathit{thread}} \\
-\def\mathdef1260#1{{}}\mathdef1260{(thread)} & {\mathit{thread}} &::=&
+{\mathit{thread}} &::=&
   {\mathit{frame}}; {\mathit{instr}}^\ast \\
 \end{array}\end{split}\]</div>
 
