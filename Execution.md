@@ -576,7 +576,6 @@ Exportの名前と関連する外部値を定義します。
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iadd}}_N(i_1, i_2) &amp;=&amp; (i_1 + i_2) \mathbin{\mathrm{mod}} 2^N
 \end{array}\]</div>
-</div>
 
 <h3><span>\({\mathrm{isub}}_N(i_1, i_2)\)</span></h3>
 <ul>
@@ -585,7 +584,6 @@ Exportの名前と関連する外部値を定義します。
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{isub}}_N(i_1, i_2) &amp;=&amp; (i_1 - i_2 + 2^N) \mathbin{\mathrm{mod}} 2^N
 \end{array}\]</div>
-</div>
 
 <h3><span>\({\mathrm{imul}}_N(i_1, i_2)\)</span></h3>
 <ul>
@@ -594,7 +592,6 @@ Exportの名前と関連する外部値を定義します。
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{imul}}_N(i_1, i_2) &amp;=&amp; (i_1 \cdot i_2) \mathbin{\mathrm{mod}} 2^N
 \end{array}\]</div>
-</div>
 
 <h3><span>\({\mathrm{idiv\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
