@@ -190,11 +190,10 @@
 ## 外部値
 
 <div>\[\begin{split}\begin{array}{llcl}
-{\mathit{externval}} &::=&
-  {\mathsf{func}}~{\mathit{funcaddr}} \\&&|&
-  {\mathsf{table}}~{\mathit{tableaddr}} \\&&|&
-  {\mathsf{mem}}~{\mathit{memaddr}} \\&&|&
-  {\mathsf{global}}~{\mathit{globaladdr}} \\
+{\mathit{externval}} &::=& {\mathsf{func}}~{\mathit{funcaddr}} \\
+&&|& {\mathsf{table}}~{\mathit{tableaddr}} \\
+&&|& {\mathsf{mem}}~{\mathit{memaddr}} \\
+&&|& {\mathsf{global}}~{\mathit{globaladdr}} \\
 \end{array}\end{split}\]</div>
 
 ### 表記上のお約束
@@ -212,16 +211,11 @@
 
 ### スタック上のラベル
 
-<div>\begin{split}\begin{array}{llll}
-{\mathit{label}} &::=& {\mathsf{label}}_n\{{\mathit{instr}}^\ast\} \\
-\end{array}\end{split}</div>
+![](Execution_0.png)
 
 ### アクティベーションフレーム
 
-<div>\begin{split}\begin{array}{llll}
-\mathit{activation} &::=& {\mathsf{frame}}_n\{{\mathit{frame}}\} \\
-{\mathit{frame}} &::=& \{ {\mathsf{locals}}~{\mathit{val}}^\ast, {\mathsf{module}}~{\mathit{moduleinst}} \} \\
-\end{array}\end{split}</div>
+![](Execution_1.png)
 
 ### 表記上のお約束
 
@@ -236,15 +230,7 @@
 
 ## 管理命令
 
-<div>\begin{split}\begin{array}{llcl}
-{\mathit{instr}} &::=& \dots \\
-  &&|& {\mathsf{trap}} \\
-  &&|& {\mathsf{invoke}}~{\mathit{funcaddr}} \\
-  &&|& {\mathsf{init\_elem}}~{\mathit{tableaddr}}~{\mathit{u32}}~{\mathit{funcidx}}^\ast \\
-  &&|& {\mathsf{init\_data}}~{\mathit{memaddr}}~{\mathit{u32}}~{\mathit{byte}}^\ast \\
-  &&|& {\mathsf{label}}_n\{{\mathit{instr}}^\ast\}~{\mathit{instr}}^\ast~{\mathsf{end}} \\
-  &&|& {\mathsf{frame}}_n\{{\mathit{frame}}\}~{\mathit{instr}}^\ast~{\mathsf{end}} \\
-\end{array}\end{split}</div>
+![](Execution_2.png)
 
 ### ブロックコンテキスト
 
@@ -262,14 +248,7 @@
 
 ### 評価コンテキスト
 
-<div>\begin{split}\begin{array}{rcl}
-S; F; E[{\mathit{instr}}^\ast] &{\hookrightarrow}& S'; F'; E[{{\mathit{instr}}'}^\ast] \\
-  && (\mathrel{\mbox{if}} S; F; {\mathit{instr}}^\ast {\hookrightarrow} S'; F'; {{\mathit{instr}}'}^\ast) \\
-S; F; {\mathsf{frame}}_n\{F'\}~{\mathit{instr}}^\ast~{\mathsf{end}} &{\hookrightarrow}& S'; F; {\mathsf{frame}}_n\{F''\}~{\mathit{instr}}'^\ast~{\mathsf{end}} \\
-  && (\mathrel{\mbox{if}} S; F'; {\mathit{instr}}^\ast {\hookrightarrow} S'; F''; {{\mathit{instr}}'}^\ast) \\
-  [1ex] S; F; E[{\mathsf{trap}}] &{\hookrightarrow}& S; F; {\mathsf{trap}} \qquad (\mathrel{\mbox{if}} E \neq [\_]) \\
-S; F; {\mathsf{frame}}_n\{F'\}~{\mathsf{trap}}~{\mathsf{end}} &{\hookrightarrow}& S; F; {\mathsf{trap}} \\
-\end{array}\end{split}</div>
+![](Execution_3.png)
 
 # 数値
 
