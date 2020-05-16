@@ -571,7 +571,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iadd}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で加算した結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
+  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>で加算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iadd}}_N(i_1, i_2) &amp;=&amp; (i_1 + i_2) \mathbin{\mathrm{mod}} 2^N
@@ -579,7 +579,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{isub}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で減算した結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
+  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>で減算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{isub}}_N(i_1, i_2) &amp;=&amp; (i_1 - i_2 + 2^N) \mathbin{\mathrm{mod}} 2^N
@@ -587,7 +587,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{imul}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で乗算した結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
+  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>で乗算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{imul}}_N(i_1, i_2) &amp;=&amp; (i_1 \cdot i_2) \mathbin{\mathrm{mod}} 2^N
@@ -595,8 +595,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{idiv\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_2\)</span>が0の時結果は未定義です。</p></li>
-  <li><p>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算し、0に向けて切り捨てた結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
+  <li><span>\(i_2\)</span>が0の時結果は未定義です。</li>
+  <li>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算し、0に向けて切り捨てた結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{idiv\_u}}_N(i_1, 0) &amp;=&amp; \{\} \\
@@ -611,11 +611,11 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{idiv\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p>もし<span>\(j_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</p></li>
-  <li><p>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果が<span>\(2^{N-1}\)</span>ならば、結果は未定義です。</p></li>
-  <li><p>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果を0に向けて切り捨てたものが結果となります。</p></li>
+  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li>もし<span>\(j_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</li>
+  <li>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果が<span>\(2^{N-1}\)</span>ならば、結果は未定義です。</li>
+  <li>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果を0に向けて切り捨てたものが結果となります。</li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{idiv\_s}}_N(i_1, 0) &amp;=&amp; \{\} \\
@@ -635,8 +635,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irem\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</p></li>
-  <li><p>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算した剰余を結果とします。</p></li>
+  <li><span>\(i_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</li>
+  <li>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算した剰余を結果とします。</li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{irem\_u}}_N(i_1, 0) &amp;=&amp; \{\} \\
@@ -651,10 +651,10 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irem\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p>もし<span>\(j_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</p></li>
-  <li><p>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した剰余に<span>\(j_1\)</span>の符号を付加したものを結果とします。</p></li>
+  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li>もし<span>\(j_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</li>
+  <li>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した剰余に<span>\(j_1\)</span>の符号を付加したものを結果とします。</li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{irem\_s}}_N(i_1, 0) &amp;=&amp; \{\} \\
@@ -670,7 +670,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iand}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のand演算を行います。</p></li>
+  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のand演算を行います。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iand}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}({\mathrm{ibits}}_N(i_1) \wedge {\mathrm{ibits}}_N(i_2))
@@ -678,7 +678,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ior}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のor演算を行います。</p></li>
+  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のor演算を行います。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ior}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}({\mathrm{ibits}}_N(i_1) \vee {\mathrm{ibits}}_N(i_2))
@@ -686,7 +686,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ixor}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のxor演算を行います。</p></li>
+  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のxor演算を行います。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ixor}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}({\mathrm{ibits}}_N(i_1) \veebar {\mathrm{ibits}}_N(i_2))
@@ -694,8 +694,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ishl}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
-  <li><p><span>\(i_1\)</span>に対して<span>\(k\)</span>ビット左にシフトします。modulo <span>\(2^N\)</span></p></li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(i_1\)</span>に対して<span>\(k\)</span>ビット左にシフトします。modulo <span>\(2^N\)</span></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ishl}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_2^{N-k}~0^k)
@@ -704,8 +704,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ishr\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
-  <li><p><span>\(i_1\)</span>に対して右に<span>\(k\)</span>ビット論理シフトします。</p></li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(i_1\)</span>に対して右に<span>\(k\)</span>ビット論理シフトします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ishr\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(0^k~d_1^{N-k})
@@ -714,8 +714,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ishr\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
-  <li><p><span>\(i_1\)</span>に対して右に<span>\(k\)</span>ビット算術シフトします。</p></li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(i_1\)</span>に対して右に<span>\(k\)</span>ビット算術シフトします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ishr\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_0^{k+1}~d_1^{N-k-1})
@@ -724,8 +724,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irotl}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
-  <li><p><span>\(i_1\)</span>を左に<span>\(k\)</span>ビット回します。</p></li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(i_1\)</span>を左に<span>\(k\)</span>ビット回します。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{irotl}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_2^{N-k}~d_1^k)
@@ -734,8 +734,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irotr}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</p></li>
-  <li><p><span>\(i_1\)</span>を右に<span>\(k\)</span>ビット回します。</p></li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(i_1\)</span>を右に<span>\(k\)</span>ビット回します。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{irotr}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_2^k~d_1^{N-k})
@@ -744,7 +744,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iclz}}_N(i)\)</span></h3>
 <ul>
-  <li><p><span>\(i\)</span>の先行する0bitを数えます。<span>\(i\)</span>が<span>\(0\)</span>ならばすべて0であると見なします。</p></li>
+  <li><span>\(i\)</span>の先行する0bitを数えます。<span>\(i\)</span>が<span>\(0\)</span>ならばすべて0であると見なします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iclz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = 0^k~(1~d^\ast)^?)
@@ -752,7 +752,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ictz}}_N(i)\)</span></h3>
 <ul>
-  <li><p><span>\(i\)</span>の後継する0bitを数えます; <span>\(i\)</span>が<span>\(0\)</span>ならばすべて0であると見なします。</p></li>
+  <li><span>\(i\)</span>の後継する0bitを数えます; <span>\(i\)</span>が<span>\(0\)</span>ならばすべて0であると見なします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ictz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = (d^\ast~1)^?~0^k)
@@ -760,7 +760,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ipopcnt}}_N(i)\)</span></h3>
 <ul>
-  <li><p><span>\(i\)</span>の0でないbitを数えます。</p></li>
+  <li><span>\(i\)</span>の0でないbitを数えます。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ipopcnt}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = (0^\ast~1)^k~0^\ast)
@@ -776,7 +776,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ieq}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば1を、そうでないならば0を戻り値とします。</p></li>
+  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば1を、そうでないならば0を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ieq}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 = i_2)
@@ -784,7 +784,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ine}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば0を、そうでないならば1を戻り値とします。</p></li>
+  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば0を、そうでないならば1を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ine}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 \neq i_2)
@@ -792,7 +792,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ilt\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</p></li>
+  <li><span>\(i_1\)</span>が<span>\(i_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ilt\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 &lt; i_2)
@@ -800,9 +800,9 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ilt\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</p></li>
+  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_1\)</span>が<span>\(j_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ilt\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) &lt; {\mathrm{signed}}_N(i_2))
@@ -810,7 +810,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{igt\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-    <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</p></li>
+    <li><span>\(i_1\)</span>が<span>\(i_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{igt\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 &gt; i_2)
@@ -818,9 +818,9 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{igt\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</p></li>
+  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_1\)</span>が<span>\(j_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{igt\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) &gt; {\mathrm{signed}}_N(i_2))
@@ -828,7 +828,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ile\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</p></li>
+  <li><span>\(i_1\)</span>が<span>\(i_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ile\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 \leq i_2)
@@ -836,9 +836,9 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ile\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</p></li>
+  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_1\)</span>が<span>\(j_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ile\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) \leq {\mathrm{signed}}_N(i_2))
@@ -846,7 +846,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ige\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</p></li>
+  <li><span>\(i_1\)</span>が<span>\(i_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ige\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 \geq i_2)
@@ -854,9 +854,9 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ige\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
-  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</p></li>
+  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
+  <li><span>\(j_1\)</span>が<span>\(j_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ige\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) \geq {\mathrm{signed}}_N(i_2))
@@ -864,7 +864,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iextend}M\mathrm{\_s}}_N(i)\)</span></h3>
 <ul>
-  <li><p><a href="#extend_m_n">\({\mathrm{extend}^{\mathsf{s}}}_{M,N}(i)\)</a>を計算します</p></li>
+  <li><a href="#extend_m_n">\({\mathrm{extend}^{\mathsf{s}}}_{M,N}(i)\)</a>を計算します</li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{iextend}M\mathrm{\_s}}_{N}(i) &amp;=&amp; {\mathrm{extend}^{\mathsf{s}}}_{M,N}(i) \\
