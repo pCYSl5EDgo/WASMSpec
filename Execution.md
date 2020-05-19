@@ -1397,7 +1397,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{extend}^{\mathsf{s}}}_{M,N}(i)\)</span></h3>
 <ul>
-  <li>Let <span>\(j\)</span> be the <a class="reference internal" href="#aux-signed"><span class="std std-ref">signed interpretation</span></a> of i of size <span>\(M\)</span></li>
+  <li>Let <span>\(j\)</span> be the signed interpretation of i of size <span>\(M\)</span></li>
   <li>Return the two’s complement of <span>\(j\)</span> relative to size N</li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
@@ -1501,7 +1501,7 @@ Nanに対して定義されていません。
 <ul>
   <li>zがcanonical Nanであるならば、<span>\({\mathrm{nans}}_N\{\}\)</span> (例：サイズNのcanonical Nan)の要素を戻り値とします。</li>
   <li>あるいはzがNaNであるならば、<span>\({\mathrm{nans}}_N\{\pm {\mathsf{nan}}(1)\}\)</span> (例：サイズNのarithmetic Nan)の要素を戻り値とします。</li>
-  <li>Else, return z</li>
+  <li>zを戻り値とします。</li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{promote}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\} &amp; (\mathrel{\mbox{if}} n = {\mathrm{canon}}_N) \\
@@ -1553,9 +1553,179 @@ Nanに対して定義されていません。
 
 # 命令
 
+`WebAssembly`の計算は個々の命令を実行することで行われます。
+
 ## 算術演算命令
 
+数値命令は一般的な数値演算子の観点から定義されます。
+数値命令とその基礎となる演算子との対応付けは以下の定義で表されます。
+
+<div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+\mathit{op}_{\mathsf{i}N}(n_1,\dots,n_k) &=& \mathrm{i}\mathit{op}_N(n_1,\dots,n_k) \\
+\mathit{op}_{\mathsf{f}N}(z_1,\dots,z_k) &=& \mathrm{f}\mathit{op}_N(z_1,\dots,z_k) \\
+\end{array}\end{split}\]</div>
+
+また、変換演算子については
+
+<div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+\mathit{cvtop}^{{\mathit{sx}}^?}_{t_1,t_2}(c) &=& \mathit{cvtop}^{{\mathit{sx}}^?}_{|t_1|,|t_2|}(c) \\
+\end{array}\end{split}\]</div>
+
+基礎となる演算子が部分的である場合、対応する命令は結果が定義されていない場合にトラップします。
+
+基礎となる演算子が非決定論的である場合、複数の可能なNaN値のうちの1つを返す可能性があるため、対応する命令も同様です。
+
+### 付記
+
+<div>例えば、オペランド<span>\(i_1, i_2\)</span>に適用された命令<span>\({\mathsf{i32}}.{\mathsf{add}}\)</span>の結果は<span>\({\mathsf{add}}_{{\mathsf{i32}}}(i_1, i_2)\)</span>を呼び出します。
+これは上記の定義を介してジェネリックな<span>\({\mathrm{iadd}}_{32}(i_1, i_2)\)</span>にマップされます。
+同様に、zに適用された<span>\({\mathsf{i64}}.{\mathsf{trunc}}\mathsf{\_}{\mathsf{f32}}\mathsf{\_s}\)</span>は、<span>\({\mathsf{trunc}}^{\mathsf{s}}_{{\mathsf{f32}},{\mathsf{i64}}}(z)\)</span>を呼び出します。
+これはジェネリックな<span>\({\mathrm{trunc}^{\mathsf{s}}}_{32,64}(z)\)</span>にマップされます。
+</div>
+
+---
+
+<h3><span>\(t\mathsf{.}{\mathsf{const}}~c\)</span></h3>
+<ol>
+  <li><span>\(t.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+</ol>
+
+### 付記
+
+`const`命令は値と一致するので、この命令には正式な還元規則は必要ありません。
+
+---
+
+<h3><span>\(t\mathsf{.}{\mathit{unop}}\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの一番上に存在するはずです。</li>
+  <li>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</li>
+  <li>もし<span>\({\mathit{unop}}_t(c_1)\)</span>が定義されているならば:
+    <ol>
+      <li>cが<span>\({\mathit{unop}}_t(c_1)\)</span>の計算結果として算出可能であるとします。</li>
+      <li><span>\(t.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+    </ol>
+  </li>
+  <li>そうでないならば:
+    <ol>
+      <li>トラップします。</li>
+    </ol>
+  </li>
+</ol>
+<div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+(t\mathsf{.}{\mathsf{const}}~c_1)~t\mathsf{.}{\mathit{unop}} &amp;{\hookrightarrow}&amp; (t\mathsf{.}{\mathsf{const}}~c)
+  &amp; (\mathrel{\mbox{if}} c \in {\mathit{unop}}_t(c_1)) \\
+(t\mathsf{.}{\mathsf{const}}~c_1)~t\mathsf{.}{\mathit{unop}} &amp;{\hookrightarrow}&amp; {\mathsf{trap}}
+  &amp; (\mathrel{\mbox{if}} {\mathit{unop}}_{t}(c_1) = \{\})
+\end{array}\end{split}\]</div>
+
+<h3><span>\(t\mathsf{.}{\mathit{binop}}\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの上に2つ連続して存在するはずです。</li>
+  <li>スタックから<span>\(t.{\mathsf{const}}~c_2\)</span>をpopします。</li>
+  <li>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</li>
+  <li>もし<span>\({\mathit{binop}}_t(c_1, c_2)\)</span>が定義されているならば:
+    <ol>
+      <li>cが<span>\({\mathit{binop}}_t(c_1, c_2)\)</span>の計算結果として算出可能であるとします。</li>
+      <li><span>\(t.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+    </ol>
+  </li>
+  <li>そうでないならば:
+    <ol>
+      <li>トラップします。</li>
+    </ol>
+  </li>
+</ol>
+<div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+(t\mathsf{.}{\mathsf{const}}~c_1)~(t\mathsf{.}{\mathsf{const}}~c_2)~t\mathsf{.}{\mathit{binop}} &amp;{\hookrightarrow}&amp; (t\mathsf{.}{\mathsf{const}}~c)
+  &amp; (\mathrel{\mbox{if}} c \in {\mathit{binop}}_t(c_1,c_2)) \\
+(t\mathsf{.}{\mathsf{const}}~c_1)~(t\mathsf{.}{\mathsf{const}}~c_2)~t\mathsf{.}{\mathit{binop}} &amp;{\hookrightarrow}&amp; {\mathsf{trap}}
+  &amp; (\mathrel{\mbox{if}} {\mathit{binop}}_{t}(c_1,c2) = \{\})
+\end{array}\end{split}\]</div>
+
+<h3><span>\(t\mathsf{.}{\mathit{testop}}\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの一番上に存在するはずです。</li>
+  <li>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</li>
+  <li>cが<span>\({\mathit{testop}}_t(c_1)\)</span>の計算結果であるとします。</li>
+  <li><span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+</ol>
+<div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+(t\mathsf{.}{\mathsf{const}}~c_1)~t\mathsf{.}{\mathit{testop}} &amp;{\hookrightarrow}&amp; ({\mathsf{i32}}\mathsf{.}{\mathsf{const}}~c)
+  &amp; (\mathrel{\mbox{if}} c = {\mathit{testop}}_t(c_1)) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\(t\mathsf{.}{\mathit{relop}}\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの上に2つ連続して存在するはずです。</li>
+  <li>スタックから<span>\(t.{\mathsf{const}}~c_2\)</span>をpopします。</li>
+  <li>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</li>
+  <li>cが<span>\({\mathit{relop}}_t(c_1, c_2)\)</span>の計算結果であるとします。</li>
+  <li><span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+</ol>
+<div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+(t\mathsf{.}{\mathsf{const}}~c_1)~(t\mathsf{.}{\mathsf{const}}~c_2)~t\mathsf{.}{\mathit{relop}} &amp;{\hookrightarrow}&amp; ({\mathsf{i32}}\mathsf{.}{\mathsf{const}}~c)
+  &amp; (\mathrel{\mbox{if}} c = {\mathit{relop}}_t(c_1,c_2)) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\(t_2\mathsf{.}{\mathit{cvtop}}\mathsf{\_}t_1\mathsf{\_}{\mathit{sx}}^?\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\(t_1\)</span>の値がスタックの上に2つ連続して存在するはずです。</li>
+  <li>スタックから<span>\(t_1.{\mathsf{const}}~c_1\)</span>をpopします。</li>
+  <li>もし<span>\({\mathit{cvtop}}^{{\mathit{sx}}^?}_{t_1,t_2}(c_1)\)</span>が定義されているならば:
+    <ol>
+      <li><span>\(c_2\)</span>が<span>\({\mathit{cvtop}}^{{\mathit{sx}}^?}_{t_1,t_2}(c_1)\)</span>の計算結果であるとします。</li>
+      <li><span>\(t_2.{\mathsf{const}}~c_2\)</span>をスタックにpushします。</li>
+    </ol>
+  </li>
+  <li>そうでないならば:
+    <ol>
+      <li>トラップします。</li>
+    </ol>
+  </li>
+</ol>
+<div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+(t_1\mathsf{.}{\mathsf{const}}~c_1)~t_2\mathsf{.}{\mathit{cvtop}}\mathsf{\_}t_1\mathsf{\_}{\mathit{sx}}^? &amp;{\hookrightarrow}&amp; (t_2\mathsf{.}{\mathsf{const}}~c_2)
+  &amp; (\mathrel{\mbox{if}} c_2 \in {\mathit{cvtop}}^{{\mathit{sx}}^?}_{t_1,t_2}(c_1)) \\
+(t_1\mathsf{.}{\mathsf{const}}~c_1)~t_2\mathsf{.}{\mathit{cvtop}}\mathsf{\_}t_1\mathsf{\_}{\mathit{sx}}^? &amp;{\hookrightarrow}&amp; {\mathsf{trap}}
+  &amp; (\mathrel{\mbox{if}} {\mathit{cvtop}}^{{\mathit{sx}}^?}_{t_1,t_2}(c_1) = \{\})
+\end{array}\end{split}\]</div>
+
 ## パラメトリック命令
+
+<h3><span>\({\mathsf{drop}}\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</li>
+  <li>スタックから<span>\({\mathit{val}}\)</span>をpopします。</li>
+</ol>
+<div>\[\begin{array}{lcl&#64;{\qquad}l}
+{\mathit{val}}~~{\mathsf{drop}} &amp;{\hookrightarrow}&amp; \epsilon
+\end{array}\]</div>
+
+<h3><span>\({\mathsf{select}}\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値がスタックの上に1つ存在するはずです。</li>
+  <li>スタックから<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、同じ型の値がスタックの上に2つ以上存在するはずです。</li>
+  <li>スタックから<span>\({\mathit{val}}_2\)</span>をpopします。</li>
+  <li>スタックから<span>\({\mathit{val}}_1\)</span>をpopします。</li>
+  <li>cが0でないならば:
+    <ol>
+      <li><span>\({\mathit{val}}_1\)</span>をスタックにpushしなおします。</li>
+    </ol>
+  </li>
+  <li>そうでないならば、:
+    <ol>
+      <li><span>\({\mathit{val}}_2\)</span>をスタックにpushしなおします。</li>
+    </ol>
+  </li>
+</ol>
+<div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+{\mathit{val}}_1~{\mathit{val}}_2~({\mathsf{i32}}\mathsf{.}{\mathsf{const}}~c)~{\mathsf{select}} &amp;{\hookrightarrow}&amp; {\mathit{val}}_1
+  &amp; (\mathrel{\mbox{if}} c \neq 0) \\
+{\mathit{val}}_1~{\mathit{val}}_2~({\mathsf{i32}}\mathsf{.}{\mathsf{const}}~c)~{\mathsf{select}} &amp;{\hookrightarrow}&amp; {\mathit{val}}_2
+  &amp; (\mathrel{\mbox{if}} c = 0) \\
+\end{array}\end{split}\]</div>
 
 ## 変数命令
 
