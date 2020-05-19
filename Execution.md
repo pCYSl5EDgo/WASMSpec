@@ -1729,7 +1729,103 @@ Nanに対して定義されていません。
 
 ## 変数命令
 
+<h3><span>\({\mathsf{local.get}}~x\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{locals}}[x]\)</span>は存在します。</li>
+  <li><span>\({\mathit{val}}\)</span>が値<span>\(F.{\mathsf{locals}}[x]\)</span>であるとします。</li>
+  <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
+</ol>
+<div>
+\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+F; ({\mathsf{local.get}}~x) &amp;{\hookrightarrow}&amp; F; {\mathit{val}}
+  &amp; (\mathrel{\mbox{if}} F.{\mathsf{locals}}[x] = {\mathit{val}}) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{local.set}}~x\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{locals}}[x]\)</span>は存在します。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</li>
+  <li><span>\({\mathit{val}}\)</span>をスタックからpopします。</li>
+  <li><span>\(F.{\mathsf{locals}}[x]\)</span>を<span>\({\mathit{val}}\)</span>で置換します。</li>
+</ol>
+<div>
+\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+F; {\mathit{val}}~({\mathsf{local.set}}~x) &amp;{\hookrightarrow}&amp; F'; \epsilon
+  &amp; (\mathrel{\mbox{if}} F' = F {\mathrel{\mbox{with}}} {\mathsf{locals}}[x] = {\mathit{val}}) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{local.tee}}~x\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</li>
+  <li><span>\({\mathit{val}}\)</span>をスタックからpopします。</li>
+  <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
+  <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
+  <li>命令<span>\(({\mathsf{local.set}}~x)\)</span>を実行します。</li>
+</ol>
+<div>
+\[\begin{array}{lcl&#64;{\qquad}l}
+{\mathit{val}}~({\mathsf{local.tee}}~x) &amp;{\hookrightarrow}&amp; {\mathit{val}}~{\mathit{val}}~({\mathsf{local.set}}~x)
+\end{array}\]</div>
+
+<h3><span>\({\mathsf{global.get}}~x\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>は存在します。</li>
+  <li>aがグローバルアドレス<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{globals}}[a]\)</span>は存在します。</li>
+  <li><span>\(\mathit{glob}\)</span>がグローバルインスタンス<span>\(S.{\mathsf{globals}}[a]\)</span>であるとします。</li>
+  <li><span>\({\mathit{val}}\)</span>が値<span>\(\mathit{glob}.{\mathsf{value}}\)</span>であるとします。</li>
+  <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
+</ol>
+<div>
+\[\begin{split}\begin{array}{l}
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{global.get}}~x) &amp;{\hookrightarrow}&amp; S; F; {\mathit{val}}
+\end{array}
+\\ \qquad
+  (\mathrel{\mbox{if}} S.{\mathsf{globals}}[F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]].{\mathsf{value}} = {\mathit{val}}) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{global.set}}~x\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>は存在します。</li>
+  <li>aがグローバルアドレス<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{globals}}[a]\)</span>は存在します。</li>
+  <li><span>\(\mathit{glob}\)</span>がグローバルインスタンス<span>\(S.{\mathsf{globals}}[a]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</li>
+  <li><span>\({\mathit{val}}\)</span>をスタックからpopします。</li>
+  <li><span>\(\mathit{glob}.{\mathsf{value}}\)</span>を<span>\({\mathit{val}}\)</span>で置換します。</li>
+</ol>
+<div>
+\[\begin{split}\begin{array}{l}
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; {\mathit{val}}~({\mathsf{global.set}}~x) &amp;{\hookrightarrow}&amp; S'; F; \epsilon
+\end{array}
+\\ \qquad
+(\mathrel{\mbox{if}} S' = S {\mathrel{\mbox{with}}} {\mathsf{globals}}[F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]].{\mathsf{value}} = {\mathit{val}}) \\
+\end{array}\end{split}\]</div>
+
+### 付記
+
+バリデーション/検証によりグローバルがmutableであると保証されます。
+
 ## メモリ命令
+
+### 付記
+
+<div>
+ロード命令とストア命令でのアラインメント<span>\({\mathit{memarg}}.{\mathsf{align}}\)</span>はセマンティクスに影響を与えません。
+
+これは、メモリがアクセスされるオフセット<span>\(\mathit{ea}\)</span>がプロパティ<span>\(\mathit{ea} \mathbin{\mathrm{mod}} 2^{{\mathit{memarg}}.{\mathsf{align}}} = 0\)</span>を満たすように意図されていることを示しています。
+
+`WebAssembly`の実装は、このヒントを使用して意図された使用のために最適化することができます。
+
+このプロパティに違反するアラインメントされていないアクセスは、アノテーションに関係なく許可されており、成功しなければなりません。
+しかし、ハードウェアによってはかなり遅くなるかもしれません。
+</div>
 
 ## 制御命令
 
