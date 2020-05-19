@@ -694,7 +694,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ishl}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo Nであるとします。</li>
   <li><span>\(i_1\)</span>に対して<span>\(k\)</span>ビット左にシフトします。modulo <span>\(2^N\)</span></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
@@ -704,7 +704,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ishr\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo Nであるとします。</li>
   <li><span>\(i_1\)</span>に対して右に<span>\(k\)</span>ビット論理シフトします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
@@ -714,7 +714,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ishr\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo Nであるとします。</li>
   <li><span>\(i_1\)</span>に対して右に<span>\(k\)</span>ビット算術シフトします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
@@ -724,7 +724,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irotl}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo Nであるとします。</li>
   <li><span>\(i_1\)</span>を左に<span>\(k\)</span>ビット回します。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
@@ -734,7 +734,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irotr}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo <span>\(N\)</span>であるとします。</li>
+  <li><span>\(k\)</span>が<span>\(i_2\)</span> modulo Nであるとします。</li>
   <li><span>\(i_1\)</span>を右に<span>\(k\)</span>ビット回します。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
@@ -744,7 +744,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iclz}}_N(i)\)</span></h3>
 <ul>
-  <li><span>\(i\)</span>の先行する0bitを数えます。<span>\(i\)</span>が0ならばすべて0であると見なします。</li>
+  <li>iの先行する0bitを数えます。iが0ならばすべて0であると見なします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iclz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = 0^k~(1~d^\ast)^?)
@@ -752,7 +752,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ictz}}_N(i)\)</span></h3>
 <ul>
-  <li><span>\(i\)</span>の後継する0bitを数えます; <span>\(i\)</span>が0ならばすべて0であると見なします。</li>
+  <li>iの後継する0bitを数えます; iが0ならばすべて0であると見なします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ictz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = (d^\ast~1)^?~0^k)
@@ -760,7 +760,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ipopcnt}}_N(i)\)</span></h3>
 <ul>
-  <li><span>\(i\)</span>の0でないbitを数えます。</li>
+  <li>iの0でないbitを数えます。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ipopcnt}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = (0^\ast~1)^k~0^\ast)
@@ -1380,6 +1380,176 @@ Exportの名前と関連する外部値を定義します。
 \end{array}\end{split}\]</div>
 
 ## 変換
+
+<h3><span>\({\mathrm{extend}^{\mathsf{u}}}_{M,N}(i)\)</span></h3>
+<ul>
+  <li>iを戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{extend}^{\mathsf{u}}}_{M,N}(i) &amp;=&amp; i \\
+\end{array}\end{split}\]</div>
+
+### 付記
+
+抽象構文では、符号なし拡張は同じ値を再解釈するだけです。
+
+---
+
+<h3><span>\({\mathrm{extend}^{\mathsf{s}}}_{M,N}(i)\)</span></h3>
+<ul>
+  <li>Let <span>\(j\)</span> be the <a class="reference internal" href="#aux-signed"><span class="std std-ref">signed interpretation</span></a> of i of size <span>\(M\)</span></li>
+  <li>Return the two’s complement of <span>\(j\)</span> relative to size N</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{extend}^{\mathsf{s}}}_{M,N}(i) &amp;=&amp; {\mathrm{signed}}_N^{-1}({\mathrm{signed}}_M(i)) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{wrap}}_{M,N}(i)\)</span></h3>
+<ul>
+  <li>iを<span>\(2^N\)</span>で割った剰余を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{wrap}}_{M,N}(i) &amp;=&amp; i \mathbin{\mathrm{mod}} 2^N \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{trunc}^{\mathsf{u}}}_{M,N}(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNであるならば、戻り値は未定義です。</li>
+  <li>あるいはzがinfinityであるならば、戻り値は未定義です。</li>
+  <li>あるいはzが数値であり、<span>\({\mathrm{trunc}}(z)\)</span>が対象の型の値の範囲内に存在するならばその値を戻り値とします。</li>
+  <li>そうでないならば、戻り値は未定義です。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{trunc}^{\mathsf{u}}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; \{\} \\
+{\mathrm{trunc}^{\mathsf{u}}}_{M,N}(\pm \infty) &amp;=&amp; \{\} \\
+{\mathrm{trunc}^{\mathsf{u}}}_{M,N}(\pm q) &amp;=&amp; {\mathrm{trunc}}(\pm q) &amp; (\mathrel{\mbox{if}} -1 &lt; {\mathrm{trunc}}(\pm q) &lt; 2^N) \\
+{\mathrm{trunc}^{\mathsf{u}}}_{M,N}(\pm q) &amp;=&amp; \{\} &amp; (\mathrel{\mbox{otherwise}}) \\
+\end{array}\end{split}\]</div>
+
+### 付記
+
+この命令はpartialです。
+Nanに対して定義されていません。
+
+---
+
+<h3><span>\({\mathrm{trunc}^{\mathsf{s}}}_{M,N}(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNであるならば、戻り値は未定義です。</li>
+  <li>あるいはzがinfinityであるならば、戻り値は未定義です。</li>
+  <li>あるいはzが数値であり、<span>\({\mathrm{trunc}}(z)\)</span>が対象の型の値の範囲内に存在するならばその値を戻り値とします。</li>
+  <li>そうでないならば、戻り値は未定義です。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{trunc}^{\mathsf{s}}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; \{\} \\
+{\mathrm{trunc}^{\mathsf{s}}}_{M,N}(\pm \infty) &amp;=&amp; \{\} \\
+{\mathrm{trunc}^{\mathsf{s}}}_{M,N}(\pm q) &amp;=&amp; {\mathrm{trunc}}(\pm q) &amp; (\mathrel{\mbox{if}} -2^{N-1} - 1 &lt; {\mathrm{trunc}}(\pm q) &lt; 2^{N-1}) \\
+{\mathrm{trunc}^{\mathsf{s}}}_{M,N}(\pm q) &amp;=&amp; \{\} &amp; (\mathrel{\mbox{otherwise}}) \\
+\end{array}\end{split}\]</div>
+
+### 付記
+
+この命令はpartialです。
+Nanに対して定義されていません。
+
+---
+
+<h3><span>\({\mathrm{trunc\_sat\_u}}_{M,N}(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNであるならば、0を戻り値とします。</li>
+  <li>あるいはzが負のinfinityであるならば、0を戻り値とします。</li>
+  <li>あるいはzが正のinfinityであるならば、<span>\(2^N - 1\)</span>を戻り値とします。</li>
+  <li>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が0未満ならば、0を戻り値とします。</li>
+  <li>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が<span>\(2^N - 1\)</span>より大きいならば、<span>\(2^N - 1\)</span>を戻り値とします。</li>
+  <li><span>\({\mathrm{trunc}}(z)\)</span>を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{trunc\_sat\_u}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; 0 \\
+{\mathrm{trunc\_sat\_u}}_{M,N}(- \infty) &amp;=&amp; 0 \\
+{\mathrm{trunc\_sat\_u}}_{M,N}(+ \infty) &amp;=&amp; 2^N - 1 \\
+{\mathrm{trunc\_sat\_u}}_{M,N}(- q) &amp;=&amp; 0 &amp; (\mathrel{\mbox{if}} {\mathrm{trunc}}(- q) &lt; 0) \\
+{\mathrm{trunc\_sat\_u}}_{M,N}(+ q) &amp;=&amp; 2^N - 1 &amp; (\mathrel{\mbox{if}} {\mathrm{trunc}}(+ q) &gt; 2^N - 1) \\
+{\mathrm{trunc\_sat\_u}}_{M,N}(\pm q) &amp;=&amp; {\mathrm{trunc}}(\pm q) &amp; (otherwise) \\
+\end{array}\end{split}\]</div>
+
+### 付記
+
+この命令はpartialです。
+Nanに対して定義されていません。
+
+---
+
+<h3><span>\({\mathrm{trunc\_sat\_s}}_{M,N}(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNであるならば、0を戻り値とします。</li>
+  <li>あるいはzが負のinfinityであるならば、<span>\(-2^{N-1}\)</span>を戻り値とします。</li>
+  <li>あるいはzが正のinfinityであるならば、<span>\(2^{N-1} - 1\)</span>を戻り値とします。</li>
+  <li>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が<span>\(-2^{N-1}\)</span>未満ならば、<span>\(-2^{N-1}\)</span>を戻り値とします。</li>
+  <li>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が<span>\(2^{N-1} - 1\)</span>より大きいならば、<span>\(2^{N-1} - 1\)</span>を戻り値とします。</li>
+  <li><span>\({\mathrm{trunc}}(z)\)</span>を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{trunc\_sat\_s}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; 0 \\
+{\mathrm{trunc\_sat\_s}}_{M,N}(- \infty) &amp;=&amp; -2^{N-1} \\
+{\mathrm{trunc\_sat\_s}}_{M,N}(+ \infty) &amp;=&amp; 2^{N-1}-1 \\
+{\mathrm{trunc\_sat\_s}}_{M,N}(- q) &amp;=&amp; -2^{N-1} &amp; (\mathrel{\mbox{if}} {\mathrm{trunc}}(- q) &lt; -2^{N-1}) \\
+{\mathrm{trunc\_sat\_s}}_{M,N}(+ q) &amp;=&amp; 2^{N-1} - 1 &amp; (\mathrel{\mbox{if}} {\mathrm{trunc}}(+ q) &gt; 2^{N-1} - 1) \\
+{\mathrm{trunc\_sat\_s}}_{M,N}(\pm q) &amp;=&amp; {\mathrm{trunc}}(\pm q) &amp; (otherwise) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{promote}}_{M,N}(z)\)</span></h3>
+<ul>
+  <li>zがcanonical Nanであるならば、<span>\({\mathrm{nans}}_N\{\}\)</span> (例：サイズNのcanonical Nan)の要素を戻り値とします。</li>
+  <li>あるいはzがNaNであるならば、<span>\({\mathrm{nans}}_N\{\pm {\mathsf{nan}}(1)\}\)</span> (例：サイズNのarithmetic Nan)の要素を戻り値とします。</li>
+  <li>Else, return z</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{promote}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\} &amp; (\mathrel{\mbox{if}} n = {\mathrm{canon}}_N) \\
+{\mathrm{promote}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{+ {\mathsf{nan}}(1)\} &amp; (\mathrel{\mbox{otherwise}}) \\
+{\mathrm{promote}}_{M,N}(z) &amp;=&amp; z \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{demote}}_{M,N}(z)\)</span></h3>
+<ul>
+  <li>zがcanonical Nanであるならば、<span>\({\mathrm{nans}}_N\{\}\)</span> (例：サイズNのcanonical Nan)の要素を戻り値とします。</li>
+  <li>あるいはzがNaNであるならば、<span>\({\mathrm{nans}}_N\{\pm {\mathsf{nan}}(1)\}\)</span> (例：サイズNのNan)の要素を戻り値とします。</li>
+  <li>あるいはzがinfinityであるならば、そのinfinityを戻り値とします。</li>
+  <li>あるいはzが0であるならば、その0を戻り値とします。</li>
+  <li><span>\({\mathrm{float}}_N(z)\)</span>を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{demote}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\} &amp; (\mathrel{\mbox{if}} n = {\mathrm{canon}}_N) \\
+{\mathrm{demote}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{+ {\mathsf{nan}}(1)\} &amp; (\mathrel{\mbox{otherwise}}) \\
+{\mathrm{demote}}_{M,N}(\pm \infty) &amp;=&amp; \pm \infty \\
+{\mathrm{demote}}_{M,N}(\pm 0) &amp;=&amp; \pm 0 \\
+{\mathrm{demote}}_{M,N}(\pm q) &amp;=&amp; {\mathrm{float}}_N(\pm q) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{convert}^{\mathsf{u}}}_{M,N}(i)\)</span></h3>
+<ul>
+  <li><span>\({\mathrm{float}}_N(i)\)</span>を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{convert}^{\mathsf{u}}}_{M,N}(i) &amp;=&amp; {\mathrm{float}}_N(i) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{convert}^{\mathsf{s}}}_{M,N}(i)\)</span></h3>
+<ul>
+  <li><span>\(j\)</span>iのsigned interpretationであるとします。</li>
+  <li><span>\({\mathrm{float}}_N(j)\)</span>を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{convert}^{\mathsf{u}}}_{M,N}(i) &amp;=&amp; {\mathrm{float}}_N({\mathrm{signed}}_M(i)) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{reinterpret}}_{t_1,t_2}(c)\)</span></h3>
+<ul>
+  <li><span>\(d^\ast\)</span>がビット列<span>\({\mathrm{bits}}_{t_1}(c)\)</span>であるとします。</li>
+  <li><span>\({\mathrm{bits}}_{t_2}(c') = d^\ast\)</span>となる定数<span>\(c'\)</span>を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{reinterpret}}_{t_1,t_2}(c) &amp;=&amp; {\mathrm{bits}}_{t_2}^{-1}({\mathrm{bits}}_{t_1}(c)) \\
+\end{array}\end{split}\]</div>
 
 # 命令
 
