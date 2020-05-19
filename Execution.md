@@ -613,7 +613,7 @@ Exportの名前と関連する外部値を定義します。
 <ul>
   <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
   <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li>もし<span>\(j_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</li>
+  <li>もし<span>\(j_2\)</span>が0ならば、結果は未定義です。</li>
   <li>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果が<span>\(2^{N-1}\)</span>ならば、結果は未定義です。</li>
   <li>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果を0に向けて切り捨てたものが結果となります。</li>
 </ul>
@@ -635,7 +635,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irem\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</li>
+  <li><span>\(i_2\)</span>が0ならば、結果は未定義です。</li>
   <li>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算した剰余を結果とします。</li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
@@ -653,7 +653,7 @@ Exportの名前と関連する外部値を定義します。
 <ul>
   <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
   <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li>もし<span>\(j_2\)</span>が<span>\(0\)</span>ならば、結果は未定義です。</li>
+  <li>もし<span>\(j_2\)</span>が0ならば、結果は未定義です。</li>
   <li>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した剰余に<span>\(j_1\)</span>の符号を付加したものを結果とします。</li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
@@ -744,7 +744,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iclz}}_N(i)\)</span></h3>
 <ul>
-  <li><span>\(i\)</span>の先行する0bitを数えます。<span>\(i\)</span>が<span>\(0\)</span>ならばすべて0であると見なします。</li>
+  <li><span>\(i\)</span>の先行する0bitを数えます。<span>\(i\)</span>が0ならばすべて0であると見なします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iclz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = 0^k~(1~d^\ast)^?)
@@ -752,7 +752,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ictz}}_N(i)\)</span></h3>
 <ul>
-  <li><span>\(i\)</span>の後継する0bitを数えます; <span>\(i\)</span>が<span>\(0\)</span>ならばすべて0であると見なします。</li>
+  <li><span>\(i\)</span>の後継する0bitを数えます; <span>\(i\)</span>が0ならばすべて0であると見なします。</li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ictz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = (d^\ast~1)^?~0^k)
@@ -886,7 +886,498 @@ Exportの名前と関連する外部値を定義します。
 
 ### 丸め
 
+丸めは、[IEEE 754-2019](https://ieeexplore.ieee.org/document/8766229)（セクション4.3.1）に対応して、常にround-to-nearest ties-to-evenです。
+
+厳密浮動小数点数は、与えられたビット幅Ｎの浮動小数点数として正確に表現できる有理数です。
+
+与えられた浮動小数点ビット幅Nの限界数は、その大きさが2の最小乗であり、幅Nの浮動小数点数として正確に表現できない正または負の数です（その大きさは、N=32の場合は2128、N=64の場合は21024です）。
+
+候補数は、与えられたビット幅Nの正確な浮動小数点数、または正または負の限界数のいずれかです。
+
+候補数のペアは候補数のペアz1,z2であり、その間には候補数は存在しません。
+
+実数rは、次のようにしてビット幅 N の浮動小数点値に変換されます。
+
+<ul>
+  <li>rが0ならば0を戻り値とします。</li>
+  <li>rが範囲内の場合、rを戻り値とします。</li>
+  <li>rが上限値以上の場合、正のinfinityを戻り値とします。</li>
+  <li>rが下限値以下の場合、負のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>は候補ペアとなります。<span>\(z_1 &lt; r &lt; z_2\)</span>について:
+    <ul>
+      <li>もし<span>\(|r - z_1| &lt; |r - z_2|\)</span>ならば、zを<span>\(z_1\)</span>であるとします。</li>
+      <li>そうでないならば、<span>\(|r - z_1| &gt; |r - z_2|\)</span>ならば、zを<span>\(z_2\)</span>であるとします。</li>
+      <li>そうでないならば、<span>\(|r - z_1| = |r - z_2|\)</span>と<span>\(z_1\)</span>の仮数がevenならば、zを<span>\(z_1\)</span>であるとします。</li>
+      <li>そうでないならば、zを<span>\(z_2\)</span>.</li>
+    </ul>
+  </li>
+  <li>もしzが0ならば、
+    <ul>
+      <li>もし<span>\(r &lt; 0\)</span>ならば、0を戻り値とします。</li>
+      <li>そうでないならば、0を戻り値とします。</li>
+    </ul>
+    </li>
+  <li>そうでないならば、zが境界上の数値であるとして、
+    <ul>
+      <li>もし<span>\(r &lt; 0\)</span>ならば、負のinfinityを戻り値とします。</li>
+      <li>そうでないならば、正のinfinityを戻り値とします。</li>
+    </ul>
+  </li>
+  <li>そうでないならば、zを戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+{\mathrm{float}}_N(0) &amp;=&amp; 0 \\
+{\mathrm{float}}_N(r) &amp;=&amp; r &amp; (\mathrel{\mbox{if}} r \in \mathrm{exact}_N) \\
+{\mathrm{float}}_N(r) &amp;=&amp; +\infty &amp; (\mathrel{\mbox{if}} r \geq +\mathrm{limit}_N) \\
+{\mathrm{float}}_N(r) &amp;=&amp; -\infty &amp; (\mathrel{\mbox{if}} r \leq -\mathrm{limit}_N) \\
+{\mathrm{float}}_N(r) &amp;=&amp; \mathrm{closest}_N(r, z_1, z_2) &amp; (\mathrel{\mbox{if}} z_1 &lt; r &lt; z_2 \wedge (z_1,z_2) \in \mathrm{candidatepair}_N) \\[1ex]
+\mathrm{closest}_N(r, z_1, z_2) &amp;=&amp; \mathrm{rectify}_N(r, z_1) &amp; (\mathrel{\mbox{if}} |r-z_1|&lt;|r-z_2|) \\
+\mathrm{closest}_N(r, z_1, z_2) &amp;=&amp; \mathrm{rectify}_N(r, z_2) &amp; (\mathrel{\mbox{if}} |r-z_1|&gt;|r-z_2|) \\
+\mathrm{closest}_N(r, z_1, z_2) &amp;=&amp; \mathrm{rectify}_N(r, z_1) &amp; (\mathrel{\mbox{if}} |r-z_1|=|r-z_2| \wedge \mathrm{even}_N(z_1)) \\
+\mathrm{closest}_N(r, z_1, z_2) &amp;=&amp; \mathrm{rectify}_N(r, z_2) &amp; (\mathrel{\mbox{if}} |r-z_1|=|r-z_2| \wedge \mathrm{even}_N(z_2)) \\[1ex]
+\mathrm{rectify}_N(r, \pm \mathrm{limit}_N) &amp;=&amp; \pm \infty \\
+\mathrm{rectify}_N(r, 0) &amp;=&amp; 0 \qquad (r \geq 0) \\
+\mathrm{rectify}_N(r, 0) &amp;=&amp; -0 \qquad (r &lt; 0) \\
+\mathrm{rectify}_N(r, z) &amp;=&amp; z \\
+\end{array}\end{split}\]</div>
+
+補足すると以下の式を満たしています。
+
+<div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
+\mathrm{exact}_N &amp;=&amp; {\mathit{f}N} \cap \mathbb{Q} \\
+\mathrm{limit}_N &amp;=&amp; 2^{2^{{\mathrm{expon}}(N)-1}} \\
+\mathrm{candidate}_N &amp;=&amp; \mathrm{exact}_N \cup \{+\mathrm{limit}_N, -\mathrm{limit}_N\} \\
+\mathrm{candidatepair}_N &amp;=&amp; \{ (z_1, z_2) \in \mathrm{candidate}_N^2 ~|~ z_1 &lt; z_2 \wedge \forall z \in \mathrm{candidate}_N, z \leq z_1 \vee z \geq z_2\} \\[1ex]
+\mathrm{even}_N((d + m\cdot 2^{-M}) \cdot 2^e) &amp;\Leftrightarrow&amp; m \mathbin{\mathrm{mod}} 2 = 0 \\
+\mathrm{even}_N(\pm \mathrm{limit}_N) &amp;\Leftrightarrow&amp; \mathrm{true} \\
+\end{array}\end{split}\]</div>
+
 ### NaN伝播
+
+`fneg`, `fabs`, `fcopysign`以外の浮動小数点演算子の結果がNaNである場合、その符号は非決定性であり、ペイロードは以下のように計算されます。
+
+演算子へのすべてのNaN入力のペイロードが正準値であれば(NaN入力がない場合を含む)、出力のペイロードも正準値となります。
+
+そうでない場合、ペイロードはすべての算術NaNの中から非決定論的に選択されます。
+すなわち、その最上位ビットは1であり、他のすべては未指定です。
+
+この非決定論的な結果は、以下の補助関数で表現され、入力のセットから許容される出力のセットを生成します。
+
+<div>\[\begin{split}\begin{array}{lll@{\qquad}l}
+{\mathrm{nans}}_N\{z^\ast\} &=& \{ + {\mathsf{nan}}(n), - {\mathsf{nan}}(n) ~|~ n = {\mathrm{canon}}_N \}
+  & (\mathrel{\mbox{if}} \forall {\mathsf{nan}}(n) \in z^\ast,~ n = {\mathrm{canon}}_N) \\
+{\mathrm{nans}}_N\{z^\ast\} &=& \{ + {\mathsf{nan}}(n), - {\mathsf{nan}}(n) ~|~ n \geq {\mathrm{canon}}_N \}
+  & (\mathrel{\mbox{otherwise}}) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fadd}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>のうちどちらかがNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が異なる符号のinfinityならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号のinfinityならば、そのinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>がinfinityならば、そのinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、正の0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の同じ0同士であるならば、その0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が0ならば、もう一方を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ大きさの絶対値を持ち、符号が異なるならば、正の0を戻り値とします。</li>
+  <li><span>\(z_1\)</span>と<span>\(z_2\)</span>を加算し、近傍の表現可能な値に丸めます。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fadd}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
+{\mathrm{fadd}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_1\} \\
+{\mathrm{fadd}}_N(\pm \infty, \mp \infty) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fadd}}_N(\pm \infty, \pm \infty) &amp;=&amp; \pm \infty \\
+{\mathrm{fadd}}_N(z_1, \pm \infty) &amp;=&amp; \pm \infty \\
+{\mathrm{fadd}}_N(\pm \infty, z_2) &amp;=&amp; \pm \infty \\
+{\mathrm{fadd}}_N(\pm 0, \mp 0) &amp;=&amp; 0 \\
+{\mathrm{fadd}}_N(\pm 0, \pm 0) &amp;=&amp; \pm 0 \\
+{\mathrm{fadd}}_N(z_1, \pm 0) &amp;=&amp; z_1 \\
+{\mathrm{fadd}}_N(\pm 0, z_2) &amp;=&amp; z_2 \\
+{\mathrm{fadd}}_N(\pm q, \mp q) &amp;=&amp; 0 \\
+{\mathrm{fadd}}_N(z_1, z_2) &amp;=&amp; {\mathrm{float}}_N(z_1 + z_2) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fsub}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号のinfinityならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が異なる符号のinfinityならば、<span>\(z_1\)</span>を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>がinfinityならば、そのinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>がinfinityならば、そのinfinityの符号を反転したものを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の同じ0同士であるならば、正の0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、<span>\(z_1\)</span>を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が0ならば、<span>\(z_1\)</span>を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が0ならば、return <span>\(z_2\)</span> negated.</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、正の0を戻り値とします。</li>
+  <li><span>\(z_2\)</span>を<span>\(z_1\)</span>で減算し、近傍の表現可能な値に丸めます。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fsub}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
+{\mathrm{fsub}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_1\} \\
+{\mathrm{fsub}}_N(\pm \infty, \pm \infty) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fsub}}_N(\pm \infty, \mp \infty) &amp;=&amp; \pm \infty \\
+{\mathrm{fsub}}_N(z_1, \pm \infty) &amp;=&amp; \mp \infty \\
+{\mathrm{fsub}}_N(\pm \infty, z_2) &amp;=&amp; \pm \infty \\
+{\mathrm{fsub}}_N(\pm 0, \pm 0) &amp;=&amp; 0 \\
+{\mathrm{fsub}}_N(\pm 0, \mp 0) &amp;=&amp; \pm 0 \\
+{\mathrm{fsub}}_N(z_1, \pm 0) &amp;=&amp; z_1 \\
+{\mathrm{fsub}}_N(\pm 0, \pm q_2) &amp;=&amp; \mp q_2 \\
+{\mathrm{fsub}}_N(\pm q, \pm q) &amp;=&amp; 0 \\
+{\mathrm{fsub}}_N(z_1, z_2) &amp;=&amp; {\mathrm{float}}_N(z_1 - z_2) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fmul}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、one of <span>\(z_1\)</span>と<span>\(z_2\)</span>が0とthe other infinityならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号のinfinityならば、正のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が異なる符号のinfinityならば、負のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>がinfinityと同じ符号の値ならば、正のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>がinfinityと異なる符号の値ならば、負のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の同じ0同士であるならば、正の0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、負の0を戻り値とします。</li>
+  <li><span>\(z_1\)</span>と<span>\(z_2\)</span>を乗算し、近傍の表現可能な値に丸めます。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fmul}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
+{\mathrm{fmul}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_1\} \\
+{\mathrm{fmul}}_N(\pm \infty, \pm 0) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fmul}}_N(\pm \infty, \mp 0) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fmul}}_N(\pm 0, \pm \infty) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fmul}}_N(\pm 0, \mp \infty) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fmul}}_N(\pm \infty, \pm \infty) &amp;=&amp; +\infty \\
+{\mathrm{fmul}}_N(\pm \infty, \mp \infty) &amp;=&amp; -\infty \\
+{\mathrm{fmul}}_N(\pm q_1, \pm \infty) &amp;=&amp; +\infty \\
+{\mathrm{fmul}}_N(\pm q_1, \mp \infty) &amp;=&amp; -\infty \\
+{\mathrm{fmul}}_N(\pm \infty, \pm q_2) &amp;=&amp; +\infty \\
+{\mathrm{fmul}}_N(\pm \infty, \mp q_2) &amp;=&amp; -\infty \\
+{\mathrm{fmul}}_N(\pm 0, \pm 0) &amp;=&amp; + 0 \\
+{\mathrm{fmul}}_N(\pm 0, \mp 0) &amp;=&amp; - 0 \\
+{\mathrm{fmul}}_N(z_1, z_2) &amp;=&amp; {\mathrm{float}}_N(z_1 \cdot z_2) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fdiv}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が両方infinitiyならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が両方0ならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>がinfinityで<span>\(z_2\)</span>が符号の同じ値ならば、正のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>がinfinityで<span>\(z_2\)</span>が符号の異なる値ならば、負のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>がinfinityで<span>\(z_1\)</span>が符号の同じ値ならば、正の0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>がinfinityで<span>\(z_1\)</span>が符号の異なる値ならば、負の0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が0で<span>\(z_2\)</span>が符号の同じ値ならば、正の0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が0で<span>\(z_2\)</span>が符号の異なる値ならば、負の0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が0で<span>\(z_1\)</span>が符号の同じ値ならば、正のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が0で<span>\(z_1\)</span>が符号の異なる値ならば、負のinfinityを戻り値とします。</li>
+  <li><span>\(z_1\)</span>を<span>\(z_2\)</span>で除算し、近傍の表現可能な値に丸めます。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fdiv}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
+{\mathrm{fdiv}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_1\} \\
+{\mathrm{fdiv}}_N(\pm \infty, \pm \infty) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fdiv}}_N(\pm \infty, \mp \infty) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fdiv}}_N(\pm 0, \pm 0) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fdiv}}_N(\pm 0, \mp 0) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fdiv}}_N(\pm \infty, \pm q_2) &amp;=&amp; +\infty \\
+{\mathrm{fdiv}}_N(\pm \infty, \mp q_2) &amp;=&amp; -\infty \\
+{\mathrm{fdiv}}_N(\pm q_1, \pm \infty) &amp;=&amp; 0 \\
+{\mathrm{fdiv}}_N(\pm q_1, \mp \infty) &amp;=&amp; -0 \\
+{\mathrm{fdiv}}_N(\pm 0, \pm q_2) &amp;=&amp; 0 \\
+{\mathrm{fdiv}}_N(\pm 0, \mp q_2) &amp;=&amp; -0 \\
+{\mathrm{fdiv}}_N(\pm q_1, \pm 0) &amp;=&amp; +\infty \\
+{\mathrm{fdiv}}_N(\pm q_1, \mp 0) &amp;=&amp; -\infty \\
+{\mathrm{fdiv}}_N(z_1, z_2) &amp;=&amp; {\mathrm{float}}_N(z_1 / z_2) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fmin}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が負のinfinityならば、負のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が正のinfinityならば、もう一方を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、負の0を戻り値とします。</li>
+  <li><span>\(z_1\)</span>と<span>\(z_2\)</span>のうち小さい方を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fmin}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
+{\mathrm{fmin}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_1\} \\
+{\mathrm{fmin}}_N(+ \infty, z_2) &amp;=&amp; z_2 \\
+{\mathrm{fmin}}_N(- \infty, z_2) &amp;=&amp; - \infty \\
+{\mathrm{fmin}}_N(z_1, + \infty) &amp;=&amp; z_1 \\
+{\mathrm{fmin}}_N(z_1, - \infty) &amp;=&amp; - \infty \\
+{\mathrm{fmin}}_N(\pm 0, \mp 0) &amp;=&amp; -0 \\
+{\mathrm{fmin}}_N(z_1, z_2) &amp;=&amp; z_1 &amp; (\mathrel{\mbox{if}} z_1 \leq z_2) \\
+{\mathrm{fmin}}_N(z_1, z_2) &amp;=&amp; z_2 &amp; (\mathrel{\mbox{if}} z_2 \leq z_1) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fmax}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が正のinfinityならば、正のinfinityを戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が負のinfinityならば、もう一方を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、正の0を戻り値とします。</li>
+  <li><span>\(z_1\)</span>と<span>\(z_2\)</span>のうち大きい方を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fmax}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
+{\mathrm{fmax}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_1\} \\
+{\mathrm{fmax}}_N(+ \infty, z_2) &amp;=&amp; + \infty \\
+{\mathrm{fmax}}_N(- \infty, z_2) &amp;=&amp; z_2 \\
+{\mathrm{fmax}}_N(z_1, + \infty) &amp;=&amp; + \infty \\
+{\mathrm{fmax}}_N(z_1, - \infty) &amp;=&amp; z_1 \\
+{\mathrm{fmax}}_N(\pm 0, \mp 0) &amp;=&amp; 0 \\
+{\mathrm{fmax}}_N(z_1, z_2) &amp;=&amp; z_1 &amp; (\mathrel{\mbox{if}} z_1 \geq z_2) \\
+{\mathrm{fmax}}_N(z_1, z_2) &amp;=&amp; z_2 &amp; (\mathrel{\mbox{if}} z_2 \geq z_1) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fcopysign}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号ならば、<span>\(z_1\)</span>を戻り値とします。</li>
+  <li><span>\(z_1\)</span>の符号を反転したものを戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fcopysign}}_N(\pm p_1, \pm p_2) &amp;=&amp; \pm p_1 \\
+{\mathrm{fcopysign}}_N(\pm p_1, \mp p_2) &amp;=&amp; \mp p_1 \\
+\end{array}\end{split}\]</div>
+</div>
+
+<h3><span>\({\mathrm{fabs}}_N(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNならば、return z with 正のsign.</li>
+  <li>そうでないならば、zがinfinityならば、正のinfinityを戻り値とします。</li>
+  <li>そうでないならば、zが0ならば、正の0を戻り値とします。</li>
+  <li>そうでないならば、zが正のvalueならば、zを戻り値とします。</li>
+  <li>zの符号を反転したものを戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fabs}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; +{\mathsf{nan}}(n) \\
+{\mathrm{fabs}}_N(\pm \infty) &amp;=&amp; +\infty \\
+{\mathrm{fabs}}_N(\pm 0) &amp;=&amp; 0 \\
+{\mathrm{fabs}}_N(\pm q) &amp;=&amp; +q \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fneg}}_N(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNならば、return z with negated sign.</li>
+  <li>そうでないならば、zがinfinityならば、そのinfinityの符号を反転したものを戻り値とします。</li>
+  <li>そうでないならば、zが0ならば、その0の符号を反転したものを戻り値とします。</li>
+  <li>zの符号を反転したものを戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fneg}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; \mp {\mathsf{nan}}(n) \\
+{\mathrm{fneg}}_N(\pm \infty) &amp;=&amp; \mp \infty \\
+{\mathrm{fneg}}_N(\pm 0) &amp;=&amp; \mp 0 \\
+{\mathrm{fneg}}_N(\pm q) &amp;=&amp; \mp q \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fsqrt}}_N(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、z has a 負のsignならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、zが正のinfinityならば、正のinfinityを戻り値とします。</li>
+  <li>そうでないならば、zが0ならば、その0を戻り値とします。</li>
+  <li>zの平方根を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fsqrt}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
+{\mathrm{fsqrt}}_N(- \infty) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fsqrt}}_N(+ \infty) &amp;=&amp; + \infty \\
+{\mathrm{fsqrt}}_N(\pm 0) &amp;=&amp; \pm 0 \\
+{\mathrm{fsqrt}}_N(- q) &amp;=&amp; {\mathrm{nans}}_N\{\} \\
+{\mathrm{fsqrt}}_N(+ q) &amp;=&amp; {\mathrm{float}}_N\left(\sqrt{q}\right) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fceil}}_N(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、zがinfinityならば、zを戻り値とします。</li>
+  <li>そうでないならば、zが0ならば、zを戻り値とします。</li>
+  <li>そうでないならば、zが0未満で-1より大きいならば、負の0を戻り値とします。</li>
+  <li>z以上の最小の整数を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fceil}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
+{\mathrm{fceil}}_N(\pm \infty) &amp;=&amp; \pm \infty \\
+{\mathrm{fceil}}_N(\pm 0) &amp;=&amp; \pm 0 \\
+{\mathrm{fceil}}_N(- q) &amp;=&amp; -0 &amp; (\mathrel{\mbox{if}} -1 &lt; -q &lt; 0) \\
+{\mathrm{fceil}}_N(\pm q) &amp;=&amp; {\mathrm{float}}_N(i) &amp; (\mathrel{\mbox{if}} \pm q \leq i &lt; \pm q + 1) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{ffloor}}_N(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、zがinfinityならば、zを戻り値とします。</li>
+  <li>そうでないならば、zが0ならば、zを戻り値とします。</li>
+  <li>そうでないならば、zが0より大きく1未満ならば、正の0を戻り値とします。</li>
+  <li>z以下の最大の整数を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{ffloor}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
+{\mathrm{ffloor}}_N(\pm \infty) &amp;=&amp; \pm \infty \\
+{\mathrm{ffloor}}_N(\pm 0) &amp;=&amp; \pm 0 \\
+{\mathrm{ffloor}}_N(+ q) &amp;=&amp; 0 &amp; (\mathrel{\mbox{if}} 0 &lt; +q &lt; 1) \\
+{\mathrm{ffloor}}_N(\pm q) &amp;=&amp; {\mathrm{float}}_N(i) &amp; (\mathrel{\mbox{if}} \pm q - 1 &lt; i \leq \pm q) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{ftrunc}}_N(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、zがinfinityならば、zを戻り値とします。</li>
+  <li>そうでないならば、zが0ならば、zを戻り値とします。</li>
+  <li>そうでないならば、zが0より大きく1未満ならば、正の0を戻り値とします。</li>
+  <li>そうでないならば、zが0未満で-1より大きいならば、負の0を戻り値とします。</li>
+  <li>zの絶対値に最も近い最大の整数にzと同じ符号を付けたものを戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{ftrunc}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
+{\mathrm{ftrunc}}_N(\pm \infty) &amp;=&amp; \pm \infty \\
+{\mathrm{ftrunc}}_N(\pm 0) &amp;=&amp; \pm 0 \\
+{\mathrm{ftrunc}}_N(+ q) &amp;=&amp; 0 &amp; (\mathrel{\mbox{if}} 0 &lt; +q &lt; 1) \\
+{\mathrm{ftrunc}}_N(- q) &amp;=&amp; -0 &amp; (\mathrel{\mbox{if}} -1 &lt; -q &lt; 0) \\
+{\mathrm{ftrunc}}_N(\pm q) &amp;=&amp; {\mathrm{float}}_N(\pm i) &amp; (\mathrel{\mbox{if}} +q - 1 &lt; i \leq +q) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fnearest}}_N(z)\)</span></h3>
+<ul>
+  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
+  <li>そうでないならば、zがinfinityならば、zを戻り値とします。</li>
+  <li>そうでないならば、zが0ならば、zを戻り値とします。</li>
+  <li>そうでないならば、zが0より大きく0.5以下ならば、正の0を戻り値とします。</li>
+  <li>そうでないならば、zが0未満-0.5以上ならば、負の0を戻り値とします。</li>
+  <li>zに近い整数に丸めます; 等距離ならば偶数を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fnearest}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
+{\mathrm{fnearest}}_N(\pm \infty) &amp;=&amp; \pm \infty \\
+{\mathrm{fnearest}}_N(\pm 0) &amp;=&amp; \pm 0 \\
+{\mathrm{fnearest}}_N(+ q) &amp;=&amp; 0 &amp; (\mathrel{\mbox{if}} 0 &lt; +q \leq 0.5) \\
+{\mathrm{fnearest}}_N(- q) &amp;=&amp; -0 &amp; (\mathrel{\mbox{if}} -0.5 \leq -q &lt; 0) \\
+{\mathrm{fnearest}}_N(\pm q) &amp;=&amp; {\mathrm{float}}_N(\pm i) &amp; (\mathrel{\mbox{if}} |i - q| &lt; 0.5) \\
+{\mathrm{fnearest}}_N(\pm q) &amp;=&amp; {\mathrm{float}}_N(\pm i) &amp; (\mathrel{\mbox{if}} |i - q| = 0.5 \wedge i~\mbox{even}) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{feq}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、1を戻り値とします。</li>
+  <li>0を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{feq}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
+{\mathrm{feq}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; 0 \\
+{\mathrm{feq}}_N(\pm 0, \mp 0) &amp;=&amp; 1 \\
+{\mathrm{feq}}_N(z_1, z_2) &amp;=&amp; {\mathrm{bool}}(z_1 = z_2) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fne}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、0を戻り値とします。</li>
+  <li>1を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fne}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 1 \\
+{\mathrm{fne}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; 1 \\
+{\mathrm{fne}}_N(\pm 0, \mp 0) &amp;=&amp; 0 \\
+{\mathrm{fne}}_N(z_1, z_2) &amp;=&amp; {\mathrm{bool}}(z_1 \neq z_2) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{flt}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>未満ならば、1を戻り値とします。</li>
+  <li>0を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{flt}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
+{\mathrm{flt}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; 0 \\
+{\mathrm{flt}}_N(z, z) &amp;=&amp; 0 \\
+{\mathrm{flt}}_N(+ \infty, z_2) &amp;=&amp; 0 \\
+{\mathrm{flt}}_N(- \infty, z_2) &amp;=&amp; 1 \\
+{\mathrm{flt}}_N(z_1, + \infty) &amp;=&amp; 1 \\
+{\mathrm{flt}}_N(z_1, - \infty) &amp;=&amp; 0 \\
+{\mathrm{flt}}_N(\pm 0, \mp 0) &amp;=&amp; 0 \\
+{\mathrm{flt}}_N(z_1, z_2) &amp;=&amp; {\mathrm{bool}}(z_1 &lt; z_2) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fgt}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>より大きいならば、1を戻り値とします。</li>
+  <li>0を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fgt}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
+{\mathrm{fgt}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; 0 \\
+{\mathrm{fgt}}_N(z, z) &amp;=&amp; 0 \\
+{\mathrm{fgt}}_N(+ \infty, z_2) &amp;=&amp; 1 \\
+{\mathrm{fgt}}_N(- \infty, z_2) &amp;=&amp; 0 \\
+{\mathrm{fgt}}_N(z_1, + \infty) &amp;=&amp; 0 \\
+{\mathrm{fgt}}_N(z_1, - \infty) &amp;=&amp; 1 \\
+{\mathrm{fgt}}_N(\pm 0, \mp 0) &amp;=&amp; 0 \\
+{\mathrm{fgt}}_N(z_1, z_2) &amp;=&amp; {\mathrm{bool}}(z_1 &gt; z_2) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fle}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>以下ならば、1を戻り値とします。</li>
+  <li>0を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fle}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
+{\mathrm{fle}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; 0 \\
+{\mathrm{fle}}_N(z, z) &amp;=&amp; 1 \\
+{\mathrm{fle}}_N(+ \infty, z_2) &amp;=&amp; 0 \\
+{\mathrm{fle}}_N(- \infty, z_2) &amp;=&amp; 1 \\
+{\mathrm{fle}}_N(z_1, + \infty) &amp;=&amp; 1 \\
+{\mathrm{fle}}_N(z_1, - \infty) &amp;=&amp; 0 \\
+{\mathrm{fle}}_N(\pm 0, \mp 0) &amp;=&amp; 1 \\
+{\mathrm{fle}}_N(z_1, z_2) &amp;=&amp; {\mathrm{bool}}(z_1 \leq z_2) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathrm{fge}}_N(z_1, z_2)\)</span></h3>
+<ul>
+  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、0を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、1を戻り値とします。</li>
+  <li>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>以下ならば、1を戻り値とします。</li>
+  <li>0を戻り値とします。</li>
+</ul>
+<div>\[\begin{split}\begin{array}{&#64;{}lcll}
+{\mathrm{fge}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
+{\mathrm{fge}}_N(z_1, \pm {\mathsf{nan}}(n)) &amp;=&amp; 0 \\
+{\mathrm{fge}}_N(z, z) &amp;=&amp; 1 \\
+{\mathrm{fge}}_N(+ \infty, z_2) &amp;=&amp; 1 \\
+{\mathrm{fge}}_N(- \infty, z_2) &amp;=&amp; 0 \\
+{\mathrm{fge}}_N(z_1, + \infty) &amp;=&amp; 0 \\
+{\mathrm{fge}}_N(z_1, - \infty) &amp;=&amp; 1 \\
+{\mathrm{fge}}_N(\pm 0, \mp 0) &amp;=&amp; 1 \\
+{\mathrm{fge}}_N(z_1, z_2) &amp;=&amp; {\mathrm{bool}}(z_1 \geq z_2) \\
+\end{array}\end{split}\]</div>
 
 ## 変換
 
