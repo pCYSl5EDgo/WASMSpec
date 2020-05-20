@@ -2676,9 +2676,9 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{globals}}~{\mathit{globalinst}}\} \\
   <li><span>\({\mathit{meminst}}\)</span>は伸長するメモリインスタンスであり、nは伸長するページ数であるとします。</li>
   <li>前提条件：<span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>の長さはページサイズ<span>\(64\,\mathrm{Ki}\)</span>により割り切れます。</li>
   <li><span>\(\mathit{len}\)</span>はnに<span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>の長さをページサイズ<span>\(64\,\mathrm{Ki}\)</span>で除算したものを加算したものであるとします。</li>
-  <li>もし<span>\(\mathit{len}\)</span> is larger than <span>\(2^{16}\)</span>, then fail。</li>
-  <li>もし<span>\({\mathit{meminst}}.{\mathsf{max}}\)</span> is not empty and its value is smaller than <span>\(\mathit{len}\)</span>, then fail。</li>
-  <li><span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>にn times <span>\(64\,\mathrm{Ki}\)</span> bytes with value <span>\(\def\mathdef1221#1{\mathtt{0x#1}}\mathdef1221{00}\)</span>を追加します。</li>
+  <li>もし<span>\(\mathit{len}\)</span>が<span>\(2^{16}\)</span>より大きいならば失敗します。</li>
+  <li>もし<span>\({\mathit{meminst}}.{\mathsf{max}}\)</span>が空ではなく、かつその値が<span>\(\mathit{len}\)</span>未満ならば失敗します。</li>
+  <li><span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>にn×<span>\(64\,\mathrm{Ki}\)</span> bytesな値<span>\(\def\mathdef1221#1{\mathtt{0x#1}}\mathdef1221{00}\)</span>を追加します。</li>
 </ol>
 <div>\[\begin{split}\begin{array}{rllll}
 {\mathrm{growmem}}({\mathit{meminst}}, n) &amp;=&amp; {\mathit{meminst}} {\mathrel{\mbox{with}}} {\mathsf{data}} = {\mathit{meminst}}.{\mathsf{data}}~(\def\mathdef1222#1{\mathtt{0x#1}}\mathdef1222{00})^{n \cdot 64\,\mathrm{Ki}} \\
@@ -2691,39 +2691,41 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{globals}}~{\mathit{globalinst}}\} \\
 \end{array}\end{split}\]</div>
 
 <h3>Modules</h3>
+
 The allocation function for modules requires a suitable list of external values that are assumed to match the import vector of the module,
 and a list of initialization values for the module’s globals。
-1. Let <span>\({\mathit{module}}\)</span> be the module to allocate and <span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span> the vector of external values providing the module’s imports,
-and <span>\({\mathit{val}}^\ast\)</span> the initialization values of the module’s globals。
-<ol start="2">
+
+<ol>
+  <li><span>\({\mathit{module}}\)</span>はthe module to allocate and <span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span> the vector of external values providing the module’s imports,
+and <span>\({\mathit{val}}^\ast\)</span> the initialization values of the module’s globals。</li>
   <li><span>\({\mathit{module}}.{\mathsf{funcs}}\)</span>中の各function <span>\({\mathit{func}}_i\)</span>について:
-<ol>
-  <li><span>\({\mathit{funcaddr}}_i\)</span>は関数アドレスresulting from allocating <span>\({\mathit{func}}_i\)</span> for the module instance <span>\({\mathit{moduleinst}}\)</span> defined belowであるとします。</li>
-</ol>
-</li>
-  <li><span>\({\mathit{module}}.{\mathsf{tables}}\)</span>中の各table <span>\({\mathit{table}}_i\)</span>について:
-<ol>
-  <li><span>\({\mathit{tableaddr}}_i\)</span>はテーブルアドレスresulting from allocating <span>\({\mathit{table}}_i.{\mathsf{type}}\)</span>であるとします。</li>
-</ol>
-</li>
-  <li><span>\({\mathit{module}}.{\mathsf{mems}}\)</span>中の各memory <span>\({\mathit{mem}}_i\)</span>について:
-<ol>
-  <li><span>\({\mathit{memaddr}}_i\)</span>はメモリアドレスresulting from allocating <span>\({\mathit{mem}}_i.{\mathsf{type}}\)</span>であるとします。</li>
-</ol>
-</li>
-  <li><span>\({\mathit{module}}.{\mathsf{globals}}\)</span>中の各global <span>\({\mathit{global}}_i\)</span>について:
-<ol>
-  <li><span>\({\mathit{globaladdr}}_i\)</span>はthe global address resulting from allocating <span>\({\mathit{global}}_i.{\mathsf{type}}\)</span> with initializer value <span>\({\mathit{val}}^\ast[i]\)</span>であるとします。</li>
-</ol>
-</li>
-  <li><span>\({\mathit{funcaddr}}^\ast\)</span>はthe the concatenation of the function addresses <span>\({\mathit{funcaddr}}_i\)</span> in index orderであるとします。</li>
-  <li><span>\({\mathit{tableaddr}}^\ast\)</span>はthe the concatenation of the table addresses <span>\({\mathit{tableaddr}}_i\)</span> in index orderであるとします。</li>
-  <li><span>\({\mathit{memaddr}}^\ast\)</span>はthe the concatenation of the memory addresses <span>\({\mathit{memaddr}}_i\)</span> in index orderであるとします。</li>
-  <li><span>\({\mathit{globaladdr}}^\ast\)</span>はthe the concatenation of the global addresses <span>\({\mathit{globaladdr}}_i\)</span> in index orderであるとします。</li>
-  <li><span>\({\mathit{funcaddr}}_{\mathrm{mod}}^\ast\)</span>はthe list of function addresses extracted from <span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>, concatenated with <span>\({\mathit{funcaddr}}^\ast\)</span>であるとします。</li>
-  <li><span>\({\mathit{tableaddr}}_{\mathrm{mod}}^\ast\)</span>はthe list of table addresses extracted from <span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>, concatenated with <span>\({\mathit{tableaddr}}^\ast\)</span>であるとします。</li>
-  <li><span>\({\mathit{memaddr}}_{\mathrm{mod}}^\ast\)</span>はthe list of memory addresses extracted from <span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>, concatenated with <span>\({\mathit{memaddr}}^\ast\)</span>であるとします。</li>
-  <li><span>\({\mathit{globaladdr}}_{\mathrm{mod}}^\ast\)</span>はthe list of global addresses extracted from <span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>, concatenated with <span>\({\mathit{globaladdr}}^\ast\)</span>であるとします。</li>
+    <ol>
+      <li><span>\({\mathit{funcaddr}}_i\)</span>は以下に定義されるモジュールインスタンス<span>\({\mathit{moduleinst}}\)</span>によりアロケートされる関数<span>\({\mathit{func}}_i\)</span>であるとします。</li>
+    </ol>
+  </li>
+  <li><span>\({\mathit{module}}.{\mathsf{tables}}\)</span>中の各テーブル<span>\({\mathit{table}}_i\)</span>について:
+    <ol>
+      <li><span>\({\mathit{tableaddr}}_i\)</span>は<span>\({\mathit{table}}_i.{\mathsf{type}}\)</span>によりアロケートされるテーブルであるとします。</li>
+    </ol>
+  </li>
+  <li><span>\({\mathit{module}}.{\mathsf{mems}}\)</span>中の各メモリ<span>\({\mathit{mem}}_i\)</span>について:
+    <ol>
+      <li><span>\({\mathit{memaddr}}_i\)</span>は<span>\({\mathit{mem}}_i.{\mathsf{type}}\)</span>によりアロケートされるメモリアドレスであるとします。</li>
+    </ol>
+  </li>
+  <li><span>\({\mathit{module}}.{\mathsf{globals}}\)</span>中の各グローバル<span>\({\mathit{global}}_i\)</span>について:
+    <ol>
+      <li><span>\({\mathit{globaladdr}}_i\)</span>は値<span>\({\mathit{val}}^\ast[i]\)</span>を以て初期化される<span>\({\mathit{global}}_i.{\mathsf{type}}\)</span>によりアロケートされるグローバルアドレスであるとします。</li>
+    </ol>
+  </li>
+  <li><span>\({\mathit{funcaddr}}^\ast\)</span>はインデックスで整列された関数アドレス<span>\({\mathit{funcaddr}}_i\)</span>の連続したものであるとします。</li>
+  <li><span>\({\mathit{tableaddr}}^\ast\)</span>はインデックスで整列されたテーブルアドレス<span>\({\mathit{tableaddr}}_i\)</span>の連続したものであるとします。</li>
+  <li><span>\({\mathit{memaddr}}^\ast\)</span>はインデックスで整列されたメモリアドレス<span>\({\mathit{memaddr}}_i\)</span>の連続したものであるとします。</li>
+  <li><span>\({\mathit{globaladdr}}^\ast\)</span>はインデックスで整列されたグローバルアドレス<span>\({\mathit{globaladdr}}_i\)</span>の連続したものであるとします。</li>
+  <li><span>\({\mathit{funcaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{funcaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出された関数アドレスのリストであるとします。</li>
+  <li><span>\({\mathit{tableaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{tableaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたテーブルアドレスのリストであるとします。</li>
+  <li><span>\({\mathit{memaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{memaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたメモリアドレスのリストであるとします。</li>
+  <li><span>\({\mathit{globaladdr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{globaladdr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたグローバルアドレスのリストであるとします。</li>
   <li><span>\({\mathit{module}}.{\mathsf{exports}}\)</span>中の各export <span>\({\mathit{export}}_i\)</span>について:
 <ol>
   <li>もし<span>\({\mathit{export}}_i\)</span> is a function export for function index x, then let <span>\({\mathit{externval}}_i\)</span> be the 外部値<span>\({\mathsf{func}}~({\mathit{funcaddr}}_{\mathrm{mod}}^\ast[x])\)</span>。</li>
