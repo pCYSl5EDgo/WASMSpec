@@ -944,7 +944,7 @@ Exportの名前と関連する外部値を定義します。
 補足すると以下の式を満たしています。
 
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
-\mathrm{exact}_N &amp;=&amp; {\mathit{f} N} \cap \mathbb{Q} \\
+\mathrm{exact}_N &amp;=&amp; {\mathit{fN}} \cap \mathbb{Q} \\
 \mathrm{limit}_N &amp;=&amp; 2^{2^{{\mathrm{expon}}(N)-1}} \\
 \mathrm{candidate}_N &amp;=&amp; \mathrm{exact}_N \cup \{+\mathrm{limit}_N, -\mathrm{limit}_N\} \\
 \mathrm{candidatepair}_N &amp;=&amp; \{ (z_1, z_2) \in \mathrm{candidate}_N^2 ~|~ z_1 &lt; z_2 \wedge \forall z \in \mathrm{candidate}_N, z \leq z_1 \vee z \geq z_2\} \\[1ex]
@@ -1844,7 +1844,7 @@ S; F; {\mathit{val}}~({\mathsf{global.set}}~x) &amp;{\hookrightarrow}&amp; S'; F
   <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\(\mathit{mem}.{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8]\)</span>であるとします。</li>
   <li>もしNと<span>\({\mathit{sx}}\)</span>が命令の部分であるならば:
     <ol>
-      <li>nが数値であり、条件<span>\({\mathrm{bytes}}_{{\mathit{i} N}}(n) = b^\ast\)</span>を満足するものであるとします。</li>
+      <li>nが数値であり、条件<span>\({\mathrm{bytes}}_{{\mathit{iN} N}}(n) = b^\ast\)</span>を満足するものであるとします。</li>
       <li>cが<span>\({\mathrm{extend}}\mathrm{\_}{\mathit{sx}}_{N,|t|}(n)\)</span>の計算結果であるとします。</li>
     </ol>
   </li>
@@ -1875,7 +1875,7 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~(t.{\mathsf{load}}{N}\mathsf{\_}{\math
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
   (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + {\mathit{memarg}}.{\mathsf{offset}} \\
   \wedge &amp; \mathit{ea} + N/8 \leq |S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}| \\
-  \wedge &amp; {\mathrm{bytes}}_{{\mathit{i} N}}(n) = S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8])
+  \wedge &amp; {\mathrm{bytes}}_{{\mathit{iN} N}}(n) = S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8])
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
@@ -1910,7 +1910,7 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~k)~(t.{\mathsf{load}}({N}\mathsf{\_}{\mat
   <li>もしNが命令の部分であるならば:
     <ol>
       <li>nが<span>\({\mathrm{wrap}}_{|t|,N}(c)\)</span>の計算結果であるとします。</li>
-      <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_{{\mathit{i} N}}(n)\)</span>であるとします。</li>
+      <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_{{\mathit{iN} N}}(n)\)</span>であるとします。</li>
     </ol>
   </li>
   <li>そうでないならば:
@@ -1939,7 +1939,7 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~(t.{\mathsf{const}}~c)~(t.{\mathsf{sto
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
   (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + {\mathit{memarg}}.{\mathsf{offset}} \\
   \wedge &amp; \mathit{ea} + N/8 \leq |S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}| \\
-  \wedge &amp; S' = S {\mathrel{\mbox{with}}} {\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8] = {\mathrm{bytes}}_{{\mathit{i} N}}({\mathrm{wrap}}_{|t|,N}(c))
+  \wedge &amp; S' = S {\mathrel{\mbox{with}}} {\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8] = {\mathrm{bytes}}_{{\mathit{iN} N}}({\mathrm{wrap}}_{|t|,N}(c))
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
