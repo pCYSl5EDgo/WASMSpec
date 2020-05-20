@@ -97,7 +97,7 @@
 
 セマンティクスのほとんどの場所で、異なる型の値が発生する可能性があります。
 曖昧さを避けるために、値はその型を明示的にする抽象構文で表現されます。
-値を生成するconst命令と同じ表記法を再利用すると便利です．
+値を生成するconst命令と同じ表記法を再利用すると便利です。
 
 <div>\[\begin{split}\begin{array}{llcl}
 {\mathit{val}} &::=&
@@ -1736,8 +1736,7 @@ Nanに対して定義されていません。
   <li><span>\({\mathit{val}}\)</span>が値<span>\(F.{\mathsf{locals}}[x]\)</span>であるとします。</li>
   <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
 </ol>
-<div>
-\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+<div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 F; ({\mathsf{local.get}}~x) &amp;{\hookrightarrow}&amp; F; {\mathit{val}}
   &amp; (\mathrel{\mbox{if}} F.{\mathsf{locals}}[x] = {\mathit{val}}) \\
 \end{array}\end{split}\]</div>
@@ -1750,8 +1749,7 @@ F; ({\mathsf{local.get}}~x) &amp;{\hookrightarrow}&amp; F; {\mathit{val}}
   <li><span>\({\mathit{val}}\)</span>をスタックからpopします。</li>
   <li><span>\(F.{\mathsf{locals}}[x]\)</span>を<span>\({\mathit{val}}\)</span>で置換します。</li>
 </ol>
-<div>
-\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
+<div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 F; {\mathit{val}}~({\mathsf{local.set}}~x) &amp;{\hookrightarrow}&amp; F'; \epsilon
   &amp; (\mathrel{\mbox{if}} F' = F {\mathrel{\mbox{with}}} {\mathsf{locals}}[x] = {\mathit{val}}) \\
 \end{array}\end{split}\]</div>
@@ -1764,8 +1762,7 @@ F; {\mathit{val}}~({\mathsf{local.set}}~x) &amp;{\hookrightarrow}&amp; F'; \epsi
   <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
   <li>命令<span>\(({\mathsf{local.set}}~x)\)</span>を実行します。</li>
 </ol>
-<div>
-\[\begin{array}{lcl&#64;{\qquad}l}
+<div>\[\begin{array}{lcl&#64;{\qquad}l}
 {\mathit{val}}~({\mathsf{local.tee}}~x) &amp;{\hookrightarrow}&amp; {\mathit{val}}~{\mathit{val}}~({\mathsf{local.set}}~x)
 \end{array}\]</div>
 
@@ -1779,8 +1776,7 @@ F; {\mathit{val}}~({\mathsf{local.set}}~x) &amp;{\hookrightarrow}&amp; F'; \epsi
   <li><span>\({\mathit{val}}\)</span>が値<span>\(\mathit{glob}.{\mathsf{value}}\)</span>であるとします。</li>
   <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
 </ol>
-<div>
-\[\begin{split}\begin{array}{l}
+<div>\[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
 S; F; ({\mathsf{global.get}}~x) &amp;{\hookrightarrow}&amp; S; F; {\mathit{val}}
 \end{array}
@@ -1799,8 +1795,7 @@ S; F; ({\mathsf{global.get}}~x) &amp;{\hookrightarrow}&amp; S; F; {\mathit{val}}
   <li><span>\({\mathit{val}}\)</span>をスタックからpopします。</li>
   <li><span>\(\mathit{glob}.{\mathsf{value}}\)</span>を<span>\({\mathit{val}}\)</span>で置換します。</li>
 </ol>
-<div>
-\[\begin{split}\begin{array}{l}
+<div>\[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
 S; F; {\mathit{val}}~({\mathsf{global.set}}~x) &amp;{\hookrightarrow}&amp; S'; F; \epsilon
 \end{array}
@@ -1816,8 +1811,7 @@ S; F; {\mathit{val}}~({\mathsf{global.set}}~x) &amp;{\hookrightarrow}&amp; S'; F
 
 ### 付記
 
-<div>
-ロード命令とストア命令でのアラインメント<span>\({\mathit{memarg}}.{\mathsf{align}}\)</span>はセマンティクスに影響を与えません。
+<div>ロード命令とストア命令でのアラインメント<span>\({\mathit{memarg}}.{\mathsf{align}}\)</span>はセマンティクスに影響を与えません。
 
 これは、メモリがアクセスされるオフセット<span>\(\mathit{ea}\)</span>がプロパティ<span>\(\mathit{ea} \mathbin{\mathrm{mod}} 2^{{\mathit{memarg}}.{\mathsf{align}}} = 0\)</span>を満たすように意図されていることを示しています。
 
@@ -1827,13 +1821,596 @@ S; F; {\mathit{val}}~({\mathsf{global.set}}~x) &amp;{\hookrightarrow}&amp; S'; F
 しかし、ハードウェアによってはかなり遅くなるかもしれません。
 </div>
 
+<h3><span>\(t\mathsf{.}{\mathsf{load}}~{\mathit{memarg}}\)</span> and <span>\(t\mathsf{.}{\mathsf{load}}{N}\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}}\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</li>
+  <li>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</li>
+  <li><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
+  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</li>
+  <li><span>\(\mathit{ea}\)</span>がthe integer <span>\(i + {\mathit{memarg}}.{\mathsf{offset}}\)</span>であるとします。</li>
+  <li>もしNが命令の部分でないならば:</p>
+    <ol>
+      <li>Nが値型<span>\(t\)</span>のビット幅<span>\(|t|\)</span>であるとします。</li>
+    </ol>
+  </li>
+  <li>もし<span>\(\mathit{ea} + N/8\)</span>が<span>\(\mathit{mem}.{\mathsf{data}}\)</span>の長さより大きいならば:</p>
+    <ol>
+      <li>トラップします。</li>
+    </ol>
+  </li>
+  <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\(\mathit{mem}.{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8]\)</span>であるとします。</li>
+  <li>もしNと<span>\({\mathit{sx}}\)</span>が命令の部分であるならば:</p>
+    <ol>
+      <li>nが数値であり、条件<span>\({\mathrm{bytes}}_{{\mathit{i}N}}(n) = b^\ast\)</span>を満足するものであるとします。</li>
+      <li>cが<span>\({\mathrm{extend}}\mathrm{\_}{\mathit{sx}}_{N,|t|}(n)\)</span>の計算結果であるとします。</li>
+    </ol>
+  </li>
+  <li>そうでないならば:</p>
+    <ol>
+      <li>cが定数であり、条件<span>\({\mathrm{bytes}}_t(c) = b^\ast\)</span>を満足するものであるとします。</li>
+    </ol>
+  </li>
+  <li>スタックに値<span>\(t.{\mathsf{const}}~c\)</span>をpushします。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{l}
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~(t.{\mathsf{load}}~{\mathit{memarg}}) &amp;{\hookrightarrow}&amp; S; F; (t.{\mathsf{const}}~c)
+\end{array}
+\\ \qquad
+  \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
+  (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + {\mathit{memarg}}.{\mathsf{offset}} \\
+  \wedge &amp; \mathit{ea} + |t|/8 \leq |S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}| \\
+  \wedge &amp; {\mathrm{bytes}}_t(c) = S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} |t|/8])
+  \end{array}
+\\[1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~(t.{\mathsf{load}}{N}\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}}) &amp;{\hookrightarrow}&amp;
+  S; F; (t.{\mathsf{const}}~{\mathrm{extend}}\mathrm{\_}{\mathit{sx}}_{N,|t|}(n))
+\end{array}
+\\ \qquad
+  \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
+  (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + {\mathit{memarg}}.{\mathsf{offset}} \\
+  \wedge &amp; \mathit{ea} + N/8 \leq |S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}| \\
+  \wedge &amp; {\mathrm{bytes}}_{{\mathit{i}N}}(n) = S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8])
+  \end{array}
+\\[1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~k)~(t.{\mathsf{load}}({N}\mathsf{\_}{\mathit{sx}})^?~{\mathit{memarg}}) &amp;{\hookrightarrow}&amp; S; F; {\mathsf{trap}}
+\end{array}
+\\ \qquad
+  (\mathrel{\mbox{otherwise}}) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\(t\mathsf{.}{\mathsf{store}}~{\mathit{memarg}}\)</span> and <span>\(t\mathsf{.}{\mathsf{store}}{N}~{\mathit{memarg}}\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</li>
+  <li>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</li>
+  <li><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\(t\)</span>の値はスタックの一番上に存在します。</li>
+  <li>スタックから値<span>\(t.{\mathsf{const}}~c\)</span>をpopします</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
+  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</li>
+  <li><span>\(\mathit{ea}\)</span>がthe integer <span>\(i + {\mathit{memarg}}.{\mathsf{offset}}\)</span>であるとします。</li>
+  <li>もしNが命令の部分でないならば:</p>
+    <ol>
+      <li>Nが値型<span>\(t\)</span>のビット幅<span>\(|t|\)</span>であるとします。</li>
+    </ol>
+  </li>
+  <li>もし<span>\(\mathit{ea} + N/8\)</span>が<span>\(\mathit{mem}.{\mathsf{data}}\)</span>の長さより大きいならば:</p>
+    <ol>
+      <li>トラップします。</li>
+    </ol>
+  </li>
+  <li>もしNが命令の部分であるならば:</p>
+    <ol>
+      <li>nが<span>\({\mathrm{wrap}}_{|t|,N}(c)\)</span>の計算結果であるとします。</li>
+      <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_{{\mathit{i}N}}(n)\)</span>であるとします。</li>
+    </ol>
+  </li>
+  <li>そうでないならば:</p>
+    <ol>
+      <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_t(c)\)</span>であるとします。</li>
+    </ol>
+  </li>
+  <li>byte列<span>\(\mathit{mem}.{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8]\)</span>を<span>\(b^\ast\)</span>で置換します。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{l}
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~(t.{\mathsf{const}}~c)~(t.{\mathsf{store}}~{\mathit{memarg}}) &amp;{\hookrightarrow}&amp; S'; F; \epsilon
+\end{array}
+\\ \qquad
+  \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
+  (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + {\mathit{memarg}}.{\mathsf{offset}} \\
+  \wedge &amp; \mathit{ea} + |t|/8 \leq |S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}| \\
+  \wedge &amp; S' = S {\mathrel{\mbox{with}}} {\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} |t|/8] = {\mathrm{bytes}}_t(c)
+  \end{array}
+\\[1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~(t.{\mathsf{const}}~c)~(t.{\mathsf{store}}{N}~{\mathit{memarg}}) &amp;{\hookrightarrow}&amp; S'; F; \epsilon
+\end{array}
+\\ \qquad
+  \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
+  (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + {\mathit{memarg}}.{\mathsf{offset}} \\
+  \wedge &amp; \mathit{ea} + N/8 \leq |S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}| \\
+  \wedge &amp; S' = S {\mathrel{\mbox{with}}} {\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8] = {\mathrm{bytes}}_{{\mathit{i}N}}({\mathrm{wrap}}_{|t|,N}(c))
+  \end{array}
+\\[1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~k)~(t.{\mathsf{const}}~c)~(t.{\mathsf{store}}{N}^?~{\mathit{memarg}}) &amp;{\hookrightarrow}&amp; S; F; {\mathsf{trap}}
+\end{array}
+\\ \qquad
+  (\mathrel{\mbox{otherwise}}) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{memory.size}}\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</li>
+  <li>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</li>
+  <li><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</li>
+  <li><span>\(\mathit{sz}\)</span>が<span>\(\mathit{mem}.{\mathsf{data}}\)</span>の長さをページサイズで除算したものであるとします。</li>
+  <li>スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{sz}\)</span>をpushします。</li>
+</ol>
+<div>\[\begin{split}\begin{array}{l}
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; {\mathsf{memory.size}} &amp;{\hookrightarrow}&amp; S; F; ({\mathsf{i32}}.{\mathsf{const}}~\mathit{sz})
+\end{array}
+\\ \qquad
+  (\mathrel{\mbox{if}} |S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}| = \mathit{sz}\cdot64\,\mathrm{Ki}) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{memory.grow}}\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</li>
+  <li>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</li>
+  <li><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</li>
+  <li><span>\(\mathit{sz}\)</span>が<span>\(S.{\mathsf{mems}}[a]\)</span>の長さをページサイズで除算したものであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
+  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~n\)</span>をpopします</li>
+  <li><span>\(\mathit{err}\)</span>が<span>\({\mathit{i32}}\)</span>型の<span>\(2^{32}-1\)</span>であり、<span>\({\mathrm{signed}}_{32}(\mathit{err})\)</span>が<span>\(-1\)</span>であるとします。</li>
+  <li>あるいは<span>\(\mathit{mem}\)</span>をnページに伸長するよう試みます:</p></li>
+</ol>
+<blockquote>
+  <div>
+    <ol>
+      <li>もし成功したならば、スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{sz}\)</span>をpushします。</li>
+      <li>そうでないならば、スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{err}\)</span>をpushします。</li>
+    </ol>
+  </div>
+</blockquote>
+<ol>
+  <li>あるいは、スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{err}\)</span>をpushします。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{l}
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~n)~{\mathsf{memory.grow}} &amp;{\hookrightarrow}&amp; S'; F; ({\mathsf{i32}}.{\mathsf{const}}~\mathit{sz})
+\end{array}
+\\ \qquad
+  \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
+  (\mathrel{\mbox{if}} &amp; F.{\mathsf{module}}.{\mathsf{memaddrs}}[0] = a \\
+  \wedge &amp; \mathit{sz} = |S.{\mathsf{mems}}[a].{\mathsf{data}}|/64\,\mathrm{Ki} \\
+  \wedge &amp; S' = S {\mathrel{\mbox{with}}} {\mathsf{mems}}[a] = {\mathrm{growmem}}(S.{\mathsf{mems}}[a], n)) \\
+  \end{array}
+\\[1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~n)~{\mathsf{memory.grow}} &amp;{\hookrightarrow}&amp; S; F; ({\mathsf{i32}}.{\mathsf{const}}~{\mathrm{signed}}_{32}^{-1}(-1))
+\end{array}
+\end{array}\end{split}\]</div>
+
+### 付記
+
+`memory.grow`命令は非決定論的です。
+成功して古いメモリサイズszを返すか、失敗して-1を返すかのどちらかです。
+
+失敗は、参照されているメモリインスタンスの最大サイズが定義されていて、それを超えてしまう場合に発生しなければなりません。
+しかし、失敗は他の場合にも起こり得ます。
+実際には、どちらを選択するかはエンベッダーが利用できるリソースに依存します。
+
 ## 制御命令
+
+<h3><span>\({\mathsf{nop}}\)</span></h3>
+<ol>
+  <li>何もしません。</li>
+</ol>
+<div>\[\begin{array}{lcl&#64;{\qquad}l}
+{\mathsf{nop}} &amp;{\hookrightarrow}&amp; \epsilon
+\end{array}\]</div>
+
+<h3><span>\({\mathsf{unreachable}}\)</span></h3>
+<ol>
+  <li>トラップします。</li>
+</ol>
+<div>\[\begin{array}{lcl&#64;{\qquad}l}
+{\mathsf{unreachable}} &amp;{\hookrightarrow}&amp; {\mathsf{trap}}
+\end{array}\]</div>
+
+<h3><span>\({\mathsf{block}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>は定義されています。</li>
+  <li><span>\([t_1^m] {\rightarrow} [t_2^n]\)</span>が関数型<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>であるとします。</li>
+  <li>Lがアリティnかつ継続先がブロック終端であるラベルであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともm個値が存在します。</li>
+  <li>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</li>
+  <li>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}^\ast\)</span>にラベルLとして突入します。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+F; {\mathit{val}}^m~{\mathsf{block}}~\mathit{bt}~{\mathit{instr}}^\ast~{\mathsf{end}} &amp;{\hookrightarrow}&amp;
+  F; {\mathsf{label}}_n\{\epsilon\}~{\mathit{val}}^m~{\mathit{instr}}^\ast~{\mathsf{end}}
+  &amp; (\mathrel{\mbox{if}} {\mathrm{expand}}_F(\mathit{bt}) = [t_1^m] {\rightarrow} [t_2^n])
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{loop}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>は定義されています。</li>
+  <li><span>\([t_1^m] {\rightarrow} [t_2^n]\)</span>が関数型<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>であるとします。</li>
+  <li>Lがアリティmかつ継続先がループ先頭であるラベルであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともm個値が存在します。</li>
+  <li>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</li>
+  <li>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}^\ast\)</span>にラベルLとして突入します。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+F; {\mathit{val}}^m~{\mathsf{loop}}~\mathit{bt}~{\mathit{instr}}^\ast~{\mathsf{end}} &amp;{\hookrightarrow}&amp;
+  F; {\mathsf{label}}_m\{{\mathsf{loop}}~\mathit{bt}~{\mathit{instr}}^\ast~{\mathsf{end}}\}~{\mathit{val}}^m~{\mathit{instr}}^\ast~{\mathsf{end}}
+  &amp; (\mathrel{\mbox{if}} {\mathrm{expand}}_F(\mathit{bt}) = [t_1^m] {\rightarrow} [t_2^n])
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{if}}~{\mathit{blocktype}}~{\mathit{instr}}_1^\ast~{\mathsf{else}}~{\mathit{instr}}_2^\ast~{\mathsf{end}}\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>は定義されています。</li>
+  <li><span>\([t_1^m] {\rightarrow} [t_2^n]\)</span>が関数型<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>であるとします。</li>
+  <li>Lがアリティnかつ継続先が<span>\({\mathsf{if}}\)</span>命令終端であるラベルであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
+  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともm個値が存在します。</li>
+  <li>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</li>
+  <li>cが0でないならば、</p>
+    <ol>
+      <li>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}_1^\ast\)</span>にラベルLとして突入します。</li>
+    </ol>
+  </li>
+  <li>そうでないならば:</p>
+    <ol>
+      <li>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}_2^\ast\)</span>にラベルLとして突入します。</li>
+    </ol>
+  </li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+F; {\mathit{val}}^m~({\mathsf{i32}}.{\mathsf{const}}~c)~{\mathsf{if}}~\mathit{bt}~{\mathit{instr}}_1^\ast~{\mathsf{else}}~{\mathit{instr}}_2^\ast~{\mathsf{end}} &amp;{\hookrightarrow}&amp;
+  F; {\mathsf{label}}_n\{\epsilon\}~{\mathit{val}}^m~{\mathit{instr}}_1^\ast~{\mathsf{end}}
+  &amp; (\mathrel{\mbox{if}} c \neq 0 \wedge {\mathrm{expand}}_F(\mathit{bt}) = [t_1^m] {\rightarrow} [t_2^n]) \\
+F; {\mathit{val}}^m~({\mathsf{i32}}.{\mathsf{const}}~c)~{\mathsf{if}}~\mathit{bt}~{\mathit{instr}}_1^\ast~{\mathsf{else}}~{\mathit{instr}}_2^\ast~{\mathsf{end}} &amp;{\hookrightarrow}&amp;
+  F; {\mathsf{label}}_n\{\epsilon\}~{\mathit{val}}^m~{\mathit{instr}}_2^\ast~{\mathsf{end}}
+  &amp; (\mathrel{\mbox{if}} c = 0 \wedge {\mathrm{expand}}_F(\mathit{bt}) = [t_1^m] {\rightarrow} [t_2^n]) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{br}}~l\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくとも<span>\(l+1\)</span>個ラベルが存在します。</li>
+  <li>Lが0-index startで<span>\(l\)</span>番目のスタックに現れるラベルであるとします。</li>
+  <li>nがLのアリティであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともn個値が存在します。</li>
+  <li>スタックから<span>\({\mathit{val}}^n\)</span>をpopします。</li>
+  <li><span>\(l+1\)</span>回繰り返します:</p>
+    <ol>
+      <li>スタックの一番上に存在するものが値である間:</p>
+        <ol>
+          <li>スタックから値をpopします。</li>
+        </ol>
+      </li>
+      <li>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上にはラベルが存在します。</li>
+      <li>スタックからラベルをpopします。</li>
+    </ol>
+  </li>
+  <li>スタックに値<span>\({\mathit{val}}^n\)</span>をpushします。</li>
+  <li>Lの続きにジャンプします。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+{\mathsf{label}}_n\{{\mathit{instr}}^\ast\}~{B}^l[{\mathit{val}}^n~({\mathsf{br}}~l)]~{\mathsf{end}} &amp;{\hookrightarrow}&amp; {\mathit{val}}^n~{\mathit{instr}}^\ast
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{br\_if}}~l\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
+  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします</li>
+  <li>cが0でないならば、</p>
+    <ol>
+      <li>命令<span>\(({\mathsf{br}}~l)\)</span>を実行します。</li>
+    </ol>
+  </li>
+  <li>そうでないならば:</p>
+    <ol>
+      <li>何もしません。</li>
+    </ol>
+  </li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+({\mathsf{i32}}.{\mathsf{const}}~c)~({\mathsf{br\_if}}~l) &amp;{\hookrightarrow}&amp; ({\mathsf{br}}~l)
+  &amp; (\mathrel{\mbox{if}} c \neq 0) \\
+({\mathsf{i32}}.{\mathsf{const}}~c)~({\mathsf{br\_if}}~l) &amp;{\hookrightarrow}&amp; \epsilon
+  &amp; (\mathrel{\mbox{if}} c = 0) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{br\_table}}~l^\ast~l_N\)</span></h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
+  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</li>
+  <li>もしiが<span>\(l^\ast\)</span>の長さ未満ならば:</p>
+    <ol>
+      <li><span>\(l_i\)</span>がthe label <span>\(l^\ast[i]\)</span>であるとします。</li>
+      <li>命令<span>\(({\mathsf{br}}~l_i)\)</span>を実行します。</li>
+    </ol>
+  </li>
+  <li>そうでないならば:</p>
+    <ol>
+      <li>命令<span>\(({\mathsf{br}}~l_N)\)</span>を実行します。</li>
+    </ol>
+  </li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+({\mathsf{i32}}.{\mathsf{const}}~i)~({\mathsf{br\_table}}~l^\ast~l_N) &amp;{\hookrightarrow}&amp; ({\mathsf{br}}~l_i)
+  &amp; (\mathrel{\mbox{if}} l^\ast[i] = l_i) \\
+({\mathsf{i32}}.{\mathsf{const}}~i)~({\mathsf{br\_table}}~l^\ast~l_N) &amp;{\hookrightarrow}&amp; ({\mathsf{br}}~l_N)
+  &amp; (\mathrel{\mbox{if}} |l^\ast| \leq i) \\
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{return}}\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>nがFのアリティであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともn個値が存在します。</li>
+  <li><span>\({\mathit{val}}^n\)</span>の戻り値をスタックからpopします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは少なくとも1つフレームを含みます。</li>
+  <li>スタックの一番上の要素がフレームでない間:</p>
+    <ol>
+      <li>popします。</li>
+    </ol>
+  </li>
+  <li>前提条件：スタックの一番上にフレームFが存在します。</li>
+  <li>スタックからフレームをpopします。</li>
+  <li>スタックに<span>\({\mathit{val}}^n\)</span>をpushします。</li>
+  <li>フレームをpushした元々の呼び出しに続く命令にジャンプします。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+{\mathsf{frame}}_n\{F\}~{B}^k[{\mathit{val}}^n~{\mathsf{return}}]~{\mathsf{end}} &amp;{\hookrightarrow}&amp; {\mathit{val}}^n
+\end{array}\end{split}\]</div>
+
+<h3><span>\({\mathsf{call}}~x\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{funcaddrs}}[x]\)</span>は存在します。</li>
+  <li>aが関数アドレス<span>\(F.{\mathsf{module}}.{\mathsf{funcaddrs}}[x]\)</span>であるとします。</li>
+  <li>アドレスaにある関数インスタンスを実行します。</li>
+</ol>
+<div>\[\begin{array}{lcl&#64;{\qquad}l}
+F; ({\mathsf{call}}~x) &amp;{\hookrightarrow}&amp; F; ({\mathsf{invoke}}~a)
+  &amp; (\mathrel{\mbox{if}} F.{\mathsf{module}}.{\mathsf{funcaddrs}}[x] = a)
+\end{array}\]</div>
+
+<h3><span>\({\mathsf{call\_indirect}}~x\)</span></h3>
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{tableaddrs}}[0]\)</span>は存在します。</li>
+  <li><span>\(\mathit{ta}\)</span>がテーブルアドレス<span>\(F.{\mathsf{module}}.{\mathsf{tableaddrs}}[0]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{tables}}[\mathit{ta}]\)</span>は存在します。</li>
+  <li><span>\(\mathit{tab}\)</span>がテーブルインスタンス<span>\(S.{\mathsf{tables}}[\mathit{ta}]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{types}}[x]\)</span>は存在します。</li>
+  <li><span>\(\mathit{ft}_{\mathrm{expect}}\)</span>が関数型<span>\(F.{\mathsf{module}}.{\mathsf{types}}[x]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
+  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</li>
+  <li>もしiが<span>\(\mathit{tab}.{\mathsf{elem}}\)</span>の長さ未満ならば:</p>
+    <ol>
+      <li>トラップします。</li>
+    </ol>
+  </li>
+  <li>もし<span>\(\mathit{tab}.{\mathsf{elem}}[i]\)</span>が初期化されていないならば:</p>
+    <ol>
+      <li>トラップします。</li>
+    </ol>
+  </li>
+  <li>aが関数アドレス<span>\(\mathit{tab}.{\mathsf{elem}}[i]\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{funcs}}[a]\)</span>は存在します。</li>
+  <li><span>\(\mathit{f}\)</span>が関数インスタンス<span>\(S.{\mathsf{funcs}}[a]\)</span>であるとします。</li>
+  <li><span>\(\mathit{ft}_{\mathrm{actual}}\)</span>が関数型<span>\(\mathit{f}.{\mathsf{type}}\)</span>であるとします。</li>
+  <li>もし<span>\(\mathit{ft}_{\mathrm{actual}}\)</span>と<span>\(\mathit{ft}_{\mathrm{expect}}\)</span>が互いに異なるならば:</p>
+    <ol>
+      <li>トラップします。</li>
+    </ol>
+  </li>
+  <li>アドレスaにある関数インスタンスを実行します。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{l}
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~({\mathsf{call\_indirect}}~x) &amp;{\hookrightarrow}&amp; S; F; ({\mathsf{invoke}}~a)
+\end{array}
+\\ \qquad
+  \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
+  (\mathrel{\mbox{if}} &amp; S.{\mathsf{tables}}[F.{\mathsf{module}}.{\mathsf{tableaddrs}}[0]].{\mathsf{elem}}[i] = a \\
+  \wedge &amp; S.{\mathsf{funcs}}[a] = f \\
+  \wedge &amp; F.{\mathsf{module}}.{\mathsf{types}}[x] = f.{\mathsf{type}})
+  \end{array}
+\\[1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~({\mathsf{call\_indirect}}~x) &amp;{\hookrightarrow}&amp; S; F; {\mathsf{trap}}
+\end{array}
+\\ \qquad
+  (\mathrel{\mbox{otherwise}})
+\end{array}\end{split}\]</div>
 
 ## ブロック
 
+以下の補助規則は、ブロックを構成する命令列を実行する際のセマンティクスを定義しています。
+
+<h3>ラベルLと共に<span>\({\mathit{instr}}^\ast\)</span>に突入する</h3>
+<ol>
+  <li>スタックにLをpushします。</li>
+  <li>命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>の最初にジャンプします。</li>
+</ol>
+
+### 付記
+
+構造化制御命令が直接還元する管理命令にはラベルLが埋め込まれているため、命令列に入る際の形式的な還元ルールは必要ありません。
+
+---
+
+<h3>ラベルLと共に<span>\({\mathit{instr}}^\ast\)</span>から脱する</h3>
+
+ブロック終端にジャンプやトラップせず到達した時、以下のステップを実行します。
+
+<ol>
+  <li>mがthe number of values on the top of the stackであるとします。</li>
+  <li>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、ラベルLはスタックの一番上に存在します。</li>
+  <li>スタックからラベルをpopします。</li>
+  <li>スタックに<span>\({\mathit{val}}^m\)</span>をpushしなおします。</li>
+  <li>ラベルLに紐付けられた構造化制御命令の<span>\({\mathsf{end}}\)</span>の後の位置にジャンプします。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+{\mathsf{label}}_n\{{\mathit{instr}}^\ast\}~{\mathit{val}}^m~{\mathsf{end}} &amp;{\hookrightarrow}&amp; {\mathit{val}}^m
+\end{array}\end{split}\]</div>
+
+### 付記
+
+このセマンティクスはループ命令に含まれる命令列にも適用されます。
+したがって、明示的に後方への分岐が実行されない限りループの実行は終了から外れます。
+
 ## 関数呼び出し
 
+<h3>Invocation of function address a</h3>
+<ol>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{funcs}}[a]\)</span>は存在します。</li>
+  <li><span>\(f\)</span>が関数インスタンス<span>\(S.{\mathsf{funcs}}[a]\)</span>であるとします。</li>
+  <li><span>\([t_1^n] {\rightarrow} [t_2^m]\)</span>が関数型<span>\(f.{\mathsf{type}}\)</span>であるとします。</li>
+  <li><span>\(t^\ast\)</span>が値型<span>\(f.{\mathsf{code}}.{\mathsf{locals}}\)</span>のリストであるとします。</li>
+  <li><span>\({\mathit{instr}}^\ast~{\mathsf{end}}\)</span>が式<span>\(f.{\mathsf{code}}.{\mathsf{body}}\)</span>であるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタック上に少なくともn個の値が存在します。</li>
+  <li>スタックから<span>\({\mathit{val}}^n\)</span>をpopします。</li>
+  <li><span>\({\mathit{val}}_0^\ast\)</span>が型<span>\(t^\ast\)</span>の0に相当する値のリストであるとします。</li>
+  <li>Fがフレーム<span>\(\{ {\mathsf{module}}~f.{\mathsf{module}}, {\mathsf{locals}}~{\mathit{val}}^n~{\mathit{val}}_0^\ast \}\)</span>であるとします。</li>
+  <li>スタックにアリティmのフレームFをpushします。</li>
+  <li>Lがアリティmかつ継続先が関数終端であるラベルであるとします。</li>
+  <li>Enter 命令シーケンス<span>\({\mathit{instr}}^\ast\)</span> with label L。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{l}
+\begin{array}{lcl&#64;{\qquad}l}
+S; {\mathit{val}}^n~({\mathsf{invoke}}~a) &amp;{\hookrightarrow}&amp; S; {\mathsf{frame}}_m\{F\}~{\mathsf{label}}_m\{\}~{\mathit{instr}}^\ast~{\mathsf{end}}~{\mathsf{end}}
+\end{array}
+\\ \qquad
+  \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
+  (\mathrel{\mbox{if}} &amp; S.{\mathsf{funcs}}[a] = f \\
+  \wedge &amp; f.{\mathsf{type}} = [t_1^n] {\rightarrow} [t_2^m] \\
+  \wedge &amp; f.{\mathsf{code}} = \{ {\mathsf{type}}~x, {\mathsf{locals}}~t^k, {\mathsf{body}}~{\mathit{instr}}^\ast~{\mathsf{end}} \} \\
+  \wedge &amp; F = \{ {\mathsf{module}}~f.{\mathsf{module}}, ~{\mathsf{locals}}~{\mathit{val}}^n~(t.{\mathsf{const}}~0)^k \})
+  \end{array} \\
+\end{array}\end{split}\]</div>
+
+<h3>関数から戻る</h3>
+
+関数終端にジャンプまたはトラップせずに到達した時、以下のステップを実行します。
+
+<ol>
+  <li>Fがカレントフレームであるとします。</li>
+  <li>nがthe arity of the activation of Fであるとします。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックにn個値が存在します。</li>
+  <li>Pop the results <span>\({\mathit{val}}^n\)</span> from the stack。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上にフレームFが存在します。</li>
+  <li>スタックからフレームをpopします。</li>
+  <li>スタックに<span>\({\mathit{val}}^n\)</span>をpushしなおします。</li>
+  <li>元々の呼び出しの後にジャンプします。</li>
+</ol>
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{lcl&#64;{\qquad}l}
+{\mathsf{frame}}_n\{F\}~{\mathit{val}}^n~{\mathsf{end}} &amp;{\hookrightarrow}&amp; {\mathit{val}}^n
+\end{array}\end{split}\]</div>
+
+<h3>Host Functions</h3>
+ホスト関数の呼び出しは、非決定論的な振る舞いをします。
+それは、トラップで終了するか、定期的に返すかのどちらかです。
+しかし、後者の場合、関数のタイプに応じて、スタック上に適切な数とタイプの`WebAssembly`値を消費して生成しなければなりません。
+
+ホスト関数は、ストアを修正することもできます。
+しかし、すべてのストアの変更は、元のストアの拡張に帰結しなければなりません。
+
+つまり、変更可能なコンテンツのみを変更しインスタンスを削除してはなりません。
+さらに、結果として得られるストアは有効である必要があります。
+すなわち、すべてのデータとコードが正しく型付けされていなければなりません。
+
+<div>\[\begin{split}~\\[-1ex]
+\begin{array}{l}
+\begin{array}{lcl&#64;{\qquad}l}
+S; {\mathit{val}}^n~({\mathsf{invoke}}~a) &amp;{\hookrightarrow}&amp; S'; {\mathit{result}}
+\end{array}
+\\ \qquad
+  \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
+  (\mathrel{\mbox{if}} &amp; S.{\mathsf{funcs}}[a] = \{ {\mathsf{type}}~[t_1^n] {\rightarrow} [t_2^m], {\mathsf{hostcode}}~\mathit{hf} \} \\
+  \wedge &amp; (S'; {\mathit{result}}) \in \mathit{hf}(S; {\mathit{val}}^n)) \\
+  \end{array} \\
+\begin{array}{lcl&#64;{\qquad}l}
+S; {\mathit{val}}^n~({\mathsf{invoke}}~a) &amp;{\hookrightarrow}&amp; S; {\mathit{val}}^n~({\mathsf{invoke}}~a)
+\end{array}
+\\ \qquad
+  \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
+  (\mathrel{\mbox{if}} &amp; S.{\mathsf{funcs}}[a] = \{ {\mathsf{type}}~[t_1^n] {\rightarrow} [t_2^m], {\mathsf{hostcode}}~\mathit{hf} \} \\
+  \wedge &amp; \bot \in \mathit{hf}(S; {\mathit{val}}^n)) \\
+  \end{array} \\
+\end{array}\end{split}\]</div>
+
+ここで、<span>\(\mathit{hf}(S; {\mathit{val}}^n)\)</span>は、引数<span>\({\mathit{val}}^n\)</span>を持つ現在のストアSにおけるホスト関数<span>\(\mathit{hf}\)</span>の実装定義実行を示します。
+それは可能な結果の集合を返し、各要素は修正されたストア<span>\(S'\)</span>と結果のペアか発散を示す特別な値⊥のいずれかです。
+ホスト関数は、結果の集合が単数ではない少なくとも1つの引数がある場合、非決定論的です。
+
+ホスト関数の存在下でWebAssemblyの実装が健全であるためには、すべてのホスト関数のインスタンスは有効でなければなりません。
+
+つまり、適切な前後条件に従うことを意味します：
+有効なストアSの下で、与えられた引数valnがパラメータ型tn1にマッチし、ホスト関数を実行すると、それぞれが発散であるか、あるいはSの拡張である有効なストアS′と、与えられた戻り値型tm2にマッチする結果からなる、空でない可能性のある結果の集合が得られなければなりません。
+
+これらの概念はすべて付録で正確に説明されています。
+
+### 付記
+
+ホスト関数は、モジュールからエクスポートされた関数を呼び出すことで WebAssembly に呼び戻すことができます。
+しかし、そのような呼び出しの効果は、ホスト関数に許可されている非決定論的な振る舞いに支配されます。
+
+---
+
 ## 式
+
+式は、そのモジュールインスタンスを指す現在のフレームから相対的に評価されます。
+
+<ol>
+  <li>式の命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>の最初にジャンプします。</li>
+  <li>命令シーケンスを実行します。</li>
+  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上には値が存在します。</li>
+  <li>スタックから値<span>\({\mathit{val}}\)</span>をpopします</li>
+</ol>
+値<span>\({\mathit{val}}\)</span>は評価の結果です。
+<div>\[S; F; {\mathit{instr}}^\ast {\hookrightarrow} S'; F'; {\mathit{instr}}'^\ast
+\qquad (\mathrel{\mbox{if}} S; F; {\mathit{instr}}^\ast~{\mathsf{end}} {\hookrightarrow} S'; F'; {\mathit{instr}}'^\ast~{\mathsf{end}})\]</div>
+
+### 付記
+
+式の評価はこの還元規則を値に到達するまで繰り返し実行します。
+関数本体を構成する式は、関数呼び出し時に実行されます。
 
 # モジュール
 
