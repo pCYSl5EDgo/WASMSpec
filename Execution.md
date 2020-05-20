@@ -944,7 +944,7 @@ Exportの名前と関連する外部値を定義します。
 補足すると以下の式を満たしています。
 
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
-\mathrm{exact}_N &amp;=&amp; {\mathit{f}N} \cap \mathbb{Q} \\
+\mathrm{exact}_N &amp;=&amp; {\mathit{f} N} \cap \mathbb{Q} \\
 \mathrm{limit}_N &amp;=&amp; 2^{2^{{\mathrm{expon}}(N)-1}} \\
 \mathrm{candidate}_N &amp;=&amp; \mathrm{exact}_N \cup \{+\mathrm{limit}_N, -\mathrm{limit}_N\} \\
 \mathrm{candidatepair}_N &amp;=&amp; \{ (z_1, z_2) \in \mathrm{candidate}_N^2 ~|~ z_1 &lt; z_2 \wedge \forall z \in \mathrm{candidate}_N, z \leq z_1 \vee z \geq z_2\} \\[1ex]
@@ -1844,7 +1844,7 @@ S; F; {\mathit{val}}~({\mathsf{global.set}}~x) &amp;{\hookrightarrow}&amp; S'; F
   <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\(\mathit{mem}.{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8]\)</span>であるとします。</li>
   <li>もしNと<span>\({\mathit{sx}}\)</span>が命令の部分であるならば:
     <ol>
-      <li>nが数値であり、条件<span>\({\mathrm{bytes}}_{{\mathit{i}N}}(n) = b^\ast\)</span>を満足するものであるとします。</li>
+      <li>nが数値であり、条件<span>\({\mathrm{bytes}}_{{\mathit{i} N}}(n) = b^\ast\)</span>を満足するものであるとします。</li>
       <li>cが<span>\({\mathrm{extend}}\mathrm{\_}{\mathit{sx}}_{N,|t|}(n)\)</span>の計算結果であるとします。</li>
     </ol>
   </li>
@@ -1875,7 +1875,7 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~(t.{\mathsf{load}}{N}\mathsf{\_}{\math
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
   (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + {\mathit{memarg}}.{\mathsf{offset}} \\
   \wedge &amp; \mathit{ea} + N/8 \leq |S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}| \\
-  \wedge &amp; {\mathrm{bytes}}_{{\mathit{i}N}}(n) = S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8])
+  \wedge &amp; {\mathrm{bytes}}_{{\mathit{i} N}}(n) = S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8])
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
@@ -1910,7 +1910,7 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~k)~(t.{\mathsf{load}}({N}\mathsf{\_}{\mat
   <li>もしNが命令の部分であるならば:
     <ol>
       <li>nが<span>\({\mathrm{wrap}}_{|t|,N}(c)\)</span>の計算結果であるとします。</li>
-      <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_{{\mathit{i}N}}(n)\)</span>であるとします。</li>
+      <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_{{\mathit{i} N}}(n)\)</span>であるとします。</li>
     </ol>
   </li>
   <li>そうでないならば:
@@ -1939,7 +1939,7 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~(t.{\mathsf{const}}~c)~(t.{\mathsf{sto
   \begin{array}[t]{&#64;{}r&#64;{~}l&#64;{}}
   (\mathrel{\mbox{if}} &amp; \mathit{ea} = i + {\mathit{memarg}}.{\mathsf{offset}} \\
   \wedge &amp; \mathit{ea} + N/8 \leq |S.{\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}| \\
-  \wedge &amp; S' = S {\mathrel{\mbox{with}}} {\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8] = {\mathrm{bytes}}_{{\mathit{i}N}}({\mathrm{wrap}}_{|t|,N}(c))
+  \wedge &amp; S' = S {\mathrel{\mbox{with}}} {\mathsf{mems}}[F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]].{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8] = {\mathrm{bytes}}_{{\mathit{i} N}}({\mathrm{wrap}}_{|t|,N}(c))
   \end{array}
 \\[1ex]
 \begin{array}{lcl&#64;{\qquad}l}
@@ -2692,13 +2692,11 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{globals}}~{\mathit{globalinst}}\} \\
 
 <h3>Modules</h3>
 
-The allocation function for modules requires a suitable list of external values that are assumed to match the import vector of the module,
-and a list of initialization values for the module’s globals。
+モジュールをアロケートする関数は適切なモジュールのImportベクトルに合致するとされる外部値のリストとモジュールのグローバルを初期化する値のリストであるとします。
 
 <ol>
-  <li><span>\({\mathit{module}}\)</span>はthe module to allocate and <span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span> the vector of external values providing the module’s imports,
-and <span>\({\mathit{val}}^\ast\)</span> the initialization values of the module’s globals。</li>
-  <li><span>\({\mathit{module}}.{\mathsf{funcs}}\)</span>中の各function <span>\({\mathit{func}}_i\)</span>について:
+  <li><span>\({\mathit{module}}\)</span>はアロケートするモジュールと<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>モジュールのImportに使用される値のリストと<span>\({\mathit{val}}^\ast\)</span>がモジュールのグローバルを初期化する値であるとします。</li>
+  <li><span>\({\mathit{module}}.{\mathsf{funcs}}\)</span>中の各関数<span>\({\mathit{func}}_i\)</span>について:
     <ol>
       <li><span>\({\mathit{funcaddr}}_i\)</span>は以下に定義されるモジュールインスタンス<span>\({\mathit{moduleinst}}\)</span>によりアロケートされる関数<span>\({\mathit{func}}_i\)</span>であるとします。</li>
     </ol>
@@ -2726,15 +2724,15 @@ and <span>\({\mathit{val}}^\ast\)</span> the initialization values of the module
   <li><span>\({\mathit{tableaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{tableaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたテーブルアドレスのリストであるとします。</li>
   <li><span>\({\mathit{memaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{memaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたメモリアドレスのリストであるとします。</li>
   <li><span>\({\mathit{globaladdr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{globaladdr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたグローバルアドレスのリストであるとします。</li>
-  <li><span>\({\mathit{module}}.{\mathsf{exports}}\)</span>中の各export <span>\({\mathit{export}}_i\)</span>について:
-<ol>
-  <li>もし<span>\({\mathit{export}}_i\)</span> is a function export for function index x, then let <span>\({\mathit{externval}}_i\)</span> be the 外部値<span>\({\mathsf{func}}~({\mathit{funcaddr}}_{\mathrm{mod}}^\ast[x])\)</span>。</li>
-  <li>Else, if <span>\({\mathit{export}}_i\)</span> is a table export for table index x, then let <span>\({\mathit{externval}}_i\)</span> be the 外部値<span>\({\mathsf{table}}~({\mathit{tableaddr}}_{\mathrm{mod}}^\ast[x])\)</span>。</li>
-  <li>Else, if <span>\({\mathit{export}}_i\)</span> is a memory export for memory index x, then let <span>\({\mathit{externval}}_i\)</span> be the 外部値<span>\({\mathsf{mem}}~({\mathit{memaddr}}_{\mathrm{mod}}^\ast[x])\)</span>。</li>
-  <li>Else, if <span>\({\mathit{export}}_i\)</span> is a global export for global index x, then let <span>\({\mathit{externval}}_i\)</span> be the 外部値<span>\({\mathsf{global}}~({\mathit{globaladdr}}_{\mathrm{mod}}^\ast[x])\)</span>。</li>
-  <li><span>\({\mathit{exportinst}}_i\)</span>はthe export instance <span>\(\{{\mathsf{name}}~({\mathit{export}}_i.{\mathsf{name}}), {\mathsf{value}}~{\mathit{externval}}_i\}\)</span>であるとします。</li>
-</ol>
-</li>
+  <li><span>\({\mathit{module}}.{\mathsf{exports}}\)</span>中の各Export<span>\({\mathit{export}}_i\)</span>について:
+    <ol>
+      <li>もし<span>\({\mathit{export}}_i\)</span>がExport関数インデックスxに対応する関数であるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{func}}~({\mathit{funcaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</li>
+      <li>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportテーブルインデックスxに対応するテーブルであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{table}}~({\mathit{tableaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</li>
+      <li>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportメモリインデックスxに対応するメモリであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{mem}}~({\mathit{memaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</li>
+      <li>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportグローバルインデックスxに対応するグローバルであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{global}}~({\mathit{globaladdr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</li>
+      <li><span>\({\mathit{exportinst}}_i\)</span>はExportインスタンス<span>\(\{{\mathsf{name}}~({\mathit{export}}_i.{\mathsf{name}}), {\mathsf{value}}~{\mathit{externval}}_i\}\)</span>であるとします。</li>
+    </ol>
+  </li>
   <li><span>\({\mathit{exportinst}}^\ast\)</span>はthe the concatenation of the export instances <span>\({\mathit{exportinst}}_i\)</span> in index orderであるとします。</li>
   <li><span>\({\mathit{moduleinst}}\)</span>はthe module instance <span>\(\{{\mathsf{types}}~({\mathit{module}}.{\mathsf{types}}),\)</span> <span>\({\mathsf{funcaddrs}}~{\mathit{funcaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{tableaddrs}}~{\mathit{tableaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{memaddrs}}~{\mathit{memaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{globaladdrs}}~{\mathit{globaladdr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{exports}}~{\mathit{exportinst}}^\ast\}\)</span>であるとします。</li>
   <li><span>\({\mathit{moduleinst}}\)</span>を戻り値とします。</li>
