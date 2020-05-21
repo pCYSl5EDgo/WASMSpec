@@ -2438,23 +2438,23 @@ Importに対する外部値をチェックする目的の下、そのような�
 <h3><span>\({\mathsf{table}}~a\)</span></h3>
 <ul>
   <li><p>ストアのエントリー<span>\(S.{\mathsf{tables}}[a]\)</span>は必ずテーブルインスタンス<span>\(\{ {\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^? \}\)</span>である必要があります。</p></li>
-  <li><p>この時、外部型<span>\({\mathsf{table}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathsf{funcref}})\)</span>について<span>\({\mathsf{table}}~a\)</span>は有効です。</p></li>
+  <li><p>この時、外部型<span>\({\mathsf{table}}~(\{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \}~{\mathsf{funcref}})\)</span>について<span>\({\mathsf{table}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{tables}}[a] = \{ {\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^? \}
 }{
-  S {\vdash} {\mathsf{table}}~a : {\mathsf{table}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathsf{funcref}})
+  S {\vdash} {\mathsf{table}}~a : {\mathsf{table}}~(\{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \}~{\mathsf{funcref}})
 }\]</div>
 
 <h3><span>\({\mathsf{mem}}~a\)</span></h3>
 <ul>
   <li><p>ストアのエントリー<span>\(S.{\mathsf{mems}}[a]\)</span>は必ずnについてメモリインスタンス<span>\(\{ {\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \}\)</span>である必要があります。</p></li>
-  <li><p>この時、外部型<span>\({\mathsf{mem}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\})\)</span>について<span>\({\mathsf{mem}}~a\)</span>は有効です。</p></li>
+  <li><p>この時、外部型<span>\({\mathsf{mem}}~(\{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \})\)</span>について<span>\({\mathsf{mem}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{mems}}[a] = \{ {\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \}
 }{
-  S {\vdash} {\mathsf{mem}}~a : {\mathsf{mem}}~\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}
+  S {\vdash} {\mathsf{mem}}~a : {\mathsf{mem}}~\{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \}
 }\]</div>
 
 <h3><span>\({\mathsf{global}}~a\)</span></h3>
@@ -2602,7 +2602,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
 <h3>Tables</h3>
 <ol>
   <li><p><span>\({\mathit{tabletype}}\)</span>はthe table type to allocateであるとします。</p></li>
-  <li><p><span>\((\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathit{elemtype}})\)</span>はthe structure of table type <span>\({\mathit{tabletype}}\)</span>であるとします。</p></li>
+  <li><p><span>\((\{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \}~{\mathit{elemtype}})\)</span>はthe structure of table type <span>\({\mathit{tabletype}}\)</span>であるとします。</p></li>
   <li><p>aはthe first free table address in Sであるとします。</p></li>
   <li><p><span>\({\mathit{tableinst}}\)</span>はテーブルインスタンス<span>\(\{  {\mathsf{elem}}~(\epsilon)^n, {\mathsf{max}}~m^?  \}\)</span> with n empty elementsであるとします。</p></li>
   <li><p>Sの<span>\({\mathsf{tables}}\)</span>に<span>\({\mathit{tableinst}}\)</span>を追加します。</p></li>
@@ -2611,7 +2611,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
 <div>\[\begin{split}\begin{array}{rlll}
 {\mathrm{alloctable}}(S, {\mathit{tabletype}}) &amp;=&amp; S', {\mathit{tableaddr}} \\[1ex]
 \mbox{where:} \hfill \\
-{\mathit{tabletype}} &amp;=&amp; \{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathit{elemtype}} \\
+{\mathit{tabletype}} &amp;=&amp; \{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \}~{\mathit{elemtype}} \\
 {\mathit{tableaddr}} &amp;=&amp; |S.{\mathsf{tables}}| \\
 {\mathit{tableinst}} &amp;=&amp; \{ {\mathsf{elem}}~(\epsilon)^n, {\mathsf{max}}~m^? \} \\
 S' &amp;=&amp; S {\oplus} \{{\mathsf{tables}}~{\mathit{tableinst}}\} \\
@@ -2629,7 +2629,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{tables}}~{\mathit{tableinst}}\} \\
 <div>\[\begin{split}\begin{array}{rlll}
 {\mathrm{allocmem}}(S, {\mathit{memtype}}) &amp;=&amp; S', {\mathit{memaddr}} \\[1ex]
 \mbox{where:} \hfill \\
-{\mathit{memtype}} &amp;=&amp; \{{\mathsf{min}}~n, {\mathsf{max}}~m^?\} \\
+{\mathit{memtype}} &amp;=&amp; \{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \} \\
 {\mathit{memaddr}} &amp;=&amp; |S.{\mathsf{mems}}| \\
 {\mathit{meminst}} &amp;=&amp; \{ {\mathsf{data}}~(\def\mathdef1220#1{\mathtt{0x#1}}\mathdef1220{00})^{n \cdot 64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \} \\
 S' &amp;=&amp; S {\oplus} \{{\mathsf{mems}}~{\mathit{meminst}}\} \\
