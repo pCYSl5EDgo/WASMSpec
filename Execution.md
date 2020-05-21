@@ -2426,7 +2426,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{func}}~a\)</span></h3>
 <ul>
-  <li><p>ストアのエントリー<span>\(S.{\mathsf{funcs}}[a]\)</span>は必ず関数インスタンス<span>\(\{{{\mathsf{type}}~{\mathit{functype}}}, \dots\}\)</span>である必要があります。</p></li>
+  <li><p>ストアのエントリー<span>\(S.{\mathsf{funcs}}[a]\)</span>は必ず関数インスタンス<span>\({\mathsf{type}}~{\mathit{functype}}, \dots\)</span>である必要があります。</p></li>
   <li><p>この時、外部型<span>\({\mathsf{func}}~{\mathit{functype}}\)</span>について<span>\({\mathsf{func}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
