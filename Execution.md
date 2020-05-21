@@ -2475,7 +2475,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3>Limits</h3>
 
-リミット<span>\(\{ {\mathsf{min}}~n_1, {\mathsf{max}}~m_1^? \}\)</span>は以下の条件を満たした場合のみリミット<span>\(\{ {\mathsf{min}}~n_2, {\mathsf{max}}~m_2^? \}\)</span>に合致します:
+<div>リミット<span>\(\{ {\mathsf{min}}~n_1, {\mathsf{max}}~m_1^? \}\)</span>は以下の条件を満たした場合のみリミット<span>\(\{ {\mathsf{min}}~n_2, {\mathsf{max}}~m_2^? \}\)</span>に合致します:</div>
 
 <ul>
   <li><p><span>\(n_1\)</span>は<span>\(n_2\)</span>以上です</p></li>
