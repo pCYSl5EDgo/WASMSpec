@@ -2426,8 +2426,8 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{func}}~a\)</span></h3>
 <ul>
-  <li>The store entry <span>\(S.{\mathsf{funcs}}[a]\)</span> must be a function instance <span>\(\{{\mathsf{type}}~{\mathit{functype}}, \dots\}\)</span>。</li>
-  <li>Then <span>\({\mathsf{func}}~a\)</span> is valid with 外部型<span>\({\mathsf{func}}~{\mathit{functype}}\)</span>。</li>
+  <li>ストアのエントリー<span>\(S.{\mathsf{funcs}}[a]\)</span>は必ず関数インスタンス<span>\(\{{\mathsf{type}}~{\mathit{functype}}, \dots\}\)</span>である必要があります。</li>
+  <li>この時、外部型<span>\({\mathsf{func}}~{\mathit{functype}}\)</span>について<span>\({\mathsf{func}}~a\)</span>は有効です。</li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{funcs}}[a] = \{{\mathsf{type}}~{\mathit{functype}}, \dots\}
@@ -2437,8 +2437,8 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{table}}~a\)</span></h3>
 <ul>
-  <li>The store entry <span>\(S.{\mathsf{tables}}[a]\)</span> must be a table instance <span>\(\{{\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^?\}\)</span>。</li>
-  <li>Then <span>\({\mathsf{table}}~a\)</span> is valid with 外部型<span>\({\mathsf{table}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathsf{funcref}})\)</span>。</li>
+  <li>ストアのエントリー<span>\(S.{\mathsf{tables}}[a]\)</span>は必ずテーブルインスタンス<span>\(\{{\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^?\}\)</span>である必要があります。</li>
+  <li>この時、外部型<span>\({\mathsf{table}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathsf{funcref}})\)</span>について<span>\({\mathsf{table}}~a\)</span>は有効です。</li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{tables}}[a] = \{ {\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^? \}
@@ -2448,8 +2448,8 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{mem}}~a\)</span></h3>
 <ul>
-  <li>The store entry <span>\(S.{\mathsf{mems}}[a]\)</span> must be a memory instance <span>\(\{{\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^?\}\)</span>, for some n。</li>
-  <li>Then <span>\({\mathsf{mem}}~a\)</span> is valid with 外部型<span>\({\mathsf{mem}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\})\)</span>。</li>
+  <li>ストアのエントリー<span>\(S.{\mathsf{mems}}[a]\)</span>は必ずnについてメモリインスタンス<span>\(\{{\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^?\}\)</span>である必要があります。</li>
+  <li>この時、外部型<span>\({\mathsf{mem}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\})\)</span>について<span>\({\mathsf{mem}}~a\)</span>は有効です。</li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{mems}}[a] = \{ {\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \}
@@ -2459,8 +2459,8 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{global}}~a\)</span></h3>
 <ul>
-  <li>The store entry <span>\(S.{\mathsf{globals}}[a]\)</span> must be a global instance <span>\(\{{\mathsf{value}}~(t.{\mathsf{const}}~c), {\mathsf{mut}}~{\mathit{mut}}\}\)</span>。</li>
-  <li>Then <span>\({\mathsf{global}}~a\)</span> is valid with 外部型<span>\({\mathsf{global}}~({\mathit{mut}}~t)\)</span>。</li>
+  <li>ストアのエントリー<span>\(S.{\mathsf{globals}}[a]\)</span>は必ずグローバルインスタンス<span>\(\{{\mathsf{value}}~(t.{\mathsf{const}}~c), {\mathsf{mut}}~{\mathit{mut}}\}\)</span>である必要があります。</li>
+  <li>この時、外部型<span>\({\mathsf{global}}~({\mathit{mut}}~t)\)</span>について<span>\({\mathsf{global}}~a\)</span>は有効です。</li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{globals}}[a] = \{ {\mathsf{value}}~(t.{\mathsf{const}}~c), {\mathsf{mut}}~{\mathit{mut}} \}
@@ -2475,7 +2475,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3>Limits</h3>
 
-リミット<span>\(\{ {\mathsf{min}}~n_1, {\mathsf{max}}~m_1^? \}\)</span> match limits <span>\(\{ {\mathsf{min}}~n_2, {\mathsf{max}}~m_2^? \}\)</span> if and only if:
+リミット<span>\(\{ {\mathsf{min}}~n_1, {\mathsf{max}}~m_1^? \}\)</span>は以下の条件を満たした場合のみリミット<span>\(\{ {\mathsf{min}}~n_2, {\mathsf{max}}~m_2^? \}\)</span>に合致します:
 
 <ul>
   <li><span>\(n_1\)</span>は<span>\(n_2\)</span>以上です</li>
@@ -2508,7 +2508,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3>Functions</h3>
 
-外部型<span>\({\mathsf{func}}~{\mathit{functype}}_1\)</span>は<span>\({\mathsf{func}}~{\mathit{functype}}_2\)</span>に次の条件を満たした場合のみ合致します:
+<div>外部型<span>\({\mathsf{func}}~{\mathit{functype}}_1\)</span>は<span>\({\mathsf{func}}~{\mathit{functype}}_2\)</span>に次の条件を満たした場合のみ合致します:</div>
 
 <ul>
   <li><span>\({\mathit{functype}}_1\)</span>と<span>\({\mathit{functype}}_2\)</span>が等しい。</li>
@@ -2521,7 +2521,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3>Tables</h3>
 
-外部型<span>\({\mathsf{table}}~({\mathit{limits}}_1~{\mathit{elemtype}}_1)\)</span>は<span>\({\mathsf{table}}~({\mathit{limits}}_2~{\mathit{elemtype}}_2)\)</span>に次の条件を満たした場合のみ合致します:
+<div>外部型<span>\({\mathsf{table}}~({\mathit{limits}}_1~{\mathit{elemtype}}_1)\)</span>は<span>\({\mathsf{table}}~({\mathit{limits}}_2~{\mathit{elemtype}}_2)\)</span>に次の条件を満たした場合のみ合致します:</div>
 
 <ul>
   <li>リミット<span>\({\mathit{limits}}_1\)</span>は<span>\({\mathsf{table}}~{\mathit{limits}}_2\)</span>に合致します。</li>
