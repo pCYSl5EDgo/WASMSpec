@@ -81,9 +81,9 @@
 \end{array}\end{split}\]</div>
 
 <ul>
-  <li><span>\(x_4 = -x_2\)</span></li>
-  <li><span>\(x_5 = -x_2 + x_3\)</span></li>
-  <li><span>\(x_6 = x_1 \cdot (-x_2 + x_3)\)</span></li>
+  <li><p><span>\(x_4 = -x_2\)</span></p></li>
+  <li><p><span>\(x_5 = -x_2 + x_3\)</span></p></li>
+  <li><p><span>\(x_6 = x_1 \cdot (-x_2 + x_3)\)</span></p></li>
 </ul>
 
 # ランタイムの構造
@@ -292,10 +292,10 @@ Exportの名前と関連する外部値を定義します。
 これは、特定の種類のエントリを順序を保持してフィルタリングします。
 
 <ul>
-  <li><span>\({\mathrm{funcs}}({\mathit{externval}}^\ast) = [{\mathit{funcaddr}} ~|~ ({\mathsf{func}}~{\mathit{funcaddr}}) \in {\mathit{externval}}^\ast]\)</span></li>
-  <li><span>\({\mathrm{tables}}({\mathit{externval}}^\ast) = [{\mathit{tableaddr}} ~|~ ({\mathsf{table}}~{\mathit{tableaddr}}) \in {\mathit{externval}}^\ast]\)</span></li>
-  <li><span>\({\mathrm{mems}}({\mathit{externval}}^\ast) = [{\mathit{memaddr}} ~|~ ({\mathsf{mem}}~{\mathit{memaddr}}) \in {\mathit{externval}}^\ast]\)</span></li>
-  <li><span>\({\mathrm{globals}}({\mathit{externval}}^\ast) = [{\mathit{globaladdr}} ~|~ ({\mathsf{global}}~{\mathit{globaladdr}}) \in {\mathit{externval}}^\ast]\)</span></li>
+  <li><p><span>\({\mathrm{funcs}}({\mathit{externval}}^\ast) = [{\mathit{funcaddr}} ~|~ ({\mathsf{func}}~{\mathit{funcaddr}}) \in {\mathit{externval}}^\ast]\)</span></p></li>
+  <li><p><span>\({\mathrm{tables}}({\mathit{externval}}^\ast) = [{\mathit{tableaddr}} ~|~ ({\mathsf{table}}~{\mathit{tableaddr}}) \in {\mathit{externval}}^\ast]\)</span></p></li>
+  <li><p><span>\({\mathrm{mems}}({\mathit{externval}}^\ast) = [{\mathit{memaddr}} ~|~ ({\mathsf{mem}}~{\mathit{memaddr}}) \in {\mathit{externval}}^\ast]\)</span></p></li>
+  <li><p><span>\({\mathrm{globals}}({\mathit{externval}}^\ast) = [{\mathit{globaladdr}} ~|~ ({\mathsf{global}}~{\mathit{globaladdr}}) \in {\mathit{externval}}^\ast]\)</span></p></li>
 </ul>
 
 ## スタック
@@ -353,8 +353,8 @@ Exportの名前と関連する外部値を定義します。
 ### 表記上のお約束
 
 <ul>
-  <li>メタ変数<b>L</b>は、文脈から明らかなように、ラベルの範囲内にあります。</li>
-  <li>メタ変数<b>F</b>は、コンテキストから明らかなフレームの範囲内にあります。</li>
+  <li><p>メタ変数<b>L</b>は、文脈から明らかなように、ラベルの範囲内にあります。</p></li>
+  <li><p>メタ変数<b>F</b>は、コンテキストから明らかなフレームの範囲内にあります。</p></li>
   <li>以下の補助定義は、ブロック型を取り、現在のフレームでそれが示す関数型を検索します。
         <div>\[\begin{split}\begin{array}{lll}
 {\mathrm{expand}}_F({\mathit{typeidx}}) &=& F.{\mathsf{module}}.{\mathsf{types}}[{\mathit{typeidx}}] \\
@@ -482,10 +482,10 @@ Exportの名前と関連する外部値を定義します。
 ### 表記上のお約束
 
 <ul>
-  <li>メタ変数 d はシングルビットの範囲を指定するために使用されます。</li>
-  <li>メタ変数pは、浮動小数点値の倍数(nan および ∞を含む)の範囲を指定するために使用されます。</li>
-  <li>メタ変数qは、nanまたは∞を除く有理数の倍数の範囲を表すために使用されます。</li>
-  <li>表記法<span>\(f^{-1}\)</span>は、双射影関数fの逆数を表します。</li>
+  <li><p>メタ変数 d はシングルビットの範囲を指定するために使用されます。</p></li>
+  <li><p>メタ変数pは、浮動小数点値の倍数(nan および ∞を含む)の範囲を指定するために使用されます。</p></li>
+  <li><p>メタ変数qは、nanまたは∞を除く有理数の倍数の範囲を表すために使用されます。</p></li>
+  <li><p>表記法<span>\(f^{-1}\)</span>は、双射影関数fの逆数を表します。</p></li>
   <li>
     有理数の切り捨ては、通常の数学的定義を用いて、trunc(±q)と書きます。
     <div>\[\begin{split}\begin{array}{lll@{\qquad}l}
@@ -571,7 +571,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iadd}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>で加算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で加算した結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iadd}}_N(i_1, i_2) &amp;=&amp; (i_1 + i_2) \mathbin{\mathrm{mod}} 2^N
@@ -579,7 +579,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{isub}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>で減算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で減算した結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{isub}}_N(i_1, i_2) &amp;=&amp; (i_1 - i_2 + 2^N) \mathbin{\mathrm{mod}} 2^N
@@ -587,7 +587,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{imul}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>で乗算した結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>で乗算した結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{imul}}_N(i_1, i_2) &amp;=&amp; (i_1 \cdot i_2) \mathbin{\mathrm{mod}} 2^N
@@ -595,8 +595,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{idiv\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_2\)</span>が0の時結果は未定義です。</li>
-  <li>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算し、0に向けて切り捨てた結果をmodulo <span>\(2^N\)</span>したものを返します。</li>
+  <li><p><span>\(i_2\)</span>が0の時結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算し、0に向けて切り捨てた結果をmodulo <span>\(2^N\)</span>したものを返します。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{idiv\_u}}_N(i_1, 0) &amp;=&amp; \{\} \\
@@ -611,11 +611,11 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{idiv\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li>もし<span>\(j_2\)</span>が0ならば、結果は未定義です。</li>
-  <li>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果が<span>\(2^{N-1}\)</span>ならば、結果は未定義です。</li>
-  <li>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果を0に向けて切り捨てたものが結果となります。</li>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p>もし<span>\(j_2\)</span>が0ならば、結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果が<span>\(2^{N-1}\)</span>ならば、結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した結果を0に向けて切り捨てたものが結果となります。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{idiv\_s}}_N(i_1, 0) &amp;=&amp; \{\} \\
@@ -635,8 +635,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irem\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_2\)</span>が0ならば、結果は未定義です。</li>
-  <li>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算した剰余を結果とします。</li>
+  <li><p><span>\(i_2\)</span>が0ならば、結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(i_1\)</span>を<span>\(i_2\)</span>で除算した剰余を結果とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{irem\_u}}_N(i_1, 0) &amp;=&amp; \{\} \\
@@ -651,10 +651,10 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irem\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li>もし<span>\(j_2\)</span>が0ならば、結果は未定義です。</li>
-  <li>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した剰余に<span>\(j_1\)</span>の符号を付加したものを結果とします。</li>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p>もし<span>\(j_2\)</span>が0ならば、結果は未定義です。</p></li>
+  <li><p>そうでないならば、<span>\(j_1\)</span>を<span>\(j_2\)</span>で除算した剰余に<span>\(j_1\)</span>の符号を付加したものを結果とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{irem\_s}}_N(i_1, 0) &amp;=&amp; \{\} \\
@@ -670,7 +670,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iand}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のand演算を行います。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のand演算を行います。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iand}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}({\mathrm{ibits}}_N(i_1) \wedge {\mathrm{ibits}}_N(i_2))
@@ -678,7 +678,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ior}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のor演算を行います。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のor演算を行います。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ior}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}({\mathrm{ibits}}_N(i_1) \vee {\mathrm{ibits}}_N(i_2))
@@ -686,7 +686,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ixor}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のxor演算を行います。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>の間でbit毎のxor演算を行います。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ixor}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}({\mathrm{ibits}}_N(i_1) \veebar {\mathrm{ibits}}_N(i_2))
@@ -694,8 +694,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ishl}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li>kが<span>\(i_2\)</span> modulo Nであるとします。</li>
-  <li><span>\(i_1\)</span>に対してkビット左にシフトします。modulo <span>\(2^N\)</span></li>
+  <li><p>kが<span>\(i_2\)</span> modulo Nであるとします。</p></li>
+  <li><p><span>\(i_1\)</span>に対してkビット左にシフトします。modulo <span>\(2^N\)</span></p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ishl}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_2^{N-k}~0^k)
@@ -704,8 +704,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ishr\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li>kが<span>\(i_2\)</span> modulo Nであるとします。</li>
-  <li><span>\(i_1\)</span>に対して右にkビット論理シフトします。</li>
+  <li><p>kが<span>\(i_2\)</span> modulo Nであるとします。</p></li>
+  <li><p><span>\(i_1\)</span>に対して右にkビット論理シフトします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ishr\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(0^k~d_1^{N-k})
@@ -714,8 +714,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ishr\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li>kが<span>\(i_2\)</span> modulo Nであるとします。</li>
-  <li><span>\(i_1\)</span>に対して右にkビット算術シフトします。</li>
+  <li><p>kが<span>\(i_2\)</span> modulo Nであるとします。</p></li>
+  <li><p><span>\(i_1\)</span>に対して右にkビット算術シフトします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ishr\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_0^{k+1}~d_1^{N-k-1})
@@ -724,8 +724,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irotl}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li>kが<span>\(i_2\)</span> modulo Nであるとします。</li>
-  <li><span>\(i_1\)</span>を左にkビット回します。</li>
+  <li><p>kが<span>\(i_2\)</span> modulo Nであるとします。</p></li>
+  <li><p><span>\(i_1\)</span>を左にkビット回します。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{irotl}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_2^{N-k}~d_1^k)
@@ -734,8 +734,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{irotr}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li>kが<span>\(i_2\)</span> modulo Nであるとします。</li>
-  <li><span>\(i_1\)</span>を右にkビット回します。</li>
+  <li><p>kが<span>\(i_2\)</span> modulo Nであるとします。</p></li>
+  <li><p><span>\(i_1\)</span>を右にkビット回します。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{irotr}}_N(i_1, i_2) &amp;=&amp; {\mathrm{ibits}}_N^{-1}(d_2^k~d_1^{N-k})
@@ -744,7 +744,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iclz}}_N(i)\)</span></h3>
 <ul>
-  <li>iの先行する0bitを数えます。iが0ならばすべて0であると見なします。</li>
+  <li><p>iの先行する0bitを数えます。iが0ならばすべて0であると見なします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{iclz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = 0^k~(1~d^\ast)^?)
@@ -752,7 +752,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ictz}}_N(i)\)</span></h3>
 <ul>
-  <li>iの後継する0bitを数えます; iが0ならばすべて0であると見なします。</li>
+  <li><p>iの後継する0bitを数えます; iが0ならばすべて0であると見なします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ictz}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = (d^\ast~1)^?~0^k)
@@ -760,7 +760,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ipopcnt}}_N(i)\)</span></h3>
 <ul>
-  <li>iの0でないbitを数えます。</li>
+  <li><p>iの0でないbitを数えます。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ipopcnt}}_N(i) &amp;=&amp; k &amp; (\mathrel{\mbox{if}} {\mathrm{ibits}}_N(i) = (0^\ast~1)^k~0^\ast)
@@ -776,7 +776,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ieq}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば1を、そうでないならば0を戻り値とします。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば1を、そうでないならば0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ieq}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 = i_2)
@@ -784,7 +784,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ine}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば0を、そうでないならば1を戻り値とします。</li>
+  <li><p><span>\(i_1\)</span>と<span>\(i_2\)</span>が等しいならば0を、そうでないならば1を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ine}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 \neq i_2)
@@ -792,7 +792,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ilt\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>が<span>\(i_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</li>
+  <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ilt\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 &lt; i_2)
@@ -800,9 +800,9 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ilt\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_1\)</span>が<span>\(j_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</li>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>より小さいならば1を、そうでないならば0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ilt\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) &lt; {\mathrm{signed}}_N(i_2))
@@ -810,7 +810,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{igt\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-    <li><span>\(i_1\)</span>が<span>\(i_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</li>
+    <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{igt\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 &gt; i_2)
@@ -818,9 +818,9 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{igt\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_1\)</span>が<span>\(j_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</li>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>より大きいならば1を、そうでないならば0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{igt\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) &gt; {\mathrm{signed}}_N(i_2))
@@ -828,7 +828,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ile\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>が<span>\(i_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</li>
+  <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ile\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 \leq i_2)
@@ -836,9 +836,9 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ile\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_1\)</span>が<span>\(j_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</li>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>以下ならば1を、そうでないならば0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ile\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) \leq {\mathrm{signed}}_N(i_2))
@@ -846,7 +846,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ige\_u}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(i_1\)</span>が<span>\(i_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</li>
+  <li><p><span>\(i_1\)</span>が<span>\(i_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ige\_u}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}(i_1 \geq i_2)
@@ -854,9 +854,9 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ige\_s}}_N(i_1, i_2)\)</span></h3>
 <ul>
-  <li><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</li>
-  <li><span>\(j_1\)</span>が<span>\(j_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</li>
+  <li><p><span>\(j_1\)</span>が<span>\(i_1\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_2\)</span>が<span>\(i_2\)</span>について符号付き整数であると解釈した結果とします。</p></li>
+  <li><p><span>\(j_1\)</span>が<span>\(j_2\)</span>以上ならば1を、そうでないならば0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{array}{&#64;{}lcll}
 {\mathrm{ige\_s}}_N(i_1, i_2) &amp;=&amp; {\mathrm{bool}}({\mathrm{signed}}_N(i_1) \geq {\mathrm{signed}}_N(i_2))
@@ -864,7 +864,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{iextend}M\mathrm{\_s}}_N(i)\)</span></h3>
 <ul>
-  <li><a href="#extend_m_n">\({\mathrm{extend}^{\mathsf{s}}}_{M,N}(i)\)</a>を計算します</li>
+  <li><p><a href="#extend_m_n">\({\mathrm{extend}^{\mathsf{s}}}_{M,N}(i)\)</a>を計算します</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{iextend}M\mathrm{\_s}}_{N}(i) &amp;=&amp; {\mathrm{extend}^{\mathsf{s}}}_{M,N}(i) \\
@@ -899,31 +899,31 @@ Exportの名前と関連する外部値を定義します。
 実数rは、次のようにしてビット幅 N の浮動小数点値に変換されます。
 
 <ul>
-  <li>rが0ならば0を戻り値とします。</li>
-  <li>rが範囲内の場合、rを戻り値とします。</li>
-  <li>rが上限値以上の場合、正のinfinityを戻り値とします。</li>
-  <li>rが下限値以下の場合、負のinfinityを戻り値とします。</li>
+  <li><p>rが0ならば0を戻り値とします。</p></li>
+  <li><p>rが範囲内の場合、rを戻り値とします。</p></li>
+  <li><p>rが上限値以上の場合、正のinfinityを戻り値とします。</p></li>
+  <li><p>rが下限値以下の場合、負のinfinityを戻り値とします。</p></li>
   <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>は候補ペアとなります。<span>\(z_1 &lt; r &lt; z_2\)</span>について:
     <ul>
-      <li>もし<span>\(|r - z_1| &lt; |r - z_2|\)</span>ならば、zを<span>\(z_1\)</span>であるとします。</li>
-      <li>そうでないならば、<span>\(|r - z_1| &gt; |r - z_2|\)</span>ならば、zを<span>\(z_2\)</span>であるとします。</li>
-      <li>そうでないならば、<span>\(|r - z_1| = |r - z_2|\)</span>と<span>\(z_1\)</span>の仮数がevenならば、zを<span>\(z_1\)</span>であるとします。</li>
-      <li>そうでないならば、zを<span>\(z_2\)</span>.</li>
+      <li><p>もし<span>\(|r - z_1| &lt; |r - z_2|\)</span>ならば、zを<span>\(z_1\)</span>であるとします。</p></li>
+      <li><p>そうでないならば、<span>\(|r - z_1| &gt; |r - z_2|\)</span>ならば、zを<span>\(z_2\)</span>であるとします。</p></li>
+      <li><p>そうでないならば、<span>\(|r - z_1| = |r - z_2|\)</span>と<span>\(z_1\)</span>の仮数がevenならば、zを<span>\(z_1\)</span>であるとします。</p></li>
+      <li><p>そうでないならば、zを<span>\(z_2\)</span>.</p></li>
     </ul>
   </li>
   <li>もしzが0ならば、
     <ul>
-      <li>もし<span>\(r &lt; 0\)</span>ならば、0を戻り値とします。</li>
-      <li>そうでないならば、0を戻り値とします。</li>
+      <li><p>もし<span>\(r &lt; 0\)</span>ならば、0を戻り値とします。</p></li>
+      <li><p>そうでないならば、0を戻り値とします。</p></li>
     </ul>
     </li>
   <li>そうでないならば、zが境界上の数値であるとして、
     <ul>
-      <li>もし<span>\(r &lt; 0\)</span>ならば、負のinfinityを戻り値とします。</li>
-      <li>そうでないならば、正のinfinityを戻り値とします。</li>
+      <li><p>もし<span>\(r &lt; 0\)</span>ならば、負のinfinityを戻り値とします。</p></li>
+      <li><p>そうでないならば、正のinfinityを戻り値とします。</p></li>
     </ul>
   </li>
-  <li>そうでないならば、zを戻り値とします。</li>
+  <li><p>そうでないならば、zを戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{float}}_N(0) &amp;=&amp; 0 \\
@@ -972,15 +972,15 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fadd}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>のうちどちらかがNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が異なる符号のinfinityならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号のinfinityならば、そのinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>がinfinityならば、そのinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、正の0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の同じ0同士であるならば、その0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が0ならば、もう一方を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ大きさの絶対値を持ち、符号が異なるならば、正の0を戻り値とします。</li>
-  <li><span>\(z_1\)</span>と<span>\(z_2\)</span>を加算し、近傍の表現可能な値に丸めます。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>のうちどちらかがNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が異なる符号のinfinityならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号のinfinityならば、そのinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>がinfinityならば、そのinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、正の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の同じ0同士であるならば、その0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が0ならば、もう一方を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ大きさの絶対値を持ち、符号が異なるならば、正の0を戻り値とします。</p></li>
+  <li><p><span>\(z_1\)</span>と<span>\(z_2\)</span>を加算し、近傍の表現可能な値に丸めます。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fadd}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
@@ -999,17 +999,17 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fsub}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号のinfinityならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が異なる符号のinfinityならば、<span>\(z_1\)</span>を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>がinfinityならば、そのinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>がinfinityならば、そのinfinityの符号を反転したものを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の同じ0同士であるならば、正の0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、<span>\(z_1\)</span>を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が0ならば、<span>\(z_1\)</span>を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が0ならば、return <span>\(z_2\)</span> negated.</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、正の0を戻り値とします。</li>
-  <li><span>\(z_2\)</span>を<span>\(z_1\)</span>で減算し、近傍の表現可能な値に丸めます。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号のinfinityならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が異なる符号のinfinityならば、<span>\(z_1\)</span>を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>がinfinityならば、そのinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>がinfinityならば、そのinfinityの符号を反転したものを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の同じ0同士であるならば、正の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、<span>\(z_1\)</span>を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が0ならば、<span>\(z_1\)</span>を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が0ならば、return <span>\(z_2\)</span> negated.</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、正の0を戻り値とします。</p></li>
+  <li><p><span>\(z_2\)</span>を<span>\(z_1\)</span>で減算し、近傍の表現可能な値に丸めます。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fsub}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
@@ -1028,15 +1028,15 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fmul}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、one of <span>\(z_1\)</span>と<span>\(z_2\)</span>が0とthe other infinityならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号のinfinityならば、正のinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が異なる符号のinfinityならば、負のinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>がinfinityと同じ符号の値ならば、正のinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>がinfinityと異なる符号の値ならば、負のinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の同じ0同士であるならば、正の0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、負の0を戻り値とします。</li>
-  <li><span>\(z_1\)</span>と<span>\(z_2\)</span>を乗算し、近傍の表現可能な値に丸めます。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、one of <span>\(z_1\)</span>と<span>\(z_2\)</span>が0とthe other infinityならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号のinfinityならば、正のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が異なる符号のinfinityならば、負のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>がinfinityと同じ符号の値ならば、正のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>がinfinityと異なる符号の値ならば、負のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の同じ0同士であるならば、正の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、負の0を戻り値とします。</p></li>
+  <li><p><span>\(z_1\)</span>と<span>\(z_2\)</span>を乗算し、近傍の表現可能な値に丸めます。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fmul}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
@@ -1058,18 +1058,18 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fdiv}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が両方infinitiyならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が両方0ならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>がinfinityで<span>\(z_2\)</span>が符号の同じ値ならば、正のinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>がinfinityで<span>\(z_2\)</span>が符号の異なる値ならば、負のinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>がinfinityで<span>\(z_1\)</span>が符号の同じ値ならば、正の0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>がinfinityで<span>\(z_1\)</span>が符号の異なる値ならば、負の0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が0で<span>\(z_2\)</span>が符号の同じ値ならば、正の0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が0で<span>\(z_2\)</span>が符号の異なる値ならば、負の0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が0で<span>\(z_1\)</span>が符号の同じ値ならば、正のinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が0で<span>\(z_1\)</span>が符号の異なる値ならば、負のinfinityを戻り値とします。</li>
-  <li><span>\(z_1\)</span>を<span>\(z_2\)</span>で除算し、近傍の表現可能な値に丸めます。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が両方infinitiyならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が両方0ならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>がinfinityで<span>\(z_2\)</span>が符号の同じ値ならば、正のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>がinfinityで<span>\(z_2\)</span>が符号の異なる値ならば、負のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>がinfinityで<span>\(z_1\)</span>が符号の同じ値ならば、正の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>がinfinityで<span>\(z_1\)</span>が符号の異なる値ならば、負の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が0で<span>\(z_2\)</span>が符号の同じ値ならば、正の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が0で<span>\(z_2\)</span>が符号の異なる値ならば、負の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が0で<span>\(z_1\)</span>が符号の同じ値ならば、正のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が0で<span>\(z_1\)</span>が符号の異なる値ならば、負のinfinityを戻り値とします。</p></li>
+  <li><p><span>\(z_1\)</span>を<span>\(z_2\)</span>で除算し、近傍の表現可能な値に丸めます。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fdiv}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
@@ -1091,11 +1091,11 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fmin}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が負のinfinityならば、負のinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が正のinfinityならば、もう一方を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、負の0を戻り値とします。</li>
-  <li><span>\(z_1\)</span>と<span>\(z_2\)</span>のうち小さい方を戻り値とします。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が負のinfinityならば、負のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が正のinfinityならば、もう一方を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、負の0を戻り値とします。</p></li>
+  <li><p><span>\(z_1\)</span>と<span>\(z_2\)</span>のうち小さい方を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fmin}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
@@ -1111,11 +1111,11 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fmax}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が正のinfinityならば、正のinfinityを戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が負のinfinityならば、もう一方を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、正の0を戻り値とします。</li>
-  <li><span>\(z_1\)</span>と<span>\(z_2\)</span>のうち大きい方を戻り値とします。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、<span>\({\mathrm{nans}}_N\{z_1, z_2\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が正のinfinityならば、正のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>か<span>\(z_2\)</span>が負のinfinityならば、もう一方を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が符号の異なる0同士であるならば、正の0を戻り値とします。</p></li>
+  <li><p><span>\(z_1\)</span>と<span>\(z_2\)</span>のうち大きい方を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fmax}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n), z_2\} \\
@@ -1131,8 +1131,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fcopysign}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号ならば、<span>\(z_1\)</span>を戻り値とします。</li>
-  <li><span>\(z_1\)</span>の符号を反転したものを戻り値とします。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>が同じ符号ならば、<span>\(z_1\)</span>を戻り値とします。</p></li>
+  <li><p><span>\(z_1\)</span>の符号を反転したものを戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fcopysign}}_N(\pm p_1, \pm p_2) &amp;=&amp; \pm p_1 \\
@@ -1142,11 +1142,11 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fabs}}_N(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNならば、return z with 正のsign.</li>
-  <li>そうでないならば、zがinfinityならば、正のinfinityを戻り値とします。</li>
-  <li>そうでないならば、zが0ならば、正の0を戻り値とします。</li>
-  <li>そうでないならば、zが正のvalueならば、zを戻り値とします。</li>
-  <li>zの符号を反転したものを戻り値とします。</li>
+  <li><p>もしzがNaNならば、return z with 正のsign.</p></li>
+  <li><p>そうでないならば、zがinfinityならば、正のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0ならば、正の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、zが正のvalueならば、zを戻り値とします。</p></li>
+  <li><p>zの符号を反転したものを戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fabs}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; +{\mathsf{nan}}(n) \\
@@ -1157,10 +1157,10 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fneg}}_N(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNならば、return z with negated sign.</li>
-  <li>そうでないならば、zがinfinityならば、そのinfinityの符号を反転したものを戻り値とします。</li>
-  <li>そうでないならば、zが0ならば、その0の符号を反転したものを戻り値とします。</li>
-  <li>zの符号を反転したものを戻り値とします。</li>
+  <li><p>もしzがNaNならば、return z with negated sign.</p></li>
+  <li><p>そうでないならば、zがinfinityならば、そのinfinityの符号を反転したものを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0ならば、その0の符号を反転したものを戻り値とします。</p></li>
+  <li><p>zの符号を反転したものを戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fneg}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; \mp {\mathsf{nan}}(n) \\
@@ -1171,11 +1171,11 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fsqrt}}_N(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、z has a 負のsignならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、zが正のinfinityならば、正のinfinityを戻り値とします。</li>
-  <li>そうでないならば、zが0ならば、その0を戻り値とします。</li>
-  <li>zの平方根を戻り値とします。</li>
+  <li><p>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、z has a 負のsignならば、<span>\({\mathrm{nans}}_N\{\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、zが正のinfinityならば、正のinfinityを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0ならば、その0を戻り値とします。</p></li>
+  <li><p>zの平方根を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fsqrt}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
@@ -1188,11 +1188,11 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fceil}}_N(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、zがinfinityならば、zを戻り値とします。</li>
-  <li>そうでないならば、zが0ならば、zを戻り値とします。</li>
-  <li>そうでないならば、zが0未満で-1より大きいならば、負の0を戻り値とします。</li>
-  <li>z以上の最小の整数を戻り値とします。</li>
+  <li><p>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、zがinfinityならば、zを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0ならば、zを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0未満で-1より大きいならば、負の0を戻り値とします。</p></li>
+  <li><p>z以上の最小の整数を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fceil}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
@@ -1204,11 +1204,11 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ffloor}}_N(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、zがinfinityならば、zを戻り値とします。</li>
-  <li>そうでないならば、zが0ならば、zを戻り値とします。</li>
-  <li>そうでないならば、zが0より大きく1未満ならば、正の0を戻り値とします。</li>
-  <li>z以下の最大の整数を戻り値とします。</li>
+  <li><p>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、zがinfinityならば、zを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0ならば、zを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0より大きく1未満ならば、正の0を戻り値とします。</p></li>
+  <li><p>z以下の最大の整数を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{ffloor}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
@@ -1220,12 +1220,12 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{ftrunc}}_N(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、zがinfinityならば、zを戻り値とします。</li>
-  <li>そうでないならば、zが0ならば、zを戻り値とします。</li>
-  <li>そうでないならば、zが0より大きく1未満ならば、正の0を戻り値とします。</li>
-  <li>そうでないならば、zが0未満で-1より大きいならば、負の0を戻り値とします。</li>
-  <li>zの絶対値に最も近い最大の整数にzと同じ符号を付けたものを戻り値とします。</li>
+  <li><p>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、zがinfinityならば、zを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0ならば、zを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0より大きく1未満ならば、正の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0未満で-1より大きいならば、負の0を戻り値とします。</p></li>
+  <li><p>zの絶対値に最も近い最大の整数にzと同じ符号を付けたものを戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{ftrunc}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
@@ -1238,12 +1238,12 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fnearest}}_N(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</li>
-  <li>そうでないならば、zがinfinityならば、zを戻り値とします。</li>
-  <li>そうでないならば、zが0ならば、zを戻り値とします。</li>
-  <li>そうでないならば、zが0より大きく0.5以下ならば、正の0を戻り値とします。</li>
-  <li>そうでないならば、zが0未満-0.5以上ならば、負の0を戻り値とします。</li>
-  <li>zに近い整数に丸めます; 等距離ならば偶数を戻り値とします。</li>
+  <li><p>もしzがNaNならば、<span>\({\mathrm{nans}}_N\{z\}\)</span>の要素を戻り値とします。</p></li>
+  <li><p>そうでないならば、zがinfinityならば、zを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0ならば、zを戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0より大きく0.5以下ならば、正の0を戻り値とします。</p></li>
+  <li><p>そうでないならば、zが0未満-0.5以上ならば、負の0を戻り値とします。</p></li>
+  <li><p>zに近い整数に丸めます; 等距離ならば偶数を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fnearest}}_N(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\pm {\mathsf{nan}}(n)\} \\
@@ -1257,10 +1257,10 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{feq}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、1を戻り値とします。</li>
-  <li>0を戻り値とします。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、1を戻り値とします。</p></li>
+  <li><p>0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{feq}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
@@ -1271,10 +1271,10 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fne}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、0を戻り値とします。</li>
-  <li>1を戻り値とします。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、0を戻り値とします。</p></li>
+  <li><p>1を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fne}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 1 \\
@@ -1285,15 +1285,15 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{flt}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>未満ならば、1を戻り値とします。</li>
-  <li>0を戻り値とします。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>未満ならば、1を戻り値とします。</p></li>
+  <li><p>0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{flt}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
@@ -1309,15 +1309,15 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fgt}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>より大きいならば、1を戻り値とします。</li>
-  <li>0を戻り値とします。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>より大きいならば、1を戻り値とします。</p></li>
+  <li><p>0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fgt}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
@@ -1333,15 +1333,15 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fle}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>以下ならば、1を戻り値とします。</li>
-  <li>0を戻り値とします。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>以下ならば、1を戻り値とします。</p></li>
+  <li><p>0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fle}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
@@ -1357,15 +1357,15 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{fge}}_N(z_1, z_2)\)</span></h3>
 <ul>
-  <li>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、0を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、1を戻り値とします。</li>
-  <li>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>以下ならば、1を戻り値とします。</li>
-  <li>0を戻り値とします。</li>
+  <li><p>もし<span>\(z_1\)</span>と<span>\(z_2\)</span>どちらか一方がNaNならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が等しいならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が正のinfinityならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が負のinfinityならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が正のinfinityならば、0を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_2\)</span>が負のinfinityならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>と<span>\(z_2\)</span>が0ならば、1を戻り値とします。</p></li>
+  <li><p>そうでないならば、<span>\(z_1\)</span>が<span>\(z_2\)</span>以下ならば、1を戻り値とします。</p></li>
+  <li><p>0を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{&#64;{}lcll}
 {\mathrm{fge}}_N(\pm {\mathsf{nan}}(n), z_2) &amp;=&amp; 0 \\
@@ -1383,7 +1383,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{extend}^{\mathsf{u}}}_{M,N}(i)\)</span></h3>
 <ul>
-  <li>iを戻り値とします。</li>
+  <li><p>iを戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{extend}^{\mathsf{u}}}_{M,N}(i) &amp;=&amp; i \\
@@ -1397,8 +1397,8 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{extend}^{\mathsf{s}}}_{M,N}(i)\)</span></h3>
 <ul>
-  <li>Let j be the signed interpretation of i of size M</li>
-  <li>Return the two’s complement of j relative to size N</li>
+  <li><p>Let j be the signed interpretation of i of size M</p></li>
+  <li><p>Return the two’s complement of j relative to size N</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{extend}^{\mathsf{s}}}_{M,N}(i) &amp;=&amp; {\mathrm{signed}}_N^{-1}({\mathrm{signed}}_M(i)) \\
@@ -1406,7 +1406,7 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{wrap}}_{M,N}(i)\)</span></h3>
 <ul>
-  <li>iを<span>\(2^N\)</span>で割った剰余を戻り値とします。</li>
+  <li><p>iを<span>\(2^N\)</span>で割った剰余を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{wrap}}_{M,N}(i) &amp;=&amp; i \mathbin{\mathrm{mod}} 2^N \\
@@ -1414,10 +1414,10 @@ Exportの名前と関連する外部値を定義します。
 
 <h3><span>\({\mathrm{trunc}^{\mathsf{u}}}_{M,N}(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNであるならば、戻り値は未定義です。</li>
-  <li>あるいはzがinfinityであるならば、戻り値は未定義です。</li>
-  <li>あるいはzが数値であり、<span>\({\mathrm{trunc}}(z)\)</span>が対象の型の値の範囲内に存在するならばその値を戻り値とします。</li>
-  <li>そうでないならば、戻り値は未定義です。</li>
+  <li><p>もしzがNaNであるならば、戻り値は未定義です。</p></li>
+  <li><p>あるいはzがinfinityであるならば、戻り値は未定義です。</p></li>
+  <li><p>あるいはzが数値であり、<span>\({\mathrm{trunc}}(z)\)</span>が対象の型の値の範囲内に存在するならばその値を戻り値とします。</p></li>
+  <li><p>そうでないならば、戻り値は未定義です。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{trunc}^{\mathsf{u}}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; \{\} \\
@@ -1435,10 +1435,10 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathrm{trunc}^{\mathsf{s}}}_{M,N}(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNであるならば、戻り値は未定義です。</li>
-  <li>あるいはzがinfinityであるならば、戻り値は未定義です。</li>
-  <li>あるいはzが数値であり、<span>\({\mathrm{trunc}}(z)\)</span>が対象の型の値の範囲内に存在するならばその値を戻り値とします。</li>
-  <li>そうでないならば、戻り値は未定義です。</li>
+  <li><p>もしzがNaNであるならば、戻り値は未定義です。</p></li>
+  <li><p>あるいはzがinfinityであるならば、戻り値は未定義です。</p></li>
+  <li><p>あるいはzが数値であり、<span>\({\mathrm{trunc}}(z)\)</span>が対象の型の値の範囲内に存在するならばその値を戻り値とします。</p></li>
+  <li><p>そうでないならば、戻り値は未定義です。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{trunc}^{\mathsf{s}}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; \{\} \\
@@ -1456,12 +1456,12 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathrm{trunc\_sat\_u}}_{M,N}(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNであるならば、0を戻り値とします。</li>
-  <li>あるいはzが負のinfinityであるならば、0を戻り値とします。</li>
-  <li>あるいはzが正のinfinityであるならば、<span>\(2^N - 1\)</span>を戻り値とします。</li>
-  <li>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が0未満ならば、0を戻り値とします。</li>
-  <li>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が<span>\(2^N - 1\)</span>より大きいならば、<span>\(2^N - 1\)</span>を戻り値とします。</li>
-  <li><span>\({\mathrm{trunc}}(z)\)</span>を戻り値とします。</li>
+  <li><p>もしzがNaNであるならば、0を戻り値とします。</p></li>
+  <li><p>あるいはzが負のinfinityであるならば、0を戻り値とします。</p></li>
+  <li><p>あるいはzが正のinfinityであるならば、<span>\(2^N - 1\)</span>を戻り値とします。</p></li>
+  <li><p>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が0未満ならば、0を戻り値とします。</p></li>
+  <li><p>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が<span>\(2^N - 1\)</span>より大きいならば、<span>\(2^N - 1\)</span>を戻り値とします。</p></li>
+  <li><p><span>\({\mathrm{trunc}}(z)\)</span>を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{trunc\_sat\_u}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; 0 \\
@@ -1481,12 +1481,12 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathrm{trunc\_sat\_s}}_{M,N}(z)\)</span></h3>
 <ul>
-  <li>もしzがNaNであるならば、0を戻り値とします。</li>
-  <li>あるいはzが負のinfinityであるならば、<span>\(-2^{N-1}\)</span>を戻り値とします。</li>
-  <li>あるいはzが正のinfinityであるならば、<span>\(2^{N-1} - 1\)</span>を戻り値とします。</li>
-  <li>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が<span>\(-2^{N-1}\)</span>未満ならば、<span>\(-2^{N-1}\)</span>を戻り値とします。</li>
-  <li>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が<span>\(2^{N-1} - 1\)</span>より大きいならば、<span>\(2^{N-1} - 1\)</span>を戻り値とします。</li>
-  <li><span>\({\mathrm{trunc}}(z)\)</span>を戻り値とします。</li>
+  <li><p>もしzがNaNであるならば、0を戻り値とします。</p></li>
+  <li><p>あるいはzが負のinfinityであるならば、<span>\(-2^{N-1}\)</span>を戻り値とします。</p></li>
+  <li><p>あるいはzが正のinfinityであるならば、<span>\(2^{N-1} - 1\)</span>を戻り値とします。</p></li>
+  <li><p>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が<span>\(-2^{N-1}\)</span>未満ならば、<span>\(-2^{N-1}\)</span>を戻り値とします。</p></li>
+  <li><p>あるいは<span>\({\mathrm{trunc}}(z)\)</span>が<span>\(2^{N-1} - 1\)</span>より大きいならば、<span>\(2^{N-1} - 1\)</span>を戻り値とします。</p></li>
+  <li><p><span>\({\mathrm{trunc}}(z)\)</span>を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{trunc\_sat\_s}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; 0 \\
@@ -1499,9 +1499,9 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathrm{promote}}_{M,N}(z)\)</span></h3>
 <ul>
-  <li>zがcanonical Nanであるならば、<span>\({\mathrm{nans}}_N\{\}\)</span> (例：サイズNのcanonical Nan)の要素を戻り値とします。</li>
-  <li>あるいはzがNaNであるならば、<span>\({\mathrm{nans}}_N\{\pm {\mathsf{nan}}(1)\}\)</span> (例：サイズNのarithmetic Nan)の要素を戻り値とします。</li>
-  <li>zを戻り値とします。</li>
+  <li><p>zがcanonical Nanであるならば、<span>\({\mathrm{nans}}_N\{\}\)</span> (例：サイズNのcanonical Nan)の要素を戻り値とします。</p></li>
+  <li><p>あるいはzがNaNであるならば、<span>\({\mathrm{nans}}_N\{\pm {\mathsf{nan}}(1)\}\)</span> (例：サイズNのarithmetic Nan)の要素を戻り値とします。</p></li>
+  <li><p>zを戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{promote}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\} &amp; (\mathrel{\mbox{if}} n = {\mathrm{canon}}_N) \\
@@ -1511,11 +1511,11 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathrm{demote}}_{M,N}(z)\)</span></h3>
 <ul>
-  <li>zがcanonical Nanであるならば、<span>\({\mathrm{nans}}_N\{\}\)</span> (例：サイズNのcanonical Nan)の要素を戻り値とします。</li>
-  <li>あるいはzがNaNであるならば、<span>\({\mathrm{nans}}_N\{\pm {\mathsf{nan}}(1)\}\)</span> (例：サイズNのNan)の要素を戻り値とします。</li>
-  <li>あるいはzがinfinityであるならば、そのinfinityを戻り値とします。</li>
-  <li>あるいはzが0であるならば、その0を戻り値とします。</li>
-  <li><span>\({\mathrm{float}}_N(z)\)</span>を戻り値とします。</li>
+  <li><p>zがcanonical Nanであるならば、<span>\({\mathrm{nans}}_N\{\}\)</span> (例：サイズNのcanonical Nan)の要素を戻り値とします。</p></li>
+  <li><p>あるいはzがNaNであるならば、<span>\({\mathrm{nans}}_N\{\pm {\mathsf{nan}}(1)\}\)</span> (例：サイズNのNan)の要素を戻り値とします。</p></li>
+  <li><p>あるいはzがinfinityであるならば、そのinfinityを戻り値とします。</p></li>
+  <li><p>あるいはzが0であるならば、その0を戻り値とします。</p></li>
+  <li><p><span>\({\mathrm{float}}_N(z)\)</span>を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{demote}}_{M,N}(\pm {\mathsf{nan}}(n)) &amp;=&amp; {\mathrm{nans}}_N\{\} &amp; (\mathrel{\mbox{if}} n = {\mathrm{canon}}_N) \\
@@ -1527,7 +1527,7 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathrm{convert}^{\mathsf{u}}}_{M,N}(i)\)</span></h3>
 <ul>
-  <li><span>\({\mathrm{float}}_N(i)\)</span>を戻り値とします。</li>
+  <li><p><span>\({\mathrm{float}}_N(i)\)</span>を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{convert}^{\mathsf{u}}}_{M,N}(i) &amp;=&amp; {\mathrm{float}}_N(i) \\
@@ -1535,8 +1535,8 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathrm{convert}^{\mathsf{s}}}_{M,N}(i)\)</span></h3>
 <ul>
-  <li>jiのsigned interpretationであるとします。</li>
-  <li><span>\({\mathrm{float}}_N(j)\)</span>を戻り値とします。</li>
+  <li><p>jiのsigned interpretationであるとします。</p></li>
+  <li><p><span>\({\mathrm{float}}_N(j)\)</span>を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{convert}^{\mathsf{u}}}_{M,N}(i) &amp;=&amp; {\mathrm{float}}_N({\mathrm{signed}}_M(i)) \\
@@ -1544,8 +1544,8 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathrm{reinterpret}}_{t_1,t_2}(c)\)</span></h3>
 <ul>
-  <li><span>\(d^\ast\)</span>がビット列<span>\({\mathrm{bits}}_{t_1}(c)\)</span>であるとします。</li>
-  <li><span>\({\mathrm{bits}}_{t_2}(c') = d^\ast\)</span>となる定数<span>\(c'\)</span>を戻り値とします。</li>
+  <li><p><span>\(d^\ast\)</span>がビット列<span>\({\mathrm{bits}}_{t_1}(c)\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathrm{bits}}_{t_2}(c') = d^\ast\)</span>となる定数<span>\(c'\)</span>を戻り値とします。</p></li>
 </ul>
 <div>\[\begin{split}\begin{array}{lll&#64;{\qquad}l}
 {\mathrm{reinterpret}}_{t_1,t_2}(c) &amp;=&amp; {\mathrm{bits}}_{t_2}^{-1}({\mathrm{bits}}_{t_1}(c)) \\
@@ -1587,7 +1587,7 @@ Nanに対して定義されていません。
 
 <h3><span>\(t\mathsf{.}{\mathsf{const}}~c\)</span></h3>
 <ol>
-  <li><span>\(t.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+  <li><p><span>\(t.{\mathsf{const}}~c\)</span>をスタックにpushします。</p></li>
 </ol>
 
 ### 付記
@@ -1598,17 +1598,17 @@ Nanに対して定義されていません。
 
 <h3><span>\(t\mathsf{.}{\mathit{unop}}\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの一番上に存在するはずです。</li>
-  <li>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの一番上に存在するはずです。</p></li>
+  <li><p>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</p></li>
   <li>もし<span>\({\mathit{unop}}_t(c_1)\)</span>が定義されているならば:
     <ol>
-      <li>cが<span>\({\mathit{unop}}_t(c_1)\)</span>の計算結果として算出可能であるとします。</li>
-      <li><span>\(t.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+      <li><p>cが<span>\({\mathit{unop}}_t(c_1)\)</span>の計算結果として算出可能であるとします。</p></li>
+      <li><p><span>\(t.{\mathsf{const}}~c\)</span>をスタックにpushします。</p></li>
     </ol>
   </li>
   <li>そうでないならば:
     <ol>
-      <li>トラップします。</li>
+      <li><p>トラップします。</p></li>
     </ol>
   </li>
 </ol>
@@ -1621,18 +1621,18 @@ Nanに対して定義されていません。
 
 <h3><span>\(t\mathsf{.}{\mathit{binop}}\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの上に2つ連続して存在するはずです。</li>
-  <li>スタックから<span>\(t.{\mathsf{const}}~c_2\)</span>をpopします。</li>
-  <li>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの上に2つ連続して存在するはずです。</p></li>
+  <li><p>スタックから<span>\(t.{\mathsf{const}}~c_2\)</span>をpopします。</p></li>
+  <li><p>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</p></li>
   <li>もし<span>\({\mathit{binop}}_t(c_1, c_2)\)</span>が定義されているならば:
     <ol>
-      <li>cが<span>\({\mathit{binop}}_t(c_1, c_2)\)</span>の計算結果として算出可能であるとします。</li>
-      <li><span>\(t.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+      <li><p>cが<span>\({\mathit{binop}}_t(c_1, c_2)\)</span>の計算結果として算出可能であるとします。</p></li>
+      <li><p><span>\(t.{\mathsf{const}}~c\)</span>をスタックにpushします。</p></li>
     </ol>
   </li>
   <li>そうでないならば:
     <ol>
-      <li>トラップします。</li>
+      <li><p>トラップします。</p></li>
     </ol>
   </li>
 </ol>
@@ -1645,10 +1645,10 @@ Nanに対して定義されていません。
 
 <h3><span>\(t\mathsf{.}{\mathit{testop}}\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの一番上に存在するはずです。</li>
-  <li>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</li>
-  <li>cが<span>\({\mathit{testop}}_t(c_1)\)</span>の計算結果であるとします。</li>
-  <li><span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの一番上に存在するはずです。</p></li>
+  <li><p>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</p></li>
+  <li><p>cが<span>\({\mathit{testop}}_t(c_1)\)</span>の計算結果であるとします。</p></li>
+  <li><p><span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をスタックにpushします。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 (t\mathsf{.}{\mathsf{const}}~c_1)~t\mathsf{.}{\mathit{testop}} &amp;{\hookrightarrow}&amp; ({\mathsf{i32}}\mathsf{.}{\mathsf{const}}~c)
@@ -1657,11 +1657,11 @@ Nanに対して定義されていません。
 
 <h3><span>\(t\mathsf{.}{\mathit{relop}}\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの上に2つ連続して存在するはずです。</li>
-  <li>スタックから<span>\(t.{\mathsf{const}}~c_2\)</span>をpopします。</li>
-  <li>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</li>
-  <li>cが<span>\({\mathit{relop}}_t(c_1, c_2)\)</span>の計算結果であるとします。</li>
-  <li><span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をスタックにpushします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型tの値がスタックの上に2つ連続して存在するはずです。</p></li>
+  <li><p>スタックから<span>\(t.{\mathsf{const}}~c_2\)</span>をpopします。</p></li>
+  <li><p>スタックから<span>\(t.{\mathsf{const}}~c_1\)</span>をpopします。</p></li>
+  <li><p>cが<span>\({\mathit{relop}}_t(c_1, c_2)\)</span>の計算結果であるとします。</p></li>
+  <li><p><span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をスタックにpushします。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 (t\mathsf{.}{\mathsf{const}}~c_1)~(t\mathsf{.}{\mathsf{const}}~c_2)~t\mathsf{.}{\mathit{relop}} &amp;{\hookrightarrow}&amp; ({\mathsf{i32}}\mathsf{.}{\mathsf{const}}~c)
@@ -1670,17 +1670,17 @@ Nanに対して定義されていません。
 
 <h3><span>\(t_2\mathsf{.}{\mathit{cvtop}}\mathsf{\_}t_1\mathsf{\_}{\mathit{sx}}^?\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\(t_1\)</span>の値がスタックの上に2つ連続して存在するはずです。</li>
-  <li>スタックから<span>\(t_1.{\mathsf{const}}~c_1\)</span>をpopします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\(t_1\)</span>の値がスタックの上に2つ連続して存在するはずです。</p></li>
+  <li><p>スタックから<span>\(t_1.{\mathsf{const}}~c_1\)</span>をpopします。</p></li>
   <li>もし<span>\({\mathit{cvtop}}^{{\mathit{sx}}^?}_{t_1,t_2}(c_1)\)</span>が定義されているならば:
     <ol>
-      <li><span>\(c_2\)</span>が<span>\({\mathit{cvtop}}^{{\mathit{sx}}^?}_{t_1,t_2}(c_1)\)</span>の計算結果であるとします。</li>
-      <li><span>\(t_2.{\mathsf{const}}~c_2\)</span>をスタックにpushします。</li>
+      <li><p><span>\(c_2\)</span>が<span>\({\mathit{cvtop}}^{{\mathit{sx}}^?}_{t_1,t_2}(c_1)\)</span>の計算結果であるとします。</p></li>
+      <li><p><span>\(t_2.{\mathsf{const}}~c_2\)</span>をスタックにpushします。</p></li>
     </ol>
   </li>
   <li>そうでないならば:
     <ol>
-      <li>トラップします。</li>
+      <li><p>トラップします。</p></li>
     </ol>
   </li>
 </ol>
@@ -1695,8 +1695,8 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathsf{drop}}\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</li>
-  <li>スタックから<span>\({\mathit{val}}\)</span>をpopします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}\)</span>をpopします。</p></li>
 </ol>
 <div>\[\begin{array}{lcl&#64;{\qquad}l}
 {\mathit{val}}~~{\mathsf{drop}} &amp;{\hookrightarrow}&amp; \epsilon
@@ -1704,19 +1704,19 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathsf{select}}\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値がスタックの上に1つ存在するはずです。</li>
-  <li>スタックから<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、同じ型の値がスタックの上に2つ以上存在するはずです。</li>
-  <li>スタックから<span>\({\mathit{val}}_2\)</span>をpopします。</li>
-  <li>スタックから<span>\({\mathit{val}}_1\)</span>をpopします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値がスタックの上に1つ存在するはずです。</p></li>
+  <li><p>スタックから<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、同じ型の値がスタックの上に2つ以上存在するはずです。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}_2\)</span>をpopします。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}_1\)</span>をpopします。</p></li>
   <li>cが0でないならば:
     <ol>
-      <li><span>\({\mathit{val}}_1\)</span>をスタックにpushしなおします。</li>
+      <li><p><span>\({\mathit{val}}_1\)</span>をスタックにpushしなおします。</p></li>
     </ol>
   </li>
   <li>そうでないならば、:
     <ol>
-      <li><span>\({\mathit{val}}_2\)</span>をスタックにpushしなおします。</li>
+      <li><p><span>\({\mathit{val}}_2\)</span>をスタックにpushしなおします。</p></li>
     </ol>
   </li>
 </ol>
@@ -1731,10 +1731,10 @@ Nanに対して定義されていません。
 
 <h3><span>\({\mathsf{local.get}}~x\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{locals}}[x]\)</span>は存在します。</li>
-  <li><span>\({\mathit{val}}\)</span>が値<span>\(F.{\mathsf{locals}}[x]\)</span>であるとします。</li>
-  <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{locals}}[x]\)</span>は存在します。</p></li>
+  <li><p><span>\({\mathit{val}}\)</span>が値<span>\(F.{\mathsf{locals}}[x]\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathit{val}}\)</span>をスタックにpushします。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 F; ({\mathsf{local.get}}~x) &amp;{\hookrightarrow}&amp; F; {\mathit{val}}
@@ -1743,11 +1743,11 @@ F; ({\mathsf{local.get}}~x) &amp;{\hookrightarrow}&amp; F; {\mathit{val}}
 
 <h3><span>\({\mathsf{local.set}}~x\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{locals}}[x]\)</span>は存在します。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</li>
-  <li><span>\({\mathit{val}}\)</span>をスタックからpopします。</li>
-  <li><span>\(F.{\mathsf{locals}}[x]\)</span>を<span>\({\mathit{val}}\)</span>で置換します。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{locals}}[x]\)</span>は存在します。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</p></li>
+  <li><p><span>\({\mathit{val}}\)</span>をスタックからpopします。</p></li>
+  <li><p><span>\(F.{\mathsf{locals}}[x]\)</span>を<span>\({\mathit{val}}\)</span>で置換します。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{lcl&#64;{\qquad}l}
 F; {\mathit{val}}~({\mathsf{local.set}}~x) &amp;{\hookrightarrow}&amp; F'; \epsilon
@@ -1756,11 +1756,11 @@ F; {\mathit{val}}~({\mathsf{local.set}}~x) &amp;{\hookrightarrow}&amp; F'; \epsi
 
 <h3><span>\({\mathsf{local.tee}}~x\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</li>
-  <li><span>\({\mathit{val}}\)</span>をスタックからpopします。</li>
-  <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
-  <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
-  <li>命令<span>\(({\mathsf{local.set}}~x)\)</span>を実行します。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</p></li>
+  <li><p><span>\({\mathit{val}}\)</span>をスタックからpopします。</p></li>
+  <li><p><span>\({\mathit{val}}\)</span>をスタックにpushします。</p></li>
+  <li><p><span>\({\mathit{val}}\)</span>をスタックにpushします。</p></li>
+  <li><p>命令<span>\(({\mathsf{local.set}}~x)\)</span>を実行します。</p></li>
 </ol>
 <div>\[\begin{array}{lcl&#64;{\qquad}l}
 {\mathit{val}}~({\mathsf{local.tee}}~x) &amp;{\hookrightarrow}&amp; {\mathit{val}}~{\mathit{val}}~({\mathsf{local.set}}~x)
@@ -1768,13 +1768,13 @@ F; {\mathit{val}}~({\mathsf{local.set}}~x) &amp;{\hookrightarrow}&amp; F'; \epsi
 
 <h3><span>\({\mathsf{global.get}}~x\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>は存在します。</li>
-  <li>aがグローバルアドレス<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{globals}}[a]\)</span>は存在します。</li>
-  <li><span>\(\mathit{glob}\)</span>がグローバルインスタンス<span>\(S.{\mathsf{globals}}[a]\)</span>であるとします。</li>
-  <li><span>\({\mathit{val}}\)</span>が値<span>\(\mathit{glob}.{\mathsf{value}}\)</span>であるとします。</li>
-  <li><span>\({\mathit{val}}\)</span>をスタックにpushします。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>は存在します。</p></li>
+  <li><p>aがグローバルアドレス<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{globals}}[a]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{glob}\)</span>がグローバルインスタンス<span>\(S.{\mathsf{globals}}[a]\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathit{val}}\)</span>が値<span>\(\mathit{glob}.{\mathsf{value}}\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathit{val}}\)</span>をスタックにpushします。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
@@ -1786,14 +1786,14 @@ S; F; ({\mathsf{global.get}}~x) &amp;{\hookrightarrow}&amp; S; F; {\mathit{val}}
 
 <h3><span>\({\mathsf{global.set}}~x\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>は存在します。</li>
-  <li>aがグローバルアドレス<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{globals}}[a]\)</span>は存在します。</li>
-  <li><span>\(\mathit{glob}\)</span>がグローバルインスタンス<span>\(S.{\mathsf{globals}}[a]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</li>
-  <li><span>\({\mathit{val}}\)</span>をスタックからpopします。</li>
-  <li><span>\(\mathit{glob}.{\mathsf{value}}\)</span>を<span>\({\mathit{val}}\)</span>で置換します。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>は存在します。</p></li>
+  <li><p>aがグローバルアドレス<span>\(F.{\mathsf{module}}.{\mathsf{globaladdrs}}[x]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{globals}}[a]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{glob}\)</span>がグローバルインスタンス<span>\(S.{\mathsf{globals}}[a]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</p></li>
+  <li><p><span>\({\mathit{val}}\)</span>をスタックからpopします。</p></li>
+  <li><p><span>\(\mathit{glob}.{\mathsf{value}}\)</span>を<span>\({\mathit{val}}\)</span>で置換します。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
@@ -1823,37 +1823,37 @@ S; F; {\mathit{val}}~({\mathsf{global.set}}~x) &amp;{\hookrightarrow}&amp; S'; F
 
 <h3><span>\(t\mathsf{.}{\mathsf{load}}~{\mathit{memarg}}\)</span> and <span>\(t\mathsf{.}{\mathsf{load}}{N}\mathsf{\_}{\mathit{sx}}~{\mathit{memarg}}\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</li>
-  <li>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</li>
-  <li><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
-  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</li>
-  <li><span>\(\mathit{ea}\)</span>がthe integer <span>\(i + {\mathit{memarg}}.{\mathsf{offset}}\)</span>であるとします。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</p></li>
+  <li><p>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</p></li>
+  <li><p>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</p></li>
+  <li><p><span>\(\mathit{ea}\)</span>がthe integer <span>\(i + {\mathit{memarg}}.{\mathsf{offset}}\)</span>であるとします。</p></li>
   <li>もしNが命令の部分でないならば:
     <ol>
-      <li>Nが値型tのビット幅<span>\(|t|\)</span>であるとします。</li>
+      <li><p>Nが値型tのビット幅<span>\(|t|\)</span>であるとします。</p></li>
     </ol>
   </li>
   <li>もし<span>\(\mathit{ea} + N/8\)</span>が<span>\(\mathit{mem}.{\mathsf{data}}\)</span>の長さより大きいならば:
     <ol>
-      <li>トラップします。</li>
+      <li><p>トラップします。</p></li>
     </ol>
   </li>
-  <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\(\mathit{mem}.{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8]\)</span>であるとします。</li>
+  <li><p><span>\(b^\ast\)</span>がbyteシーケンス<span>\(\mathit{mem}.{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8]\)</span>であるとします。</p></li>
   <li>もしNと<span>\({\mathit{sx}}\)</span>が命令の部分であるならば:
     <ol>
-      <li>nが数値であり、条件<span>\({\mathrm{bytes}}_{{\mathit{iN}}}(n) = b^\ast\)</span>を満足するものであるとします。</li>
-      <li>cが<span>\({\mathrm{extend}}\mathrm{\_}{\mathit{sx}}_{N,|t|}(n)\)</span>の計算結果であるとします。</li>
+      <li><p>nが数値であり、条件<span>\({\mathrm{bytes}}_{{\mathit{iN}}}(n) = b^\ast\)</span>を満足するものであるとします。</p></li>
+      <li><p>cが<span>\({\mathrm{extend}}\mathrm{\_}{\mathit{sx}}_{N,|t|}(n)\)</span>の計算結果であるとします。</p></li>
     </ol>
   </li>
   <li>そうでないならば:
     <ol>
-      <li>cが定数であり、条件<span>\({\mathrm{bytes}}_t(c) = b^\ast\)</span>を満足するものであるとします。</li>
+      <li><p>cが定数であり、条件<span>\({\mathrm{bytes}}_t(c) = b^\ast\)</span>を満足するものであるとします。</p></li>
     </ol>
   </li>
-  <li>スタックに値<span>\(t.{\mathsf{const}}~c\)</span>をpushします。</li>
+  <li><p>スタックに値<span>\(t.{\mathsf{const}}~c\)</span>をpushします。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{l}
@@ -1887,38 +1887,38 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~k)~(t.{\mathsf{load}}({N}\mathsf{\_}{\mat
 
 <h3><span>\(t\mathsf{.}{\mathsf{store}}~{\mathit{memarg}}\)</span> and <span>\(t\mathsf{.}{\mathsf{store}}{N}~{\mathit{memarg}}\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</li>
-  <li>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</li>
-  <li><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型tの値はスタックの一番上に存在します。</li>
-  <li>スタックから値<span>\(t.{\mathsf{const}}~c\)</span>をpopします</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
-  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</li>
-  <li><span>\(\mathit{ea}\)</span>がthe integer <span>\(i + {\mathit{memarg}}.{\mathsf{offset}}\)</span>であるとします。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</p></li>
+  <li><p>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型tの値はスタックの一番上に存在します。</p></li>
+  <li><p>スタックから値<span>\(t.{\mathsf{const}}~c\)</span>をpopします</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</p></li>
+  <li><p>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</p></li>
+  <li><p><span>\(\mathit{ea}\)</span>がthe integer <span>\(i + {\mathit{memarg}}.{\mathsf{offset}}\)</span>であるとします。</p></li>
   <li>もしNが命令の部分でないならば:
     <ol>
-      <li>Nが値型tのビット幅<span>\(|t|\)</span>であるとします。</li>
+      <li><p>Nが値型tのビット幅<span>\(|t|\)</span>であるとします。</p></li>
     </ol>
   </li>
   <li>もし<span>\(\mathit{ea} + N/8\)</span>が<span>\(\mathit{mem}.{\mathsf{data}}\)</span>の長さより大きいならば:
     <ol>
-      <li>トラップします。</li>
+      <li><p>トラップします。</p></li>
     </ol>
   </li>
   <li>もしNが命令の部分であるならば:
     <ol>
-      <li>nが<span>\({\mathrm{wrap}}_{|t|,N}(c)\)</span>の計算結果であるとします。</li>
-      <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_{{\mathit{iN}}}(n)\)</span>であるとします。</li>
+      <li><p>nが<span>\({\mathrm{wrap}}_{|t|,N}(c)\)</span>の計算結果であるとします。</p></li>
+      <li><p><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_{{\mathit{iN}}}(n)\)</span>であるとします。</p></li>
     </ol>
   </li>
   <li>そうでないならば:
     <ol>
-      <li><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_t(c)\)</span>であるとします。</li>
+      <li><p><span>\(b^\ast\)</span>がbyteシーケンス<span>\({\mathrm{bytes}}_t(c)\)</span>であるとします。</p></li>
     </ol>
   </li>
-  <li>byte列<span>\(\mathit{mem}.{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8]\)</span>を<span>\(b^\ast\)</span>で置換します。</li>
+  <li><p>byte列<span>\(\mathit{mem}.{\mathsf{data}}[\mathit{ea} {\mathrel{\mathbf{:}}} N/8]\)</span>を<span>\(b^\ast\)</span>で置換します。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{l}
@@ -1951,13 +1951,13 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~k)~(t.{\mathsf{const}}~c)~(t.{\mathsf{sto
 
 <h3><span>\({\mathsf{memory.size}}\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</li>
-  <li>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</li>
-  <li><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</li>
-  <li><span>\(\mathit{sz}\)</span>が<span>\(\mathit{mem}.{\mathsf{data}}\)</span>の長さをページサイズで除算したものであるとします。</li>
-  <li>スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{sz}\)</span>をpushします。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</p></li>
+  <li><p>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</p></li>
+  <li><p><span>\(\mathit{sz}\)</span>が<span>\(\mathit{mem}.{\mathsf{data}}\)</span>の長さをページサイズで除算したものであるとします。</p></li>
+  <li><p>スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{sz}\)</span>をpushします。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{l}
 \begin{array}{lcl&#64;{\qquad}l}
@@ -1969,27 +1969,27 @@ S; F; {\mathsf{memory.size}} &amp;{\hookrightarrow}&amp; S; F; ({\mathsf{i32}}.{
 
 <h3><span>\({\mathsf{memory.grow}}\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</li>
-  <li>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</li>
-  <li><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</li>
-  <li><span>\(\mathit{sz}\)</span>が<span>\(S.{\mathsf{mems}}[a]\)</span>の長さをページサイズで除算したものであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
-  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~n\)</span>をpopします</li>
-  <li><span>\(\mathit{err}\)</span>が<span>\({\mathit{i32}}\)</span>型の<span>\(2^{32}-1\)</span>であり、<span>\({\mathrm{signed}}_{32}(\mathit{err})\)</span>が<span>\(-1\)</span>であるとします。</li>
-  <li>あるいは<span>\(\mathit{mem}\)</span>をnページに伸長するよう試みます:</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>は存在します。</p></li>
+  <li><p>aがメモリアドレス<span>\(F.{\mathsf{module}}.{\mathsf{memaddrs}}[0]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{mems}}[a]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{mem}\)</span>がメモリインスタンス<span>\(S.{\mathsf{mems}}[a]\)</span>であるとします。</p></li>
+  <li><p><span>\(\mathit{sz}\)</span>が<span>\(S.{\mathsf{mems}}[a]\)</span>の長さをページサイズで除算したものであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</p></li>
+  <li><p>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~n\)</span>をpopします</p></li>
+  <li><p><span>\(\mathit{err}\)</span>が<span>\({\mathit{i32}}\)</span>型の<span>\(2^{32}-1\)</span>であり、<span>\({\mathrm{signed}}_{32}(\mathit{err})\)</span>が<span>\(-1\)</span>であるとします。</p></li>
+  <li><p>あるいは<span>\(\mathit{mem}\)</span>をnページに伸長するよう試みます:</p></li>
 </ol>
 <blockquote>
   <div>
     <ol>
-      <li>もし成功したならば、スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{sz}\)</span>をpushします。</li>
-      <li>そうでないならば、スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{err}\)</span>をpushします。</li>
+      <li><p>もし成功したならば、スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{sz}\)</span>をpushします。</p></li>
+      <li><p>そうでないならば、スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{err}\)</span>をpushします。</p></li>
     </ol>
   </div>
 </blockquote>
 <ol>
-  <li>あるいは、スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{err}\)</span>をpushします。</li>
+  <li><p>あるいは、スタックに値<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{err}\)</span>をpushします。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{l}
@@ -2021,7 +2021,7 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~n)~{\mathsf{memory.grow}} &amp;{\hookrigh
 
 <h3><span>\({\mathsf{nop}}\)</span></h3>
 <ol>
-  <li>何もしません。</li>
+  <li><p>何もしません。</p></li>
 </ol>
 <div>\[\begin{array}{lcl&#64;{\qquad}l}
 {\mathsf{nop}} &amp;{\hookrightarrow}&amp; \epsilon
@@ -2029,7 +2029,7 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~n)~{\mathsf{memory.grow}} &amp;{\hookrigh
 
 <h3><span>\({\mathsf{unreachable}}\)</span></h3>
 <ol>
-  <li>トラップします。</li>
+  <li><p>トラップします。</p></li>
 </ol>
 <div>\[\begin{array}{lcl&#64;{\qquad}l}
 {\mathsf{unreachable}} &amp;{\hookrightarrow}&amp; {\mathsf{trap}}
@@ -2037,12 +2037,12 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~n)~{\mathsf{memory.grow}} &amp;{\hookrigh
 
 <h3><span>\({\mathsf{block}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>は定義されています。</li>
-  <li><span>\([t_1^m] {\rightarrow} [t_2^n]\)</span>が関数型<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>であるとします。</li>
-  <li>Lがアリティnかつ継続先がブロック終端であるラベルであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともm個値が存在します。</li>
-  <li>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</li>
-  <li>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}^\ast\)</span>にラベルLとして突入します。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>は定義されています。</p></li>
+  <li><p><span>\([t_1^m] {\rightarrow} [t_2^n]\)</span>が関数型<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>であるとします。</p></li>
+  <li><p>Lがアリティnかつ継続先がブロック終端であるラベルであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともm個値が存在します。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</p></li>
+  <li><p>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}^\ast\)</span>にラベルLとして突入します。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{lcl&#64;{\qquad}l}
@@ -2053,12 +2053,12 @@ F; {\mathit{val}}^m~{\mathsf{block}}~\mathit{bt}~{\mathit{instr}}^\ast~{\mathsf{
 
 <h3><span>\({\mathsf{loop}}~{\mathit{blocktype}}~{\mathit{instr}}^\ast~{\mathsf{end}}\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>は定義されています。</li>
-  <li><span>\([t_1^m] {\rightarrow} [t_2^n]\)</span>が関数型<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>であるとします。</li>
-  <li>Lがアリティmかつ継続先がループ先頭であるラベルであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともm個値が存在します。</li>
-  <li>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</li>
-  <li>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}^\ast\)</span>にラベルLとして突入します。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>は定義されています。</p></li>
+  <li><p><span>\([t_1^m] {\rightarrow} [t_2^n]\)</span>が関数型<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>であるとします。</p></li>
+  <li><p>Lがアリティmかつ継続先がループ先頭であるラベルであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともm個値が存在します。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</p></li>
+  <li><p>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}^\ast\)</span>にラベルLとして突入します。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{lcl&#64;{\qquad}l}
@@ -2069,21 +2069,21 @@ F; {\mathit{val}}^m~{\mathsf{loop}}~\mathit{bt}~{\mathit{instr}}^\ast~{\mathsf{e
 
 <h3><span>\({\mathsf{if}}~{\mathit{blocktype}}~{\mathit{instr}}_1^\ast~{\mathsf{else}}~{\mathit{instr}}_2^\ast~{\mathsf{end}}\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>は定義されています。</li>
-  <li><span>\([t_1^m] {\rightarrow} [t_2^n]\)</span>が関数型<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>であるとします。</li>
-  <li>Lがアリティnかつ継続先が<span>\({\mathsf{if}}\)</span>命令終端であるラベルであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
-  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともm個値が存在します。</li>
-  <li>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>は定義されています。</p></li>
+  <li><p><span>\([t_1^m] {\rightarrow} [t_2^n]\)</span>が関数型<span>\({\mathrm{expand}}_F({\mathit{blocktype}})\)</span>であるとします。</p></li>
+  <li><p>Lがアリティnかつ継続先が<span>\({\mathsf{if}}\)</span>命令終端であるラベルであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</p></li>
+  <li><p>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともm個値が存在します。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</p></li>
   <li>cが0でないならば、
     <ol>
-      <li>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}_1^\ast\)</span>にラベルLとして突入します。</li>
+      <li><p>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}_1^\ast\)</span>にラベルLとして突入します。</p></li>
     </ol>
   </li>
   <li>そうでないならば:
     <ol>
-      <li>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}_2^\ast\)</span>にラベルLとして突入します。</li>
+      <li><p>ブロック<span>\({\mathit{val}}^m~{\mathit{instr}}_2^\ast\)</span>にラベルLとして突入します。</p></li>
     </ol>
   </li>
 </ol>
@@ -2099,24 +2099,24 @@ F; {\mathit{val}}^m~({\mathsf{i32}}.{\mathsf{const}}~c)~{\mathsf{if}}~\mathit{bt
 
 <h3><span>\({\mathsf{br}}~l\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくとも<span>\(l+1\)</span>個ラベルが存在します。</li>
-  <li>Lが0-index startでl番目のスタックに現れるラベルであるとします。</li>
-  <li>nがLのアリティであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともn個値が存在します。</li>
-  <li>スタックから<span>\({\mathit{val}}^n\)</span>をpopします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくとも<span>\(l+1\)</span>個ラベルが存在します。</p></li>
+  <li><p>Lが0-index startでl番目のスタックに現れるラベルであるとします。</p></li>
+  <li><p>nがLのアリティであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともn個値が存在します。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}^n\)</span>をpopします。</p></li>
   <li><span>\(l+1\)</span>回繰り返します:
     <ol>
       <li>スタックの一番上に存在するものが値である間:
         <ol>
-          <li>スタックから値をpopします。</li>
+          <li><p>スタックから値をpopします。</p></li>
         </ol>
       </li>
-      <li>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上にはラベルが存在します。</li>
-      <li>スタックからラベルをpopします。</li>
+      <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上にはラベルが存在します。</p></li>
+      <li><p>スタックからラベルをpopします。</p></li>
     </ol>
   </li>
-  <li>スタックに値<span>\({\mathit{val}}^n\)</span>をpushします。</li>
-  <li>Lの続きにジャンプします。</li>
+  <li><p>スタックに値<span>\({\mathit{val}}^n\)</span>をpushします。</p></li>
+  <li><p>Lの続きにジャンプします。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{lcl&#64;{\qquad}l}
@@ -2125,16 +2125,16 @@ F; {\mathit{val}}^m~({\mathsf{i32}}.{\mathsf{const}}~c)~{\mathsf{if}}~\mathit{bt
 
 <h3><span>\({\mathsf{br\_if}}~l\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
-  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</p></li>
+  <li><p>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします</p></li>
   <li>cが0でないならば、
     <ol>
-      <li>命令<span>\(({\mathsf{br}}~l)\)</span>を実行します。</li>
+      <li><p>命令<span>\(({\mathsf{br}}~l)\)</span>を実行します。</p></li>
     </ol>
   </li>
   <li>そうでないならば:
     <ol>
-      <li>何もしません。</li>
+      <li><p>何もしません。</p></li>
     </ol>
   </li>
 </ol>
@@ -2148,17 +2148,17 @@ F; {\mathit{val}}^m~({\mathsf{i32}}.{\mathsf{const}}~c)~{\mathsf{if}}~\mathit{bt
 
 <h3><span>\({\mathsf{br\_table}}~l^\ast~l_N\)</span></h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
-  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</p></li>
+  <li><p>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</p></li>
   <li>もしiが<span>\(l^\ast\)</span>の長さ未満ならば:
     <ol>
-      <li><span>\(l_i\)</span>がthe label <span>\(l^\ast[i]\)</span>であるとします。</li>
-      <li>命令<span>\(({\mathsf{br}}~l_i)\)</span>を実行します。</li>
+      <li><p><span>\(l_i\)</span>がthe label <span>\(l^\ast[i]\)</span>であるとします。</p></li>
+      <li><p>命令<span>\(({\mathsf{br}}~l_i)\)</span>を実行します。</p></li>
     </ol>
   </li>
   <li>そうでないならば:
     <ol>
-      <li>命令<span>\(({\mathsf{br}}~l_N)\)</span>を実行します。</li>
+      <li><p>命令<span>\(({\mathsf{br}}~l_N)\)</span>を実行します。</p></li>
     </ol>
   </li>
 </ol>
@@ -2172,20 +2172,20 @@ F; {\mathit{val}}^m~({\mathsf{i32}}.{\mathsf{const}}~c)~{\mathsf{if}}~\mathit{bt
 
 <h3><span>\({\mathsf{return}}\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>nがFのアリティであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともn個値が存在します。</li>
-  <li><span>\({\mathit{val}}^n\)</span>の戻り値をスタックからpopします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックは少なくとも1つフレームを含みます。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>nがFのアリティであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックには少なくともn個値が存在します。</p></li>
+  <li><p><span>\({\mathit{val}}^n\)</span>の戻り値をスタックからpopします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックは少なくとも1つフレームを含みます。</p></li>
   <li>スタックの一番上の要素がフレームでない間:
     <ol>
-      <li>popします。</li>
+      <li><p>popします。</p></li>
     </ol>
   </li>
-  <li>前提条件：スタックの一番上にフレームFが存在します。</li>
-  <li>スタックからフレームをpopします。</li>
-  <li>スタックに<span>\({\mathit{val}}^n\)</span>をpushします。</li>
-  <li>フレームをpushした元々の呼び出しに続く命令にジャンプします。</li>
+  <li><p>前提条件：スタックの一番上にフレームFが存在します。</p></li>
+  <li><p>スタックからフレームをpopします。</p></li>
+  <li><p>スタックに<span>\({\mathit{val}}^n\)</span>をpushします。</p></li>
+  <li><p>フレームをpushした元々の呼び出しに続く命令にジャンプします。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{lcl&#64;{\qquad}l}
@@ -2194,10 +2194,10 @@ F; {\mathit{val}}^m~({\mathsf{i32}}.{\mathsf{const}}~c)~{\mathsf{if}}~\mathit{bt
 
 <h3><span>\({\mathsf{call}}~x\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{funcaddrs}}[x]\)</span>は存在します。</li>
-  <li>aが関数アドレス<span>\(F.{\mathsf{module}}.{\mathsf{funcaddrs}}[x]\)</span>であるとします。</li>
-  <li>アドレスaにある関数インスタンスを実行します。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{funcaddrs}}[x]\)</span>は存在します。</p></li>
+  <li><p>aが関数アドレス<span>\(F.{\mathsf{module}}.{\mathsf{funcaddrs}}[x]\)</span>であるとします。</p></li>
+  <li><p>アドレスaにある関数インスタンスを実行します。</p></li>
 </ol>
 <div>\[\begin{array}{lcl&#64;{\qquad}l}
 F; ({\mathsf{call}}~x) &amp;{\hookrightarrow}&amp; F; ({\mathsf{invoke}}~a)
@@ -2206,35 +2206,35 @@ F; ({\mathsf{call}}~x) &amp;{\hookrightarrow}&amp; F; ({\mathsf{invoke}}~a)
 
 <h3><span>\({\mathsf{call\_indirect}}~x\)</span></h3>
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{tableaddrs}}[0]\)</span>は存在します。</li>
-  <li><span>\(\mathit{ta}\)</span>がテーブルアドレス<span>\(F.{\mathsf{module}}.{\mathsf{tableaddrs}}[0]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{tables}}[\mathit{ta}]\)</span>は存在します。</li>
-  <li><span>\(\mathit{tab}\)</span>がテーブルインスタンス<span>\(S.{\mathsf{tables}}[\mathit{ta}]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{types}}[x]\)</span>は存在します。</li>
-  <li><span>\(\mathit{ft}_{\mathrm{expect}}\)</span>が関数型<span>\(F.{\mathsf{module}}.{\mathsf{types}}[x]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</li>
-  <li>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{tableaddrs}}[0]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{ta}\)</span>がテーブルアドレス<span>\(F.{\mathsf{module}}.{\mathsf{tableaddrs}}[0]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{tables}}[\mathit{ta}]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{tab}\)</span>がテーブルインスタンス<span>\(S.{\mathsf{tables}}[\mathit{ta}]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(F.{\mathsf{module}}.{\mathsf{types}}[x]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{ft}_{\mathrm{expect}}\)</span>が関数型<span>\(F.{\mathsf{module}}.{\mathsf{types}}[x]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値はスタックの一番上に存在します。</p></li>
+  <li><p>スタックから値<span>\({\mathsf{i32}}.{\mathsf{const}}~i\)</span>をpopします</p></li>
   <li>もしiが<span>\(\mathit{tab}.{\mathsf{elem}}\)</span>の長さ未満ならば:
     <ol>
-      <li>トラップします。</li>
+      <li><p>トラップします。</p></li>
     </ol>
   </li>
   <li>もし<span>\(\mathit{tab}.{\mathsf{elem}}[i]\)</span>が初期化されていないならば:
     <ol>
-      <li>トラップします。</li>
+      <li><p>トラップします。</p></li>
     </ol>
   </li>
-  <li>aが関数アドレス<span>\(\mathit{tab}.{\mathsf{elem}}[i]\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{funcs}}[a]\)</span>は存在します。</li>
-  <li><span>\(\mathit{f}\)</span>が関数インスタンス<span>\(S.{\mathsf{funcs}}[a]\)</span>であるとします。</li>
-  <li><span>\(\mathit{ft}_{\mathrm{actual}}\)</span>が関数型<span>\(\mathit{f}.{\mathsf{type}}\)</span>であるとします。</li>
+  <li><p>aが関数アドレス<span>\(\mathit{tab}.{\mathsf{elem}}[i]\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{funcs}}[a]\)</span>は存在します。</p></li>
+  <li><p><span>\(\mathit{f}\)</span>が関数インスタンス<span>\(S.{\mathsf{funcs}}[a]\)</span>であるとします。</p></li>
+  <li><p><span>\(\mathit{ft}_{\mathrm{actual}}\)</span>が関数型<span>\(\mathit{f}.{\mathsf{type}}\)</span>であるとします。</p></li>
   <li>もし<span>\(\mathit{ft}_{\mathrm{actual}}\)</span>と<span>\(\mathit{ft}_{\mathrm{expect}}\)</span>が互いに異なるならば:
     <ol>
-      <li>トラップします。</li>
+      <li><p>トラップします。</p></li>
     </ol>
   </li>
-  <li>アドレスaにある関数インスタンスを実行します。</li>
+  <li><p>アドレスaにある関数インスタンスを実行します。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{l}
@@ -2261,8 +2261,8 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~({\mathsf{call\_indirect}}~x) &amp;{\h
 
 <h3>ラベルLと共に<span>\({\mathit{instr}}^\ast\)</span>に突入する</h3>
 <ol>
-  <li>スタックにLをpushします。</li>
-  <li>命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>の最初にジャンプします。</li>
+  <li><p>スタックにLをpushします。</p></li>
+  <li><p>命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>の最初にジャンプします。</p></li>
 </ol>
 
 ### 付記
@@ -2276,12 +2276,12 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~({\mathsf{call\_indirect}}~x) &amp;{\h
 ブロック終端にジャンプやトラップせず到達した時、以下のステップを実行します。
 
 <ol>
-  <li>mがthe number of values on the top of the stackであるとします。</li>
-  <li>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、ラベルLはスタックの一番上に存在します。</li>
-  <li>スタックからラベルをpopします。</li>
-  <li>スタックに<span>\({\mathit{val}}^m\)</span>をpushしなおします。</li>
-  <li>ラベルLに紐付けられた構造化制御命令の<span>\({\mathsf{end}}\)</span>の後の位置にジャンプします。</li>
+  <li><p>mがthe number of values on the top of the stackであるとします。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}^m\)</span>をpopします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、ラベルLはスタックの一番上に存在します。</p></li>
+  <li><p>スタックからラベルをpopします。</p></li>
+  <li><p>スタックに<span>\({\mathit{val}}^m\)</span>をpushしなおします。</p></li>
+  <li><p>ラベルLに紐付けられた構造化制御命令の<span>\({\mathsf{end}}\)</span>の後の位置にジャンプします。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{lcl&#64;{\qquad}l}
@@ -2297,18 +2297,18 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~({\mathsf{call\_indirect}}~x) &amp;{\h
 
 <h3>Invocation of function address a</h3>
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{funcs}}[a]\)</span>は存在します。</li>
-  <li>fが関数インスタンス<span>\(S.{\mathsf{funcs}}[a]\)</span>であるとします。</li>
-  <li><span>\([t_1^n] {\rightarrow} [t_2^m]\)</span>が関数型<span>\(f.{\mathsf{type}}\)</span>であるとします。</li>
-  <li><span>\(t^\ast\)</span>が値型<span>\(f.{\mathsf{code}}.{\mathsf{locals}}\)</span>のリストであるとします。</li>
-  <li><span>\({\mathit{instr}}^\ast~{\mathsf{end}}\)</span>が式<span>\(f.{\mathsf{code}}.{\mathsf{body}}\)</span>であるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタック上に少なくともn個の値が存在します。</li>
-  <li>スタックから<span>\({\mathit{val}}^n\)</span>をpopします。</li>
-  <li><span>\({\mathit{val}}_0^\ast\)</span>が型<span>\(t^\ast\)</span>の0に相当する値のリストであるとします。</li>
-  <li>Fがフレーム<span>\(\{ {\mathsf{module}}~f.{\mathsf{module}}, {\mathsf{locals}}~{\mathit{val}}^n~{\mathit{val}}_0^\ast \}\)</span>であるとします。</li>
-  <li>スタックにアリティmのフレームFをpushします。</li>
-  <li>Lがアリティmかつ継続先が関数終端であるラベルであるとします。</li>
-  <li>Enter 命令シーケンス<span>\({\mathit{instr}}^\ast\)</span> with label L。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S.{\mathsf{funcs}}[a]\)</span>は存在します。</p></li>
+  <li><p>fが関数インスタンス<span>\(S.{\mathsf{funcs}}[a]\)</span>であるとします。</p></li>
+  <li><p><span>\([t_1^n] {\rightarrow} [t_2^m]\)</span>が関数型<span>\(f.{\mathsf{type}}\)</span>であるとします。</p></li>
+  <li><p><span>\(t^\ast\)</span>が値型<span>\(f.{\mathsf{code}}.{\mathsf{locals}}\)</span>のリストであるとします。</p></li>
+  <li><p><span>\({\mathit{instr}}^\ast~{\mathsf{end}}\)</span>が式<span>\(f.{\mathsf{code}}.{\mathsf{body}}\)</span>であるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタック上に少なくともn個の値が存在します。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}^n\)</span>をpopします。</p></li>
+  <li><p><span>\({\mathit{val}}_0^\ast\)</span>が型<span>\(t^\ast\)</span>の0に相当する値のリストであるとします。</p></li>
+  <li><p>Fがフレーム<span>\(\{ {\mathsf{module}}~f.{\mathsf{module}}, {\mathsf{locals}}~{\mathit{val}}^n~{\mathit{val}}_0^\ast \}\)</span>であるとします。</p></li>
+  <li><p>スタックにアリティmのフレームFをpushします。</p></li>
+  <li><p>Lがアリティmかつ継続先が関数終端であるラベルであるとします。</p></li>
+  <li><p>Enter 命令シーケンス<span>\({\mathit{instr}}^\ast\)</span> with label L。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{l}
@@ -2329,14 +2329,14 @@ S; {\mathit{val}}^n~({\mathsf{invoke}}~a) &amp;{\hookrightarrow}&amp; S; {\maths
 関数終端にジャンプまたはトラップせずに到達した時、以下のステップを実行します。
 
 <ol>
-  <li>Fがカレントフレームであるとします。</li>
-  <li>nがthe arity of the activation of Fであるとします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックにn個値が存在します。</li>
-  <li>スタックからthe results <span>\({\mathit{val}}^n\)</span>をpopします。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上にフレームFが存在します。</li>
-  <li>スタックからフレームをpopします。</li>
-  <li>スタックに<span>\({\mathit{val}}^n\)</span>をpushしなおします。</li>
-  <li>元々の呼び出しの後にジャンプします。</li>
+  <li><p>Fがカレントフレームであるとします。</p></li>
+  <li><p>nがthe arity of the activation of Fであるとします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックにn個値が存在します。</p></li>
+  <li><p>スタックからthe results <span>\({\mathit{val}}^n\)</span>をpopします。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上にフレームFが存在します。</p></li>
+  <li><p>スタックからフレームをpopします。</p></li>
+  <li><p>スタックに<span>\({\mathit{val}}^n\)</span>をpushしなおします。</p></li>
+  <li><p>元々の呼び出しの後にジャンプします。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{lcl&#64;{\qquad}l}
@@ -2398,10 +2398,10 @@ S; {\mathit{val}}^n~({\mathsf{invoke}}~a) &amp;{\hookrightarrow}&amp; S; {\mathi
 式は、そのモジュールインスタンスを指す現在のフレームから相対的に評価されます。
 
 <ol>
-  <li>式の命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>の最初にジャンプします。</li>
-  <li>命令シーケンスを実行します。</li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上には値が存在します。</li>
-  <li>スタックから値<span>\({\mathit{val}}\)</span>をpopします</li>
+  <li><p>式の命令シーケンス<span>\({\mathit{instr}}^\ast\)</span>の最初にジャンプします。</p></li>
+  <li><p>命令シーケンスを実行します。</p></li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上には値が存在します。</p></li>
+  <li><p>スタックから値<span>\({\mathit{val}}\)</span>をpopします</p></li>
 </ol>
 値<span>\({\mathit{val}}\)</span>は評価の結果です。
 <div>\[S; F; {\mathit{instr}}^\ast {\hookrightarrow} S'; F'; {\mathit{instr}}'^\ast
@@ -2426,8 +2426,8 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{func}}~a\)</span></h3>
 <ul>
-  <li>ストアのエントリー<span>\(S.{\mathsf{funcs}}[a]\)</span>は必ず関数インスタンス<span>\(\{{\mathsf{type}}~{\mathit{functype}}, \dots\}\)</span>である必要があります。</li>
-  <li>この時、外部型<span>\({\mathsf{func}}~{\mathit{functype}}\)</span>について<span>\({\mathsf{func}}~a\)</span>は有効です。</li>
+  <li><p>ストアのエントリー<span>\(S.{\mathsf{funcs}}[a]\)</span>は必ず関数インスタンス<span>\(\{{\mathsf{type}}~{\mathit{functype}}, \dots\}\)</span>である必要があります。</p></li>
+  <li><p>この時、外部型<span>\({\mathsf{func}}~{\mathit{functype}}\)</span>について<span>\({\mathsf{func}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{funcs}}[a] = \{{\mathsf{type}}~{\mathit{functype}}, \dots\}
@@ -2437,8 +2437,8 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{table}}~a\)</span></h3>
 <ul>
-  <li>ストアのエントリー<span>\(S.{\mathsf{tables}}[a]\)</span>は必ずテーブルインスタンス<span>\(\{{\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^?\}\)</span>である必要があります。</li>
-  <li>この時、外部型<span>\({\mathsf{table}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathsf{funcref}})\)</span>について<span>\({\mathsf{table}}~a\)</span>は有効です。</li>
+  <li><p>ストアのエントリー<span>\(S.{\mathsf{tables}}[a]\)</span>は必ずテーブルインスタンス<span>\(\{{\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^?\}\)</span>である必要があります。</p></li>
+  <li><p>この時、外部型<span>\({\mathsf{table}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathsf{funcref}})\)</span>について<span>\({\mathsf{table}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{tables}}[a] = \{ {\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^? \}
@@ -2448,8 +2448,8 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{mem}}~a\)</span></h3>
 <ul>
-  <li>ストアのエントリー<span>\(S.{\mathsf{mems}}[a]\)</span>は必ずnについてメモリインスタンス<span>\(\{{\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^?\}\)</span>である必要があります。</li>
-  <li>この時、外部型<span>\({\mathsf{mem}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\})\)</span>について<span>\({\mathsf{mem}}~a\)</span>は有効です。</li>
+  <li><p>ストアのエントリー<span>\(S.{\mathsf{mems}}[a]\)</span>は必ずnについてメモリインスタンス<span>\(\{{\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^?\}\)</span>である必要があります。</p></li>
+  <li><p>この時、外部型<span>\({\mathsf{mem}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\})\)</span>について<span>\({\mathsf{mem}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{mems}}[a] = \{ {\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \}
@@ -2459,8 +2459,8 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{global}}~a\)</span></h3>
 <ul>
-  <li>ストアのエントリー<span>\(S.{\mathsf{globals}}[a]\)</span>は必ずグローバルインスタンス<span>\(\{{\mathsf{value}}~(t.{\mathsf{const}}~c), {\mathsf{mut}}~{\mathit{mut}}\}\)</span>である必要があります。</li>
-  <li>この時、外部型<span>\({\mathsf{global}}~({\mathit{mut}}~t)\)</span>について<span>\({\mathsf{global}}~a\)</span>は有効です。</li>
+  <li><p>ストアのエントリー<span>\(S.{\mathsf{globals}}[a]\)</span>は必ずグローバルインスタンス<span>\(\{{\mathsf{value}}~(t.{\mathsf{const}}~c), {\mathsf{mut}}~{\mathit{mut}}\}\)</span>である必要があります。</p></li>
+  <li><p>この時、外部型<span>\({\mathsf{global}}~({\mathit{mut}}~t)\)</span>について<span>\({\mathsf{global}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
   S.{\mathsf{globals}}[a] = \{ {\mathsf{value}}~(t.{\mathsf{const}}~c), {\mathsf{mut}}~{\mathit{mut}} \}
@@ -2478,16 +2478,16 @@ Importに対する外部値をチェックする目的の下、そのような�
 リミット<span>\(\{ {\mathsf{min}}~n_1, {\mathsf{max}}~m_1^? \}\)</span>は以下の条件を満たした場合のみリミット<span>\(\{ {\mathsf{min}}~n_2, {\mathsf{max}}~m_2^? \}\)</span>に合致します:
 
 <ul>
-  <li><span>\(n_1\)</span>は<span>\(n_2\)</span>以上です</li>
+  <li><p><span>\(n_1\)</span>は<span>\(n_2\)</span>以上です</p></li>
   <li>どちらか一方に該当します:
     <ul>
-      <li><span>\(m_2^?\)</span>は空です。</li>
+      <li><p><span>\(m_2^?\)</span>は空です。</p></li>
     </ul>
   </li>
   <li>あるいは:
     <ul>
-      <li><span>\(m_1^?\)</span>と<span>\(m_2^?\)</span>は空ではありません。</li>
-      <li><span>\(m_1\)</span>は<span>\(m_2\)</span>以下です。</li>
+      <li><p><span>\(m_1^?\)</span>と<span>\(m_2^?\)</span>は空ではありません。</p></li>
+      <li><p><span>\(m_1\)</span>は<span>\(m_2\)</span>以下です。</p></li>
     </ul>
   </li>
 </ul>
@@ -2511,7 +2511,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 <div>外部型<span>\({\mathsf{func}}~{\mathit{functype}}_1\)</span>は<span>\({\mathsf{func}}~{\mathit{functype}}_2\)</span>に次の条件を満たした場合のみ合致します:</div>
 
 <ul>
-  <li><span>\({\mathit{functype}}_1\)</span>と<span>\({\mathit{functype}}_2\)</span>が等しい。</li>
+  <li><p><span>\({\mathit{functype}}_1\)</span>と<span>\({\mathit{functype}}_2\)</span>が等しい。</p></li>
 </ul>
 <div>\[\begin{split}~\\[-1ex]
 \frac{
@@ -2524,8 +2524,8 @@ Importに対する外部値をチェックする目的の下、そのような�
 <div>外部型<span>\({\mathsf{table}}~({\mathit{limits}}_1~{\mathit{elemtype}}_1)\)</span>は<span>\({\mathsf{table}}~({\mathit{limits}}_2~{\mathit{elemtype}}_2)\)</span>に次の条件を満たした場合のみ合致します:</div>
 
 <ul>
-  <li>リミット<span>\({\mathit{limits}}_1\)</span>は<span>\({\mathsf{table}}~{\mathit{limits}}_2\)</span>に合致します。</li>
-  <li><span>\({\mathit{elemtype}}_1\)</span>と<span>\({\mathit{elemtype}}_2\)</span>が等しい。</li>
+  <li><p>リミット<span>\({\mathit{limits}}_1\)</span>は<span>\({\mathsf{table}}~{\mathit{limits}}_2\)</span>に合致します。</p></li>
+  <li><p><span>\({\mathit{elemtype}}_1\)</span>と<span>\({\mathit{elemtype}}_2\)</span>が等しい。</p></li>
 </ul>
 <div>\[\frac{
   {\vdash} {\mathit{limits}}_1 {\leq} {\mathit{limits}}_2
@@ -2538,7 +2538,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 外部型<span>\({\mathsf{mem}}~{\mathit{limits}}_1\)</span>は<span>\({\mathsf{mem}}~{\mathit{limits}}_2\)</span>に次の条件を満たした場合のみ合致します:
 
 <ul>
-  <li>リミット<span>\({\mathit{limits}}_1\)</span>は<span>\({\mathsf{mem}}~{\mathit{limits}}_2\)</span>に合致する。</li>
+  <li><p>リミット<span>\({\mathit{limits}}_1\)</span>は<span>\({\mathsf{mem}}~{\mathit{limits}}_2\)</span>に合致する。</p></li>
 </ul>
 <div>\[\frac{
   {\vdash} {\mathit{limits}}_1 {\leq} {\mathit{limits}}_2
@@ -2551,7 +2551,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 外部型<span>\({\mathsf{global}}~{\mathit{globaltype}}_1\)</span>は<span>\({\mathsf{global}}~{\mathit{globaltype}}_2\)</span>に次の条件を満たした場合のみ合致します:
 
 <ul>
-  <li><span>\({\mathit{globaltype}}_1\)</span>と<span>\({\mathit{globaltype}}_2\)</span>が等しい。</li>
+  <li><p><span>\({\mathit{globaltype}}_1\)</span>と<span>\({\mathit{globaltype}}_2\)</span>が等しい。</p></li>
 </ul>
 <div>\[\begin{split}~\\[-1ex]
 \frac{
@@ -2565,12 +2565,12 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3>Functions</h3>
 <ol>
-  <li><span>\({\mathit{func}}\)</span>はthe function to allocate and <span>\({\mathit{moduleinst}}\)</span> its module instanceであるとします。</li>
-  <li>aはS中の最初の自由関数アドレスであるとします。</li>
-  <li><span>\({\mathit{functype}}\)</span>は関数型<span>\({\mathit{moduleinst}}.{\mathsf{types}}[{\mathit{func}}.{\mathsf{type}}]\)</span>であるとします。</li>
-  <li><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(\{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{code}}~{\mathit{func}} \}\)</span>であるとします。</li>
-  <li>Sの<span>\({\mathsf{funcs}}\)</span>に<span>\({\mathit{funcinst}}\)</span>を追加します。</li>
-  <li>aを戻り値とします。</li>
+  <li><p><span>\({\mathit{func}}\)</span>はthe function to allocate and <span>\({\mathit{moduleinst}}\)</span> its module instanceであるとします。</p></li>
+  <li><p>aはS中の最初の自由関数アドレスであるとします。</p></li>
+  <li><p><span>\({\mathit{functype}}\)</span>は関数型<span>\({\mathit{moduleinst}}.{\mathsf{types}}[{\mathit{func}}.{\mathsf{type}}]\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(\{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{code}}~{\mathit{func}} \}\)</span>であるとします。</p></li>
+  <li><p>Sの<span>\({\mathsf{funcs}}\)</span>に<span>\({\mathit{funcinst}}\)</span>を追加します。</p></li>
+  <li><p>aを戻り値とします。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{rlll}
@@ -2584,11 +2584,11 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
 
 <h3>Host Functions</h3>
 <ol>
-  <li><span>\({\mathit{hostfunc}}\)</span>はthe host function to allocate and <span>\({\mathit{functype}}\)</span> its function typeであるとします。</li>
-  <li>aはS中の最初の自由関数アドレスであるとします。</li>
-  <li><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(\{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{hostcode}}~{\mathit{hostfunc}} \}\)</span>であるとします。</li>
-  <li>Sの<span>\({\mathsf{funcs}}\)</span>に<span>\({\mathit{funcinst}}\)</span>を追加します。</li>
-  <li>aを戻り値とします。</li>
+  <li><p><span>\({\mathit{hostfunc}}\)</span>はthe host function to allocate and <span>\({\mathit{functype}}\)</span> its function typeであるとします。</p></li>
+  <li><p>aはS中の最初の自由関数アドレスであるとします。</p></li>
+  <li><p><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(\{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{hostcode}}~{\mathit{hostfunc}} \}\)</span>であるとします。</p></li>
+  <li><p>Sの<span>\({\mathsf{funcs}}\)</span>に<span>\({\mathit{funcinst}}\)</span>を追加します。</p></li>
+  <li><p>aを戻り値とします。</p></li>
 </ol>
 <div>\[\begin{split}~\\[-1ex]
 \begin{array}{rlll}
@@ -2601,12 +2601,12 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
 
 <h3>Tables</h3>
 <ol>
-  <li><span>\({\mathit{tabletype}}\)</span>はthe table type to allocateであるとします。</li>
-  <li><span>\((\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathit{elemtype}})\)</span>はthe structure of table type <span>\({\mathit{tabletype}}\)</span>であるとします。</li>
-  <li>aはthe first free table address in Sであるとします。</li>
-  <li><span>\({\mathit{tableinst}}\)</span>はテーブルインスタンス<span>\(\{ {\mathsf{elem}}~(\epsilon)^n, {\mathsf{max}}~m^? \}\)</span> with n empty elementsであるとします。</li>
-  <li>Sの<span>\({\mathsf{tables}}\)</span>に<span>\({\mathit{tableinst}}\)</span>を追加します。</li>
-  <li>aを戻り値とします。</li>
+  <li><p><span>\({\mathit{tabletype}}\)</span>はthe table type to allocateであるとします。</p></li>
+  <li><p><span>\((\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathit{elemtype}})\)</span>はthe structure of table type <span>\({\mathit{tabletype}}\)</span>であるとします。</p></li>
+  <li><p>aはthe first free table address in Sであるとします。</p></li>
+  <li><p><span>\({\mathit{tableinst}}\)</span>はテーブルインスタンス<span>\(\{ {\mathsf{elem}}~(\epsilon)^n, {\mathsf{max}}~m^? \}\)</span> with n empty elementsであるとします。</p></li>
+  <li><p>Sの<span>\({\mathsf{tables}}\)</span>に<span>\({\mathit{tableinst}}\)</span>を追加します。</p></li>
+  <li><p>aを戻り値とします。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{rlll}
 {\mathrm{alloctable}}(S, {\mathit{tabletype}}) &amp;=&amp; S', {\mathit{tableaddr}} \\[1ex]
@@ -2619,12 +2619,12 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{tables}}~{\mathit{tableinst}}\} \\
 
 <h3>Memories</h3>
 <ol>
-  <li><span>\({\mathit{memtype}}\)</span>はthe memory type to allocateであるとします。</li>
-  <li><span>\(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}\)</span>はthe structure of memory type <span>\({\mathit{memtype}}\)</span>であるとします。</li>
-  <li>aはS中の最初の自由メモリアドレスであるとします。</li>
-  <li><span>\({\mathit{meminst}}\)</span>はメモリインスタンス<span>\(\{ {\mathsf{data}}~(\def\mathdef1219#1{\mathtt{0x#1}}\mathdef1219{00})^{n \cdot 64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \}\)</span> that contains n pages of zeroed bytesであるとします。</li>
-  <li>Sの<span>\({\mathsf{mems}}\)</span>に<span>\({\mathit{meminst}}\)</span>を追加します。</li>
-  <li>aを戻り値とします。</li>
+  <li><p><span>\({\mathit{memtype}}\)</span>はthe memory type to allocateであるとします。</p></li>
+  <li><p><span>\(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}\)</span>はthe structure of memory type <span>\({\mathit{memtype}}\)</span>であるとします。</p></li>
+  <li><p>aはS中の最初の自由メモリアドレスであるとします。</p></li>
+  <li><p><span>\({\mathit{meminst}}\)</span>はメモリインスタンス<span>\(\{ {\mathsf{data}}~(\def\mathdef1219#1{\mathtt{0x#1}}\mathdef1219{00})^{n \cdot 64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \}\)</span> that contains n pages of zeroed bytesであるとします。</p></li>
+  <li><p>Sの<span>\({\mathsf{mems}}\)</span>に<span>\({\mathit{meminst}}\)</span>を追加します。</p></li>
+  <li><p>aを戻り値とします。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{rlll}
 {\mathrm{allocmem}}(S, {\mathit{memtype}}) &amp;=&amp; S', {\mathit{memaddr}} \\[1ex]
@@ -2637,12 +2637,12 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{mems}}~{\mathit{meminst}}\} \\
 
 <h3>Globals</h3>
 <ol>
-  <li><span>\({\mathit{globaltype}}\)</span>はアロケート予定のグローバル型であり、<span>\({\mathit{val}}\)</span>はグローバル初期化に使用する値であるとします。</li>
-  <li><span>\({\mathit{mut}}~t\)</span>はグローバル型<span>\({\mathit{globaltype}}\)</span>の構造であるとします。</li>
-  <li>aはS中の最初の自由グローバルアドレスであるとします。</li>
-  <li><span>\({\mathit{globalinst}}\)</span>はグローバルインスタンス<span>\(\{ {\mathsf{value}}~{\mathit{val}}, {\mathsf{mut}}~{\mathit{mut}} \}\)</span>であるとします。</li>
-  <li>Sの<span>\({\mathsf{globals}}\)</span>に<span>\({\mathit{globalinst}}\)</span>を追加します。</li>
-  <li>aを戻り値とします。</li>
+  <li><p><span>\({\mathit{globaltype}}\)</span>はアロケート予定のグローバル型であり、<span>\({\mathit{val}}\)</span>はグローバル初期化に使用する値であるとします。</p></li>
+  <li><p><span>\({\mathit{mut}}~t\)</span>はグローバル型<span>\({\mathit{globaltype}}\)</span>の構造であるとします。</p></li>
+  <li><p>aはS中の最初の自由グローバルアドレスであるとします。</p></li>
+  <li><p><span>\({\mathit{globalinst}}\)</span>はグローバルインスタンス<span>\(\{ {\mathsf{value}}~{\mathit{val}}, {\mathsf{mut}}~{\mathit{mut}} \}\)</span>であるとします。</p></li>
+  <li><p>Sの<span>\({\mathsf{globals}}\)</span>に<span>\({\mathit{globalinst}}\)</span>を追加します。</p></li>
+  <li><p>aを戻り値とします。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{rlll}
 {\mathrm{allocglobal}}(S, {\mathit{globaltype}}, {\mathit{val}}) &amp;=&amp; S', {\mathit{globaladdr}} \\[1ex]
@@ -2655,11 +2655,11 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{globals}}~{\mathit{globalinst}}\} \\
 
 <h3>Growing tables</h3>
 <ol>
-  <li><span>\({\mathit{tableinst}}\)</span>はテーブルインスタンスto grow and n the number of elements by which to grow itであるとします。</li>
-  <li><span>\(\mathit{len}\)</span>はn added to the length of <span>\({\mathit{tableinst}}.{\mathsf{elem}}\)</span>であるとします。</li>
-  <li>もし<span>\(\mathit{len}\)</span> is larger than or equal to <span>\(2^{32}\)</span>, then fail。</li>
-  <li>もし<span>\({\mathit{tableinst}}.{\mathsf{max}}\)</span> is not empty and its value is smaller than <span>\(\mathit{len}\)</span>, then fail。</li>
-  <li><span>\({\mathit{tableinst}}.{\mathsf{elem}}\)</span>にn empty elementsを追加します。</li>
+  <li><p><span>\({\mathit{tableinst}}\)</span>はテーブルインスタンスto grow and n the number of elements by which to grow itであるとします。</p></li>
+  <li><p><span>\(\mathit{len}\)</span>はn added to the length of <span>\({\mathit{tableinst}}.{\mathsf{elem}}\)</span>であるとします。</p></li>
+  <li><p>もし<span>\(\mathit{len}\)</span> is larger than or equal to <span>\(2^{32}\)</span>, then fail。</p></li>
+  <li><p>もし<span>\({\mathit{tableinst}}.{\mathsf{max}}\)</span> is not empty and its value is smaller than <span>\(\mathit{len}\)</span>, then fail。</p></li>
+  <li><p><span>\({\mathit{tableinst}}.{\mathsf{elem}}\)</span>にn empty elementsを追加します。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{rllll}
 {\mathrm{growtable}}({\mathit{tableinst}}, n) &amp;=&amp; {\mathit{tableinst}} {\mathrel{\mbox{with}}} {\mathsf{elem}} = {\mathit{tableinst}}.{\mathsf{elem}}~(\epsilon)^n \\
@@ -2673,12 +2673,12 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{globals}}~{\mathit{globalinst}}\} \\
 
 <h3>Growing memories</h3>
 <ol>
-  <li><span>\({\mathit{meminst}}\)</span>は伸長するメモリインスタンスであり、nは伸長するページ数であるとします。</li>
-  <li>前提条件：<span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>の長さはページサイズ<span>\(64\,\mathrm{Ki}\)</span>により割り切れます。</li>
-  <li><span>\(\mathit{len}\)</span>はnに<span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>の長さをページサイズ<span>\(64\,\mathrm{Ki}\)</span>で除算したものを加算したものであるとします。</li>
-  <li>もし<span>\(\mathit{len}\)</span>が<span>\(2^{16}\)</span>より大きいならば失敗します。</li>
-  <li>もし<span>\({\mathit{meminst}}.{\mathsf{max}}\)</span>が空ではなく、かつその値が<span>\(\mathit{len}\)</span>未満ならば失敗します。</li>
-  <li><span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>にn×<span>\(64\,\mathrm{Ki}\)</span> bytesな値<span>\(\def\mathdef1221#1{\mathtt{0x#1}}\mathdef1221{00}\)</span>を追加します。</li>
+  <li><p><span>\({\mathit{meminst}}\)</span>は伸長するメモリインスタンスであり、nは伸長するページ数であるとします。</p></li>
+  <li><p>前提条件：<span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>の長さはページサイズ<span>\(64\,\mathrm{Ki}\)</span>により割り切れます。</p></li>
+  <li><p><span>\(\mathit{len}\)</span>はnに<span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>の長さをページサイズ<span>\(64\,\mathrm{Ki}\)</span>で除算したものを加算したものであるとします。</p></li>
+  <li><p>もし<span>\(\mathit{len}\)</span>が<span>\(2^{16}\)</span>より大きいならば失敗します。</p></li>
+  <li><p>もし<span>\({\mathit{meminst}}.{\mathsf{max}}\)</span>が空ではなく、かつその値が<span>\(\mathit{len}\)</span>未満ならば失敗します。</p></li>
+  <li><p><span>\({\mathit{meminst}}.{\mathsf{data}}\)</span>にn×<span>\(64\,\mathrm{Ki}\)</span> bytesな値<span>\(\def\mathdef1221#1{\mathtt{0x#1}}\mathdef1221{00}\)</span>を追加します。</p></li>
 </ol>
 <div>\[\begin{split}\begin{array}{rllll}
 {\mathrm{growmem}}({\mathit{meminst}}, n) &amp;=&amp; {\mathit{meminst}} {\mathrel{\mbox{with}}} {\mathsf{data}} = {\mathit{meminst}}.{\mathsf{data}}~(\def\mathdef1222#1{\mathtt{0x#1}}\mathdef1222{00})^{n \cdot 64\,\mathrm{Ki}} \\
@@ -2695,47 +2695,47 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{globals}}~{\mathit{globalinst}}\} \\
 モジュールをアロケートする関数は適切なモジュールのImportベクトルに合致するとされる外部値のリストとモジュールのグローバルを初期化する値のリストであるとします。
 
 <ol>
-  <li><span>\({\mathit{module}}\)</span>はアロケートするモジュールと<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>モジュールのImportに使用される値のリストと<span>\({\mathit{val}}^\ast\)</span>がモジュールのグローバルを初期化する値であるとします。</li>
+  <li><p><span>\({\mathit{module}}\)</span>はアロケートするモジュールと<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>モジュールのImportに使用される値のリストと<span>\({\mathit{val}}^\ast\)</span>がモジュールのグローバルを初期化する値であるとします。</p></li>
   <li><span>\({\mathit{module}}.{\mathsf{funcs}}\)</span>中の各関数<span>\({\mathit{func}}_i\)</span>について:
     <ol>
-      <li><span>\({\mathit{funcaddr}}_i\)</span>は以下に定義されるモジュールインスタンス<span>\({\mathit{moduleinst}}\)</span>によりアロケートされる関数<span>\({\mathit{func}}_i\)</span>であるとします。</li>
+      <li><p><span>\({\mathit{funcaddr}}_i\)</span>は以下に定義されるモジュールインスタンス<span>\({\mathit{moduleinst}}\)</span>によりアロケートされる関数<span>\({\mathit{func}}_i\)</span>であるとします。</p></li>
     </ol>
   </li>
   <li><span>\({\mathit{module}}.{\mathsf{tables}}\)</span>中の各テーブル<span>\({\mathit{table}}_i\)</span>について:
     <ol>
-      <li><span>\({\mathit{tableaddr}}_i\)</span>は<span>\({\mathit{table}}_i.{\mathsf{type}}\)</span>によりアロケートされるテーブルであるとします。</li>
+      <li><p><span>\({\mathit{tableaddr}}_i\)</span>は<span>\({\mathit{table}}_i.{\mathsf{type}}\)</span>によりアロケートされるテーブルであるとします。</p></li>
     </ol>
   </li>
   <li><span>\({\mathit{module}}.{\mathsf{mems}}\)</span>中の各メモリ<span>\({\mathit{mem}}_i\)</span>について:
     <ol>
-      <li><span>\({\mathit{memaddr}}_i\)</span>は<span>\({\mathit{mem}}_i.{\mathsf{type}}\)</span>によりアロケートされるメモリアドレスであるとします。</li>
+      <li><p><span>\({\mathit{memaddr}}_i\)</span>は<span>\({\mathit{mem}}_i.{\mathsf{type}}\)</span>によりアロケートされるメモリアドレスであるとします。</p></li>
     </ol>
   </li>
   <li><span>\({\mathit{module}}.{\mathsf{globals}}\)</span>中の各グローバル<span>\({\mathit{global}}_i\)</span>について:
     <ol>
-      <li><span>\({\mathit{globaladdr}}_i\)</span>は値<span>\({\mathit{val}}^\ast[i]\)</span>を以て初期化される<span>\({\mathit{global}}_i.{\mathsf{type}}\)</span>によりアロケートされるグローバルアドレスであるとします。</li>
+      <li><p><span>\({\mathit{globaladdr}}_i\)</span>は値<span>\({\mathit{val}}^\ast[i]\)</span>を以て初期化される<span>\({\mathit{global}}_i.{\mathsf{type}}\)</span>によりアロケートされるグローバルアドレスであるとします。</p></li>
     </ol>
   </li>
-  <li><span>\({\mathit{funcaddr}}^\ast\)</span>はインデックスで整列された関数アドレス<span>\({\mathit{funcaddr}}_i\)</span>の連続したものであるとします。</li>
-  <li><span>\({\mathit{tableaddr}}^\ast\)</span>はインデックスで整列されたテーブルアドレス<span>\({\mathit{tableaddr}}_i\)</span>の連続したものであるとします。</li>
-  <li><span>\({\mathit{memaddr}}^\ast\)</span>はインデックスで整列されたメモリアドレス<span>\({\mathit{memaddr}}_i\)</span>の連続したものであるとします。</li>
-  <li><span>\({\mathit{globaladdr}}^\ast\)</span>はインデックスで整列されたグローバルアドレス<span>\({\mathit{globaladdr}}_i\)</span>の連続したものであるとします。</li>
-  <li><span>\({\mathit{funcaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{funcaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出された関数アドレスのリストであるとします。</li>
-  <li><span>\({\mathit{tableaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{tableaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたテーブルアドレスのリストであるとします。</li>
-  <li><span>\({\mathit{memaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{memaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたメモリアドレスのリストであるとします。</li>
-  <li><span>\({\mathit{globaladdr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{globaladdr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたグローバルアドレスのリストであるとします。</li>
+  <li><p><span>\({\mathit{funcaddr}}^\ast\)</span>はインデックスで整列された関数アドレス<span>\({\mathit{funcaddr}}_i\)</span>の連続したものであるとします。</p></li>
+  <li><p><span>\({\mathit{tableaddr}}^\ast\)</span>はインデックスで整列されたテーブルアドレス<span>\({\mathit{tableaddr}}_i\)</span>の連続したものであるとします。</p></li>
+  <li><p><span>\({\mathit{memaddr}}^\ast\)</span>はインデックスで整列されたメモリアドレス<span>\({\mathit{memaddr}}_i\)</span>の連続したものであるとします。</p></li>
+  <li><p><span>\({\mathit{globaladdr}}^\ast\)</span>はインデックスで整列されたグローバルアドレス<span>\({\mathit{globaladdr}}_i\)</span>の連続したものであるとします。</p></li>
+  <li><p><span>\({\mathit{funcaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{funcaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出された関数アドレスのリストであるとします。</p></li>
+  <li><p><span>\({\mathit{tableaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{tableaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたテーブルアドレスのリストであるとします。</p></li>
+  <li><p><span>\({\mathit{memaddr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{memaddr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたメモリアドレスのリストであるとします。</p></li>
+  <li><p><span>\({\mathit{globaladdr}}_{\mathrm{mod}}^\ast\)</span>は<span>\({\mathit{globaladdr}}^\ast\)</span>に連続する<span>\({\mathit{externval}}_{\mathrm{im}}^\ast\)</span>から抽出されたグローバルアドレスのリストであるとします。</p></li>
   <li><span>\({\mathit{module}}.{\mathsf{exports}}\)</span>中の各Export<span>\({\mathit{export}}_i\)</span>について:
     <ol>
-      <li>もし<span>\({\mathit{export}}_i\)</span>がExport関数インデックスxに対応する関数であるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{func}}~({\mathit{funcaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</li>
-      <li>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportテーブルインデックスxに対応するテーブルであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{table}}~({\mathit{tableaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</li>
-      <li>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportメモリインデックスxに対応するメモリであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{mem}}~({\mathit{memaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</li>
-      <li>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportグローバルインデックスxに対応するグローバルであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{global}}~({\mathit{globaladdr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</li>
-      <li><span>\({\mathit{exportinst}}_i\)</span>はExportインスタンス<span>\(\{{\mathsf{name}}~({\mathit{export}}_i.{\mathsf{name}}), {\mathsf{value}}~{\mathit{externval}}_i\}\)</span>であるとします。</li>
+      <li><p>もし<span>\({\mathit{export}}_i\)</span>がExport関数インデックスxに対応する関数であるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{func}}~({\mathit{funcaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</p></li>
+      <li><p>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportテーブルインデックスxに対応するテーブルであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{table}}~({\mathit{tableaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</p></li>
+      <li><p>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportメモリインデックスxに対応するメモリであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{mem}}~({\mathit{memaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</p></li>
+      <li><p>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportグローバルインデックスxに対応するグローバルであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{global}}~({\mathit{globaladdr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</p></li>
+      <li><p><span>\({\mathit{exportinst}}_i\)</span>はExportインスタンス<span>\(\{{\mathsf{name}}~({\mathit{export}}_i.{\mathsf{name}}), {\mathsf{value}}~{\mathit{externval}}_i\}\)</span>であるとします。</p></li>
     </ol>
   </li>
-  <li><span>\({\mathit{exportinst}}^\ast\)</span>はthe the concatenation of the export instances <span>\({\mathit{exportinst}}_i\)</span> in index orderであるとします。</li>
-  <li><span>\({\mathit{moduleinst}}\)</span>はthe module instance <span>\(\{{\mathsf{types}}~({\mathit{module}}.{\mathsf{types}}),\)</span> <span>\({\mathsf{funcaddrs}}~{\mathit{funcaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{tableaddrs}}~{\mathit{tableaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{memaddrs}}~{\mathit{memaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{globaladdrs}}~{\mathit{globaladdr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{exports}}~{\mathit{exportinst}}^\ast\}\)</span>であるとします。</li>
-  <li><span>\({\mathit{moduleinst}}\)</span>を戻り値とします。</li>
+  <li><p><span>\({\mathit{exportinst}}^\ast\)</span>はthe the concatenation of the export instances <span>\({\mathit{exportinst}}_i\)</span> in index orderであるとします。</p></li>
+  <li><p><span>\({\mathit{moduleinst}}\)</span>はthe module instance <span>\(\{{\mathsf{types}}~({\mathit{module}}.{\mathsf{types}}),\)</span> <span>\({\mathsf{funcaddrs}}~{\mathit{funcaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{tableaddrs}}~{\mathit{tableaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{memaddrs}}~{\mathit{memaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{globaladdrs}}~{\mathit{globaladdr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{exports}}~{\mathit{exportinst}}^\ast\}\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathit{moduleinst}}\)</span>を戻り値とします。</p></li>
 </ol>
 <div>\[\begin{split}~\\
 \begin{array}{rlll}
@@ -2799,25 +2799,25 @@ S_{i+1}, a^n[i] &amp;=&amp; \mathrm{allocx}(S_i, X^n[i], \dots)
 <ol>
   <li>もし<span>\({\mathit{module}}\)</span>が無効ならば:
     <ol>
-      <li>失敗します。</li>
+      <li><p>失敗します。</p></li>
     </ol>
   </li>
-  <li>前提条件：<span>\({\mathit{module}}\)</span>はImportされた外部型<span>\({\mathit{externtype}}_{\mathrm{im}}^m\)</span>として有効です。</li>
+  <li><p>前提条件：<span>\({\mathit{module}}\)</span>はImportされた外部型<span>\({\mathit{externtype}}_{\mathrm{im}}^m\)</span>として有効です。</p></li>
   <li>もしImportされた数値mが外部値のnと等しくないならば:
     <ol>
-      <li>失敗します。</li>
+      <li><p>失敗します。</p></li>
     </ol>
   </li>
   <li><span>\({\mathit{externtype}}_{\mathrm{im}}^n\)</span>中の<span>\({\mathit{externval}}^n\)</span>中の各外部値<span>\({\mathit{externval}}_i\)</span>と外部型<span>\({\mathit{externtype}}'_i\)</span>について:
     <ol>
       <li>もし<span>\({\mathit{externval}}_i\)</span>がストアS中に存在する外部型<span>\({\mathit{externtype}}_i\)</span>で無効ならば:
         <ol>
-          <li>失敗します。</li>
+          <li><p>失敗します。</p></li>
         </ol>
       </li>
       <li>もし<span>\({\mathit{externtype}}_i\)</span>が<span>\({\mathit{externtype}}'_i\)</span>に合致しないならば:
         <ol>
-          <li>失敗します。</li>
+          <li><p>失敗します。</p></li>
         </ol>
       </li>
     </ol>
@@ -2826,36 +2826,36 @@ S_{i+1}, a^n[i] &amp;=&amp; \mathrm{allocx}(S_i, X^n[i], \dots)
 <ol>
   <li><span>\({\mathit{val}}^\ast\)</span>は<span>\({\mathit{module}}\)</span>と<span>\({\mathit{externval}}^n\)</span>により決定されるグローバル初期化に用いる値のベクトルであるとします。これらは以下のように計算されるでしょう。
     <ol>
-      <li><span>\({\mathit{moduleinst}}_{\mathrm{im}}\)</span>はImportされたグローバルインスタンスのみによって構成される補助モジュールインスタンス<span>\(\{{\mathsf{globaladdrs}}~{\mathrm{globals}}({\mathit{externval}}^n)\}\)</span>であるとします。</li>
-      <li><span>\(F_{\mathrm{im}}\)</span>は補助フレーム<span>\(\{ {\mathsf{module}}~{\mathit{moduleinst}}_{\mathrm{im}}, {\mathsf{locals}}~\epsilon \}\)</span>であるとします。</li>
-      <li>スタックにフレーム<span>\(F_{\mathrm{im}}\)</span>をpushします。</li>
+      <li><p><span>\({\mathit{moduleinst}}_{\mathrm{im}}\)</span>はImportされたグローバルインスタンスのみによって構成される補助モジュールインスタンス<span>\(\{{\mathsf{globaladdrs}}~{\mathrm{globals}}({\mathit{externval}}^n)\}\)</span>であるとします。</p></li>
+      <li><p><span>\(F_{\mathrm{im}}\)</span>は補助フレーム<span>\(\{ {\mathsf{module}}~{\mathit{moduleinst}}_{\mathrm{im}}, {\mathsf{locals}}~\epsilon \}\)</span>であるとします。</p></li>
+      <li><p>スタックにフレーム<span>\(F_{\mathrm{im}}\)</span>をpushします。</p></li>
       <li><span>\({\mathit{module}}.{\mathsf{globals}}\)</span>中の各グローバル<span>\({\mathit{global}}_i\)</span>について:
         <ol>
-          <li><span>\({\mathit{val}}_i\)</span>は初期化式<span>\({\mathit{global}}_i.{\mathsf{init}}\)</span>の評価結果であるとします。</li>
+          <li><p><span>\({\mathit{val}}_i\)</span>は初期化式<span>\({\mathit{global}}_i.{\mathsf{init}}\)</span>の評価結果であるとします。</p></li>
         </ol>
       </li>
-      <li>前提条件：バリデーション/検証を経て保証されることですが、フレーム<span>\(F_{\mathrm{im}}\)</span>はスタックの一番上に存在します</li>
-      <li>スタックからフレーム<span>\(F_{\mathrm{im}}\)</span>をpopします。</li>
+      <li><p>前提条件：バリデーション/検証を経て保証されることですが、フレーム<span>\(F_{\mathrm{im}}\)</span>はスタックの一番上に存在します</p></li>
+      <li><p>スタックからフレーム<span>\(F_{\mathrm{im}}\)</span>をpopします。</p></li>
     </ol>
   </li>
-  <li><span>\({\mathit{moduleinst}}\)</span>がストアS中の<span>\({\mathit{module}}\)</span>においてアロケートされた新しいモジュールのインスタンスであり、Importは<span>\({\mathit{externval}}^n\)</span>で、グローバル初期化の値が<span>\({\mathit{val}}^\ast\)</span>であり、<span>\(S'\)</span>がモジュールのアロケーションにより拡張されたストアであるとします。</li>
-  <li>Fはフレーム<span>\(\{ {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{locals}}~\epsilon \}\)</span>であるとします。</li>
-  <li>スタックにフレームFをpushします。</li>
+  <li><p><span>\({\mathit{moduleinst}}\)</span>がストアS中の<span>\({\mathit{module}}\)</span>においてアロケートされた新しいモジュールのインスタンスであり、Importは<span>\({\mathit{externval}}^n\)</span>で、グローバル初期化の値が<span>\({\mathit{val}}^\ast\)</span>であり、<span>\(S'\)</span>がモジュールのアロケーションにより拡張されたストアであるとします。</p></li>
+  <li><p>Fはフレーム<span>\(\{ {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{locals}}~\epsilon \}\)</span>であるとします。</p></li>
+  <li><p>スタックにフレームFをpushします。</p></li>
   <li><span>\({\mathit{module}}.{\mathsf{elem}}\)</span>中の各Elementセグメント<span>\({\mathit{elem}}_i\)</span>について:
     <blockquote>
       <div>
         <ol>
-          <li><span>\(\mathit{eoval}_i\)</span>は式<span>\({\mathit{elem}}_i.{\mathsf{offset}}\)</span>の評価結果であるとします。</li>
-          <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(\mathit{eoval}_i\)</span>が<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{eo}_i\)</span>の形式であるとします。</li>
-          <li><span>\({\mathit{tableidx}}_i\)</span>はテーブルインデックス<span>\({\mathit{elem}}_i.{\mathsf{table}}\)</span>であるとします。</li>
-          <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathit{moduleinst}}.{\mathsf{tableaddrs}}[{\mathit{tableidx}}_i]\)</span>は存在します。</li>
-          <li><span>\({\mathit{tableaddr}}_i\)</span>はテーブルアドレス<span>\({\mathit{moduleinst}}.{\mathsf{tableaddrs}}[{\mathit{tableidx}}_i]\)</span>であるとします。</li>
-          <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S'.{\mathsf{tables}}[{\mathit{tableaddr}}_i]\)</span>は存在します。</li>
-          <li><span>\({\mathit{tableinst}}_i\)</span>はテーブルインスタンス<span>\(S'.{\mathsf{tables}}[{\mathit{tableaddr}}_i]\)</span>であるとします。</li>
-          <li><span>\(\mathit{eend}_i\)</span>は<span>\(\mathit{eo}_i\)</span> plus the length of <span>\({\mathit{elem}}_i.{\mathsf{init}}\)</span>であるとします。</li>
+          <li><p><span>\(\mathit{eoval}_i\)</span>は式<span>\({\mathit{elem}}_i.{\mathsf{offset}}\)</span>の評価結果であるとします。</p></li>
+          <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(\mathit{eoval}_i\)</span>が<span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{eo}_i\)</span>の形式であるとします。</p></li>
+          <li><p><span>\({\mathit{tableidx}}_i\)</span>はテーブルインデックス<span>\({\mathit{elem}}_i.{\mathsf{table}}\)</span>であるとします。</p></li>
+          <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathit{moduleinst}}.{\mathsf{tableaddrs}}[{\mathit{tableidx}}_i]\)</span>は存在します。</p></li>
+          <li><p><span>\({\mathit{tableaddr}}_i\)</span>はテーブルアドレス<span>\({\mathit{moduleinst}}.{\mathsf{tableaddrs}}[{\mathit{tableidx}}_i]\)</span>であるとします。</p></li>
+          <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S'.{\mathsf{tables}}[{\mathit{tableaddr}}_i]\)</span>は存在します。</p></li>
+          <li><p><span>\({\mathit{tableinst}}_i\)</span>はテーブルインスタンス<span>\(S'.{\mathsf{tables}}[{\mathit{tableaddr}}_i]\)</span>であるとします。</p></li>
+          <li><p><span>\(\mathit{eend}_i\)</span>は<span>\(\mathit{eo}_i\)</span> plus the length of <span>\({\mathit{elem}}_i.{\mathsf{init}}\)</span>であるとします。</p></li>
           <li>もし<span>\(\mathit{eend}_i\)</span>が<span>\({\mathit{tableinst}}_i.{\mathsf{elem}}\)</span>の長さより大きいならば:
             <ol>
-              <li>失敗します。</li>
+              <li><p>失敗します。</p></li>
             </ol>
           </li>
         </ol>
@@ -2864,30 +2864,30 @@ S_{i+1}, a^n[i] &amp;=&amp; \mathrm{allocx}(S_i, X^n[i], \dots)
   </li>
   <li><span>\({\mathit{module}}.{\mathsf{data}}\)</span>中の各Dataセグメント<span>\({\mathit{data}}_i\)</span>について:
     <ol>
-      <li><span>\(\mathit{doval}_i\)</span>は式<span>\({\mathit{data}}_i.{\mathsf{offset}}\)</span>の評価結果であるとします。</li>
-      <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(\mathit{doval}_i\)</span> is of the form <span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{do}_i\)</span>。</li>
-      <li><span>\({\mathit{memidx}}_i\)</span>はメモリインデックス<span>\({\mathit{data}}_i.{\mathsf{data}}\)</span>であるとします。</li>
-      <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathit{moduleinst}}.{\mathsf{memaddrs}}[{\mathit{memidx}}_i]\)</span>は存在します。</li>
-      <li><span>\({\mathit{memaddr}}_i\)</span>はメモリアドレス<span>\({\mathit{moduleinst}}.{\mathsf{memaddrs}}[{\mathit{memidx}}_i]\)</span>であるとします。</li>
-      <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S'.{\mathsf{mems}}[{\mathit{memaddr}}_i]\)</span>は存在します。</li>
-      <li><span>\({\mathit{meminst}}_i\)</span>はメモリインスタンス<span>\(S'.{\mathsf{mems}}[{\mathit{memaddr}}_i]\)</span>であるとします。</li>
-      <li><span>\(\mathit{dend}_i\)</span>は<span>\(\mathit{do}_i\)</span> plus the length of <span>\({\mathit{data}}_i.{\mathsf{init}}\)</span>であるとします。</li>
+      <li><p><span>\(\mathit{doval}_i\)</span>は式<span>\({\mathit{data}}_i.{\mathsf{offset}}\)</span>の評価結果であるとします。</p></li>
+      <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(\mathit{doval}_i\)</span> is of the form <span>\({\mathsf{i32}}.{\mathsf{const}}~\mathit{do}_i\)</span>。</p></li>
+      <li><p><span>\({\mathit{memidx}}_i\)</span>はメモリインデックス<span>\({\mathit{data}}_i.{\mathsf{data}}\)</span>であるとします。</p></li>
+      <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathit{moduleinst}}.{\mathsf{memaddrs}}[{\mathit{memidx}}_i]\)</span>は存在します。</p></li>
+      <li><p><span>\({\mathit{memaddr}}_i\)</span>はメモリアドレス<span>\({\mathit{moduleinst}}.{\mathsf{memaddrs}}[{\mathit{memidx}}_i]\)</span>であるとします。</p></li>
+      <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\(S'.{\mathsf{mems}}[{\mathit{memaddr}}_i]\)</span>は存在します。</p></li>
+      <li><p><span>\({\mathit{meminst}}_i\)</span>はメモリインスタンス<span>\(S'.{\mathsf{mems}}[{\mathit{memaddr}}_i]\)</span>であるとします。</p></li>
+      <li><p><span>\(\mathit{dend}_i\)</span>は<span>\(\mathit{do}_i\)</span> plus the length of <span>\({\mathit{data}}_i.{\mathsf{init}}\)</span>であるとします。</p></li>
       <li>もし<span>\(\mathit{dend}_i\)</span>が<span>\({\mathit{meminst}}_i.{\mathsf{data}}\)</span>の長さより大きいならば:
         <ol>
-          <li>失敗します。</li>
+          <li><p>失敗します。</p></li>
         </ol>
       </li>
     </ol>
   </li>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、フレームFはスタックの一番上に存在します</li>
-  <li>スタックからフレームをpopします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、フレームFはスタックの一番上に存在します</p></li>
+  <li><p>スタックからフレームをpopします。</p></li>
   <li><span>\({\mathit{module}}.{\mathsf{elem}}\)</span>中の各Elementセグメント<span>\({\mathit{elem}}_i\)</span>について:
     <ol>
       <li><span>\({\mathit{elem}}_i.{\mathsf{init}}\)</span> (<span>\(j = 0\)</span>から開始します)中の各function index <span>\({\mathit{funcidx}}_{ij}\)</span>について:
         <ol>
-          <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathit{moduleinst}}.{\mathsf{funcaddrs}}[{\mathit{funcidx}}_{ij}]\)</span>は存在します。</li>
-          <li><span>\({\mathit{funcaddr}}_{ij}\)</span>は関数アドレス<span>\({\mathit{moduleinst}}.{\mathsf{funcaddrs}}[{\mathit{funcidx}}_{ij}]\)</span>であるとします。</li>
-          <li><span>\({\mathit{tableinst}}_i.{\mathsf{elem}}[\mathit{eo}_i + j]\)</span>を<span>\({\mathit{funcaddr}}_{ij}\)</span>で置換します。</li>
+          <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathit{moduleinst}}.{\mathsf{funcaddrs}}[{\mathit{funcidx}}_{ij}]\)</span>は存在します。</p></li>
+          <li><p><span>\({\mathit{funcaddr}}_{ij}\)</span>は関数アドレス<span>\({\mathit{moduleinst}}.{\mathsf{funcaddrs}}[{\mathit{funcidx}}_{ij}]\)</span>であるとします。</p></li>
+          <li><p><span>\({\mathit{tableinst}}_i.{\mathsf{elem}}[\mathit{eo}_i + j]\)</span>を<span>\({\mathit{funcaddr}}_{ij}\)</span>で置換します。</p></li>
         </ol>
       </li>
     </ol>
@@ -2896,16 +2896,16 @@ S_{i+1}, a^n[i] &amp;=&amp; \mathrm{allocx}(S_i, X^n[i], \dots)
     <ol>
       <li><span>\({\mathit{data}}_i.{\mathsf{init}}\)</span> (<span>\(j = 0\)</span>から開始します)中の各byte <span>\(b_{ij}\)</span>について:
         <ol>
-          <li><span>\({\mathit{meminst}}_i.{\mathsf{data}}[\mathit{do}_i + j]\)</span>を<span>\(b_{ij}\)</span>で置換します。</li>
+          <li><p><span>\({\mathit{meminst}}_i.{\mathsf{data}}[\mathit{do}_i + j]\)</span>を<span>\(b_{ij}\)</span>で置換します。</p></li>
         </ol>
       </li>
     </ol>
   </li>
   <li>もしthe start function <span>\({\mathit{module}}.{\mathsf{start}}\)</span> is not empty, then:
     <ol>
-      <li>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathit{moduleinst}}.{\mathsf{funcaddrs}}[{\mathit{module}}.{\mathsf{start}}.{\mathsf{func}}]\)</span>は存在します。</li>
-      <li><span>\({\mathit{funcaddr}}\)</span>は関数アドレス<span>\({\mathit{moduleinst}}.{\mathsf{funcaddrs}}[{\mathit{module}}.{\mathsf{start}}.{\mathsf{func}}]\)</span>であるとします。</li>
-      <li>関数アドレス<span>\({\mathit{funcaddr}}\)</span>にある関数インスタンスを呼び出します。</li>
+      <li><p>前提条件：バリデーション/検証を経て保証されることですが、<span>\({\mathit{moduleinst}}.{\mathsf{funcaddrs}}[{\mathit{module}}.{\mathsf{start}}.{\mathsf{func}}]\)</span>は存在します。</p></li>
+      <li><p><span>\({\mathit{funcaddr}}\)</span>は関数アドレス<span>\({\mathit{moduleinst}}.{\mathsf{funcaddrs}}[{\mathit{module}}.{\mathsf{start}}.{\mathsf{func}}]\)</span>であるとします。</p></li>
+      <li><p>関数アドレス<span>\({\mathit{funcaddr}}\)</span>にある関数インスタンスを呼び出します。</p></li>
     </ol>
   </li>
 </ol>
@@ -2975,34 +2975,34 @@ S; F; {\mathsf{init\_data}}~a~i~(b_0~b^\ast) &amp;{\hookrightarrow}&amp;
 以下の手順を実行します:
 
 <ol>
-  <li>前提条件：<span>\(S.{\mathsf{funcs}}[{\mathit{funcaddr}}]\)</span>は存在します。</li>
-  <li><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(S.{\mathsf{funcs}}[{\mathit{funcaddr}}]\)</span>であるとします。</li>
-  <li><span>\([t_1^n] {\rightarrow} [t_2^m]\)</span>は関数型<span>\({\mathit{funcinst}}.{\mathsf{type}}\)</span>であるとします。</li>
+  <li><p>前提条件：<span>\(S.{\mathsf{funcs}}[{\mathit{funcaddr}}]\)</span>は存在します。</p></li>
+  <li><p><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(S.{\mathsf{funcs}}[{\mathit{funcaddr}}]\)</span>であるとします。</p></li>
+  <li><p><span>\([t_1^n] {\rightarrow} [t_2^m]\)</span>は関数型<span>\({\mathit{funcinst}}.{\mathsf{type}}\)</span>であるとします。</p></li>
   <li>もし与えられた引数の長さ<span>\(|{\mathit{val}}^\ast|\)</span>が期待される引数の長さの数値nと異なるならば:
     <ol>
-      <li>失敗します。</li>
+      <li><p>失敗します。</p></li>
     </ol>
   </li>
   <li><span>\({\mathit{val}}^\ast\)</span>中の各<span>\(t_1^n\)</span>の値型<span>\(t_i\)</span>と対応する値<span>\(val_i\)</span>について:
     <ol>
       <li>もし<span>\({\mathit{val}}_i\)</span>が<span>\(c_i\)</span>について<span>\(t_i.{\mathsf{const}}~c_i\)</span>でないならば:
         <ol>
-          <li>失敗します。</li>
+          <li><p>失敗します。</p></li>
         </ol>
       </li>
     </ol>
   </li>
-  <li>Fはダミーフレーム<span>\(\{ {\mathsf{module}}~\{\}, {\mathsf{locals}}~\epsilon \}\)</span>であるとします。</li>
-  <li>スタックにフレームFをpushします。</li>
-  <li>スタックに値<span>\({\mathit{val}}^\ast\)</span>をpushします。</li>
-  <li>アドレス<span>\({\mathit{funcaddr}}\)</span>にある関数インスタンスを呼び出します。</li>
+  <li><p>Fはダミーフレーム<span>\(\{ {\mathsf{module}}~\{\}, {\mathsf{locals}}~\epsilon \}\)</span>であるとします。</p></li>
+  <li><p>スタックにフレームFをpushします。</p></li>
+  <li><p>スタックに値<span>\({\mathit{val}}^\ast\)</span>をpushします。</p></li>
+  <li><p>アドレス<span>\({\mathit{funcaddr}}\)</span>にある関数インスタンスを呼び出します。</p></li>
 </ol>
 
 関数がreturnした場合、次のステップを実行します:
 
 <ol>
-  <li>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上にm valuesが存在します。</li>
-  <li>スタックから<span>\({\mathit{val}}_{\mathrm{res}}^m\)</span>をpopします。</li>
+  <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックの一番上にm valuesが存在します。</p></li>
+  <li><p>スタックから<span>\({\mathit{val}}_{\mathrm{res}}^m\)</span>をpopします。</p></li>
 </ol>
 
 <div><span>\({\mathit{val}}_{\mathrm{res}}^m\)</span>の値が呼び出しの結果として戻り値になります。</div>
@@ -3020,9 +3020,9 @@ S; F; {\mathsf{init\_data}}~a~i~(b_0~b^\ast) &amp;{\hookrightarrow}&amp;
 <footer>
     <nav>
         <ul>
-          <li><a href="Validation" rel="prev">Prev: 検証</a></li>
-          <li><a href="./">Top: Index</a></li>
-          <li><a href="BinaryFormat" rel="next">Next: Binary Format</a></li>
+          <li><p><a href="Validation" rel="prev">Prev: 検証</a></p></li>
+          <li><p><a href="./">Top: Index</a></p></li>
+          <li><p><a href="BinaryFormat" rel="next">Next: Binary Format</a></p></li>
         </ul>
         <a href="LICENSE" rel="license">LICENSE</a>
     </nav>
