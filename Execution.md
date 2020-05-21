@@ -2579,7 +2579,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 {\mathit{funcaddr}} &amp;=&amp; |S.{\mathsf{funcs}}| \\
 {\mathit{functype}} &amp;=&amp; {\mathit{moduleinst}}.{\mathsf{types}}[{\mathit{func}}.{\mathsf{type}}] \\
 {\mathit{funcinst}} &amp;=&amp; \{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{code}}~{\mathit{func}} \} \\
-S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
+S' &amp;=&amp; S {\oplus} \{ {\mathsf{funcs}}~{\mathit{funcinst}} \} \\
 \end{array}\end{split}\]</div>
 
 <h3>Host Functions</h3>
@@ -2596,7 +2596,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
 \mbox{where:} \hfill \\
 {\mathit{funcaddr}} &amp;=&amp; |S.{\mathsf{funcs}}| \\
 {\mathit{funcinst}} &amp;=&amp; \{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{hostcode}}~{\mathit{hostfunc}} \} \\
-S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
+S' &amp;=&amp; S {\oplus} \{ {\mathsf{funcs}}~{\mathit{funcinst}} \} \\
 \end{array}\end{split}\]</div>
 
 <h3>Tables</h3>
@@ -2614,7 +2614,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
 {\mathit{tabletype}} &amp;=&amp; \{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \}~{\mathit{elemtype}} \\
 {\mathit{tableaddr}} &amp;=&amp; |S.{\mathsf{tables}}| \\
 {\mathit{tableinst}} &amp;=&amp; \{ {\mathsf{elem}}~(\epsilon)^n, {\mathsf{max}}~m^? \} \\
-S' &amp;=&amp; S {\oplus} \{{\mathsf{tables}}~{\mathit{tableinst}}\} \\
+S' &amp;=&amp; S {\oplus} \{ {\mathsf{tables}}~{\mathit{tableinst}} \} \\
 \end{array}\end{split}\]</div>
 
 <h3>Memories</h3>
@@ -2632,7 +2632,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{tables}}~{\mathit{tableinst}}\} \\
 {\mathit{memtype}} &amp;=&amp; \{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \} \\
 {\mathit{memaddr}} &amp;=&amp; |S.{\mathsf{mems}}| \\
 {\mathit{meminst}} &amp;=&amp; \{ {\mathsf{data}}~(\def\mathdef1220#1{\mathtt{0x#1}}\mathdef1220{00})^{n \cdot 64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \} \\
-S' &amp;=&amp; S {\oplus} \{{\mathsf{mems}}~{\mathit{meminst}}\} \\
+S' &amp;=&amp; S {\oplus} \{ {\mathsf{mems}}~{\mathit{meminst}} \} \\
 \end{array}\end{split}\]</div>
 
 <h3>Globals</h3>
@@ -2650,7 +2650,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{mems}}~{\mathit{meminst}}\} \\
 {\mathit{globaltype}} &amp;=&amp; {\mathit{mut}}~t \\
 {\mathit{globaladdr}} &amp;=&amp; |S.{\mathsf{globals}}| \\
 {\mathit{globalinst}} &amp;=&amp; \{ {\mathsf{value}}~{\mathit{val}}, {\mathsf{mut}}~{\mathit{mut}} \} \\
-S' &amp;=&amp; S {\oplus} \{{\mathsf{globals}}~{\mathit{globalinst}}\} \\
+S' &amp;=&amp; S {\oplus} \{ {\mathsf{globals}}~{\mathit{globalinst}} \} \\
 \end{array}\end{split}\]</div>
 
 <h3>Growing tables</h3>
