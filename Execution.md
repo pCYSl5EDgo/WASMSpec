@@ -2305,7 +2305,7 @@ S; F; ({\mathsf{i32}}.{\mathsf{const}}~i)~({\mathsf{call\_indirect}}~x) &amp;{\h
   <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタック上に少なくともn個の値が存在します。</p></li>
   <li><p>スタックから<span>\({\mathit{val}}^n\)</span>をpopします。</p></li>
   <li><p><span>\({\mathit{val}}_0^\ast\)</span>が型<span>\(t^\ast\)</span>の0に相当する値のリストであるとします。</p></li>
-  <li><p>Fがフレーム<span>\(\{ {\mathsf{module}}~f.{\mathsf{module}}, {\mathsf{locals}}~{\mathit{val}}^n~{\mathit{val}}_0^\ast \}\)</span>であるとします。</p></li>
+  <li><p>Fがフレーム<span>\(\{  {\mathsf{module}}~f.{\mathsf{module}}, {\mathsf{locals}}~{\mathit{val}}^n~{\mathit{val}}_0^\ast  \}\)</span>であるとします。</p></li>
   <li><p>スタックにアリティmのフレームFをpushします。</p></li>
   <li><p>Lがアリティmかつ継続先が関数終端であるラベルであるとします。</p></li>
   <li><p>Enter 命令シーケンス<span>\({\mathit{instr}}^\ast\)</span> with label L。</p></li>
@@ -2430,14 +2430,14 @@ Importに対する外部値をチェックする目的の下、そのような�
   <li><p>この時、外部型<span>\({\mathsf{func}}~{\mathit{functype}}\)</span>について<span>\({\mathsf{func}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
-  S.{\mathsf{funcs}}[a] = \{{\mathsf{type}}~{\mathit{functype}}, \dots\}
+  S.{\mathsf{funcs}}[a] = \{ {\mathsf{type}}~{\mathit{functype}}, \dots \}
 }{
   S {\vdash} {\mathsf{func}}~a : {\mathsf{func}}~{\mathit{functype}}
 }\]</div>
 
 <h3><span>\({\mathsf{table}}~a\)</span></h3>
 <ul>
-  <li><p>ストアのエントリー<span>\(S.{\mathsf{tables}}[a]\)</span>は必ずテーブルインスタンス<span>\(\{{\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^?\}\)</span>である必要があります。</p></li>
+  <li><p>ストアのエントリー<span>\(S.{\mathsf{tables}}[a]\)</span>は必ずテーブルインスタンス<span>\(\{ {\mathsf{elem}}~(\mathit{fa}^?)^n, {\mathsf{max}}~m^? \}\)</span>である必要があります。</p></li>
   <li><p>この時、外部型<span>\({\mathsf{table}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathsf{funcref}})\)</span>について<span>\({\mathsf{table}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
@@ -2448,7 +2448,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{mem}}~a\)</span></h3>
 <ul>
-  <li><p>ストアのエントリー<span>\(S.{\mathsf{mems}}[a]\)</span>は必ずnについてメモリインスタンス<span>\(\{{\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^?\}\)</span>である必要があります。</p></li>
+  <li><p>ストアのエントリー<span>\(S.{\mathsf{mems}}[a]\)</span>は必ずnについてメモリインスタンス<span>\(\{ {\mathsf{data}}~b^{n\cdot64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \}\)</span>である必要があります。</p></li>
   <li><p>この時、外部型<span>\({\mathsf{mem}}~(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\})\)</span>について<span>\({\mathsf{mem}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
@@ -2459,7 +2459,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3><span>\({\mathsf{global}}~a\)</span></h3>
 <ul>
-  <li><p>ストアのエントリー<span>\(S.{\mathsf{globals}}[a]\)</span>は必ずグローバルインスタンス<span>\(\{{\mathsf{value}}~(t.{\mathsf{const}}~c), {\mathsf{mut}}~{\mathit{mut}}\}\)</span>である必要があります。</p></li>
+  <li><p>ストアのエントリー<span>\(S.{\mathsf{globals}}[a]\)</span>は必ずグローバルインスタンス<span>\(\{ {\mathsf{value}}~(t.{\mathsf{const}}~c), {\mathsf{mut}}~{\mathit{mut}} \}\)</span>である必要があります。</p></li>
   <li><p>この時、外部型<span>\({\mathsf{global}}~({\mathit{mut}}~t)\)</span>について<span>\({\mathsf{global}}~a\)</span>は有効です。</p></li>
 </ul>
 <div>\[\frac{
@@ -2475,7 +2475,7 @@ Importに対する外部値をチェックする目的の下、そのような�
 
 <h3>Limits</h3>
 
-リミット<span>\(\{ {\mathsf{min}}~n_1, {\mathsf{max}}~m_1^? \}\)</span>は以下の条件を満たした場合のみリミット<span>\(\{ {\mathsf{min}}~n_2, {\mathsf{max}}~m_2^? \}\)</span>に合致します:
+リミット<span>\(\{  {\mathsf{min}}~n_1, {\mathsf{max}}~m_1^? \}\)</span>は以下の条件を満たした場合のみリミット<span>\(\{ {\mathsf{min}}~n_2, {\mathsf{max}}~m_2^?  \}\)</span>に合致します:
 
 <ul>
   <li><p><span>\(n_1\)</span>は<span>\(n_2\)</span>以上です</p></li>
@@ -2568,7 +2568,7 @@ Importに対する外部値をチェックする目的の下、そのような�
   <li><p><span>\({\mathit{func}}\)</span>はthe function to allocate and <span>\({\mathit{moduleinst}}\)</span> its module instanceであるとします。</p></li>
   <li><p>aはS中の最初の自由関数アドレスであるとします。</p></li>
   <li><p><span>\({\mathit{functype}}\)</span>は関数型<span>\({\mathit{moduleinst}}.{\mathsf{types}}[{\mathit{func}}.{\mathsf{type}}]\)</span>であるとします。</p></li>
-  <li><p><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(\{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{code}}~{\mathit{func}} \}\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(\{  {\mathsf{type}}~{\mathit{functype}}, {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{code}}~{\mathit{func}}  \}\)</span>であるとします。</p></li>
   <li><p>Sの<span>\({\mathsf{funcs}}\)</span>に<span>\({\mathit{funcinst}}\)</span>を追加します。</p></li>
   <li><p>aを戻り値とします。</p></li>
 </ol>
@@ -2586,7 +2586,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
 <ol>
   <li><p><span>\({\mathit{hostfunc}}\)</span>はthe host function to allocate and <span>\({\mathit{functype}}\)</span> its function typeであるとします。</p></li>
   <li><p>aはS中の最初の自由関数アドレスであるとします。</p></li>
-  <li><p><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(\{ {\mathsf{type}}~{\mathit{functype}}, {\mathsf{hostcode}}~{\mathit{hostfunc}} \}\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathit{funcinst}}\)</span>は関数インスタンス<span>\(\{  {\mathsf{type}}~{\mathit{functype}}, {\mathsf{hostcode}}~{\mathit{hostfunc}}  \}\)</span>であるとします。</p></li>
   <li><p>Sの<span>\({\mathsf{funcs}}\)</span>に<span>\({\mathit{funcinst}}\)</span>を追加します。</p></li>
   <li><p>aを戻り値とします。</p></li>
 </ol>
@@ -2604,7 +2604,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{funcs}}~{\mathit{funcinst}}\} \\
   <li><p><span>\({\mathit{tabletype}}\)</span>はthe table type to allocateであるとします。</p></li>
   <li><p><span>\((\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}~{\mathit{elemtype}})\)</span>はthe structure of table type <span>\({\mathit{tabletype}}\)</span>であるとします。</p></li>
   <li><p>aはthe first free table address in Sであるとします。</p></li>
-  <li><p><span>\({\mathit{tableinst}}\)</span>はテーブルインスタンス<span>\(\{ {\mathsf{elem}}~(\epsilon)^n, {\mathsf{max}}~m^? \}\)</span> with n empty elementsであるとします。</p></li>
+  <li><p><span>\({\mathit{tableinst}}\)</span>はテーブルインスタンス<span>\(\{  {\mathsf{elem}}~(\epsilon)^n, {\mathsf{max}}~m^?  \}\)</span> with n empty elementsであるとします。</p></li>
   <li><p>Sの<span>\({\mathsf{tables}}\)</span>に<span>\({\mathit{tableinst}}\)</span>を追加します。</p></li>
   <li><p>aを戻り値とします。</p></li>
 </ol>
@@ -2620,9 +2620,9 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{tables}}~{\mathit{tableinst}}\} \\
 <h3>Memories</h3>
 <ol>
   <li><p><span>\({\mathit{memtype}}\)</span>はthe memory type to allocateであるとします。</p></li>
-  <li><p><span>\(\{{\mathsf{min}}~n, {\mathsf{max}}~m^?\}\)</span>はthe structure of memory type <span>\({\mathit{memtype}}\)</span>であるとします。</p></li>
+  <li><p><span>\(\{ {\mathsf{min}}~n, {\mathsf{max}}~m^? \}\)</span>はthe structure of memory type <span>\({\mathit{memtype}}\)</span>であるとします。</p></li>
   <li><p>aはS中の最初の自由メモリアドレスであるとします。</p></li>
-  <li><p><span>\({\mathit{meminst}}\)</span>はメモリインスタンス<span>\(\{ {\mathsf{data}}~(\def\mathdef1219#1{\mathtt{0x#1}}\mathdef1219{00})^{n \cdot 64\,\mathrm{Ki}}, {\mathsf{max}}~m^? \}\)</span> that contains n pages of zeroed bytesであるとします。</p></li>
+  <li><p><span>\({\mathit{meminst}}\)</span>はメモリインスタンス<span>\(\{  {\mathsf{data}}~(\def\mathdef1219#1{\mathtt{0x#1}}\mathdef1219{00})^{n \cdot 64\,\mathrm{Ki}}, {\mathsf{max}}~m^?  \}\)</span> that contains n pages of zeroed bytesであるとします。</p></li>
   <li><p>Sの<span>\({\mathsf{mems}}\)</span>に<span>\({\mathit{meminst}}\)</span>を追加します。</p></li>
   <li><p>aを戻り値とします。</p></li>
 </ol>
@@ -2640,7 +2640,7 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{mems}}~{\mathit{meminst}}\} \\
   <li><p><span>\({\mathit{globaltype}}\)</span>はアロケート予定のグローバル型であり、<span>\({\mathit{val}}\)</span>はグローバル初期化に使用する値であるとします。</p></li>
   <li><p><span>\({\mathit{mut}}~t\)</span>はグローバル型<span>\({\mathit{globaltype}}\)</span>の構造であるとします。</p></li>
   <li><p>aはS中の最初の自由グローバルアドレスであるとします。</p></li>
-  <li><p><span>\({\mathit{globalinst}}\)</span>はグローバルインスタンス<span>\(\{ {\mathsf{value}}~{\mathit{val}}, {\mathsf{mut}}~{\mathit{mut}} \}\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathit{globalinst}}\)</span>はグローバルインスタンス<span>\(\{  {\mathsf{value}}~{\mathit{val}}, {\mathsf{mut}}~{\mathit{mut}}  \}\)</span>であるとします。</p></li>
   <li><p>Sの<span>\({\mathsf{globals}}\)</span>に<span>\({\mathit{globalinst}}\)</span>を追加します。</p></li>
   <li><p>aを戻り値とします。</p></li>
 </ol>
@@ -2730,11 +2730,11 @@ S' &amp;=&amp; S {\oplus} \{{\mathsf{globals}}~{\mathit{globalinst}}\} \\
       <li><p>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportテーブルインデックスxに対応するテーブルであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{table}}~({\mathit{tableaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</p></li>
       <li><p>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportメモリインデックスxに対応するメモリであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{mem}}~({\mathit{memaddr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</p></li>
       <li><p>そうでないならば、<span>\({\mathit{export}}_i\)</span>がExportグローバルインデックスxに対応するグローバルであるならば、<span>\({\mathit{externval}}_i\)</span>は外部値<span>\({\mathsf{global}}~({\mathit{globaladdr}}_{\mathrm{mod}}^\ast[x])\)</span>であるとします。</p></li>
-      <li><p><span>\({\mathit{exportinst}}_i\)</span>はExportインスタンス<span>\(\{{\mathsf{name}}~({\mathit{export}}_i.{\mathsf{name}}), {\mathsf{value}}~{\mathit{externval}}_i\}\)</span>であるとします。</p></li>
+      <li><p><span>\({\mathit{exportinst}}_i\)</span>はExportインスタンス<span>\(\{ {\mathsf{name}}~({\mathit{export}}_i.{\mathsf{name}}), {\mathsf{value}}~{\mathit{externval}}_i \}\)</span>であるとします。</p></li>
     </ol>
   </li>
   <li><p><span>\({\mathit{exportinst}}^\ast\)</span>はthe the concatenation of the export instances <span>\({\mathit{exportinst}}_i\)</span> in index orderであるとします。</p></li>
-  <li><p><span>\({\mathit{moduleinst}}\)</span>はthe module instance <span>\(\{{\mathsf{types}}~({\mathit{module}}.{\mathsf{types}}),\)</span> <span>\({\mathsf{funcaddrs}}~{\mathit{funcaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{tableaddrs}}~{\mathit{tableaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{memaddrs}}~{\mathit{memaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{globaladdrs}}~{\mathit{globaladdr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{exports}}~{\mathit{exportinst}}^\ast\}\)</span>であるとします。</p></li>
+  <li><p><span>\({\mathit{moduleinst}}\)</span>はthe module instance <span>\(\{ {\mathsf{types}}~({\mathit{module}}.{\mathsf{types}}),\)</span> <span>\({\mathsf{funcaddrs}}~{\mathit{funcaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{tableaddrs}}~{\mathit{tableaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{memaddrs}}~{\mathit{memaddr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{globaladdrs}}~{\mathit{globaladdr}}_{\mathrm{mod}}^\ast,\)</span> <span>\({\mathsf{exports}}~{\mathit{exportinst}}^\ast \}\)</span>であるとします。</p></li>
   <li><p><span>\({\mathit{moduleinst}}\)</span>を戻り値とします。</p></li>
 </ol>
 <div>\[\begin{split}~\\
@@ -2826,8 +2826,8 @@ S_{i+1}, a^n[i] &amp;=&amp; \mathrm{allocx}(S_i, X^n[i], \dots)
 <ol>
   <li><span>\({\mathit{val}}^\ast\)</span>は<span>\({\mathit{module}}\)</span>と<span>\({\mathit{externval}}^n\)</span>により決定されるグローバル初期化に用いる値のベクトルであるとします。これらは以下のように計算されるでしょう。
     <ol>
-      <li><p><span>\({\mathit{moduleinst}}_{\mathrm{im}}\)</span>はImportされたグローバルインスタンスのみによって構成される補助モジュールインスタンス<span>\(\{{\mathsf{globaladdrs}}~{\mathrm{globals}}({\mathit{externval}}^n)\}\)</span>であるとします。</p></li>
-      <li><p><span>\(F_{\mathrm{im}}\)</span>は補助フレーム<span>\(\{ {\mathsf{module}}~{\mathit{moduleinst}}_{\mathrm{im}}, {\mathsf{locals}}~\epsilon \}\)</span>であるとします。</p></li>
+      <li><p><span>\({\mathit{moduleinst}}_{\mathrm{im}}\)</span>はImportされたグローバルインスタンスのみによって構成される補助モジュールインスタンス<span>\(\{ {\mathsf{globaladdrs}}~{\mathrm{globals}}({\mathit{externval}}^n) \}\)</span>であるとします。</p></li>
+      <li><p><span>\(F_{\mathrm{im}}\)</span>は補助フレーム<span>\(\{  {\mathsf{module}}~{\mathit{moduleinst}}_{\mathrm{im}}, {\mathsf{locals}}~\epsilon  \}\)</span>であるとします。</p></li>
       <li><p>スタックにフレーム<span>\(F_{\mathrm{im}}\)</span>をpushします。</p></li>
       <li><span>\({\mathit{module}}.{\mathsf{globals}}\)</span>中の各グローバル<span>\({\mathit{global}}_i\)</span>について:
         <ol>
@@ -2839,7 +2839,7 @@ S_{i+1}, a^n[i] &amp;=&amp; \mathrm{allocx}(S_i, X^n[i], \dots)
     </ol>
   </li>
   <li><p><span>\({\mathit{moduleinst}}\)</span>がストアS中の<span>\({\mathit{module}}\)</span>においてアロケートされた新しいモジュールのインスタンスであり、Importは<span>\({\mathit{externval}}^n\)</span>で、グローバル初期化の値が<span>\({\mathit{val}}^\ast\)</span>であり、<span>\(S'\)</span>がモジュールのアロケーションにより拡張されたストアであるとします。</p></li>
-  <li><p>Fはフレーム<span>\(\{ {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{locals}}~\epsilon \}\)</span>であるとします。</p></li>
+  <li><p>Fはフレーム<span>\(\{  {\mathsf{module}}~{\mathit{moduleinst}}, {\mathsf{locals}}~\epsilon  \}\)</span>であるとします。</p></li>
   <li><p>スタックにフレームFをpushします。</p></li>
   <li><span>\({\mathit{module}}.{\mathsf{elem}}\)</span>中の各Elementセグメント<span>\({\mathit{elem}}_i\)</span>について:
     <blockquote>
@@ -2992,7 +2992,7 @@ S; F; {\mathsf{init\_data}}~a~i~(b_0~b^\ast) &amp;{\hookrightarrow}&amp;
       </li>
     </ol>
   </li>
-  <li><p>Fはダミーフレーム<span>\(\{ {\mathsf{module}}~\{\}, {\mathsf{locals}}~\epsilon \}\)</span>であるとします。</p></li>
+  <li><p>Fはダミーフレーム<span>\(\{  {\mathsf{module}}~\{\}, {\mathsf{locals}}~\epsilon  \}\)</span>であるとします。</p></li>
   <li><p>スタックにフレームFをpushします。</p></li>
   <li><p>スタックに値<span>\({\mathit{val}}^\ast\)</span>をpushします。</p></li>
   <li><p>アドレス<span>\({\mathit{funcaddr}}\)</span>にある関数インスタンスを呼び出します。</p></li>
