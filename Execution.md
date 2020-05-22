@@ -93,7 +93,7 @@
 
 ## 値
 
-`WebAssembly`の計算は4つの基本的な値の型を対照にしています。
+`WebAssembly`の計算は4つの基本的な値の型を対象にしています。
 それぞれ32ビット幅または64ビット幅の整数と浮動小数点データの値を操作します。
 
 セマンティクスのほとんどの場所で異なる型の値が発生する可能性があります。
@@ -1702,7 +1702,7 @@ Nanに対して定義されていません。
 {\mathit{val}}~~{\mathsf{drop}} &amp;{\hookrightarrow}&amp; \epsilon
 \end{array}\]</div>
 
-<h3><span>\({\mathsf{select}}\)</span></h3>
+<h3><span id="select">\({\mathsf{select}}\)</span></h3>
 <ol>
   <li><p>前提条件：バリデーション/検証を経て保証されることですが、値型<span>\({\mathsf{i32}}\)</span>の値がスタックの上に1つ存在するはずです。</p></li>
   <li><p>スタックから<span>\({\mathsf{i32}}.{\mathsf{const}}~c\)</span>をpopします。</p></li>
@@ -1754,7 +1754,7 @@ F; {\mathit{val}}~({\mathsf{local.set}}~x) &amp;{\hookrightarrow}&amp; F'; \epsi
   &amp; (\mathrel{\mbox{if}} F' = F {\mathrel{\mbox{with}}} {\mathsf{locals}}[x] = {\mathit{val}}) \\
 \end{array}\end{split}\]</div>
 
-<h3><span>\({\mathsf{local.tee}}~x\)</span></h3>
+<h3><span id="local.tee">\({\mathsf{local.tee}}~x\)</span></h3>
 <ol>
   <li><p>前提条件：バリデーション/検証を経て保証されることですが、スタックは空ではありません。</p></li>
   <li><p><span>\({\mathit{val}}\)</span>をスタックからpopします。</p></li>

@@ -263,7 +263,7 @@ Binary Format仕様の制限により、名前の長さはUTF-8エンコーデ�
 \end{array}\end{split}\]</div>
 
 リミットは、メモリの最小サイズと最大サイズを指定します。
-リミットの数値の単位は[ページサイズ](Execution#ページサイズ)です。
+リミットの数値の単位は[ページサイズ](Execution#メモリインスタンス)です。
 
 <details><summary>訳注:Thread</summary><div><div>\[\begin{split}\begin{array}{llll}
 \def\mathdef2404#1{{}}\mathdef2404{memory type} &amp; {\mathit{memtype}} &amp;::=&amp;
@@ -488,7 +488,7 @@ Binary Format仕様の制限により、名前の長さはUTF-8エンコーデ�
   - スタック上に存在する値を1つ廃棄します。
 - `select`
   - 3番目のオペランドがゼロかどうかで、最初の2つのオペランドのうちの1つを選択します。
-  - 詳細については[実行/命令/パラメトリック命令/select](Execute#select)を読んでください。
+  - 詳細については[実行/命令/パラメトリック命令/select](Execution#select)を読んでください。
 
 ## 変数命令
 
@@ -508,7 +508,7 @@ Binary Format仕様の制限により、名前の長さはUTF-8エンコーデ�
 これらの命令はそれぞれ変数の値を取得または設定します。
 
 local.tee命令はlocal.setと似ていますが、引数を返します。
-詳細については[実行/命令/変数命令/local.tee](Execute#local.tee)を読んでください。
+詳細については[実行/命令/変数命令/local.tee](Execution#local.tee)を読んでください。
 
 ## メモリ命令
 
